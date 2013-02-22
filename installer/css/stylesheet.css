@@ -1,0 +1,77 @@
+img {
+border-style: none;
+}
+
+.logo {
+padding-bottom: 15px;
+}
+
+span.heading {
+font-size: 1.2em;
+color: #27408B;
+}
+
+span.heading_note {
+font-size: 0.9em;
+font-style: italic;
+}
+
+span.field {
+color: #8B1A1A;
+font-weight: bold;
+}
+
+span.field_note {
+font-size: 0.75em;
+}
+
+span.part {
+color: #000080;
+font-weight: bold;
+}
+
+span.example {
+font-size: 0.8em;
+}
+
+span.example_note {
+font-size: 0.8em;
+font-weight: bold;
+}
+
+span.success {
+color: #006600;
+font-weight: bold;
+}
+
+span.fail {
+color: #CC0000;
+font-weight: bold;
+}
+
+span.system_green {
+color: #006600;
+font-weight: bold;
+}
+
+span.system_amber {
+color: #FFAC00;
+font-weight: bold;
+}
+
+span.system_red {
+color: #CC0000;
+font-weight: bold;
+}
+
+label.system_item {
+float: left;
+width: 193px;
+}
+
+label.upgrade_item {
+color: #27408B;
+font-weight: bold;
+float: left;
+width: 125px;
+}
