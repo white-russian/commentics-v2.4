@@ -419,16 +419,16 @@ function cmtx_error_reporting($path) { //error reporting
 		@error_reporting(-1); //show every possible error
 		if ($cmtx_settings->error_reporting_method == "log") { //if errors should be logged to file
 			@ini_set('display_errors', 0); //don't display errors
-			@ini_set("log_errors" , 1); //log errors
-			@ini_set("error_log" , $path); //set log path
+			@ini_set('log_errors', 1); //log errors
+			@ini_set('error_log', $path); //set log path
 		} else { //if errors should be displayed on screen
 			@ini_set('display_errors', 1); //display errors
-			@ini_set("log_errors" , 0); //don't log errors
+			@ini_set('log_errors', 0); //don't log errors
 		}
 	} else { //if error reporting is turned off for admin panel
 		@error_reporting(0); //turn off all error reporting
 		@ini_set('display_errors', 0); //don't display errors
-		@ini_set("log_errors" , 0); //don't log errors
+		@ini_set('log_errors', 0); //don't log errors
 	}
 
 } //end of error-reporting function

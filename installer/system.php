@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
 <?php
 @error_reporting(0); //turn off all error reporting
 @ini_set('display_errors', 0); //don't display errors
-@ini_set("log_errors" , 0); //don't log errors
+@ini_set('log_errors', 0); //don't log errors
 ?>
 
 <?php
