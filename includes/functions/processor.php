@@ -1072,7 +1072,7 @@ function cmtx_akismet ($name, $email, $website, $comment) { //check Akismet test
 	if ($website == "http://") { $website = ""; }
 	$comment = cmtx_strip_slashes(cmtx_decode($comment));
 
-	require_once $cmtx_path . "includes/classes/akismet.php"; //load Akismet script
+	require_once $cmtx_path . "includes/akismet/akismet.php"; //load Akismet script
 
 	$WordPressAPIKey = $cmtx_settings->akismet_key; //set API key
 
