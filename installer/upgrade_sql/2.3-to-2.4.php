@@ -24,6 +24,4 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 
 if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
 
-$latest_version = "2.4";
-
 ?>
