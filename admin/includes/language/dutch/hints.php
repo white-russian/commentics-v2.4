@@ -56,6 +56,7 @@ define('CMTX_HINT_SCROLL_REPLY', 'Scroll langzaam naar beneden naar het formulie
 define('CMTX_HINT_SOCIAL_ENABLED', 'Toon de social sharing links.');
 
 define('CMTX_HINT_GRAVATAR_DEFAULT', 'mm is de mysterieuze man. Kies standaard voor de eigenlijke standaard.');
+define('CMTX_HINT_GRAVATAR_CUSTOM', 'Enter the URL of the image that you want as the default.');
 define('CMTX_HINT_GRAVATAR_RATING', 'Het publiek type. G is geschikt voor alle doelgroepen.');
 
 define('CMTX_HINT_DISPLAY_JS_MSG', 'Toon een waarschuwings bericht als JavaScript is uitgeschakeld in de web browser van de gebruiker.');

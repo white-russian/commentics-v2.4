@@ -100,6 +100,7 @@ define('CMTX_FIELD_LABEL_REPLY_ARROW', 'Seta Resp.:');
 define('CMTX_FIELD_LABEL_SCROLL_REPLY', 'Rolagem Resp.:');
 define('CMTX_FIELD_LABEL_NEW_WINDOW', 'Nova Jan.:');
 define('CMTX_FIELD_LABEL_GRAVATAR_DEFAULT', 'Padrão:');
+define('CMTX_FIELD_LABEL_GRAVATAR_CUSTOM', 'Custom:');
 define('CMTX_FIELD_LABEL_GRAVATAR_SIZE', 'Tamanho:');
 define('CMTX_FIELD_LABEL_GRAVATAR_RATING', 'Avaliação:');
 define('CMTX_FIELD_LABEL_DISPLAY', 'Exibir:');

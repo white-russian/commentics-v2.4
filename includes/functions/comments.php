@@ -216,7 +216,11 @@ function cmtx_generate_comment ($is_preview, $alternate, $id, $name, $email, $we
 		$cmtx_box .= "<div class='cmtx_gravatar_block'>";
 		$gravatar_parameter = "&amp;r=" . $cmtx_settings->gravatar_rating;
 		if ($cmtx_settings->gravatar_default != "default") {
-			$gravatar_parameter .= "&amp;d=" . $cmtx_settings->gravatar_default;
+			if ($cmtx_settings->gravatar_default == "custom") {
+				$gravatar_parameter .= "&amp;d=" . cmtx_url_encode($cmtx_settings->gravatar_custom);
+			} else {
+				$gravatar_parameter .= "&amp;d=" . $cmtx_settings->gravatar_default;
+			}
 		}
 		$cmtx_box .= "<img src='http://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . ".png?s=" . $cmtx_settings->gravatar_size . $gravatar_parameter . "' alt='Gravatar' title='Gravatar'/>";
 		$cmtx_box .= "</div>";

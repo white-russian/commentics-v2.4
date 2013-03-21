@@ -44,15 +44,18 @@ cmtx_check_csrf_form_key();
 
 if (isset($_POST['show_gravatar'])) { $show_gravatar = 1; } else { $show_gravatar = 0; }
 $gravatar_default = $_POST['gravatar_defaults'];
+$gravatar_custom = $_POST['gravatar_custom'];
 $gravatar_size = $_POST['gravatar_size'];
 $gravatar_rating = $_POST['gravatar_ratings'];
 
 $gravatar_default_san = cmtx_sanitize($gravatar_default);
+$gravatar_custom_san = cmtx_sanitize($gravatar_custom);
 $gravatar_size_san = cmtx_sanitize($gravatar_size);
 $gravatar_rating_san = cmtx_sanitize($gravatar_rating);
 
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$show_gravatar' WHERE `title` = 'show_gravatar'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$gravatar_default_san' WHERE `title` = 'gravatar_default'");
+mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$gravatar_custom_san' WHERE `title` = 'gravatar_custom'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$gravatar_size_san' WHERE `title` = 'gravatar_size'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$gravatar_rating_san' WHERE `title` = 'gravatar_rating'");
 ?>
@@ -73,8 +76,9 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$g
 <p />
 <label class='layout_comments_gravatar'><?php echo CMTX_FIELD_LABEL_GRAVATAR_DEFAULT ?></label>
 <?php
-$gravatar_defaults = "<select name='gravatar_defaults'>
+$gravatar_defaults = "<select name='gravatar_defaults' id='gravatar_defaults' onchange=\"show_hide('gravatar');\">
 <option value='default'>default</option>
+<option value='custom'>custom</option>
 <option value='mm'>mm</option>
 <option value='identicon'>identicon</option>
 <option value='monsterid'>monsterid</option>
@@ -85,6 +89,11 @@ $gravatar_defaults = str_ireplace("'".$cmtx_settings->gravatar_default."'", "'".
 echo $gravatar_defaults;
 ?>
 <?php cmtx_generate_hint(CMTX_HINT_GRAVATAR_DEFAULT); ?>
+<div id="gravatar_custom" <?php if ($cmtx_settings->gravatar_default != "custom") { echo "style='display:none;'"; } ?> >
+<p />
+<label class='layout_comments_gravatar'><?php echo CMTX_FIELD_LABEL_GRAVATAR_CUSTOM ?></label> <input type="text" required name="gravatar_custom" size="35" maxlength="250" value="<?php echo $cmtx_settings->gravatar_custom; ?>"/>
+<?php cmtx_generate_hint(CMTX_HINT_GRAVATAR_CUSTOM); ?>
+</div>
 <p />
 <label class='layout_comments_gravatar'><?php echo CMTX_FIELD_LABEL_GRAVATAR_SIZE ?></label> <input type="text" required name="gravatar_size" size="1" maxlength="250" value="<?php echo $cmtx_settings->gravatar_size; ?>"/>
 <span class='note'><?php echo CMTX_NOTE_PIXELS ?></span>

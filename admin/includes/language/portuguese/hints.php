@@ -56,6 +56,7 @@ define('CMTX_HINT_SCROLL_REPLY', 'Gradualmente rolar para baixo o formulário de
 define('CMTX_HINT_SOCIAL_ENABLED', 'Exibir os links de compartilhamento social.');
 
 define('CMTX_HINT_GRAVATAR_DEFAULT', 'mm é o homem misterioso. Selecione padrão para o padrão real.');
+define('CMTX_HINT_GRAVATAR_CUSTOM', 'Enter the URL of the image that you want as the default.');
 define('CMTX_HINT_GRAVATAR_RATING', 'O tipo de público. G é apropriado para todas as audiências.');
 
 define('CMTX_HINT_DISPLAY_JS_MSG', 'Exibir uma mensagem de aviso se o Javascript está desabilitado no navegador do usuário.');

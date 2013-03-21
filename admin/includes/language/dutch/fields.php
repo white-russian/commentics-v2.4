@@ -100,6 +100,7 @@ define('CMTX_FIELD_LABEL_REPLY_ARROW', 'Reply Pijl:');
 define('CMTX_FIELD_LABEL_SCROLL_REPLY', 'Scroll Reply:');
 define('CMTX_FIELD_LABEL_NEW_WINDOW', 'Nieuw scherm:');
 define('CMTX_FIELD_LABEL_GRAVATAR_DEFAULT', 'Verzuim:');
+define('CMTX_FIELD_LABEL_GRAVATAR_CUSTOM', 'Custom:');
 define('CMTX_FIELD_LABEL_GRAVATAR_SIZE', 'Grootte:');
 define('CMTX_FIELD_LABEL_GRAVATAR_RATING', 'Waardering:');
 define('CMTX_FIELD_LABEL_DISPLAY', 'Toon:');

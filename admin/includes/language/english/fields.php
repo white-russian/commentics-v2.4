@@ -100,6 +100,7 @@ define('CMTX_FIELD_LABEL_REPLY_ARROW', 'Reply Arrow:');
 define('CMTX_FIELD_LABEL_SCROLL_REPLY', 'Scroll Reply:');
 define('CMTX_FIELD_LABEL_NEW_WINDOW', 'New Win:');
 define('CMTX_FIELD_LABEL_GRAVATAR_DEFAULT', 'Default:');
+define('CMTX_FIELD_LABEL_GRAVATAR_CUSTOM', 'Custom:');
 define('CMTX_FIELD_LABEL_GRAVATAR_SIZE', 'Size:');
 define('CMTX_FIELD_LABEL_GRAVATAR_RATING', 'Rating:');
 define('CMTX_FIELD_LABEL_DISPLAY', 'Display:');

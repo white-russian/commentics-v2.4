@@ -243,6 +243,13 @@ if (id == "php") {
 	} else {
 		document.getElementById('allowed_pages').style.display = "none";
 	}
+} else if (id == "gravatar") {
+	var e = document.getElementById('gravatar_defaults');
+	if (e.options[e.selectedIndex].value == 'custom') {
+		document.getElementById('gravatar_custom').style.display = "inline";
+	} else {
+		document.getElementById('gravatar_custom').style.display = "none";
+	}
 }
 }
 // ]]>

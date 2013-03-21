@@ -56,6 +56,7 @@ define('CMTX_HINT_SCROLL_REPLY', 'Gradually scroll down to the form after clicki
 define('CMTX_HINT_SOCIAL_ENABLED', 'Display the social sharing links.');
 
 define('CMTX_HINT_GRAVATAR_DEFAULT', 'mm is the mystery man. Select default for the actual default.');
+define('CMTX_HINT_GRAVATAR_CUSTOM', 'Enter the URL of the image that you want as the default.');
 define('CMTX_HINT_GRAVATAR_RATING', 'The audience type. G is suitable for all audiences.');
 
 define('CMTX_HINT_DISPLAY_JS_MSG', 'Display a warning message if JavaScript is disabled in user\'s web browser.');
