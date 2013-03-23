@@ -144,7 +144,7 @@ function cmtx_validate_page_id() { //validate page ID
 	} else if (cmtx_strlen($cmtx_page_id) < 250) { //if page ID validates
 
 		//get URL
-		$url = "http" . ((!empty($_SERVER['HTTPS'])) ? "s" : "") . "://" . strtolower($_SERVER['SERVER_NAME']) . $_SERVER['REQUEST_URI'];
+		$url = "http" . ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "s" : "") . "://" . strtolower($_SERVER['SERVER_NAME']) . $_SERVER['REQUEST_URI'];
 		$url = cmtx_url_decode($url);
 		if ($cmtx_settings->lower_pages) {
 			$url = strtolower($url);
