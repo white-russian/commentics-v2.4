@@ -192,7 +192,7 @@ if (id.indexOf('up') != -1) {
 
 jQuery.ajax({
 type: "POST",
-url: "<?php echo $cmtx_path . "vote.php"?>",
+url: "<?php echo cmtx_url_encode("http" . ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "s" : "") . "://" . $_SERVER['HTTP_HOST'] . parse_url($cmtx_settings->url_to_comments_folder, PHP_URL_PATH)) . "vote.php"?>",
 data: {id: id, type: type},
 cache: false,
 
@@ -229,7 +229,7 @@ if (proceed) {
 
 	jQuery.ajax({
 	type: "POST",
-	url: "<?php echo $cmtx_path . "flag.php"?>",
+	url: "<?php echo cmtx_url_encode("http" . ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "s" : "") . "://" . $_SERVER['HTTP_HOST'] . parse_url($cmtx_settings->url_to_comments_folder, PHP_URL_PATH)) . "flag.php"?>",
 	data: {id: id},
 	cache: false,
 
