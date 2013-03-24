@@ -711,6 +711,10 @@ function cmtx_comments_folder() { //gets the URL to the /comments/ folder
 	global $cmtx_settings; //globalise variables
 
 	$url = cmtx_url_encode("http" . ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "s" : "") . "://" . $_SERVER['HTTP_HOST'] . parse_url($cmtx_settings->url_to_comments_folder, PHP_URL_PATH));
+	
+	if (!filter_var($url, FILTER_VALIDATE_URL)) {
+		$url = cmtx_url_encode($cmtx_settings->url_to_comments_folder);
+	}
 
 	return $url;
 
