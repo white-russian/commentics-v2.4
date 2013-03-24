@@ -111,10 +111,10 @@ define('CMTX_TEXT_NOTIFY', 'Obveščajte me o novih komentarjih po e-pošti.');
 define('CMTX_TEXT_REMEMBER', 'Zapomni si moje podatke na tem računalniku.');
 
 /* Text displayed after privacy checkbox */
-define('CMTX_TEXT_PRIVACY', 'Strinjam se z vsebino <a href="' . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . 'agreement/slovenian/privacy_policy.html" title="Ogled politike zasebnosti." target="_blank" rel="nofollow">politike zasebnosti</a>.');
+define('CMTX_TEXT_PRIVACY', 'Strinjam se z vsebino <a href="' . cmtx_comments_folder() . 'agreement/slovenian/privacy_policy.html" title="Ogled politike zasebnosti." target="_blank" rel="nofollow">politike zasebnosti</a>.');
 
 /* Text displayed after terms checkbox */
-define('CMTX_TEXT_TERMS', 'Strinjam se s <a href="' . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . 'agreement/slovenian/terms_and_conditions.html" title="Pogoji uporabe." target="_blank" rel="nofollow">pogoji uporabe</a>.');
+define('CMTX_TEXT_TERMS', 'Strinjam se s <a href="' . cmtx_comments_folder() . 'agreement/slovenian/terms_and_conditions.html" title="Pogoji uporabe." target="_blank" rel="nofollow">pogoji uporabe</a>.');
 
 /* Text for form submit button */
 define('CMTX_SUBMIT_BUTTON', 'Nov komentar');

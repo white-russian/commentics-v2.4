@@ -111,10 +111,10 @@ define('CMTX_TEXT_NOTIFY', 'Уведомлеть о новых коментар�
 define('CMTX_TEXT_REMEMBER', 'Запомнить данные формы на этом компьютере.');
 
 /* Text displayed after privacy checkbox */
-define('CMTX_TEXT_PRIVACY', 'Я прочитал и согласен с  <a href="' . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . 'agreement/russian/privacy_policy.html" title="политикой конфеденциальности" target="_blank" rel="nofollow">политикой конфеденциальности</a>.');
+define('CMTX_TEXT_PRIVACY', 'Я прочитал и согласен с  <a href="' . cmtx_comments_folder() . 'agreement/russian/privacy_policy.html" title="политикой конфеденциальности" target="_blank" rel="nofollow">политикой конфеденциальности</a>.');
 
 /* Text displayed after terms checkbox */
-define('CMTX_TEXT_TERMS', 'Я прочитал и согласен с  <a href="' . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . 'agreement/russian/terms_and_conditions.html" title="View terms and conditions" target="_blank" rel="nofollow">пользовательским соглашением</a>.');
+define('CMTX_TEXT_TERMS', 'Я прочитал и согласен с  <a href="' . cmtx_comments_folder() . 'agreement/russian/terms_and_conditions.html" title="View terms and conditions" target="_blank" rel="nofollow">пользовательским соглашением</a>.');
 
 /* Text for form submit button */
 define('CMTX_SUBMIT_BUTTON', 'Добавить комментарий');

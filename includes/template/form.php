@@ -586,52 +586,52 @@ echo $cmtx_ratings;
 <div class="cmtx_label">&nbsp;</div>
 <div class="cmtx_bb_code_block">
 <?php if ($cmtx_settings->enabled_bb_code_bold) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/bold.png";?>" title="Bold" alt="Bold" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[B]', '[/B]')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/bold.png";?>" title="Bold" alt="Bold" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[B]', '[/B]')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_bb_code_italic) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/italic.png";?>" title="Italic" alt="Italic" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[I]', '[/I]')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/italic.png";?>" title="Italic" alt="Italic" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[I]', '[/I]')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_bb_code_underline) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/underline.png";?>" title="Underline" alt="Underline" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[U]', '[/U]')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/underline.png";?>" title="Underline" alt="Underline" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[U]', '[/U]')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_bb_code_strike) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/strike.png";?>" title="Strike" alt="Strike" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[STRIKE]', '[/STRIKE]')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/strike.png";?>" title="Strike" alt="Strike" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[STRIKE]', '[/STRIKE]')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_bb_code_superscript) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/superscript.png";?>" title="Superscript" alt="Superscript" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[SUP]', '[/SUP]')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/superscript.png";?>" title="Superscript" alt="Superscript" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[SUP]', '[/SUP]')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_bb_code_subscript) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/subscript.png";?>" title="Subscript" alt="Subscript" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[SUB]', '[/SUB]')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/subscript.png";?>" title="Subscript" alt="Subscript" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[SUB]', '[/SUB]')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_bb_code_code) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/code.png";?>" title="Code" alt="Code" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[CODE]', '[/CODE]')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/code.png";?>" title="Code" alt="Code" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[CODE]', '[/CODE]')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_bb_code_php_code) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/php_code.png";?>" title="PHP Code" alt="PHP Code" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[PHP]', '[/PHP]')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/php_code.png";?>" title="PHP Code" alt="PHP Code" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[PHP]', '[/PHP]')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_bb_code_quote) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/quote.png";?>" title="Quote" alt="Quote" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[QUOTE]', '[/QUOTE]')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/quote.png";?>" title="Quote" alt="Quote" class="cmtx_bb_code_image" onclick="cmtx_add_tags('[QUOTE]', '[/QUOTE]')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_bb_code_line) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/line.png";?>" title="Insert line" alt="Insert line" class="cmtx_bb_code_image" onclick="cmtx_add_tags('', '[LINE]')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/line.png";?>" title="Insert line" alt="Insert line" class="cmtx_bb_code_image" onclick="cmtx_add_tags('', '[LINE]')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_bb_code_list_bullet) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/list_bullet.png";?>" title="Insert bullet list" alt="Bullet list" class="cmtx_bb_code_image" onclick="cmtx_enter_bullet()"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/list_bullet.png";?>" title="Insert bullet list" alt="Bullet list" class="cmtx_bb_code_image" onclick="cmtx_enter_bullet()"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_bb_code_list_numeric) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/list_numeric.png";?>" title="Insert numeric list" alt="Numeric list" class="cmtx_bb_code_image" onclick="cmtx_enter_numeric()"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/list_numeric.png";?>" title="Insert numeric list" alt="Numeric list" class="cmtx_bb_code_image" onclick="cmtx_enter_numeric()"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_bb_code_url) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/link.png";?>" title="Insert web link" alt="Link" class="cmtx_bb_code_image" onclick="cmtx_enter_link()"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/link.png";?>" title="Insert web link" alt="Link" class="cmtx_bb_code_image" onclick="cmtx_enter_link()"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_bb_code_email) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/email.png";?>" title="Insert email link" alt="Email" class="cmtx_bb_code_image" onclick="cmtx_enter_email()"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/email.png";?>" title="Insert email link" alt="Email" class="cmtx_bb_code_image" onclick="cmtx_enter_email()"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_bb_code_image) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/image.png";?>" title="Insert image" alt="Image" class="cmtx_bb_code_image" onclick="cmtx_enter_image()"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/image.png";?>" title="Insert image" alt="Image" class="cmtx_bb_code_image" onclick="cmtx_enter_image()"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_bb_code_video) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/bb_code/video.png";?>" title="Insert video" alt="Video" class="cmtx_bb_code_image" onclick="cmtx_enter_video()"/>
+<img src="<?php echo cmtx_comments_folder() . "images/bb_code/video.png";?>" title="Insert video" alt="Video" class="cmtx_bb_code_image" onclick="cmtx_enter_video()"/>
 <?php } ?>
 </div>
 <?php } ?>
@@ -645,49 +645,49 @@ echo $cmtx_ratings;
 <div class="cmtx_label">&nbsp;</div>
 <div class="cmtx_smilies_block">
 <?php if ($cmtx_settings->enabled_smilies_smile) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/smile.gif";?>" title="Smile" alt="Smile" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':smile:')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/smilies/smile.gif";?>" title="Smile" alt="Smile" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':smile:')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_smilies_sad) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/sad.gif";?>" title="Sad" alt="Sad" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':sad:')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/smilies/sad.gif";?>" title="Sad" alt="Sad" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':sad:')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_smilies_huh) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/huh.gif";?>" title="Huh" alt="Huh" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':huh:')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/smilies/huh.gif";?>" title="Huh" alt="Huh" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':huh:')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_smilies_laugh) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/laugh.gif";?>" title="Laugh" alt="Laugh" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':laugh:')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/smilies/laugh.gif";?>" title="Laugh" alt="Laugh" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':laugh:')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_smilies_mad) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/mad.gif";?>" title="Mad" alt="Mad" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':mad:')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/smilies/mad.gif";?>" title="Mad" alt="Mad" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':mad:')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_smilies_tongue) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/tongue.gif";?>" title="Tongue" alt="Tongue" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':tongue:')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/smilies/tongue.gif";?>" title="Tongue" alt="Tongue" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':tongue:')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_smilies_crying) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/crying.gif";?>" title="Crying" alt="Crying" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':crying:')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/smilies/crying.gif";?>" title="Crying" alt="Crying" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':crying:')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_smilies_grin) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/grin.gif";?>" title="Grin" alt="Grin" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':grin:')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/smilies/grin.gif";?>" title="Grin" alt="Grin" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':grin:')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_smilies_wink) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/wink.gif";?>" title="Wink" alt="Wink" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':wink:')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/smilies/wink.gif";?>" title="Wink" alt="Wink" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':wink:')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_smilies_scared) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/scared.gif";?>" title="Scared" alt="Scared" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':scared:')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/smilies/scared.gif";?>" title="Scared" alt="Scared" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':scared:')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_smilies_cool) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/cool.gif";?>" title="Cool" alt="Cool" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':cool:')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/smilies/cool.gif";?>" title="Cool" alt="Cool" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':cool:')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_smilies_sleep) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/sleep.gif";?>" title="Sleep" alt="Sleep" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':sleep:')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/smilies/sleep.gif";?>" title="Sleep" alt="Sleep" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':sleep:')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_smilies_blush) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/blush.gif";?>" title="Blush" alt="Blush" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':blush:')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/smilies/blush.gif";?>" title="Blush" alt="Blush" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':blush:')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_smilies_unsure) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/unsure.gif";?>" title="Unsure" alt="Unsure" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':unsure:')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/smilies/unsure.gif";?>" title="Unsure" alt="Unsure" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':unsure:')"/>
 <?php } ?>
 <?php if ($cmtx_settings->enabled_smilies_shocked) { ?>
-<img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/shocked.gif";?>" title="Shocked" alt="Shocked" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':shocked:')"/>
+<img src="<?php echo cmtx_comments_folder() . "images/smilies/shocked.gif";?>" title="Shocked" alt="Shocked" class="cmtx_smiley_image" onclick="cmtx_add_tags('', ':shocked:')"/>
 <?php } ?>
 </div>
 <?php } ?>
@@ -892,7 +892,7 @@ foreach ($cmtx_elements as $cmtx_element) {
 <div style="clear: left;"></div>
 <div class='cmtx_height_above_powered'></div>
 <div class="cmtx_label">&nbsp;</div>
-<a href="http://www.commentics.org"<?php echo $cmtx_powered_attribute; ?>><img src="<?php echo cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/commentics/powered_by.png";?>" title="Commentics" alt="Commentics"/></a>
+<a href="http://www.commentics.org"<?php echo $cmtx_powered_attribute; ?>><img src="<?php echo cmtx_comments_folder() . "images/commentics/powered_by.png";?>" title="Commentics" alt="Commentics"/></a>
 <?php } else if ($cmtx_settings->powered_by == "text") { ?>
 <div style="clear: left;"></div>
 <div class='cmtx_height_above_powered'></div>

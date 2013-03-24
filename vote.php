@@ -134,7 +134,7 @@ if (isset($_POST['id']) && isset($_POST['type'])) {
 		} else {
 			$vote_up = 0;
 		}
-		echo "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/buttons/up.png' alt='Up' title='" . CMTX_TITLE_VOTE_UP . "'/>" . $vote_up;
+		echo "<img src='" . cmtx_comments_folder() . "images/buttons/up.png' alt='Up' title='" . CMTX_TITLE_VOTE_UP . "'/>" . $vote_up;
 	
 	} else if ($type == "down") {
 	
@@ -145,7 +145,7 @@ if (isset($_POST['id']) && isset($_POST['type'])) {
 		} else {
 			$vote_down = 0;
 		}
-		echo "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/buttons/down.png' alt='Down' title='" . CMTX_TITLE_VOTE_DOWN . "'/>" . $vote_down;
+		echo "<img src='" . cmtx_comments_folder() . "images/buttons/down.png' alt='Down' title='" . CMTX_TITLE_VOTE_DOWN . "'/>" . $vote_down;
 		
 	}
 

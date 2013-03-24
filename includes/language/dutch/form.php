@@ -111,10 +111,10 @@ define('CMTX_TEXT_NOTIFY', 'Meld me over nieuwe berichten via email.');
 define('CMTX_TEXT_REMEMBER', 'Onthoud mijn gegevens op deze computer.');
 
 /* Text displayed after privacy checkbox */
-define('CMTX_TEXT_PRIVACY', 'Ik begrijp en heb de privacy policy gelezen <a href="' . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . 'agreement/dutch/privacy_policy.html" title="Privacy policy" target="_blank" rel="nofollow">Privacy policy</a>.');
+define('CMTX_TEXT_PRIVACY', 'Ik begrijp en heb de privacy policy gelezen <a href="' . cmtx_comments_folder() . 'agreement/dutch/privacy_policy.html" title="Privacy policy" target="_blank" rel="nofollow">Privacy policy</a>.');
 
 /* Text displayed after terms checkbox */
-define('CMTX_TEXT_TERMS', 'Ik begrijp de voorwaarden en heb ze gelezen <a href="' . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . 'agreement/dutch/terms_and_conditions.html" title="Voorwaarden" target="_blank" rel="nofollow">Voorwaarden</a>.');
+define('CMTX_TEXT_TERMS', 'Ik begrijp de voorwaarden en heb ze gelezen <a href="' . cmtx_comments_folder() . 'agreement/dutch/terms_and_conditions.html" title="Voorwaarden" target="_blank" rel="nofollow">Voorwaarden</a>.');
 
 /* Text for form submit button */
 define('CMTX_SUBMIT_BUTTON', 'Voeg bericht toe');

@@ -59,7 +59,7 @@ cmtx_set_time_zone($cmtx_settings->time_zone);
 
 $ip_address = cmtx_get_ip_address(); //get user's IP address
 
-echo "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/buttons/flag.png' alt='Flag' title='" . CMTX_TITLE_FLAG . "'/>" . CMTX_FLAG;
+echo "<img src='" . cmtx_comments_folder() . "images/buttons/flag.png' alt='Flag' title='" . CMTX_TITLE_FLAG . "'/>" . CMTX_FLAG;
 
 if (isset($_POST['id'])) {
 

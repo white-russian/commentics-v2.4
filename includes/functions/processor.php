@@ -957,63 +957,63 @@ function cmtx_comment_add_smilies ($comment) { //add smilies to comment
 	$smiley_styling = 'border-style: none; vertical-align: bottom;';
 
 	if ($cmtx_settings->enabled_smilies_smile) {
-		$comment = str_ireplace(":smile:", "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/smile.gif' title='Smile' alt='Smile' style='" . $smiley_styling . "'/>", $comment);
+		$comment = str_ireplace(":smile:", "<img src='" . cmtx_comments_folder() . "images/smilies/smile.gif' title='Smile' alt='Smile' style='" . $smiley_styling . "'/>", $comment);
 	}
 
 	if ($cmtx_settings->enabled_smilies_sad) {
-		$comment = str_ireplace(":sad:", "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/sad.gif' title='Sad' alt='Sad' style='" . $smiley_styling . "'/>", $comment);
+		$comment = str_ireplace(":sad:", "<img src='" . cmtx_comments_folder() . "images/smilies/sad.gif' title='Sad' alt='Sad' style='" . $smiley_styling . "'/>", $comment);
 	}
 
 	if ($cmtx_settings->enabled_smilies_huh) {
-		$comment = str_ireplace(":huh:", "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/huh.gif' title='Huh' alt='Huh' style='" . $smiley_styling . "'/>", $comment);
+		$comment = str_ireplace(":huh:", "<img src='" . cmtx_comments_folder() . "images/smilies/huh.gif' title='Huh' alt='Huh' style='" . $smiley_styling . "'/>", $comment);
 	}
 
 	if ($cmtx_settings->enabled_smilies_laugh) {
-		$comment = str_ireplace(":laugh:", "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/laugh.gif' title='Laugh' alt='Laugh' style='" . $smiley_styling . "'/>", $comment);
+		$comment = str_ireplace(":laugh:", "<img src='" . cmtx_comments_folder() . "images/smilies/laugh.gif' title='Laugh' alt='Laugh' style='" . $smiley_styling . "'/>", $comment);
 	}
 
 	if ($cmtx_settings->enabled_smilies_mad) {
-		$comment = str_ireplace(":mad:", "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/mad.gif' title='Mad' alt='Mad' style='" . $smiley_styling . "'/>", $comment);
+		$comment = str_ireplace(":mad:", "<img src='" . cmtx_comments_folder() . "images/smilies/mad.gif' title='Mad' alt='Mad' style='" . $smiley_styling . "'/>", $comment);
 	}
 
 	if ($cmtx_settings->enabled_smilies_tongue) {
-		$comment = str_ireplace(":tongue:", "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/tongue.gif' title='Tongue' alt='Tongue' style='" . $smiley_styling . "'/>", $comment);
+		$comment = str_ireplace(":tongue:", "<img src='" . cmtx_comments_folder() . "images/smilies/tongue.gif' title='Tongue' alt='Tongue' style='" . $smiley_styling . "'/>", $comment);
 	}
 
 	if ($cmtx_settings->enabled_smilies_crying) {
-		$comment = str_ireplace(":crying:", "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/crying.gif' title='Crying' alt='Crying' style='" . $smiley_styling . "'/>", $comment);
+		$comment = str_ireplace(":crying:", "<img src='" . cmtx_comments_folder() . "images/smilies/crying.gif' title='Crying' alt='Crying' style='" . $smiley_styling . "'/>", $comment);
 	}
 
 	if ($cmtx_settings->enabled_smilies_grin) {
-		$comment = str_ireplace(":grin:", "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/grin.gif' title='Grin' alt='Grin' style='" . $smiley_styling . "'/>", $comment);
+		$comment = str_ireplace(":grin:", "<img src='" . cmtx_comments_folder() . "images/smilies/grin.gif' title='Grin' alt='Grin' style='" . $smiley_styling . "'/>", $comment);
 	}
 
 	if ($cmtx_settings->enabled_smilies_wink) {
-		$comment = str_ireplace(":wink:", "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/wink.gif' title='Wink' alt='Wink' style='" . $smiley_styling . "'/>", $comment);
+		$comment = str_ireplace(":wink:", "<img src='" . cmtx_comments_folder() . "images/smilies/wink.gif' title='Wink' alt='Wink' style='" . $smiley_styling . "'/>", $comment);
 	}
 
 	if ($cmtx_settings->enabled_smilies_scared) {
-		$comment = str_ireplace(":scared:", "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/scared.gif' title='Scared' alt='Scared' style='" . $smiley_styling . "'/>", $comment);
+		$comment = str_ireplace(":scared:", "<img src='" . cmtx_comments_folder() . "images/smilies/scared.gif' title='Scared' alt='Scared' style='" . $smiley_styling . "'/>", $comment);
 	}	
 
 	if ($cmtx_settings->enabled_smilies_cool) {
-		$comment = str_ireplace(":cool:", "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/cool.gif' title='Cool' alt='Cool' style='" . $smiley_styling . "'/>", $comment);
+		$comment = str_ireplace(":cool:", "<img src='" . cmtx_comments_folder() . "images/smilies/cool.gif' title='Cool' alt='Cool' style='" . $smiley_styling . "'/>", $comment);
 	}
 
 	if ($cmtx_settings->enabled_smilies_sleep) {
-		$comment = str_ireplace(":sleep:", "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/sleep.gif' title='Sleep' alt='Sleep' style='" . $smiley_styling . "'/>", $comment);
+		$comment = str_ireplace(":sleep:", "<img src='" . cmtx_comments_folder() . "images/smilies/sleep.gif' title='Sleep' alt='Sleep' style='" . $smiley_styling . "'/>", $comment);
 	}
 
 	if ($cmtx_settings->enabled_smilies_blush) {
-		$comment = str_ireplace(":blush:", "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/blush.gif' title='Blush' alt='Blush' style='" . $smiley_styling . "'/>", $comment);
+		$comment = str_ireplace(":blush:", "<img src='" . cmtx_comments_folder() . "images/smilies/blush.gif' title='Blush' alt='Blush' style='" . $smiley_styling . "'/>", $comment);
 	}
 
 	if ($cmtx_settings->enabled_smilies_unsure) {
-		$comment = str_ireplace(":unsure:", "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/unsure.gif' title='Unsure' alt='Unsure' style='" . $smiley_styling . "'/>", $comment);
+		$comment = str_ireplace(":unsure:", "<img src='" . cmtx_comments_folder() . "images/smilies/unsure.gif' title='Unsure' alt='Unsure' style='" . $smiley_styling . "'/>", $comment);
 	}
 
 	if ($cmtx_settings->enabled_smilies_shocked) {
-		$comment = str_ireplace(":shocked:", "<img src='" . cmtx_url_encode($cmtx_settings->url_to_comments_folder) . "images/smilies/shocked.gif' title='Shocked' alt='Shocked' style='" . $smiley_styling . "'/>", $comment);
+		$comment = str_ireplace(":shocked:", "<img src='" . cmtx_comments_folder() . "images/smilies/shocked.gif' title='Shocked' alt='Shocked' style='" . $smiley_styling . "'/>", $comment);
 	}
 
 	return $comment;
