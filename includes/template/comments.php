@@ -383,44 +383,44 @@ if ($cmtx_number_of_comments == 0) { //if no comments
 
 	if ($cmtx_settings->show_sort_by_1 && $cmtx_settings->show_date) {
 		if ( (isset($_GET['cmtx_sort']) && $_GET['cmtx_sort'] == "1") || (!isset($_GET['cmtx_sort']) && $cmtx_settings->comments_order == "1") ) {
-			echo "<option value='" . cmtx_url_encode(strtok($_SERVER['REQUEST_URI'], "?") . "?cmtx_sort=1" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "' selected='selected'>". CMTX_SORT_1 . "</option>";
+			echo "<option value='" . cmtx_url_encode(strtok(cmtx_current_page(), "?") . "?cmtx_sort=1" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "' selected='selected'>". CMTX_SORT_1 . "</option>";
 		} else {
-			echo "<option value='" . cmtx_url_encode(strtok($_SERVER['REQUEST_URI'], "?") . "?cmtx_sort=1" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "'>". CMTX_SORT_1 . "</option>";
+			echo "<option value='" . cmtx_url_encode(strtok(cmtx_current_page(), "?") . "?cmtx_sort=1" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "'>". CMTX_SORT_1 . "</option>";
 		}
 	}
 	if ($cmtx_settings->show_sort_by_2 && $cmtx_settings->show_date) {
 		if ( (isset($_GET['cmtx_sort']) && $_GET['cmtx_sort'] == "2") || (!isset($_GET['cmtx_sort']) && $cmtx_settings->comments_order == "2") ) {
-			echo "<option value='" . cmtx_url_encode(strtok($_SERVER['REQUEST_URI'], "?") . "?cmtx_sort=2" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "' selected='selected'>". CMTX_SORT_2 . "</option>";
+			echo "<option value='" . cmtx_url_encode(strtok(cmtx_current_page(), "?") . "?cmtx_sort=2" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "' selected='selected'>". CMTX_SORT_2 . "</option>";
 		} else {
-			echo "<option value='" . cmtx_url_encode(strtok($_SERVER['REQUEST_URI'], "?") . "?cmtx_sort=2" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "'>". CMTX_SORT_2 . "</option>";
+			echo "<option value='" . cmtx_url_encode(strtok(cmtx_current_page(), "?") . "?cmtx_sort=2" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "'>". CMTX_SORT_2 . "</option>";
 		}
 	}
 	if ($cmtx_settings->show_sort_by_3 && $cmtx_settings->show_like) {
 		if ( (isset($_GET['cmtx_sort']) && $_GET['cmtx_sort'] == "3") || (!isset($_GET['cmtx_sort']) && $cmtx_settings->comments_order == "3") ) {
-			echo "<option value='" . cmtx_url_encode(strtok($_SERVER['REQUEST_URI'], "?") . "?cmtx_sort=3" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "' selected='selected'>". CMTX_SORT_3 . "</option>";
+			echo "<option value='" . cmtx_url_encode(strtok(cmtx_current_page(), "?") . "?cmtx_sort=3" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "' selected='selected'>". CMTX_SORT_3 . "</option>";
 		} else {
-			echo "<option value='" . cmtx_url_encode(strtok($_SERVER['REQUEST_URI'], "?") . "?cmtx_sort=3" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "'>". CMTX_SORT_3 . "</option>";
+			echo "<option value='" . cmtx_url_encode(strtok(cmtx_current_page(), "?") . "?cmtx_sort=3" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "'>". CMTX_SORT_3 . "</option>";
 		}
 	}
 	if ($cmtx_settings->show_sort_by_4 && $cmtx_settings->show_dislike) {
 		if ( (isset($_GET['cmtx_sort']) && $_GET['cmtx_sort'] == "4") || (!isset($_GET['cmtx_sort']) && $cmtx_settings->comments_order == "4") ) {
-			echo "<option value='" . cmtx_url_encode(strtok($_SERVER['REQUEST_URI'], "?") . "?cmtx_sort=4" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "' selected='selected'>". CMTX_SORT_4 . "</option>";
+			echo "<option value='" . cmtx_url_encode(strtok(cmtx_current_page(), "?") . "?cmtx_sort=4" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "' selected='selected'>". CMTX_SORT_4 . "</option>";
 		} else {
-			echo "<option value='" . cmtx_url_encode(strtok($_SERVER['REQUEST_URI'], "?") . "?cmtx_sort=4" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "'>". CMTX_SORT_4 . "</option>";
+			echo "<option value='" . cmtx_url_encode(strtok(cmtx_current_page(), "?") . "?cmtx_sort=4" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "'>". CMTX_SORT_4 . "</option>";
 		}
 	}
 	if ($cmtx_settings->show_sort_by_5 && $cmtx_settings->show_rating) {
 		if ( (isset($_GET['cmtx_sort']) && $_GET['cmtx_sort'] == "5") || (!isset($_GET['cmtx_sort']) && $cmtx_settings->comments_order == "5") ) {
-			echo "<option value='" . cmtx_url_encode(strtok($_SERVER['REQUEST_URI'], "?") . "?cmtx_sort=5" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "' selected='selected'>". CMTX_SORT_5 . "</option>";
+			echo "<option value='" . cmtx_url_encode(strtok(cmtx_current_page(), "?") . "?cmtx_sort=5" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "' selected='selected'>". CMTX_SORT_5 . "</option>";
 		} else {
-			echo "<option value='" . cmtx_url_encode(strtok($_SERVER['REQUEST_URI'], "?") . "?cmtx_sort=5" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "'>". CMTX_SORT_5 . "</option>";
+			echo "<option value='" . cmtx_url_encode(strtok(cmtx_current_page(), "?") . "?cmtx_sort=5" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "'>". CMTX_SORT_5 . "</option>";
 		}
 	}
 	if ($cmtx_settings->show_sort_by_6 && $cmtx_settings->show_rating) {
 		if ( (isset($_GET['cmtx_sort']) && $_GET['cmtx_sort'] == "6") || (!isset($_GET['cmtx_sort']) && $cmtx_settings->comments_order == "6") ) {
-			echo "<option value='" . cmtx_url_encode(strtok($_SERVER['REQUEST_URI'], "?") . "?cmtx_sort=6" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "' selected='selected'>". CMTX_SORT_6 . "</option>";
+			echo "<option value='" . cmtx_url_encode(strtok(cmtx_current_page(), "?") . "?cmtx_sort=6" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "' selected='selected'>". CMTX_SORT_6 . "</option>";
 		} else {
-			echo "<option value='" . cmtx_url_encode(strtok($_SERVER['REQUEST_URI'], "?") . "?cmtx_sort=6" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "'>". CMTX_SORT_6 . "</option>";
+			echo "<option value='" . cmtx_url_encode(strtok(cmtx_current_page(), "?") . "?cmtx_sort=6" . cmtx_get_query("sort") . CMTX_ANCHOR_COMMENTS) . "'>". CMTX_SORT_6 . "</option>";
 		}
 	}
 

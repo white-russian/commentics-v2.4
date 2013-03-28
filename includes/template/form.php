@@ -419,7 +419,7 @@ if (isset($cmtx_box) && !empty($cmtx_box)) { //if a box exists
 }
 ?>
 
-<form name="commentics" id="commentics" class="cmtx_form_styling" action="<?php echo cmtx_url_encode(strtok($_SERVER['REQUEST_URI'], "?") . cmtx_get_query("form") . CMTX_ANCHOR_FORM); ?>" method="post">
+<form name="commentics" id="commentics" class="cmtx_form_styling" action="<?php echo cmtx_url_encode(strtok(cmtx_current_page(), "?") . cmtx_get_query("form") . CMTX_ANCHOR_FORM); ?>" method="post">
 
 <noscript>
 <?php if ($cmtx_settings->display_javascript_disabled) { ?>

@@ -560,12 +560,14 @@ function cmtx_add_viewer() { //add viewer to database
 
 function cmtx_get_query ($type) { //gets query string from URL
 
-	if ($type == "form" && isset($_SERVER['QUERY_STRING']) && !empty($_SERVER['QUERY_STRING'])) {
-		$query = "?" . $_SERVER['QUERY_STRING'];
-	} else if ($type == "page" && isset($_SERVER['QUERY_STRING']) && !empty($_SERVER['QUERY_STRING'])) {
-		$query = "&" . $_SERVER['QUERY_STRING'];
-	} else if ($type == "sort" && isset($_SERVER['QUERY_STRING']) && !empty($_SERVER['QUERY_STRING'])) {
-		$query = "&" . $_SERVER['QUERY_STRING'];
+	$query = parse_url(cmtx_current_page(), PHP_URL_QUERY);
+
+	if ($type == "form" && !empty($query)) {
+		$query = "?" . $query;
+	} else if ($type == "page" && !empty($query)) {
+		$query = "&" . $query;
+	} else if ($type == "sort" && !empty($query)) {
+		$query = "&" . $query;
 	} else {
 		$query = "";
 	}
@@ -710,13 +712,24 @@ function cmtx_comments_folder() { //gets the URL to the /comments/ folder
 
 	global $cmtx_settings; //globalise variables
 
-	$url = cmtx_url_encode("http" . ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "s" : "") . "://" . $_SERVER['HTTP_HOST'] . parse_url($cmtx_settings->url_to_comments_folder, PHP_URL_PATH));
+	$url = cmtx_url_decode("http" . ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "s" : "") . "://" . strtolower($_SERVER['HTTP_HOST']) . parse_url($cmtx_settings->url_to_comments_folder, PHP_URL_PATH));
 	
-	if (!filter_var($url, FILTER_VALIDATE_URL)) {
+	$url = cmtx_url_encode($url);
+	
+	if (!parse_url($cmtx_settings->url_to_comments_folder, PHP_URL_PATH) || !filter_var($url, FILTER_VALIDATE_URL)) {
 		$url = cmtx_url_encode($cmtx_settings->url_to_comments_folder);
 	}
 
 	return $url;
 
 } //end of comments-folder function
+
+
+function cmtx_current_page() { //gets the URL of the current page
+
+	$url = cmtx_url_decode("http" . ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "s" : "") . "://" . strtolower($_SERVER['HTTP_HOST']) . $_SERVER['REQUEST_URI']);
+
+	return $url;
+
+} //end of current-page function
 ?>
