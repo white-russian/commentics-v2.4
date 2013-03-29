@@ -337,7 +337,7 @@ function cmtx_generate_comment ($is_preview, $alternate, $id, $name, $email, $we
 		$cmtx_box .= "<div class='cmtx_reply_block'>";
 		$cmtx_box .= "<div class='cmtx_buttons'>";
 		if (cmtx_get_reply_depth($id) < $cmtx_settings->reply_depth && !$is_locked) {
-			$cmtx_box .= "<a href='" . cmtx_url_encode($_SERVER['REQUEST_URI']) . CMTX_ANCHOR_FORM . "' id='cmtx_reply_" . $id . "' class='cmtx_reply_enabled' title='" . CMTX_TITLE_REPLY . "' rel='nofollow' onclick='";
+			$cmtx_box .= "<a href='" . cmtx_url_encode(cmtx_current_page() . CMTX_ANCHOR_FORM) . "' id='cmtx_reply_" . $id . "' class='cmtx_reply_enabled' title='" . CMTX_TITLE_REPLY . "' rel='nofollow' onclick='";
 			if ($cmtx_settings->hide_form) {
 				$cmtx_box .= "cmtx_open_form();";
 			}
@@ -347,7 +347,7 @@ function cmtx_generate_comment ($is_preview, $alternate, $id, $name, $email, $we
 			$cmtx_box .= "document.getElementById(\"cmtx_reset_reply\").style.display=\"inline\"'>";
 			$cmtx_box .= "<img src='" . cmtx_comments_folder() . "images/buttons/reply.png' alt='Reply' title='" . CMTX_TITLE_REPLY . "'/>" . CMTX_REPLY . "</a>";
 		} else {
-			$cmtx_box .= "<a href='' id='cmtx_reply_" . $id . "' class='cmtx_reply_disabled' title='' rel='nofollow' onclick='return false;'>";
+			$cmtx_box .= "<a href='" . cmtx_url_encode(cmtx_current_page()) . "' id='cmtx_reply_" . $id . "' class='cmtx_reply_disabled' title='' rel='nofollow' onclick='return false;'>";
 			$cmtx_box .= "<img src='" . cmtx_comments_folder() . "images/buttons/reply.png' alt='Reply' title=''/>" . CMTX_REPLY . "</a>";
 		}
 		$cmtx_box .= "</div>";
@@ -367,7 +367,7 @@ function cmtx_generate_comment ($is_preview, $alternate, $id, $name, $email, $we
 	if ($cmtx_settings->show_flag && !$is_preview) {
 		$cmtx_box .= "<div class='cmtx_flag_block'>";
 		$cmtx_box .= "<div class='cmtx_buttons'>";
-		$cmtx_box .= "<a class='cmtx_flag' href='' id='cmtx_flag_" . $id . "' title='" . CMTX_TITLE_FLAG . "' rel='nofollow'><img src='" . cmtx_comments_folder() . "images/buttons/flag.png' alt='Flag' title='" . CMTX_TITLE_FLAG . "'/>" . CMTX_FLAG . "</a>";
+		$cmtx_box .= "<a class='cmtx_flag' href='" . cmtx_url_encode(cmtx_current_page()) . "' id='cmtx_flag_" . $id . "' title='" . CMTX_TITLE_FLAG . "' rel='nofollow'><img src='" . cmtx_comments_folder() . "images/buttons/flag.png' alt='Flag' title='" . CMTX_TITLE_FLAG . "'/>" . CMTX_FLAG . "</a>";
 		$cmtx_box .= "</div>";
 		$cmtx_box .= "</div>";
 	}
@@ -377,10 +377,10 @@ function cmtx_generate_comment ($is_preview, $alternate, $id, $name, $email, $we
 		$cmtx_box .= "<div class='cmtx_like_block'>";
 		$cmtx_box .= "<div class='cmtx_buttons'>";
 		if ($cmtx_settings->show_like) {
-			$cmtx_box .= "<a class='cmtx_vote cmtx_vote_up' href='' id='cmtx_vote_up_" . $id . "' title='" . CMTX_TITLE_VOTE_UP . "' rel='nofollow'><img src='" . cmtx_comments_folder() . "images/buttons/up.png' alt='Up' title='" . CMTX_TITLE_VOTE_UP . "'/>" . $vote_up . "</a>";
+			$cmtx_box .= "<a class='cmtx_vote cmtx_vote_up' href='" . cmtx_url_encode(cmtx_current_page()) . "' id='cmtx_vote_up_" . $id . "' title='" . CMTX_TITLE_VOTE_UP . "' rel='nofollow'><img src='" . cmtx_comments_folder() . "images/buttons/up.png' alt='Up' title='" . CMTX_TITLE_VOTE_UP . "'/>" . $vote_up . "</a>";
 		}
 		if ($cmtx_settings->show_dislike) {
-			$cmtx_box .= "<a class='cmtx_vote cmtx_vote_down' href='' id='cmtx_vote_down_" . $id . "' title='" . CMTX_TITLE_VOTE_DOWN . "' rel='nofollow'><img src='" . cmtx_comments_folder() . "images/buttons/down.png' alt='Down' title='" . CMTX_TITLE_VOTE_DOWN . "'/>" . $vote_down . "</a>";
+			$cmtx_box .= "<a class='cmtx_vote cmtx_vote_down' href='" . cmtx_url_encode(cmtx_current_page()) . "' id='cmtx_vote_down_" . $id . "' title='" . CMTX_TITLE_VOTE_DOWN . "' rel='nofollow'><img src='" . cmtx_comments_folder() . "images/buttons/down.png' alt='Down' title='" . CMTX_TITLE_VOTE_DOWN . "'/>" . $vote_down . "</a>";
 		}
 		$cmtx_box .= "</div>";
 		$cmtx_box .= "</div>";
