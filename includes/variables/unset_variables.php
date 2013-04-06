@@ -116,6 +116,7 @@ unset($cmtx_current_page);
 unset($cmtx_sort);
 unset($cmtx_comments_query);
 unset($cmtx_comments);
+unset($cmtx_topic);
 unset($cmtx_average_rating);
 unset($cmtx_output_average_rating);
 unset($cmtx_social_url);
