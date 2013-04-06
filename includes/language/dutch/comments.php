@@ -56,7 +56,7 @@ define('CMTX_TITLE_EMPTY_STAR', 'Lege Ster');
 define('CMTX_SAYS', 'schreef...');
 
 /* Read More */
-define('CMTX_READ_MORE', 'Lees meer');
+define('CMTX_READ_MORE', '... Lees meer');
 define('CMTX_TITLE_READ_MORE', 'Lees het volledige commentaar');
 
 /* Admin */

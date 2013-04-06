@@ -56,7 +56,7 @@ define('CMTX_TITLE_EMPTY_STAR', 'Empty Star');
 define('CMTX_SAYS', 'pravi...');
 
 /* Read More */
-define('CMTX_READ_MORE', 'Preberite več');
+define('CMTX_READ_MORE', '... Preberite več');
 define('CMTX_TITLE_READ_MORE', 'Preberite celoten komentar');
 
 /* Admin */

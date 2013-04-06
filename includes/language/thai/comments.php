@@ -56,7 +56,7 @@ define('CMTX_TITLE_EMPTY_STAR', 'ดาวไร้ดวง');
 define('CMTX_SAYS', 'แสดงความคิดเห็น...');
 
 /* Read More */
-define('CMTX_READ_MORE', 'อ่านเพิ่มเติม');
+define('CMTX_READ_MORE', '... อ่านเพิ่มเติม');
 define('CMTX_TITLE_READ_MORE', 'อ่านความคิดเห็นเต็ม');
 
 /* Admin */

@@ -56,7 +56,7 @@ define('CMTX_TITLE_EMPTY_STAR', 'Пустая звезда');
 define('CMTX_SAYS', 'говорит...');
 
 /* Read More */
-define('CMTX_READ_MORE', 'Читать дальше');
+define('CMTX_READ_MORE', '... Читать дальше');
 define('CMTX_TITLE_READ_MORE', 'Читать отзыв полностью');
 
 /* Admin */

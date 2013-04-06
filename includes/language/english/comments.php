@@ -56,7 +56,7 @@ define('CMTX_TITLE_EMPTY_STAR', 'Empty Star');
 define('CMTX_SAYS', 'says...');
 
 /* Read More */
-define('CMTX_READ_MORE', 'Read More');
+define('CMTX_READ_MORE', '... Read More');
 define('CMTX_TITLE_READ_MORE', 'Read the full comment');
 
 /* Admin */
