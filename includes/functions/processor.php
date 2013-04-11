@@ -93,28 +93,9 @@ function cmtx_add_subscriber ($name, $email, $page_id) { //adds new subscriber
 	$body = str_ireplace("[page url]", $page_url, $body);
 	$body = str_ireplace("[confirmation link]", $confirmation_link, $body);
 
-	require $cmtx_path . "includes/swift_mailer/create.php"; //create email
-
-	//Give the message a subject
-	$message->setSubject($cmtx_settings->subscriber_confirmation_subject);
-
-	//Set the From address
-	$message->setFrom(array($cmtx_settings->subscriber_confirmation_from_email => $cmtx_settings->subscriber_confirmation_from_name));
-
-	//Set the Reply-To address
-	$message->setReplyTo($cmtx_settings->subscriber_confirmation_reply_to);
-
-	//Set the To address
-	$message->setTo(array($email => $name));
-
-	//Give it a body
-	$message->setBody($body);
-
-	require $cmtx_path . "includes/swift_mailer/options.php"; //set options
-
-	//Send the message
-	$result = $mailer->send($message);
-
+	//send email
+	cmtx_email($email, $name, $cmtx_settings->subscriber_confirmation_subject, $body, $cmtx_settings->subscriber_confirmation_from_email, $cmtx_settings->subscriber_confirmation_from_name, $cmtx_settings->subscriber_confirmation_reply_to);
+	
 } //end of add-subscriber function
 
 
@@ -133,19 +114,6 @@ function cmtx_notify_subscribers ($poster, $comment, $page_id) { //notify subscr
 	$poster = cmtx_prepare_name_for_email($poster); //prepare name for email
 	$comment = cmtx_prepare_comment_for_email($comment); //prepare comment for email
 
-	require $cmtx_path . "includes/swift_mailer/create.php"; //create email
-
-	//Give the message a subject
-	$message->setSubject($cmtx_settings->subscriber_notification_subject);
-
-	//Set the From address
-	$message->setFrom(array($cmtx_settings->subscriber_notification_from_email => $cmtx_settings->subscriber_notification_from_name));
-
-	//Set the Reply-To address
-	$message->setReplyTo($cmtx_settings->subscriber_notification_reply_to);
-
-	require $cmtx_path . "includes/swift_mailer/options.php"; //set options
-
 	$count = 0; //count how many emails are sent
 
 	while ($subscriber = mysql_fetch_assoc($subscribers)) { //while there are subscribers
@@ -154,8 +122,7 @@ function cmtx_notify_subscribers ($poster, $comment, $page_id) { //notify subscr
 
 		$email = $subscriber["email"];
 
-		$name = $subscriber["name"];
-		$name = cmtx_decode($name);
+		$name = cmtx_decode($subscriber["name"]);
 
 		$token = $subscriber["token"];
 
@@ -169,14 +136,8 @@ function cmtx_notify_subscribers ($poster, $comment, $page_id) { //notify subscr
 		$body = str_ireplace("[comment]", $comment, $body);
 		$body = str_ireplace("[unsubscribe link]", $unsubscribe_link, $body);
 
-		//Set the To address
-		$message->setTo(array($email => $name));
-
-		//Give it a body
-		$message->setBody($body);
-
-		//Send the message
-		$result = $mailer->send($message);
+		//send email
+		cmtx_email($email, $name, $cmtx_settings->subscriber_notification_subject, $body, $cmtx_settings->subscriber_notification_from_email, $cmtx_settings->subscriber_notification_from_name, $cmtx_settings->subscriber_notification_reply_to);
 
 		$count++; //increment email counter
 
@@ -204,34 +165,14 @@ function cmtx_notify_admin_new_ban ($reason) { //notify admin of new ban
 	$body = str_ireplace("[ban reasoning]", $reason, $body);
 	$body = str_ireplace("[admin link]", $admin_link, $body);
 
-	require $cmtx_path . "includes/swift_mailer/create.php"; //create email
-
-	//Give the message a subject
-	$message->setSubject($cmtx_settings->admin_new_ban_subject);
-
-	//Set the From address
-	$message->setFrom(array($cmtx_settings->admin_new_ban_from_email => $cmtx_settings->admin_new_ban_from_name));
-
-	//Set the Reply-To address
-	$message->setReplyTo($cmtx_settings->admin_new_ban_reply_to);
-
-	//Give it a body
-	$message->setBody($body);
-
-	require $cmtx_path . "includes/swift_mailer/options.php"; //set options
-
 	//select administrators from database
 	$admins = mysql_query("SELECT `email` FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `receive_email_new_ban` = '1' AND `is_enabled` = '1'");
 
 	while ($admin = mysql_fetch_assoc($admins)) { //while there are administrators
 
 		$email = $admin["email"]; //get administrator email address
-
-		//Set the To address
-		$message->setTo($email);
-
-		//Send the message
-		$result = $mailer->send($message);
+		
+		cmtx_email($email, null, $cmtx_settings->admin_new_ban_subject, $body, $cmtx_settings->admin_new_ban_from_email, $cmtx_settings->admin_new_ban_from_name, $cmtx_settings->admin_new_ban_reply_to);
 
 	}
 
@@ -261,34 +202,14 @@ function cmtx_notify_admin_new_comment_approve ($poster, $comment) { //notify ad
 	$body = str_ireplace("[approval reasoning]", $cmtx_approve_reason, $body);
 	$body = str_ireplace("[admin link]", $admin_link, $body);
 
-	require $cmtx_path . "includes/swift_mailer/create.php"; //create email
-
-	//Give the message a subject
-	$message->setSubject($cmtx_settings->admin_new_comment_approve_subject);
-
-	//Set the From address
-	$message->setFrom(array($cmtx_settings->admin_new_comment_approve_from_email => $cmtx_settings->admin_new_comment_approve_from_name));
-
-	//Set the Reply-To address
-	$message->setReplyTo($cmtx_settings->admin_new_comment_approve_reply_to);
-
-	//Give it a body
-	$message->setBody($body);
-
-	require $cmtx_path . "includes/swift_mailer/options.php"; //set options
-
 	//select administrators from database
 	$admins = mysql_query("SELECT `email` FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `receive_email_new_comment_approve` = '1' AND `is_enabled` = '1'");
 
 	while ($admin = mysql_fetch_assoc($admins)) { //while there are administrators
 
-		$email = $admin["email"]; //get administrator email address	
-
-		//Set the To address
-		$message->setTo($email);
-
-		//Send the message
-		$result = $mailer->send($message);
+		$email = $admin["email"]; //get administrator email address
+		
+		cmtx_email($email, null, $cmtx_settings->admin_new_comment_approve_subject, $body, $cmtx_settings->admin_new_comment_approve_from_email, $cmtx_settings->admin_new_comment_approve_from_name, $cmtx_settings->admin_new_comment_approve_reply_to);
 
 	}
 
@@ -317,22 +238,6 @@ function cmtx_notify_admin_new_comment_okay ($poster, $comment) { //notify admin
 	$body = str_ireplace("[comment]", $comment, $body);
 	$body = str_ireplace("[admin link]", $admin_link, $body);
 
-	require $cmtx_path . "includes/swift_mailer/create.php"; //create email
-
-	//Give the message a subject
-	$message->setSubject($cmtx_settings->admin_new_comment_okay_subject);
-
-	//Set the From address
-	$message->setFrom(array($cmtx_settings->admin_new_comment_okay_from_email => $cmtx_settings->admin_new_comment_okay_from_name));
-
-	//Set the Reply-To address
-	$message->setReplyTo($cmtx_settings->admin_new_comment_okay_reply_to);
-
-	//Give it a body
-	$message->setBody($body);
-
-	require $cmtx_path . "includes/swift_mailer/options.php"; //set options
-
 	//select administrators from database
 	$admins = mysql_query("SELECT `email` FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `receive_email_new_comment_okay` = '1' AND `is_enabled` = '1'");
 
@@ -340,13 +245,9 @@ function cmtx_notify_admin_new_comment_okay ($poster, $comment) { //notify admin
 
 		$email = $admin["email"]; //get administrator email address
 
-		//Set the To address
-		$message->setTo($email);
-
 		if ($cmtx_is_admin && cmtx_is_admin_email($email)) {} else { //if not detected admin who submitted
 
-			//Send the message
-			$result = $mailer->send($message);
+			cmtx_email($email, null, $cmtx_settings->admin_new_comment_okay_subject, $body, $cmtx_settings->admin_new_comment_okay_from_email, $cmtx_settings->admin_new_comment_okay_from_name, $cmtx_settings->admin_new_comment_okay_reply_to);
 
 		}
 

@@ -28,6 +28,8 @@ define('CMTX_IN_ADMIN', 'true');
 session_start();
 ob_start();
 
+$cmtx_path = "../"; //set the path
+
 require "../includes/db/connect.php"; //connect to database
 if (!$cmtx_db_ok) { die(); }
 
@@ -49,8 +51,6 @@ require "includes/language/" . $cmtx_settings->language_backend . "/buttons.php"
 require "includes/language/" . $cmtx_settings->language_backend . "/prompts.php"; //load language file for prompts
 
 require "includes/functions/general.php"; //load functions
-
-require "../includes/swift_mailer/lib/swift_required.php"; //load Swift Mailer
 
 cmtx_error_reporting("includes/logs/errors.log"); //error reporting
 

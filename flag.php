@@ -24,6 +24,9 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 
 define('IN_COMMENTICS', 'true');
 
+//set the path
+$cmtx_path = "";
+
 /* Database Connection */
 require "includes/db/connect.php"; //connect to database
 if (!$cmtx_db_ok) { die(); }
@@ -37,9 +40,6 @@ require "includes/functions/page.php";
 
 //load language file
 require "includes/language/" . $cmtx_settings->language_frontend . "/comments.php";
-
-//load Swift Mailer
-require "includes/swift_mailer/lib/swift_required.php";
 
 if (!$cmtx_settings->show_flag) {
 	die();
@@ -184,22 +184,6 @@ if (isset($_POST['id'])) {
 		$body = str_ireplace("[comment]", $comment, $body);
 		$body = str_ireplace("[admin link]", $admin_link, $body);
 
-		require "includes/swift_mailer/create.php"; //create email
-
-		//Give the message a subject
-		$message->setSubject($cmtx_settings->admin_new_flag_subject);
-
-		//Set the From address
-		$message->setFrom(array($cmtx_settings->admin_new_flag_from_email => $cmtx_settings->admin_new_flag_from_name));
-
-		//Set the Reply-To address
-		$message->setReplyTo($cmtx_settings->admin_new_flag_reply_to);
-
-		//Give it a body
-		$message->setBody($body);
-
-		require "includes/swift_mailer/options.php"; //set options
-
 		//select administrators from database
 		$admins = mysql_query("SELECT `email` FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `receive_email_new_flag` = '1' AND `is_enabled` = '1'");
 
@@ -207,11 +191,7 @@ if (isset($_POST['id'])) {
 
 			$email = $admin["email"]; //get administrator email address
 
-			//Set the To address
-			$message->setTo($email);
-
-			//Send the message
-			$result = $mailer->send($message);
+			cmtx_email($email, null, $cmtx_settings->admin_new_flag_subject, $body, $cmtx_settings->admin_new_flag_from_email, $cmtx_settings->admin_new_flag_from_name, $cmtx_settings->admin_new_flag_reply_to);
 
 		}
 

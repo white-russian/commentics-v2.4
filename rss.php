@@ -24,6 +24,9 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 
 define('IN_COMMENTICS', 'true');
 
+//set the path
+$cmtx_path = "";
+
 /* Database Connection */
 require "includes/db/connect.php"; //connect to database
 if (!$cmtx_db_ok) { die(); }

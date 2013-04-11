@@ -73,6 +73,9 @@ if (isset($_GET['uid'])) {
 	$_GET['id'] = $_GET['uid'];
 }
 
+//set the path
+$cmtx_path = "";
+
 /* Database Connection */
 require "includes/db/connect.php"; //connect to database
 if (!$cmtx_db_ok) { die(); }

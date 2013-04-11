@@ -190,19 +190,6 @@ function cmtx_notify_subscribers ($poster, $comment, $comment_id, $page_id) { //
 	
 	$poster = cmtx_prepare_name_for_email($poster); //prepare name for email
 	$comment = cmtx_prepare_comment_for_email($comment); //prepare comment for email
-
-	require "../includes/swift_mailer/create.php"; //create email
-	
-	//Give the message a subject
-	$message->setSubject($cmtx_settings->subscriber_notification_subject);
-	
-	//Set the From address
-	$message->setFrom(array($cmtx_settings->subscriber_notification_from_email => $cmtx_settings->subscriber_notification_from_name));
-	
-	//Set the Reply-To address
-	$message->setReplyTo($cmtx_settings->subscriber_notification_reply_to);
-	
-	require "../includes/swift_mailer/options.php"; //set options
 	
 	$count = 0; //count how many emails are sent
 	
@@ -226,14 +213,8 @@ function cmtx_notify_subscribers ($poster, $comment, $comment_id, $page_id) { //
 		$body = str_ireplace("[comment]", $comment, $body);
 		$body = str_ireplace("[unsubscribe link]", $unsubscribe_link, $body);
 
-		//Set the To address
-		$message->setTo(array($email => $name));
-		
-		//Give it a body
-		$message->setBody($body);
-
-		//Send the message
-		$result = $mailer->send($message);
+		//send email
+		cmtx_email($email, $name, $cmtx_settings->subscriber_notification_subject, $body, $cmtx_settings->subscriber_notification_from_email, $cmtx_settings->subscriber_notification_from_name, $cmtx_settings->subscriber_notification_reply_to);
 		
 		$count++; //increment email counter
 	
@@ -705,4 +686,69 @@ function cmtx_set_time_zone($time_zone) { //set the time zone
 	@mysql_query("SET time_zone = '" . date("P") . "'"); //set time zone DB
 
 } //end of set-time-zone function
+
+
+function cmtx_email($to_email, $to_name, $subject, $body, $from_email, $from_name, $reply_email) { //sends an email
+
+	global $cmtx_settings, $cmtx_path; //globalise variables
+	
+	require_once $cmtx_path . "includes/swift_mailer/lib/swift_required.php"; //load Swift Mailer
+
+	//Set the transport method
+	if ($cmtx_settings->transport_method == "php") {
+		$transport = Swift_MailTransport::newInstance();
+	} else if ($cmtx_settings->transport_method == "smtp") {
+		$transport = Swift_SmtpTransport::newInstance();
+		$transport->setHost($cmtx_settings->smtp_host);
+		$transport->setPort($cmtx_settings->smtp_port);
+		if ($cmtx_settings->smtp_encrypt == "ssl") {
+			$transport->setEncryption('ssl');
+		} else if ($cmtx_settings->smtp_encrypt == "tls") {
+			$transport->setEncryption('tls');
+		}
+		if ($cmtx_settings->smtp_auth) {
+			$transport->setUsername($cmtx_settings->smtp_username);
+			$transport->setPassword($cmtx_settings->smtp_password);
+		}
+	} else if ($cmtx_settings->transport_method == "sendmail") {
+		$transport = Swift_SendmailTransport::newInstance($cmtx_settings->sendmail_path . ' -bs');
+	}
+
+	//Create the Mailer using the created Transport
+	$mailer = Swift_Mailer::newInstance($transport);
+
+	//Create the message
+	$message = Swift_Message::newInstance();
+	
+	//Give the message a subject
+	$message->setSubject($subject);
+
+	//Set the From address
+	$message->setFrom(array($from_email => $from_name));
+
+	//Set the Reply-To address
+	$message->setReplyTo($reply_email);
+
+	//Set the To address
+	if (empty($to_name)) { $message->setTo($to_email); } else { $message->setTo(array($to_email => $to_name)); }
+
+	//Give it a body
+	$message->setBody($body);
+
+	//Set the format of message
+	$message->setContentType("text/plain");
+
+	//Set the charset as UTF-8
+	$message->setCharset("UTF-8");
+
+	//Set the content-transfer-encoding to 8bit
+	$message->setEncoder(Swift_Encoding::get8BitEncoding());
+
+	//Set the maximum line length to 1000
+	$message->setMaxLineLength(1000);
+
+	//Send the message
+	$result = $mailer->send($message);
+
+} //end of email function
 ?>

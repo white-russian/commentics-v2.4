@@ -157,27 +157,8 @@ if (!isset($_SESSION['cmtx_username']) && !isset($_SESSION['cmtx_password']) && 
 					$body = str_ireplace("[password]", $password, $body);
 					$body = str_ireplace("[admin link]", $admin_link, $body);
 					
-					require "../includes/swift_mailer/create.php"; //create email
-					
-					//Give the message a subject
-					$message->setSubject($cmtx_settings->admin_reset_password_subject);
-		
-					//Set the From address
-					$message->setFrom(array($cmtx_settings->admin_reset_password_from_email => $cmtx_settings->admin_reset_password_from_name));
-		
-					//Set the Reply-To address
-					$message->setReplyTo($cmtx_settings->admin_reset_password_reply_to);
-					
-					//Set the To address
-					$message->setTo($email);
-		
-					//Give it a body
-					$message->setBody($body);
-		
-					require "../includes/swift_mailer/options.php"; //set options
-		
-					//Send the message
-					$result = $mailer->send($message);
+					//send email
+					cmtx_email($email, null, $cmtx_settings->admin_reset_password_subject, $body, $cmtx_settings->admin_reset_password_from_email, $cmtx_settings->admin_reset_password_from_name, $cmtx_settings->admin_reset_password_reply_to);
 					
 					$password = md5($password);
 					$password = cmtx_sanitize($password);
