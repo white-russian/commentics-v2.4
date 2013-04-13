@@ -692,63 +692,80 @@ function cmtx_email($to_email, $to_name, $subject, $body, $from_email, $from_nam
 
 	global $cmtx_settings, $cmtx_path; //globalise variables
 	
-	require_once $cmtx_path . "includes/swift_mailer/lib/swift_required.php"; //load Swift Mailer
-
-	//Set the transport method
-	if ($cmtx_settings->transport_method == "php") {
-		$transport = Swift_MailTransport::newInstance();
-	} else if ($cmtx_settings->transport_method == "smtp") {
-		$transport = Swift_SmtpTransport::newInstance();
-		$transport->setHost($cmtx_settings->smtp_host);
-		$transport->setPort($cmtx_settings->smtp_port);
-		if ($cmtx_settings->smtp_encrypt == "ssl") {
-			$transport->setEncryption('ssl');
-		} else if ($cmtx_settings->smtp_encrypt == "tls") {
-			$transport->setEncryption('tls');
-		}
-		if ($cmtx_settings->smtp_auth) {
-			$transport->setUsername($cmtx_settings->smtp_username);
-			$transport->setPassword($cmtx_settings->smtp_password);
-		}
-	} else if ($cmtx_settings->transport_method == "sendmail") {
-		$transport = Swift_SendmailTransport::newInstance($cmtx_settings->sendmail_path . ' -bs');
-	}
-
-	//Create the Mailer using the created Transport
-	$mailer = Swift_Mailer::newInstance($transport);
-
-	//Create the message
-	$message = Swift_Message::newInstance();
+	if ($cmtx_settings->transport_method == "php-basic") {
 	
-	//Give the message a subject
-	$message->setSubject($subject);
+		//set email headers
+		$headers = 'From: ' . $from_name . ' <' . $from_email . '>' . "\r\n";
+		$headers .= 'Reply-To: ' . $reply_email . "\r\n";
+		$headers .= 'Content-Type: text/plain; charset=utf-8' . "\r\n";
+		
+		//set recipient name
+		if (!empty($to_name)) { $to_email = $to_name . " <$to_email>"; }
+		
+		//send email
+		@mail($to_email, $subject, $body, $headers);
+	
+	} else {
+	
+		require_once $cmtx_path . "includes/swift_mailer/lib/swift_required.php"; //load Swift Mailer
 
-	//Set the From address
-	$message->setFrom(array($from_email => $from_name));
+		//set the transport method
+		if ($cmtx_settings->transport_method == "php") {
+			$transport = Swift_MailTransport::newInstance();
+		} else if ($cmtx_settings->transport_method == "smtp") {
+			$transport = Swift_SmtpTransport::newInstance();
+			$transport->setHost($cmtx_settings->smtp_host);
+			$transport->setPort($cmtx_settings->smtp_port);
+			if ($cmtx_settings->smtp_encrypt == "ssl") {
+				$transport->setEncryption('ssl');
+			} else if ($cmtx_settings->smtp_encrypt == "tls") {
+				$transport->setEncryption('tls');
+			}
+			if ($cmtx_settings->smtp_auth) {
+				$transport->setUsername($cmtx_settings->smtp_username);
+				$transport->setPassword($cmtx_settings->smtp_password);
+			}
+		} else if ($cmtx_settings->transport_method == "sendmail") {
+			$transport = Swift_SendmailTransport::newInstance($cmtx_settings->sendmail_path . ' -bs');
+		}
 
-	//Set the Reply-To address
-	$message->setReplyTo($reply_email);
+		//create the Mailer using the created Transport
+		$mailer = Swift_Mailer::newInstance($transport);
 
-	//Set the To address
-	if (empty($to_name)) { $message->setTo($to_email); } else { $message->setTo(array($to_email => $to_name)); }
+		//create the message
+		$message = Swift_Message::newInstance();
+		
+		//give the message a subject
+		$message->setSubject($subject);
 
-	//Give it a body
-	$message->setBody($body);
+		//set the From address
+		$message->setFrom(array($from_email => $from_name));
 
-	//Set the format of message
-	$message->setContentType("text/plain");
+		//set the Reply-To address
+		$message->setReplyTo($reply_email);
 
-	//Set the charset as UTF-8
-	$message->setCharset("UTF-8");
+		//set the To address
+		if (empty($to_name)) { $message->setTo($to_email); } else { $message->setTo(array($to_email => $to_name)); }
 
-	//Set the content-transfer-encoding to 8bit
-	$message->setEncoder(Swift_Encoding::get8BitEncoding());
+		//give it a body
+		$message->setBody($body);
 
-	//Set the maximum line length to 1000
-	$message->setMaxLineLength(1000);
+		//set the format of message
+		$message->setContentType("text/plain");
 
-	//Send the message
-	$result = $mailer->send($message);
+		//set the charset as UTF-8
+		$message->setCharset("UTF-8");
+
+		//set the content-transfer-encoding to 8bit
+		$message->setEncoder(Swift_Encoding::get8BitEncoding());
+
+		//set the maximum line length to 1000
+		$message->setMaxLineLength(1000);
+
+		//send the message
+		$result = $mailer->send($message);
+	
+	}
 
 } //end of email function
 ?>

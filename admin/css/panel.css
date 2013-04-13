@@ -363,11 +363,6 @@ font-size: 0.9em;
 font-style: italic;
 }
 
-span.php_typical {
-font-size: 0.8em;
-font-style: italic;
-}
-
 .info, .success, .warning, .error {
 border: 1px solid;
 margin: 8px 0px 0px 0px;
