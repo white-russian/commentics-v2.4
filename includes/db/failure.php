@@ -89,12 +89,12 @@ function cmtx_db_error_table() { //display a database tables error to admin
 	echo "<br />";
 	echo "Sorry, there is a <span style='font-weight:bold;color:#CC0000;'>database tables</span> problem.";
 	echo "<p></p>";
-	echo "If you haven't yet installed the script:";
+	echo "<u>If you haven't yet installed the script</u>";
 	echo "<ul>";
-	echo "<li>You must run the installer (domain.com/comments/installer/)</li>";
+	echo "<li>You need to run the installer (domain.com/comments/installer/)</li>";
 	echo "</ul>";
 	echo "<p></p>";
-	echo "If you have already installed the script:";
+	echo "<u>If you have already installed the script</u>";
 	echo "<ul>";
 	echo "<li>Please open <b>/comments/includes/db/details.php</b></li>";
 	echo "<li>Is the <b>\$cmtx_mysql_table_prefix</b> value correct?</li><br/>";
