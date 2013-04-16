@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_LANGUAGE ?></h3>
+<h3><?php echo CMTX_TITLE_LANGUAGE; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -51,43 +51,41 @@ $language_backend_san = cmtx_sanitize($language_backend);
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$language_frontend_san' WHERE `title` = 'language_frontend'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$language_backend_san' WHERE `title` = 'language_backend'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_SETTINGS_LANGUAGE ?>
+<?php echo CMTX_DESC_SETTINGS_LANGUAGE; ?>
 
 <p />
 
-<?php $cmtx_settings = new cmtx_settings; ?>
-
 <form name="settings_language" id="settings_language" action="index.php?page=settings_language" method="post">
-<label class='settings_language'><?php echo CMTX_FIELD_LABEL_FRONTEND ?></label>
+<label class='settings_language'><?php echo CMTX_FIELD_LABEL_FRONTEND; ?></label>
 <select name="language_frontend">
 <?php
 foreach (glob('../includes/language/*', GLOB_ONLYDIR) as $dir) {
 	$dir = basename($dir);
 	echo "<option value='" . $dir . "'";
-	if ($dir == $cmtx_settings->language_frontend) { echo " selected='selected'"; }
+	if ($dir == cmtx_setting('language_frontend')) { echo " selected='selected'"; }
 	echo ">" . $dir . "</option>";	
 }
 ?>
 </select>
 <p />
-<label class='settings_language'><?php echo CMTX_FIELD_LABEL_BACKEND ?></label>
+<label class='settings_language'><?php echo CMTX_FIELD_LABEL_BACKEND; ?></label>
 <select name="language_backend">
 <?php
 foreach (glob('includes/language/*', GLOB_ONLYDIR) as $dir) {
 	$dir = basename($dir);
 	echo "<option value='" . $dir . "'";
-	if ($dir == $cmtx_settings->language_backend) { echo " selected='selected'"; }
+	if ($dir == cmtx_setting('language_backend')) { echo " selected='selected'"; }
 	echo ">" . $dir . "</option>";	
 }
 ?>
 </select>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

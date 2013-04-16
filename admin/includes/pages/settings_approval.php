@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_APPROVAL ?></h3>
+<h3><?php echo CMTX_TITLE_APPROVAL; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -48,25 +48,23 @@ if (isset($_POST['approve_notifications'])) { $approve_notifications = 1; } else
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$approve_comments' WHERE `title` = 'approve_comments'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$approve_notifications' WHERE `title` = 'approve_notifications'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_SETTINGS_APPROVAL ?>
+<?php echo CMTX_DESC_SETTINGS_APPROVAL; ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="settings_approval" id="settings_approval" action="index.php?page=settings_approval" method="post">
-<label class='settings_approval'><?php echo CMTX_FIELD_LABEL_APPROVE_COMMENTS ?></label> <?php if ($cmtx_settings->approve_comments) { ?> <input type="checkbox" checked="checked" name="approve_comments"/> <?php } else { ?> <input type="checkbox" name="approve_comments"/> <?php } ?>
+<label class='settings_approval'><?php echo CMTX_FIELD_LABEL_APPROVE_COMMENTS; ?></label> <?php if (cmtx_setting('approve_comments')) { ?> <input type="checkbox" checked="checked" name="approve_comments"/> <?php } else { ?> <input type="checkbox" name="approve_comments"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_APPROVE_COMMENTS); ?>
 <p />
-<label class='settings_approval'><?php echo CMTX_FIELD_LABEL_APPROVE_NOTIFICATIONS ?></label> <?php if ($cmtx_settings->approve_notifications) { ?> <input type="checkbox" checked="checked" name="approve_notifications"/> <?php } else { ?> <input type="checkbox" name="approve_notifications"/> <?php } ?>
+<label class='settings_approval'><?php echo CMTX_FIELD_LABEL_APPROVE_NOTIFICATIONS; ?></label> <?php if (cmtx_setting('approve_notifications')) { ?> <input type="checkbox" checked="checked" name="approve_notifications"/> <?php } else { ?> <input type="checkbox" name="approve_notifications"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_APPROVE_NOTIFICATIONS); ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

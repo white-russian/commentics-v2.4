@@ -22,18 +22,18 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_PHPINFO ?></h3>
+<h3><?php echo CMTX_TITLE_PHPINFO; ?></h3>
 <hr class="title"/>
 
 <?php
-if ($cmtx_settings->is_demo) {
+if (cmtx_setting('is_demo')) {
 echo CMTX_MSG_DEMO;
 die();
 }

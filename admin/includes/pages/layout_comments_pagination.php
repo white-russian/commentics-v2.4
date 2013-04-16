@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_COMMENTS_PAGINATION ?></h3>
+<h3><?php echo CMTX_TITLE_COMMENTS_PAGINATION; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -57,34 +57,32 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$comments_per_page_san' WHERE `title` = 'comments_per_page'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$range_of_pages_san' WHERE `title` = 'range_of_pages'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_LAYOUT_COMMENTS_PAGINATION ?>
+<?php echo CMTX_DESC_LAYOUT_COMMENTS_PAGINATION; ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="layout_comments_pagination" id="layout_comments_pagination" action="index.php?page=layout_comments_pagination" method="post">
-<label class='layout_comments_pagination'><?php echo CMTX_FIELD_LABEL_ENABLED ?></label> <?php if ($cmtx_settings->enabled_pagination) { ?> <input type="checkbox" checked="checked" name="enabled_pagination"/> <?php } else { ?> <input type="checkbox" name="enabled_pagination"/> <?php } ?>
+<label class='layout_comments_pagination'><?php echo CMTX_FIELD_LABEL_ENABLED; ?></label> <?php if (cmtx_setting('enabled_pagination')) { ?> <input type="checkbox" checked="checked" name="enabled_pagination"/> <?php } else { ?> <input type="checkbox" name="enabled_pagination"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_PAGINATION_ENABLED); ?>
 <p />
-<label class='layout_comments_pagination'><?php echo CMTX_FIELD_LABEL_TOP ?></label> <?php if ($cmtx_settings->show_pagination_top) { ?> <input type="checkbox" checked="checked" name="show_pagination_top"/> <?php } else { ?> <input type="checkbox" name="show_pagination_top"/> <?php } ?>
+<label class='layout_comments_pagination'><?php echo CMTX_FIELD_LABEL_TOP; ?></label> <?php if (cmtx_setting('show_pagination_top')) { ?> <input type="checkbox" checked="checked" name="show_pagination_top"/> <?php } else { ?> <input type="checkbox" name="show_pagination_top"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_PAGINATION_TOP); ?>
 <p />
-<label class='layout_comments_pagination'><?php echo CMTX_FIELD_LABEL_BOTTOM ?></label> <?php if ($cmtx_settings->show_pagination_bottom) { ?> <input type="checkbox" checked="checked" name="show_pagination_bottom"/> <?php } else { ?> <input type="checkbox" name="show_pagination_bottom"/> <?php } ?>
+<label class='layout_comments_pagination'><?php echo CMTX_FIELD_LABEL_BOTTOM; ?></label> <?php if (cmtx_setting('show_pagination_bottom')) { ?> <input type="checkbox" checked="checked" name="show_pagination_bottom"/> <?php } else { ?> <input type="checkbox" name="show_pagination_bottom"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_PAGINATION_BOTTOM); ?>
 <p />
-<label class='layout_comments_pagination'><?php echo CMTX_FIELD_LABEL_PER_PAGE ?></label> <input type="text" required name="comments_per_page" size="1" maxlength="250" value="<?php echo $cmtx_settings->comments_per_page; ?>"/>
+<label class='layout_comments_pagination'><?php echo CMTX_FIELD_LABEL_PER_PAGE; ?></label> <input type="text" required name="comments_per_page" size="1" maxlength="250" value="<?php echo cmtx_setting('comments_per_page'); ?>"/>
 <?php cmtx_generate_hint(CMTX_HINT_PAGINATION_PER_PAGE); ?>
 <p />
-<label class='layout_comments_pagination'><?php echo CMTX_FIELD_LABEL_RANGE ?></label> <input type="text" required name="range_of_pages" size="1" maxlength="250" value="<?php echo $cmtx_settings->range_of_pages; ?>"/>
+<label class='layout_comments_pagination'><?php echo CMTX_FIELD_LABEL_RANGE; ?></label> <input type="text" required name="range_of_pages" size="1" maxlength="250" value="<?php echo cmtx_setting('range_of_pages'); ?>"/>
 <?php cmtx_generate_hint(CMTX_HINT_PAGINATION_RANGE); ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

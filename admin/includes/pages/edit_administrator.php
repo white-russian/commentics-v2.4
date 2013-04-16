@@ -22,14 +22,14 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_EDIT_ADMIN ?></h3>
+<h3><?php echo CMTX_TITLE_EDIT_ADMIN; ?></h3>
 <hr class="title"/>
 
 <?php
@@ -42,18 +42,18 @@ die("<p />" . CMTX_MSG_ADMIN_ONLY);
 <?php
 if (isset($_GET['id']) && ctype_digit($_GET['id']) && cmtx_record_exists($_GET['id'], "admins")) {
 } else { ?>
-<div class="error"><?php echo CMTX_MSG_RECORD_MISSING ?></div>
+<div class="error"><?php echo CMTX_MSG_RECORD_MISSING; ?></div>
 <div style="clear: left;"></div>
-<a href="index.php?page=manage_administrators"><?php echo CMTX_LINK_BACK ?></a>
+<a href="index.php?page=manage_administrators"><?php echo CMTX_LINK_BACK; ?></a>
 <?php
 die();
 }
 ?>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -80,14 +80,14 @@ $allowed_pages_san = cmtx_sanitize($allowed_pages);
 if (mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `username` = '$username_san' AND `id` != '$id_san'"))) {
 
 ?>
-<div class="error"><?php echo CMTX_MSG_ADMIN_EXISTS ?></div>
+<div class="error"><?php echo CMTX_MSG_ADMIN_EXISTS; ?></div>
 <div style="clear: left;"></div>
 <?php
 
 } else if ((!$is_enabled || $restrict_pages) && mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `is_super` = '1' AND `id` = '$id_san'"))) {
 
 ?>
-<div class="error"><?php echo CMTX_MSG_ADMIN_SUP_DIS ?></div>
+<div class="error"><?php echo CMTX_MSG_ADMIN_SUP_DIS; ?></div>
 <div style="clear: left;"></div>
 <?php
 
@@ -101,7 +101,7 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "admins` SET `restrict_pages
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "admins` SET `allowed_pages` = '$allowed_pages_san' WHERE `id` = '$id_san'");
 
 ?>
-<div class="success"><?php echo CMTX_MSG_ADMIN_UPDATED ?></div>
+<div class="success"><?php echo CMTX_MSG_ADMIN_UPDATED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
@@ -123,34 +123,32 @@ $date = date("jS M Y", strtotime($administrator["dated"]));
 
 <p />
 
-<?php $cmtx_settings = new cmtx_settings; ?>
-
 <form name="administrator" id="administrator" action="index.php?page=edit_administrator&id=<?php echo $id ?>" method="post" onsubmit="return check_passwords()";>
-<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_USERNAME ?></label> <input type="text" required name="username" size="12" maxlength="250" value="<?php echo cmtx_sanitize($username, true, false); ?>"/>
+<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_USERNAME; ?></label> <input type="text" required name="username" size="12" maxlength="250" value="<?php echo cmtx_sanitize($username, true, false); ?>"/>
 <p />
-<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_NEW_PASSWORD ?></label> <input type="password" name="password_1" size="20" maxlength="250"/>
+<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_NEW_PASSWORD; ?></label> <input type="password" name="password_1" size="20" maxlength="250"/>
 <p />
-<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_REPEAT_PASSWORD ?></label> <input type="password" name="password_2" size="20" maxlength="250"/>
+<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_REPEAT_PASSWORD; ?></label> <input type="password" name="password_2" size="20" maxlength="250"/>
 <p />
-<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_EMAIL_ADDRESS ?></label> <input type="email" required name="email" size="30" maxlength="250" value="<?php echo $email; ?>"/>
+<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_EMAIL_ADDRESS; ?></label> <input type="email" required name="email" size="30" maxlength="250" value="<?php echo $email; ?>"/>
 <p />
-<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_ENABLED ?></label>
+<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_ENABLED; ?></label>
 <?php if ($enabled) { ?>
 <select name='enabled'>
-<option value='0'><?php echo CMTX_FIELD_VALUE_NO ?></option>
-<option value='1' selected='selected'><?php echo CMTX_FIELD_VALUE_YES ?></option>
+<option value='0'><?php echo CMTX_FIELD_VALUE_NO; ?></option>
+<option value='1' selected='selected'><?php echo CMTX_FIELD_VALUE_YES; ?></option>
 </select>
 <?php } else { ?>
 <select name='enabled'>
-<option value='0' selected='selected'><?php echo CMTX_FIELD_VALUE_NO ?></option>
-<option value='1'><?php echo CMTX_FIELD_VALUE_YES ?></option>
+<option value='0' selected='selected'><?php echo CMTX_FIELD_VALUE_NO; ?></option>
+<option value='1'><?php echo CMTX_FIELD_VALUE_YES; ?></option>
 </select>
 <?php } ?>
 <p />
-<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_RESTRICT_PAGES ?></label> <?php if ($restrict_pages) { ?> <input type="checkbox" checked="checked" name="restrict_pages" onclick="show_hide('allowed_pages');"/> <?php } else { ?> <input type="checkbox" name="restrict_pages" onclick="show_hide('allowed_pages');"/> <?php } ?>
+<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_RESTRICT_PAGES; ?></label> <?php if ($restrict_pages) { ?> <input type="checkbox" checked="checked" name="restrict_pages" onclick="show_hide('allowed_pages');"/> <?php } else { ?> <input type="checkbox" name="restrict_pages" onclick="show_hide('allowed_pages');"/> <?php } ?>
 <br />
 <div id="allowed_pages" style="display:none;">
-<label class='edit_administrator'>&nbsp;</label> <span class='note'><?php echo CMTX_NOTE_ALLOWED ?></span>
+<label class='edit_administrator'>&nbsp;</label> <span class='note'><?php echo CMTX_NOTE_ALLOWED; ?></span>
 <p />
 <?php
 echo cmtx_page_checkbox("manage", $id, "0") . "<span class='menu_checkbox'>Manage</span>" . "<p />";
@@ -266,15 +264,15 @@ echo cmtx_page_checkbox("tools", $id, "0") . "<span class='menu_checkbox'>Tools<
 <script type="text/javascript">show_hide('allowed_pages')</script>
 <?php } ?>
 <p />
-<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_TIME ?></label> <input readonly="readonly" type="text" class="readonly" name="time" size="5" maxlength="250" value="<?php echo $time; ?>"/>
+<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_TIME; ?></label> <input readonly="readonly" type="text" class="readonly" name="time" size="5" maxlength="250" value="<?php echo $time; ?>"/>
 <p />
-<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_DATE ?></label> <input readonly="readonly" type="text" class="readonly" name="date" size="12" maxlength="250" value="<?php echo $date; ?>"/>
+<label class='edit_administrator'><?php echo CMTX_FIELD_LABEL_DATE; ?></label> <input readonly="readonly" type="text" class="readonly" name="date" size="12" maxlength="250" value="<?php echo $date; ?>"/>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
-<input type="button" class="button" name="delete" onclick="if(delete_confirmation()){window.location='index.php?page=manage_administrators&action=delete&id=<?php echo $id . "&key=" . $_SESSION['cmtx_csrf_key']?>'};" title="<?php echo CMTX_BUTTON_DELETE ?>" value="<?php echo CMTX_BUTTON_DELETE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
+<input type="button" class="button" name="delete" onclick="if(delete_confirmation()){window.location='index.php?page=manage_administrators&action=delete&id=<?php echo $id . "&key=" . $_SESSION['cmtx_csrf_key']?>'};" title="<?php echo CMTX_BUTTON_DELETE; ?>" value="<?php echo CMTX_BUTTON_DELETE; ?>"/>
 </form>
 
 <p />
 
-<a href="index.php?page=manage_administrators"><?php echo CMTX_LINK_BACK ?></a>
+<a href="index.php?page=manage_administrators"><?php echo CMTX_LINK_BACK; ?></a>

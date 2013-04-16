@@ -22,14 +22,14 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_VERSION ?></h3>
+<h3><?php echo CMTX_TITLE_VERSION; ?></h3>
 <hr class="title"/>
 
 <?php echo CMTX_DESC_REPORT_VERSION_1 ?> <b>v<?php echo cmtx_get_current_version(); ?></b>. <?php echo CMTX_DESC_REPORT_VERSION_2 ?>
@@ -39,9 +39,9 @@ if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
 <table id="data" class="display" summary="Versions">
     <thead>
     	<tr>
-        	<th><?php echo CMTX_TABLE_VERSION ?></th>
-			<th><?php echo CMTX_TABLE_TYPE ?></th>
-            <th><?php echo CMTX_TABLE_DATE_TIME ?></th>
+        	<th><?php echo CMTX_TABLE_VERSION; ?></th>
+			<th><?php echo CMTX_TABLE_TYPE; ?></th>
+            <th><?php echo CMTX_TABLE_DATE_TIME; ?></th>
         </tr>
     </thead>
     <tbody>

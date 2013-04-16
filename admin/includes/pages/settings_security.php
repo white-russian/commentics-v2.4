@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_SECURITY ?></h3>
+<h3><?php echo CMTX_TITLE_SECURITY; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -56,34 +56,32 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$c
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$check_time' WHERE `title` = 'check_time'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$ban_cookie_days_san' WHERE `title` = 'ban_cookie_days'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_SETTINGS_SECURITY ?>
+<?php echo CMTX_DESC_SETTINGS_SECURITY; ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="settings_security" id="settings_security" action="index.php?page=settings_security" method="post">
-<label class='settings_security'><?php echo CMTX_FIELD_LABEL_CHECK_REFERRER ?></label> <?php if ($cmtx_settings->check_referrer) { ?> <input type="checkbox" checked="checked" name="check_referrer"/> <?php } else { ?> <input type="checkbox" name="check_referrer"/> <?php } ?>
+<label class='settings_security'><?php echo CMTX_FIELD_LABEL_CHECK_REFERRER; ?></label> <?php if (cmtx_setting('check_referrer')) { ?> <input type="checkbox" checked="checked" name="check_referrer"/> <?php } else { ?> <input type="checkbox" name="check_referrer"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_CHECK_REFERRER); ?>
 <p />
-<label class='settings_security'><?php echo CMTX_FIELD_LABEL_CHECK_DB_FILE ?></label> <?php if ($cmtx_settings->check_db_file) { ?> <input type="checkbox" checked="checked" name="check_db_file"/> <?php } else { ?> <input type="checkbox" name="check_db_file"/> <?php } ?>
+<label class='settings_security'><?php echo CMTX_FIELD_LABEL_CHECK_DB_FILE; ?></label> <?php if (cmtx_setting('check_db_file')) { ?> <input type="checkbox" checked="checked" name="check_db_file"/> <?php } else { ?> <input type="checkbox" name="check_db_file"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_CHECK_DB_FILE); ?>
 <p />
-<label class='settings_security'><?php echo CMTX_FIELD_LABEL_CHECK_HONEYPOT ?></label> <?php if ($cmtx_settings->check_honeypot) { ?> <input type="checkbox" checked="checked" name="check_honeypot"/> <?php } else { ?> <input type="checkbox" name="check_honeypot"/> <?php } ?>
+<label class='settings_security'><?php echo CMTX_FIELD_LABEL_CHECK_HONEYPOT; ?></label> <?php if (cmtx_setting('check_honeypot')) { ?> <input type="checkbox" checked="checked" name="check_honeypot"/> <?php } else { ?> <input type="checkbox" name="check_honeypot"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_CHECK_HONEYPOT); ?>
 <p />
-<label class='settings_security'><?php echo CMTX_FIELD_LABEL_CHECK_TIME ?></label> <?php if ($cmtx_settings->check_time) { ?> <input type="checkbox" checked="checked" name="check_time"/> <?php } else { ?> <input type="checkbox" name="check_time"/> <?php } ?>
+<label class='settings_security'><?php echo CMTX_FIELD_LABEL_CHECK_TIME; ?></label> <?php if (cmtx_setting('check_time')) { ?> <input type="checkbox" checked="checked" name="check_time"/> <?php } else { ?> <input type="checkbox" name="check_time"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_CHECK_TIME); ?>
 <p />
-<label class='settings_security'><?php echo CMTX_FIELD_LABEL_BAN_COOKIE ?></label> <input type="text" required name="ban_cookie_days" size="1" maxlength="3" value="<?php echo $cmtx_settings->ban_cookie_days; ?>"/> <span class='note'><?php echo CMTX_NOTE_DAYS ?></span>
+<label class='settings_security'><?php echo CMTX_FIELD_LABEL_BAN_COOKIE; ?></label> <input type="text" required name="ban_cookie_days" size="1" maxlength="3" value="<?php echo cmtx_setting('ban_cookie_days'); ?>"/> <span class='note'><?php echo CMTX_NOTE_DAYS; ?></span>
 <?php cmtx_generate_hint(CMTX_HINT_BAN_COOKIE); ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

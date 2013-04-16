@@ -23,47 +23,41 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
 /*************************************************************** DIRECT ACCESS **********************************************************/
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 /****************************************************************************************************************************************/
 
 
 /*************************************************************** VARIABLES (1/2) ********************************************************/
-require_once $cmtx_path . "includes/variables/set_variables.php"; //set variables for page
+require_once $cmtx_path . 'includes/variables/set_variables.php'; //set variables for page
 /****************************************************************************************************************************************/
 
 
 /*************************************************************** FUNCTIONS **************************************************************/
-require_once $cmtx_path . "includes/functions/page.php"; //load functions file for page
-require_once $cmtx_path . "includes/functions/comments.php"; //load functions file for comments
-require_once $cmtx_path . "includes/functions/processor.php"; //load functions file for processor
-require_once $cmtx_path . "includes/functions/form.php"; //load functions file for form
+require_once $cmtx_path . 'includes/functions/page.php'; //load functions file for page
+require_once $cmtx_path . 'includes/functions/comments.php'; //load functions file for comments
+require_once $cmtx_path . 'includes/functions/processor.php'; //load functions file for processor
+require_once $cmtx_path . 'includes/functions/form.php'; //load functions file for form
 /****************************************************************************************************************************************/
 
 
 /*************************************************************** DATABASE (1/2) *********************************************************/
-require_once $cmtx_path . "includes/db/connect.php"; //connect to database
+require_once $cmtx_path . 'includes/db/connect.php'; //connect to database
 if ($cmtx_db_ok) { //if database connection okay
 /****************************************************************************************************************************************/
 
 
-/*************************************************************** SETTINGS ***************************************************************/
-require_once $cmtx_path . "includes/classes/settings.php"; //load class file for settings
-$cmtx_settings = new cmtx_settings; //get settings from database
-/****************************************************************************************************************************************/
-
-
 /*************************************************************** LANGUAGE ***************************************************************/
-require_once $cmtx_path . "includes/language/" . $cmtx_settings->language_frontend . "/page.php"; //load language file for page
-require_once $cmtx_path . "includes/language/" . $cmtx_settings->language_frontend . "/comments.php"; //load language file for comments
-require_once $cmtx_path . "includes/language/" . $cmtx_settings->language_frontend . "/processor.php"; //load language file for processor
-require_once $cmtx_path . "includes/language/" . $cmtx_settings->language_frontend . "/form.php"; //load language file for form
-require_once $cmtx_path . "includes/language/" . $cmtx_settings->language_frontend . "/countries.php"; //load language file for countries
-require_once $cmtx_path . "includes/language/" . $cmtx_settings->language_frontend . "/ratings.php"; //load language file for ratings
+require_once $cmtx_path . 'includes/language/' . cmtx_setting('language_frontend') . '/page.php'; //load language file for page
+require_once $cmtx_path . 'includes/language/' . cmtx_setting('language_frontend') . '/comments.php'; //load language file for comments
+require_once $cmtx_path . 'includes/language/' . cmtx_setting('language_frontend') . '/processor.php'; //load language file for processor
+require_once $cmtx_path . 'includes/language/' . cmtx_setting('language_frontend') . '/form.php'; //load language file for form
+require_once $cmtx_path . 'includes/language/' . cmtx_setting('language_frontend') . '/countries.php'; //load language file for countries
+require_once $cmtx_path . 'includes/language/' . cmtx_setting('language_frontend') . '/ratings.php'; //load language file for ratings
 /****************************************************************************************************************************************/
 
 
 /*************************************************************** ERROR REPORTING ********************************************************/
-cmtx_error_reporting($cmtx_path . "includes/logs/errors.log");
+cmtx_error_reporting($cmtx_path . 'includes/logs/errors.log');
 /****************************************************************************************************************************************/
 
 
@@ -90,7 +84,7 @@ $cmtx_page_id = cmtx_validate_page_id(); //validate Page ID
 
 
 /*************************************************************** TIME ZONE **************************************************************/
-cmtx_set_time_zone($cmtx_settings->time_zone); //set the time zone
+cmtx_set_time_zone(cmtx_setting('time_zone')); //set the time zone
 /****************************************************************************************************************************************/
 
 
@@ -100,24 +94,24 @@ cmtx_unban_user(); //unban user if requested by admin
 
 
 /*************************************************************** LOAD PROCESSOR *********************************************************/
-require_once $cmtx_path . "includes/app/processor.php"; //load file for form processor
+require_once $cmtx_path . 'includes/app/processor.php'; //load file for form processor
 /****************************************************************************************************************************************/
 
 
 /*************************************************************** DISPLAY DATA ***********************************************************/
-require_once $cmtx_path . "includes/template/main.php"; //load main template
+require_once $cmtx_path . 'includes/template/main.php'; //load main template
 /****************************************************************************************************************************************/
 
 
 /*************************************************************** VIEWERS ****************************************************************/
-if ($cmtx_settings->viewers_enabled) { //if viewers feature is enabled
+if (cmtx_setting('viewers_enabled')) { //if viewers feature is enabled
 	if (!$cmtx_is_admin) { cmtx_add_viewer(); } //add viewer if not administrator
 }
 /****************************************************************************************************************************************/
 
 
 /*************************************************************** TASK SYSTEM ************************************************************/
-require_once $cmtx_path . "includes/tasks/tasks.php"; //load task system
+require_once $cmtx_path . 'includes/tasks/tasks.php'; //load task system
 /****************************************************************************************************************************************/
 
 
@@ -133,6 +127,6 @@ cmtx_reconnect_db(); //reconnect original connection
 
 
 /*************************************************************** VARIABLES (2/2) ********************************************************/
-require_once $cmtx_path . "includes/variables/unset_variables.php"; //unset variables for page
+require_once $cmtx_path . 'includes/variables/unset_variables.php'; //unset variables for page
 /****************************************************************************************************************************************/
 ?>

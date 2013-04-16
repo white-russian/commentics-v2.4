@@ -22,13 +22,13 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 @$cmtx_db_orig = mysql_query("SELECT DATABASE();");
 @$cmtx_db_orig = mysql_result($cmtx_db_orig, 0);
 
-require_once "details.php"; //load database details
-require_once "failure.php"; //load failure messages
+require_once 'details.php'; //load database details
+require_once 'failure.php'; //load failure messages
 
 $cmtx_db_ok = true;
 

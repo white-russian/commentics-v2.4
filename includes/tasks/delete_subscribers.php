@@ -22,9 +22,9 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 //delete subscribers who have been unconfirmed for longer than the configured time period
-mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "subscribers` WHERE `is_confirmed` = '0' AND `dated` < DATE_SUB(NOW(), INTERVAL " . $cmtx_settings->days_to_delete_subscribers . " DAY)");
+mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "subscribers` WHERE `is_confirmed` = '0' AND `dated` < DATE_SUB(NOW(), INTERVAL " . cmtx_setting('days_to_delete_subscribers') . " DAY)");
 
 ?>

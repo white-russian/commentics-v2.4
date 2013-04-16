@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_PROCESSOR_COMMENT ?></h3>
+<h3><?php echo CMTX_TITLE_PROCESSOR_COMMENT; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -119,234 +119,232 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$b
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$banned_websites_as_comment_action_san' WHERE `title` = 'banned_websites_as_comment_action'");
 
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_SETTINGS_PROCESSING_COMMENT ?>
+<?php echo CMTX_DESC_SETTINGS_PROCESSING_COMMENT; ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="settings_processor_comment" id="settings_processor_comment" action="index.php?page=settings_processor_comment" method="post">
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_APPROVE_IMAGES ?></label> <?php if ($cmtx_settings->approve_images) { ?> <input type="checkbox" checked="checked" name="approve_images"/> <?php } else { ?> <input type="checkbox" name="approve_images"/> <?php } ?>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_APPROVE_IMAGES; ?></label> <?php if (cmtx_setting('approve_images')) { ?> <input type="checkbox" checked="checked" name="approve_images"/> <?php } else { ?> <input type="checkbox" name="approve_images"/> <?php } ?>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_APPROVE_VIDEOS ?></label> <?php if ($cmtx_settings->approve_videos) { ?> <input type="checkbox" checked="checked" name="approve_videos"/> <?php } else { ?> <input type="checkbox" name="approve_videos"/> <?php } ?>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_APPROVE_VIDEOS; ?></label> <?php if (cmtx_setting('approve_videos')) { ?> <input type="checkbox" checked="checked" name="approve_videos"/> <?php } else { ?> <input type="checkbox" name="approve_videos"/> <?php } ?>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_CONVERT_LINKS ?></label> <?php if ($cmtx_settings->comment_parser_convert_links) { ?> <input type="checkbox" checked="checked" name="comment_parser_convert_links"/> <?php } else { ?> <input type="checkbox" name="comment_parser_convert_links"/> <?php } ?>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_CONVERT_LINKS; ?></label> <?php if (cmtx_setting('comment_parser_convert_links')) { ?> <input type="checkbox" checked="checked" name="comment_parser_convert_links"/> <?php } else { ?> <input type="checkbox" name="comment_parser_convert_links"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_CONVERT_LINKS); ?>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_CONVERT_EMAILS ?></label> <?php if ($cmtx_settings->comment_parser_convert_emails) { ?> <input type="checkbox" checked="checked" name="comment_parser_convert_emails"/> <?php } else { ?> <input type="checkbox" name="comment_parser_convert_emails"/> <?php } ?>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_CONVERT_EMAILS; ?></label> <?php if (cmtx_setting('comment_parser_convert_emails')) { ?> <input type="checkbox" checked="checked" name="comment_parser_convert_emails"/> <?php } else { ?> <input type="checkbox" name="comment_parser_convert_emails"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_CONVERT_EMAILS); ?>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_NEW_WINDOW ?></label> <?php if ($cmtx_settings->comment_links_new_window) { ?> <input type="checkbox" checked="checked" name="comment_links_new_window"/> <?php } else { ?> <input type="checkbox" name="comment_links_new_window"/> <?php } ?>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_NEW_WINDOW; ?></label> <?php if (cmtx_setting('comment_links_new_window')) { ?> <input type="checkbox" checked="checked" name="comment_links_new_window"/> <?php } else { ?> <input type="checkbox" name="comment_links_new_window"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_NEW_WIN); ?>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_NO_FOLLOW ?></label> <?php if ($cmtx_settings->comment_links_nofollow) { ?> <input type="checkbox" checked="checked" name="comment_links_nofollow"/> <?php } else { ?> <input type="checkbox" name="comment_links_nofollow"/> <?php } ?>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_NO_FOLLOW; ?></label> <?php if (cmtx_setting('comment_links_nofollow')) { ?> <input type="checkbox" checked="checked" name="comment_links_nofollow"/> <?php } else { ?> <input type="checkbox" name="comment_links_nofollow"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_NO_FOLLOW); ?>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MIN_CHARS ?></label> <input type="text" required name="comment_minimum_characters" size="1" maxlength="250" value="<?php echo $cmtx_settings->comment_minimum_characters; ?>"/>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MIN_CHARS; ?></label> <input type="text" required name="comment_minimum_characters" size="1" maxlength="250" value="<?php echo cmtx_setting('comment_minimum_characters'); ?>"/>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MIN_WORDS ?></label> <input type="text" required name="comment_minimum_words" size="1" maxlength="250" value="<?php echo $cmtx_settings->comment_minimum_words; ?>"/>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MIN_WORDS; ?></label> <input type="text" required name="comment_minimum_words" size="1" maxlength="250" value="<?php echo cmtx_setting('comment_minimum_words'); ?>"/>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MAX_CHARS ?></label> <input type="text" required name="comment_maximum_characters" size="3" maxlength="250" value="<?php echo $cmtx_settings->comment_maximum_characters; ?>"/>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MAX_CHARS; ?></label> <input type="text" required name="comment_maximum_characters" size="3" maxlength="250" value="<?php echo cmtx_setting('comment_maximum_characters'); ?>"/>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MAX_LINES ?></label> <input type="text" required name="comment_maximum_lines" size="1" maxlength="250" value="<?php echo $cmtx_settings->comment_maximum_lines; ?>"/>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MAX_LINES; ?></label> <input type="text" required name="comment_maximum_lines" size="1" maxlength="250" value="<?php echo cmtx_setting('comment_maximum_lines'); ?>"/>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MAX_SMILIES ?></label> <input type="text" required name="comment_maximum_smilies" size="1" maxlength="250" value="<?php echo $cmtx_settings->comment_maximum_smilies; ?>"/>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MAX_SMILIES; ?></label> <input type="text" required name="comment_maximum_smilies" size="1" maxlength="250" value="<?php echo cmtx_setting('comment_maximum_smilies'); ?>"/>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_LONG_WORD ?></label> <input type="text" required name="long_word_length_to_deny" size="1" maxlength="250" value="<?php echo $cmtx_settings->long_word_length_to_deny; ?>"/> <span class='note'><?php echo CMTX_NOTE_CHARS ?></span>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_LONG_WORD; ?></label> <input type="text" required name="long_word_length_to_deny" size="1" maxlength="250" value="<?php echo cmtx_setting('long_word_length_to_deny'); ?>"/> <span class='note'><?php echo CMTX_NOTE_CHARS; ?></span>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_LINE_BREAKS ?></label> <?php if ($cmtx_settings->comment_line_breaks) { ?> <input type="checkbox" checked="checked" name="comment_line_breaks"/> <?php } else { ?> <input type="checkbox" name="comment_line_breaks"/> <?php } ?>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_LINE_BREAKS; ?></label> <?php if (cmtx_setting('comment_line_breaks')) { ?> <input type="checkbox" checked="checked" name="comment_line_breaks"/> <?php } else { ?> <input type="checkbox" name="comment_line_breaks"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_LINE_BREAKS); ?>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MASK ?></label> <input type="text" required name="swear_word_masking" size="4" maxlength="250" value="<?php echo $cmtx_settings->swear_word_masking; ?>"/>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MASK; ?></label> <input type="text" required name="swear_word_masking" size="4" maxlength="250" value="<?php echo cmtx_setting('swear_word_masking'); ?>"/>
 <?php cmtx_generate_hint(CMTX_HINT_MASK); ?>
 <p /><hr class="separator"/><br />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_DETECT_LINKS ?></label> <?php if ($cmtx_settings->detect_link_in_comment_enabled) { ?> <input type="checkbox" checked="checked" name="detect_link_in_comment_enabled"/> <?php } else { ?> <input type="checkbox" name="detect_link_in_comment_enabled"/> <?php } ?>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_DETECT_LINKS; ?></label> <?php if (cmtx_setting('detect_link_in_comment_enabled')) { ?> <input type="checkbox" checked="checked" name="detect_link_in_comment_enabled"/> <?php } else { ?> <input type="checkbox" name="detect_link_in_comment_enabled"/> <?php } ?>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_ACTION ?></label>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_ACTION; ?></label>
 <select name='link_in_comment_action'>
-<?php if ($cmtx_settings->link_in_comment_action == "reject") { ?>
-<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
-<?php } else if ($cmtx_settings->link_in_comment_action == "approve") { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<?php if (cmtx_setting('link_in_comment_action') == "reject") { ?>
+<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
+<?php } else if (cmtx_setting('link_in_comment_action') == "approve") { ?>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } else { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } ?>
 </select>
 <br /><hr class="separator"/><br />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MAX_CAPS ?></label> <?php if ($cmtx_settings->check_capitals_enabled) { ?> <input type="checkbox" checked="checked" name="check_capitals_enabled"/> <?php } else { ?> <input type="checkbox" name="check_capitals_enabled"/> <?php } ?>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MAX_CAPS; ?></label> <?php if (cmtx_setting('check_capitals_enabled')) { ?> <input type="checkbox" checked="checked" name="check_capitals_enabled"/> <?php } else { ?> <input type="checkbox" name="check_capitals_enabled"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_MAX_CAPITALS); ?>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_PERCENTAGE ?></label> <input type="text" required name="check_capitals_percentage" size="1" maxlength="250" value="<?php echo $cmtx_settings->check_capitals_percentage; ?>"/> <span class='note'>%</span>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_PERCENTAGE; ?></label> <input type="text" required name="check_capitals_percentage" size="1" maxlength="250" value="<?php echo cmtx_setting('check_capitals_percentage'); ?>"/> <span class='note'>%</span>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_ACTION ?></label>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_ACTION; ?></label>
 <select name='check_capitals_action'>
-<?php if ($cmtx_settings->check_capitals_action == "reject") { ?>
-<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
-<?php } else if ($cmtx_settings->check_capitals_action == "approve") { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<?php if (cmtx_setting('check_capitals_action') == "reject") { ?>
+<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
+<?php } else if (cmtx_setting('check_capitals_action') == "approve") { ?>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } else { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } ?>
 </select>
 <p /><hr class="separator"/><br />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_DETECT_REPEATS ?></label> <?php if ($cmtx_settings->check_repeats_enabled) { ?> <input type="checkbox" checked="checked" name="check_repeats_enabled"/> <?php } else { ?> <input type="checkbox" name="check_repeats_enabled"/> <?php } ?>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_DETECT_REPEATS; ?></label> <?php if (cmtx_setting('check_repeats_enabled')) { ?> <input type="checkbox" checked="checked" name="check_repeats_enabled"/> <?php } else { ?> <input type="checkbox" name="check_repeats_enabled"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_DETECT_REPEATS); ?>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_ACTION ?></label>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_ACTION; ?></label>
 <select name='check_repeats_action'>
-<?php if ($cmtx_settings->check_repeats_action == "reject") { ?>
-<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
-<?php } else if ($cmtx_settings->check_repeats_action == "approve") { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<?php if (cmtx_setting('check_repeats_action') == "reject") { ?>
+<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
+<?php } else if (cmtx_setting('check_repeats_action') == "approve") { ?>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } else { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } ?>
 </select>
 <br /><hr class="separator"/><br />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_SPAM_WORDS ?></label> <?php if ($cmtx_settings->spam_words_enabled) { ?> <input type="checkbox" checked="checked" name="spam_words_enabled"/> <?php } else { ?> <input type="checkbox" name="spam_words_enabled"/> <?php } ?>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_SPAM_WORDS; ?></label> <?php if (cmtx_setting('spam_words_enabled')) { ?> <input type="checkbox" checked="checked" name="spam_words_enabled"/> <?php } else { ?> <input type="checkbox" name="spam_words_enabled"/> <?php } ?>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_LIST ?></label> <a href="index.php?page=list_spam_words"><?php echo CMTX_LINK_EDIT ?></a>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_LIST; ?></label> <a href="index.php?page=list_spam_words"><?php echo CMTX_LINK_EDIT; ?></a>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_ACTION ?></label>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_ACTION; ?></label>
 <select name='spam_words_action'>
-<?php if ($cmtx_settings->spam_words_action == "reject") { ?>
-<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
-<?php } else if ($cmtx_settings->spam_words_action == "approve") { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<?php if (cmtx_setting('spam_words_action') == "reject") { ?>
+<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
+<?php } else if (cmtx_setting('spam_words_action') == "approve") { ?>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } else { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } ?>
 </select>
 <br /><hr class="separator"/><br />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MILD_SWEARS ?></label> <?php if ($cmtx_settings->mild_swear_words_enabled) { ?> <input type="checkbox" checked="checked" name="mild_swear_words_enabled"/> <?php } else { ?> <input type="checkbox" name="mild_swear_words_enabled"/> <?php } ?>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_MILD_SWEARS; ?></label> <?php if (cmtx_setting('mild_swear_words_enabled')) { ?> <input type="checkbox" checked="checked" name="mild_swear_words_enabled"/> <?php } else { ?> <input type="checkbox" name="mild_swear_words_enabled"/> <?php } ?>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_LIST ?></label> <a href="index.php?page=list_mild_swear_words"><?php echo CMTX_LINK_EDIT ?></a>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_LIST; ?></label> <a href="index.php?page=list_mild_swear_words"><?php echo CMTX_LINK_EDIT; ?></a>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_ACTION ?></label>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_ACTION; ?></label>
 <select name='mild_swear_words_action'>
-<?php if ($cmtx_settings->mild_swear_words_action == "mask") { ?>
-<option value='mask' selected='selected'><?php echo CMTX_FIELD_VALUE_MASK ?></option>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
-<?php } else if ($cmtx_settings->mild_swear_words_action == "reject") { ?>
-<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK ?></option>
-<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
-<?php } else if ($cmtx_settings->mild_swear_words_action == "approve") { ?>
-<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK ?></option>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
-<?php } else if ($cmtx_settings->mild_swear_words_action == "mask_approve") { ?>
-<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK ?></option>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='mask_approve' selected='selected'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<?php if (cmtx_setting('mild_swear_words_action') == "mask") { ?>
+<option value='mask' selected='selected'><?php echo CMTX_FIELD_VALUE_MASK; ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
+<?php } else if (cmtx_setting('mild_swear_words_action') == "reject") { ?>
+<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK; ?></option>
+<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
+<?php } else if (cmtx_setting('mild_swear_words_action') == "approve") { ?>
+<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK; ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
+<?php } else if (cmtx_setting('mild_swear_words_action') == "mask_approve") { ?>
+<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK; ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='mask_approve' selected='selected'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } else { ?>
-<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK ?></option>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE ?></option>
-<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK; ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE; ?></option>
+<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } ?>
 </select>
 <br /><hr class="separator"/><br />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_STRONG_SWEARS ?></label> <?php if ($cmtx_settings->strong_swear_words_enabled) { ?> <input type="checkbox" checked="checked" name="strong_swear_words_enabled"/> <?php } else { ?> <input type="checkbox" name="strong_swear_words_enabled"/> <?php } ?>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_STRONG_SWEARS; ?></label> <?php if (cmtx_setting('strong_swear_words_enabled')) { ?> <input type="checkbox" checked="checked" name="strong_swear_words_enabled"/> <?php } else { ?> <input type="checkbox" name="strong_swear_words_enabled"/> <?php } ?>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_LIST ?></label> <a href="index.php?page=list_strong_swear_words"><?php echo CMTX_LINK_EDIT ?></a>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_LIST; ?></label> <a href="index.php?page=list_strong_swear_words"><?php echo CMTX_LINK_EDIT; ?></a>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_ACTION ?></label>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_ACTION; ?></label>
 <select name='strong_swear_words_action'>
-<?php if ($cmtx_settings->strong_swear_words_action == "mask") { ?>
-<option value='mask' selected='selected'><?php echo CMTX_FIELD_VALUE_MASK ?></option>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
-<?php } else if ($cmtx_settings->strong_swear_words_action == "reject") { ?>
-<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK ?></option>
-<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
-<?php } else if ($cmtx_settings->strong_swear_words_action == "approve") { ?>
-<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK ?></option>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
-<?php } else if ($cmtx_settings->strong_swear_words_action == "mask_approve") { ?>
-<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK ?></option>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='mask_approve' selected='selected'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<?php if (cmtx_setting('strong_swear_words_action') == "mask") { ?>
+<option value='mask' selected='selected'><?php echo CMTX_FIELD_VALUE_MASK; ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
+<?php } else if (cmtx_setting('strong_swear_words_action') == "reject") { ?>
+<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK; ?></option>
+<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
+<?php } else if (cmtx_setting('strong_swear_words_action') == "approve") { ?>
+<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK; ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
+<?php } else if (cmtx_setting('strong_swear_words_action') == "mask_approve") { ?>
+<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK; ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='mask_approve' selected='selected'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } else { ?>
-<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK ?></option>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE ?></option>
-<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<option value='mask'><?php echo CMTX_FIELD_VALUE_MASK; ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='mask_approve'><?php echo CMTX_FIELD_VALUE_MASK_APPROVE; ?></option>
+<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } ?>
 </select>
 <br /><hr class="separator"/><br />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_BANNED_WEBSITE ?></label> <?php if ($cmtx_settings->banned_websites_as_comment_enabled) { ?> <input type="checkbox" checked="checked" name="banned_websites_as_comment_enabled"/> <?php } else { ?> <input type="checkbox" name="banned_websites_as_comment_enabled"/> <?php } ?>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_BANNED_WEBSITE; ?></label> <?php if (cmtx_setting('banned_websites_as_comment_enabled')) { ?> <input type="checkbox" checked="checked" name="banned_websites_as_comment_enabled"/> <?php } else { ?> <input type="checkbox" name="banned_websites_as_comment_enabled"/> <?php } ?>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_LIST ?></label> <a href="index.php?page=list_banned_websites"><?php echo CMTX_LINK_EDIT ?></a>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_LIST; ?></label> <a href="index.php?page=list_banned_websites"><?php echo CMTX_LINK_EDIT; ?></a>
 <p />
-<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_ACTION ?></label>
+<label class='settings_processor_comment'><?php echo CMTX_FIELD_LABEL_ACTION; ?></label>
 <select name='banned_websites_as_comment_action'>
-<?php if ($cmtx_settings->banned_websites_as_comment_action == "reject") { ?>
-<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
-<?php } else if ($cmtx_settings->banned_websites_as_comment_action == "approve") { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<?php if (cmtx_setting('banned_websites_as_comment_action') == "reject") { ?>
+<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
+<?php } else if (cmtx_setting('banned_websites_as_comment_action') == "approve") { ?>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } else { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } ?>
 </select>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

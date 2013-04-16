@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_COMMENTS_ENABLED ?></h3>
+<h3><?php echo CMTX_TITLE_COMMENTS_ENABLED; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -80,55 +80,53 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$show_rss_all_pages' WHERE `title` = 'show_rss_all_pages'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$show_page_number' WHERE `title` = 'show_page_number'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_LAYOUT_COMMENTS_ENABLED ?>
+<?php echo CMTX_DESC_LAYOUT_COMMENTS_ENABLED; ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="layout_comments_enabled" id="layout_comments_enabled" action="index.php?page=layout_comments_enabled" method="post">
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_WEBSITE ?></label> <?php if ($cmtx_settings->show_website) { ?> <input type="checkbox" checked="checked" name="show_website"/> <?php } else { ?> <input type="checkbox" name="show_website"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_WEBSITE; ?></label> <?php if (cmtx_setting('show_website')) { ?> <input type="checkbox" checked="checked" name="show_website"/> <?php } else { ?> <input type="checkbox" name="show_website"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_TOWN ?></label> <?php if ($cmtx_settings->show_town) { ?> <input type="checkbox" checked="checked" name="show_town"/> <?php } else { ?> <input type="checkbox" name="show_town"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_TOWN; ?></label> <?php if (cmtx_setting('show_town')) { ?> <input type="checkbox" checked="checked" name="show_town"/> <?php } else { ?> <input type="checkbox" name="show_town"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_COUNTRY ?></label> <?php if ($cmtx_settings->show_country) { ?> <input type="checkbox" checked="checked" name="show_country"/> <?php } else { ?> <input type="checkbox" name="show_country"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_COUNTRY; ?></label> <?php if (cmtx_setting('show_country')) { ?> <input type="checkbox" checked="checked" name="show_country"/> <?php } else { ?> <input type="checkbox" name="show_country"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_RATING ?></label> <?php if ($cmtx_settings->show_rating) { ?> <input type="checkbox" checked="checked" name="show_rating"/> <?php } else { ?> <input type="checkbox" name="show_rating"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_RATING; ?></label> <?php if (cmtx_setting('show_rating')) { ?> <input type="checkbox" checked="checked" name="show_rating"/> <?php } else { ?> <input type="checkbox" name="show_rating"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_DATE ?></label> <?php if ($cmtx_settings->show_date) { ?> <input type="checkbox" checked="checked" name="show_date"/> <?php } else { ?> <input type="checkbox" name="show_date"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_DATE; ?></label> <?php if (cmtx_setting('show_date')) { ?> <input type="checkbox" checked="checked" name="show_date"/> <?php } else { ?> <input type="checkbox" name="show_date"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_LIKE ?></label> <?php if ($cmtx_settings->show_like) { ?> <input type="checkbox" checked="checked" name="show_like"/> <?php } else { ?> <input type="checkbox" name="show_like"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_LIKE; ?></label> <?php if (cmtx_setting('show_like')) { ?> <input type="checkbox" checked="checked" name="show_like"/> <?php } else { ?> <input type="checkbox" name="show_like"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_DISLIKE ?></label> <?php if ($cmtx_settings->show_dislike) { ?> <input type="checkbox" checked="checked" name="show_dislike"/> <?php } else { ?> <input type="checkbox" name="show_dislike"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_DISLIKE; ?></label> <?php if (cmtx_setting('show_dislike')) { ?> <input type="checkbox" checked="checked" name="show_dislike"/> <?php } else { ?> <input type="checkbox" name="show_dislike"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_FLAG ?></label> <?php if ($cmtx_settings->show_flag) { ?> <input type="checkbox" checked="checked" name="show_flag"/> <?php } else { ?> <input type="checkbox" name="show_flag"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_FLAG; ?></label> <?php if (cmtx_setting('show_flag')) { ?> <input type="checkbox" checked="checked" name="show_flag"/> <?php } else { ?> <input type="checkbox" name="show_flag"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_PERMALINK ?></label> <?php if ($cmtx_settings->show_permalink) { ?> <input type="checkbox" checked="checked" name="show_permalink"/> <?php } else { ?> <input type="checkbox" name="show_permalink"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_PERMALINK; ?></label> <?php if (cmtx_setting('show_permalink')) { ?> <input type="checkbox" checked="checked" name="show_permalink"/> <?php } else { ?> <input type="checkbox" name="show_permalink"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_REPLY ?></label> <?php if ($cmtx_settings->show_reply) { ?> <input type="checkbox" checked="checked" name="show_reply"/> <?php } else { ?> <input type="checkbox" name="show_reply"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_REPLY; ?></label> <?php if (cmtx_setting('show_reply')) { ?> <input type="checkbox" checked="checked" name="show_reply"/> <?php } else { ?> <input type="checkbox" name="show_reply"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_GRAVATAR ?></label> <?php if ($cmtx_settings->show_gravatar) { ?> <input type="checkbox" checked="checked" name="show_gravatar"/> <?php } else { ?> <input type="checkbox" name="show_gravatar"/> <?php } ?>
-<div class='sub-heading'><?php echo CMTX_TITLE_OUTER_AREA ?></div>
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_SORT_BY ?></label> <?php if ($cmtx_settings->show_sort_by) { ?> <input type="checkbox" checked="checked" name="show_sort_by"/> <?php } else { ?> <input type="checkbox" name="show_sort_by"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_GRAVATAR; ?></label> <?php if (cmtx_setting('show_gravatar')) { ?> <input type="checkbox" checked="checked" name="show_gravatar"/> <?php } else { ?> <input type="checkbox" name="show_gravatar"/> <?php } ?>
+<div class='sub-heading'><?php echo CMTX_TITLE_OUTER_AREA; ?></div>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_SORT_BY; ?></label> <?php if (cmtx_setting('show_sort_by')) { ?> <input type="checkbox" checked="checked" name="show_sort_by"/> <?php } else { ?> <input type="checkbox" name="show_sort_by"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_TOPIC ?></label> <?php if ($cmtx_settings->show_topic) { ?> <input type="checkbox" checked="checked" name="show_topic"/> <?php } else { ?> <input type="checkbox" name="show_topic"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_TOPIC; ?></label> <?php if (cmtx_setting('show_topic')) { ?> <input type="checkbox" checked="checked" name="show_topic"/> <?php } else { ?> <input type="checkbox" name="show_topic"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_AVG_RATING ?></label> <?php if ($cmtx_settings->show_average_rating) { ?> <input type="checkbox" checked="checked" name="show_average_rating"/> <?php } else { ?> <input type="checkbox" name="show_average_rating"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_AVG_RATING; ?></label> <?php if (cmtx_setting('show_average_rating')) { ?> <input type="checkbox" checked="checked" name="show_average_rating"/> <?php } else { ?> <input type="checkbox" name="show_average_rating"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_SOCIAL ?></label> <?php if ($cmtx_settings->show_social) { ?> <input type="checkbox" checked="checked" name="show_social"/> <?php } else { ?> <input type="checkbox" name="show_social"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_SOCIAL; ?></label> <?php if (cmtx_setting('show_social')) { ?> <input type="checkbox" checked="checked" name="show_social"/> <?php } else { ?> <input type="checkbox" name="show_social"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_RSS_THIS ?></label> <?php if ($cmtx_settings->show_rss_this_page) { ?> <input type="checkbox" checked="checked" name="show_rss_this_page"/> <?php } else { ?> <input type="checkbox" name="show_rss_this_page"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_RSS_THIS; ?></label> <?php if (cmtx_setting('show_rss_this_page')) { ?> <input type="checkbox" checked="checked" name="show_rss_this_page"/> <?php } else { ?> <input type="checkbox" name="show_rss_this_page"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_RSS_ALL ?></label> <?php if ($cmtx_settings->show_rss_all_pages) { ?> <input type="checkbox" checked="checked" name="show_rss_all_pages"/> <?php } else { ?> <input type="checkbox" name="show_rss_all_pages"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_RSS_ALL; ?></label> <?php if (cmtx_setting('show_rss_all_pages')) { ?> <input type="checkbox" checked="checked" name="show_rss_all_pages"/> <?php } else { ?> <input type="checkbox" name="show_rss_all_pages"/> <?php } ?>
 <p />
-<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_PAGE_NUMBER ?></label> <?php if ($cmtx_settings->show_page_number) { ?> <input type="checkbox" checked="checked" name="show_page_number"/> <?php } else { ?> <input type="checkbox" name="show_page_number"/> <?php } ?>
+<label class='layout_comments_enabled'><?php echo CMTX_FIELD_LABEL_PAGE_NUMBER; ?></label> <?php if (cmtx_setting('show_page_number')) { ?> <input type="checkbox" checked="checked" name="show_page_number"/> <?php } else { ?> <input type="checkbox" name="show_page_number"/> <?php } ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_FORM_DEFAULTS ?></h3>
+<h3><?php echo CMTX_TITLE_FORM_DEFAULTS; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -72,54 +72,52 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$d
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$default_notify' WHERE `title` = 'default_notify'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$default_remember' WHERE `title` = 'default_remember'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_LAYOUT_FORM_DEFAULTS ?>
+<?php echo CMTX_DESC_LAYOUT_FORM_DEFAULTS; ?>
 
 <p />
 
-<?php require "../includes/language/" . $cmtx_settings->language_frontend . "/countries.php"; ?>
-<?php require "../includes/language/" . $cmtx_settings->language_frontend . "/ratings.php"; ?>
-
-<?php $cmtx_settings = new cmtx_settings; ?>
+<?php require '../includes/language/' . cmtx_setting('language_frontend') . '/countries.php'; ?>
+<?php require '../includes/language/' . cmtx_setting('language_frontend') . '/ratings.php'; ?>
 
 <form name="layout_form_defaults" id="layout_form_defaults" action="index.php?page=layout_form_defaults" method="post">
-<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_NAME ?></label> <input type="text" name="default_name" size="33" maxlength="250" value="<?php echo $cmtx_settings->default_name; ?>"/>
+<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_NAME; ?></label> <input type="text" name="default_name" size="33" maxlength="250" value="<?php echo cmtx_setting('default_name'); ?>"/>
 <p />
-<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_EMAIL ?></label> <input type="email" name="default_email" size="33" maxlength="250" value="<?php echo $cmtx_settings->default_email; ?>"/>
+<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_EMAIL; ?></label> <input type="email" name="default_email" size="33" maxlength="250" value="<?php echo cmtx_setting('default_email'); ?>"/>
 <p />
-<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_WEBSITE ?></label> <input type="text" name="default_website" size="33" maxlength="250" value="<?php echo $cmtx_settings->default_website; ?>"/>
+<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_WEBSITE; ?></label> <input type="text" name="default_website" size="33" maxlength="250" value="<?php echo cmtx_setting('default_website'); ?>"/>
 <p />
-<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_TOWN ?></label> <input type="text" name="default_town" size="33" maxlength="250" value="<?php echo $cmtx_settings->default_town; ?>"/>
+<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_TOWN; ?></label> <input type="text" name="default_town" size="33" maxlength="250" value="<?php echo cmtx_setting('default_town'); ?>"/>
 <p />
-<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_COUNTRY ?></label>
+<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_COUNTRY; ?></label>
 <?php
-require "../includes/template/countries.php";
-if (!empty($cmtx_settings->default_country)) {
-	$cmtx_countries = str_ireplace('"'.$cmtx_settings->default_country.'"', '"'.$cmtx_settings->default_country.'" selected="selected"', $cmtx_countries);
+require '../includes/template/countries.php';
+if (!empty(cmtx_setting('default_country'))) {
+	$cmtx_countries = str_ireplace('"'.cmtx_setting('default_country').'"', '"'.cmtx_setting('default_country').'" selected="selected"', $cmtx_countries);
 }
 echo $cmtx_countries;
 ?>
 <p />
-<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_RATING ?></label>
+<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_RATING; ?></label>
 <?php
-require "../includes/template/ratings.php";
-if (!empty($cmtx_settings->default_rating)) {
-	$cmtx_ratings = str_ireplace('"'.$cmtx_settings->default_rating.'"', '"'.$cmtx_settings->default_rating.'" selected="selected"', $cmtx_ratings);
+require '../includes/template/ratings.php';
+if (!empty(cmtx_setting('default_rating'))) {
+	$cmtx_ratings = str_ireplace('"'.cmtx_setting('default_rating').'"', '"'.cmtx_setting('default_rating').'" selected="selected"', $cmtx_ratings);
 }
 echo $cmtx_ratings;
 ?>
 <p />
-<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_COMMENT ?></label> <textarea name="default_comment" cols="41" rows="6"><?php echo $cmtx_settings->default_comment; ?></textarea>
+<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_COMMENT; ?></label> <textarea name="default_comment" cols="41" rows="6"><?php echo cmtx_setting('default_comment'); ?></textarea>
 <p />
-<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_NOTIFY ?></label> <?php if ($cmtx_settings->default_notify) { ?> <input type="checkbox" checked="checked" name="default_notify"/> <?php } else { ?> <input type="checkbox" name="default_notify"/> <?php } ?>
+<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_NOTIFY; ?></label> <?php if (cmtx_setting('default_notify')) { ?> <input type="checkbox" checked="checked" name="default_notify"/> <?php } else { ?> <input type="checkbox" name="default_notify"/> <?php } ?>
 <p />
-<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_COOKIE ?></label> <?php if ($cmtx_settings->default_remember) { ?> <input type="checkbox" checked="checked" name="default_remember"/> <?php } else { ?> <input type="checkbox" name="default_remember"/> <?php } ?>
+<label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_COOKIE; ?></label> <?php if (cmtx_setting('default_remember')) { ?> <input type="checkbox" checked="checked" name="default_remember"/> <?php } else { ?> <input type="checkbox" name="default_remember"/> <?php } ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

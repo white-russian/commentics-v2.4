@@ -22,14 +22,14 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_RECAPTCHA ?></h3>
+<h3><?php echo CMTX_TITLE_RECAPTCHA; ?></h3>
 <hr class="title"/>
 
 <?php
@@ -37,9 +37,9 @@ if (function_exists('fsockopen') && is_callable('fsockopen')) {
 ?>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -63,26 +63,24 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$r
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$recaptcha_theme_san' WHERE `title` = 'recaptcha_theme'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$recaptcha_language_san' WHERE `title` = 'recaptcha_language'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_SETTINGS_RECAPTCHA ?>
+<?php echo CMTX_DESC_SETTINGS_RECAPTCHA; ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="settings_recaptcha" id="settings_recaptcha" action="index.php?page=settings_recaptcha" method="post">
-<label class='settings_recaptcha'><?php echo CMTX_FIELD_LABEL_ENABLED ?></label> <?php if ($cmtx_settings->enabled_captcha) { ?> <input type="checkbox" checked="checked" name="enabled"/> <?php } else { ?> <input type="checkbox" name="enabled"/> <?php } ?>
+<label class='settings_recaptcha'><?php echo CMTX_FIELD_LABEL_ENABLED; ?></label> <?php if (cmtx_setting('enabled_captcha')) { ?> <input type="checkbox" checked="checked" name="enabled"/> <?php } else { ?> <input type="checkbox" name="enabled"/> <?php } ?>
 <p />
-<label class='settings_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_PUBLIC_KEY ?></label> <input type="text" name="recaptcha_public_key" size="55" maxlength="250" value="<?php echo $cmtx_settings->recaptcha_public_key; ?>"/>
+<label class='settings_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_PUBLIC_KEY; ?></label> <input type="text" name="recaptcha_public_key" size="55" maxlength="250" value="<?php echo cmtx_setting('recaptcha_public_key'); ?>"/>
 <p />
-<label class='settings_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_PRIVATE_KEY ?></label> <input type="text" name="recaptcha_private_key" size="55" maxlength="250" value="<?php echo $cmtx_settings->recaptcha_private_key; ?>"/>
+<label class='settings_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_PRIVATE_KEY; ?></label> <input type="text" name="recaptcha_private_key" size="55" maxlength="250" value="<?php echo cmtx_setting('recaptcha_private_key'); ?>"/>
 <p />
-<label class='settings_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_THEME ?></label>
+<label class='settings_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_THEME; ?></label>
 <?php
 $recaptcha_themes = "<select name='recaptcha_themes'>
 <option value='red'>red</option>
@@ -90,11 +88,11 @@ $recaptcha_themes = "<select name='recaptcha_themes'>
 <option value='blackglass'>blackglass</option>
 <option value='clean'>clean</option>
 </select>";
-$recaptcha_themes = str_ireplace("'".$cmtx_settings->recaptcha_theme."'", "'".$cmtx_settings->recaptcha_theme."' selected='selected'", $recaptcha_themes);
+$recaptcha_themes = str_ireplace("'".cmtx_setting('recaptcha_theme')."'", "'".cmtx_setting('recaptcha_theme')."' selected='selected'", $recaptcha_themes);
 echo $recaptcha_themes;
 ?>
 <p />
-<label class='settings_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_LANGUAGE ?></label>
+<label class='settings_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_LANGUAGE; ?></label>
 <?php
 $recaptcha_languages = "<select name='recaptcha_languages'>
 <option value='en'>english</option>
@@ -105,12 +103,12 @@ $recaptcha_languages = "<select name='recaptcha_languages'>
 <option value='es'>spanish</option>
 <option value='tr'>turkish</option>
 </select>";
-$recaptcha_languages = str_ireplace("'".$cmtx_settings->recaptcha_language."'", "'".$cmtx_settings->recaptcha_language."' selected='selected'", $recaptcha_languages);
+$recaptcha_languages = str_ireplace("'".cmtx_setting('recaptcha_language')."'", "'".cmtx_setting('recaptcha_language')."' selected='selected'", $recaptcha_languages);
 echo $recaptcha_languages;
 ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>
 
 <?php

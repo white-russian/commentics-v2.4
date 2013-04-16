@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_MAINTENANCE ?></h3>
+<h3><?php echo CMTX_TITLE_MAINTENANCE; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -50,23 +50,21 @@ $maintenance_message_san = cmtx_sanitize($maintenance_message);
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$maintenance_mode' WHERE `title` = 'maintenance_mode'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$maintenance_message_san' WHERE `title` = 'maintenance_message'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_SETTINGS_MAINTENANCE ?>
+<?php echo CMTX_DESC_SETTINGS_MAINTENANCE; ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="settings_maintenance" id="settings_maintenance" action="index.php?page=settings_maintenance" method="post">
-<label class='settings_maintenance'><?php echo CMTX_FIELD_LABEL_ENABLED ?></label> <?php if ($cmtx_settings->maintenance_mode) { ?> <input type="checkbox" checked="checked" name="enabled"/> <?php } else { ?> <input type="checkbox" name="enabled"/> <?php } ?>
+<label class='settings_maintenance'><?php echo CMTX_FIELD_LABEL_ENABLED; ?></label> <?php if (cmtx_setting('maintenance_mode')) { ?> <input type="checkbox" checked="checked" name="enabled"/> <?php } else { ?> <input type="checkbox" name="enabled"/> <?php } ?>
 <p />
-<label class='settings_maintenance'><?php echo CMTX_FIELD_LABEL_MESSAGE ?></label> <input type="text" required name="message" size="40" maxlength="250" value="<?php echo $cmtx_settings->maintenance_message; ?>"/>
+<label class='settings_maintenance'><?php echo CMTX_FIELD_LABEL_MESSAGE; ?></label> <input type="text" required name="message" size="40" maxlength="250" value="<?php echo cmtx_setting('maintenance_message'); ?>"/>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

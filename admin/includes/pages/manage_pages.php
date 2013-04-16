@@ -22,21 +22,21 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="" onclick="show_hide('pages');return false;"><?php echo CMTX_LINK_OPTIONS ?></a> /
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="" onclick="show_hide('pages');return false;"><?php echo CMTX_LINK_OPTIONS; ?></a> /
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_PAGES ?></h3>
+<h3><?php echo CMTX_TITLE_PAGES; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -50,15 +50,15 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$d
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$lower_pages' WHERE `title` = 'lower_pages'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$enabled_form' WHERE `title` = 'enabled_form'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <?php
 if (isset($_GET['action']) && $_GET['action'] == "delete" && isset($_GET['id']) && ctype_digit($_GET['id']) && cmtx_record_exists($_GET['id'], "pages") && cmtx_check_csrf_url_key()) {
-if ($cmtx_settings->is_demo) {
+if (cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else {
@@ -74,28 +74,26 @@ mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "reporters` WHERE `comm
 }
 mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "comments` WHERE `page_id` = '$id'");
 ?>
-<div class="success"><?php echo CMTX_MSG_PAGE_DELETED ?></div>
+<div class="success"><?php echo CMTX_MSG_PAGE_DELETED; ?></div>
 <div style="clear: left;"></div>
 <?php } } ?>
 
 <p />
 
-<?php $cmtx_settings = new cmtx_settings; ?>
-
 <div id="pages" style="display:none;">
 <div class="options_box">
 <form name="page_options" id="page_options" action="index.php?page=manage_pages" method="post">
-<?php if ($cmtx_settings->delay_pages) { ?> <input type="checkbox" checked="checked" name="delay_pages"/> <?php } else { ?> <input type="checkbox" name="delay_pages"/> <?php } ?>
-<?php echo CMTX_FIELD_VALUE_DELAY_PAGES ?>
+<?php if (cmtx_setting('delay_pages')) { ?> <input type="checkbox" checked="checked" name="delay_pages"/> <?php } else { ?> <input type="checkbox" name="delay_pages"/> <?php } ?>
+<?php echo CMTX_FIELD_VALUE_DELAY_PAGES; ?>
 <br />
-<?php if ($cmtx_settings->lower_pages) { ?> <input type="checkbox" checked="checked" name="lower_pages"/> <?php } else { ?> <input type="checkbox" name="lower_pages"/> <?php } ?>
-<?php echo CMTX_FIELD_VALUE_LOWER_PAGES ?>
+<?php if (cmtx_setting('lower_pages')) { ?> <input type="checkbox" checked="checked" name="lower_pages"/> <?php } else { ?> <input type="checkbox" name="lower_pages"/> <?php } ?>
+<?php echo CMTX_FIELD_VALUE_LOWER_PAGES; ?>
 <br />
-<?php if (!$cmtx_settings->enabled_form) { ?> <input type="checkbox" checked="checked" name="enabled_form"/> <?php } else { ?> <input type="checkbox" name="enabled_form"/> <?php } ?>
-<?php echo CMTX_FIELD_VALUE_ENABLED_FORM ?>
+<?php if (!cmtx_setting('enabled_form')) { ?> <input type="checkbox" checked="checked" name="enabled_form"/> <?php } else { ?> <input type="checkbox" name="enabled_form"/> <?php } ?>
+<?php echo CMTX_FIELD_VALUE_ENABLED_FORM; ?>
 <div style='margin-bottom: 5px;'></div>
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>
 </div>
 </div>
@@ -105,12 +103,12 @@ mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "comments` WHERE `page_
 <table id="data" class="display" summary="Pages">
     <thead>
     	<tr>
-			<th><?php echo CMTX_TABLE_PAGE_ID ?></th>
-        	<th><?php echo CMTX_TABLE_REFERENCE ?></th>
-            <th><?php echo CMTX_TABLE_URL ?></th>
-			<th><?php echo CMTX_TABLE_FORM_ENABLED ?></th>
-            <th><?php echo CMTX_TABLE_DATE_TIME ?></th>
-            <th><?php echo CMTX_TABLE_ACTION ?></th>
+			<th><?php echo CMTX_TABLE_PAGE_ID; ?></th>
+        	<th><?php echo CMTX_TABLE_REFERENCE; ?></th>
+            <th><?php echo CMTX_TABLE_URL; ?></th>
+			<th><?php echo CMTX_TABLE_FORM_ENABLED; ?></th>
+            <th><?php echo CMTX_TABLE_DATE_TIME; ?></th>
+            <th><?php echo CMTX_TABLE_ACTION; ?></th>
         </tr>
     </thead>
     <tbody>

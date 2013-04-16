@@ -22,7 +22,7 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 $session_key = cmtx_get_random_key(20);
 
@@ -85,7 +85,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$cmtx_mysql_table_prefix."access` (
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 

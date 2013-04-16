@@ -22,29 +22,29 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_COMMENTS ?></h3>
+<h3><?php echo CMTX_TITLE_COMMENTS; ?></h3>
 <hr class="title"/>
 
 <?php
 if (isset($_GET['notice']) && $_GET['notice'] == "dismiss" && cmtx_check_csrf_url_key()) {
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '0' WHERE `title` = 'notice_manage_comments'");
 } else {
-if ($cmtx_settings->notice_manage_comments) { ?>
+if (cmtx_setting('notice_manage_comments')) { ?>
 <div class="info"><?php echo CMTX_MSG_NOTICE_MANAGE_COMMENTS . " <a href='index.php?page=manage_comments&notice=dismiss&key=" . $_SESSION['cmtx_csrf_key'] . "'>" . CMTX_LINK_DISMISS . "</a>"; ?></div>
 <div style="clear: left;"></div>
 <?php } } ?>
 
 <?php
-if (isset($_POST['spam']) && $cmtx_settings->is_demo) {
+if (isset($_POST['spam']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['spam'])) {
@@ -102,15 +102,15 @@ if (isset($_POST['ban_website'])) {
 	fclose($handle);
 }
 ?>
-<div class="success"><?php echo CMTX_MSG_SPAM_REMOVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SPAM_REMOVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <?php
 if (isset($_GET['id']) && ctype_digit($_GET['id']) && cmtx_record_exists($_GET['id'], "comments") && cmtx_check_csrf_url_key()) {
-if ($cmtx_settings->is_demo) {
+if (cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else {
@@ -122,13 +122,13 @@ if ($_GET['action'] == "delete") {
 	mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "voters` WHERE `comment_id` = '$id'");
 	mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "reporters` WHERE `comment_id` = '$id'");
 	?>
-	<div class="success"><?php echo CMTX_MSG_COMMENT_DELETED ?></div>
+	<div class="success"><?php echo CMTX_MSG_COMMENT_DELETED; ?></div>
 	<div style="clear: left;"></div>
 	<?php
 } else if ($_GET['action'] == "approve") {
 	if (cmtx_is_approved($_GET['id'])) {
 		?>
-		<div class="info"><?php echo CMTX_MSG_COMMENT_ALREADY_APPROVED ?></div>
+		<div class="info"><?php echo CMTX_MSG_COMMENT_ALREADY_APPROVED; ?></div>
 		<div style="clear: left;"></div>
 		<?php
 	} else {
@@ -136,14 +136,14 @@ if ($_GET['action'] == "delete") {
 		$id = cmtx_sanitize($id);
 		mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "comments` SET `is_approved` = '1' WHERE `id` = '$id'");
 		?>
-		<div class="success"><?php echo CMTX_MSG_COMMENT_APPROVED ?></div>
+		<div class="success"><?php echo CMTX_MSG_COMMENT_APPROVED; ?></div>
 		<div style="clear: left;"></div>
 		<?php
 	}
-} else if ($_GET['action'] == "send" && $cmtx_settings->enabled_notify) {
+} else if ($_GET['action'] == "send" && cmtx_setting('enabled_notify')) {
 	if (cmtx_is_sent($_GET['id'])) {
 		?>
-		<div class="info"><?php echo CMTX_MSG_COMMENT_ALREADY_SENT ?></div>
+		<div class="info"><?php echo CMTX_MSG_COMMENT_ALREADY_SENT; ?></div>
 		<div style="clear: left;"></div>
 		<?php
 	} else {
@@ -157,7 +157,7 @@ if ($_GET['action'] == "delete") {
 		cmtx_notify_subscribers($name, $comment, $id, $page_id);
 		mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "comments` SET `is_approved` = '1' WHERE `id` = '$id'");
 		?>
-		<div class="success"><?php echo CMTX_MSG_COMMENT_SENT ?></div>
+		<div class="success"><?php echo CMTX_MSG_COMMENT_SENT; ?></div>
 		<div style="clear: left;"></div>
 		<?php
 	}
@@ -170,25 +170,25 @@ if ($_GET['action'] == "delete") {
 <table id="data" class="display" summary="Comments">
     <thead>
     	<tr>
-        	<th><?php echo CMTX_TABLE_NAME ?></th>
-			<th><?php echo CMTX_TABLE_PAGE ?></th>
-			<th><?php echo CMTX_TABLE_COMMENT ?></th>
-			<th><?php echo CMTX_TABLE_APPROVED ?></th>
-			<?php if ($cmtx_settings->enabled_notify) { ?>
-			<th><?php echo CMTX_TABLE_SENT ?></th>
+        	<th><?php echo CMTX_TABLE_NAME; ?></th>
+			<th><?php echo CMTX_TABLE_PAGE; ?></th>
+			<th><?php echo CMTX_TABLE_COMMENT; ?></th>
+			<th><?php echo CMTX_TABLE_APPROVED; ?></th>
+			<?php if (cmtx_setting('enabled_notify')) { ?>
+			<th><?php echo CMTX_TABLE_SENT; ?></th>
 			<?php } ?>
-			<?php if ($cmtx_settings->show_flag) { ?>
-			<th><?php echo CMTX_TABLE_REPORTS ?></th>
-			<th><?php echo CMTX_TABLE_FLAGGED ?></th>
+			<?php if (cmtx_setting('show_flag')) { ?>
+			<th><?php echo CMTX_TABLE_REPORTS; ?></th>
+			<th><?php echo CMTX_TABLE_FLAGGED; ?></th>
 			<?php } ?>
-			<th><?php echo CMTX_TABLE_DATE_TIME ?></th>
-            <th><?php echo CMTX_TABLE_ACTION ?></th>
+			<th><?php echo CMTX_TABLE_DATE_TIME; ?></th>
+            <th><?php echo CMTX_TABLE_ACTION; ?></th>
         </tr>
     </thead>
     <tbody>
 
 <?php
-$comments = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "comments` ORDER BY `dated` DESC LIMIT " . $cmtx_settings->limit_comments);
+$comments = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "comments` ORDER BY `dated` DESC LIMIT " . cmtx_setting('limit_comments'));
 while ($comment = mysql_fetch_assoc($comments)) {
 ?>
     	<tr>
@@ -211,20 +211,20 @@ while ($comment = mysql_fetch_assoc($comments)) {
 			?>
 			<td><?php echo $comment1; ?></td>
 			<td><?php if ($comment["is_approved"]) { echo CMTX_TABLE_YES; } else { echo CMTX_TABLE_NO; } ?></td>
-			<?php if ($cmtx_settings->enabled_notify) { ?>
+			<?php if (cmtx_setting('enabled_notify')) { ?>
 			<td><?php if ($comment["is_sent"]) { echo CMTX_TABLE_YES; } else { echo CMTX_TABLE_NO; } ?></td>
 			<?php } ?>
-			<?php if ($cmtx_settings->show_flag) {
+			<?php if (cmtx_setting('show_flag')) {
 			echo "<td>" . $comment["reports"] . "</td>";
 			echo "<td>";
-			if ($comment["reports"] >= $cmtx_settings->flag_min_per_comment) { echo CMTX_TABLE_YES; } else { echo CMTX_TABLE_NO; }
+			if ($comment["reports"] >= cmtx_setting('flag_min_per_comment')) { echo CMTX_TABLE_YES; } else { echo CMTX_TABLE_NO; }
 			echo "</td>";
 			}
 			?>
             <td><span style="display:none;"><?php echo date("YmdHis", strtotime($comment["dated"])); ?></span><?php echo date("jS F Y g:ia", strtotime($comment["dated"])); ?></td>
 			<td>
 			<a href="<?php echo "index.php?page=manage_comments&action=approve&id=" . $comment["id"] . "&key=" . $_SESSION['cmtx_csrf_key'];?>"><img src="images/buttons/approve.png" class="button_approve" title="Approve" alt="Approve"></a>
-			<?php if ($cmtx_settings->enabled_notify) { ?> <a href="<?php echo "index.php?page=manage_comments&action=send&id=" . $comment["id"] . "&key=" . $_SESSION['cmtx_csrf_key'];?>"><img src="images/buttons/send.png" class="button_send" title="Send to email subscribers" alt="Send"></a> <?php } ?>
+			<?php if (cmtx_setting('enabled_notify')) { ?> <a href="<?php echo "index.php?page=manage_comments&action=send&id=" . $comment["id"] . "&key=" . $_SESSION['cmtx_csrf_key'];?>"><img src="images/buttons/send.png" class="button_send" title="Send to email subscribers" alt="Send"></a> <?php } ?>
 			<a href="<?php echo "index.php?page=edit_comment&id=" . $comment["id"];?>"><img src="images/buttons/edit.png" class="button_edit" title="Edit" alt="Edit"></a>
 			<a href="<?php echo "index.php?page=manage_comments&action=delete&id=" . $comment["id"] . "&key=" . $_SESSION['cmtx_csrf_key'];?>"><img src="images/buttons/delete.png" class="button_delete" onclick="return delete_comment_confirmation()" title="Delete" alt="Delete"></a>
 			</td>

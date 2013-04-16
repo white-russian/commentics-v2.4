@@ -22,14 +22,14 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_AKISMET ?></h3>
+<h3><?php echo CMTX_TITLE_AKISMET; ?></h3>
 <hr class="title"/>
 
 <?php
@@ -37,9 +37,9 @@ if (function_exists('fsockopen') && is_callable('fsockopen')) {
 ?>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -54,25 +54,23 @@ $akismet_key_san = cmtx_sanitize($akismet_key);
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$akismet_enabled' WHERE `title` = 'akismet_enabled'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$akismet_key_san' WHERE `title` = 'akismet_key'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_SETTINGS_AKISMET ?>
+<?php echo CMTX_DESC_SETTINGS_AKISMET; ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="settings_akismet" id="settings_akismet" action="index.php?page=settings_akismet" method="post">
-<label class='settings_akismet'><?php echo CMTX_FIELD_LABEL_ENABLED ?></label> <?php if ($cmtx_settings->akismet_enabled) { ?> <input type="checkbox" checked="checked" name="enabled"/> <?php } else { ?> <input type="checkbox" name="enabled"/> <?php } ?>
+<label class='settings_akismet'><?php echo CMTX_FIELD_LABEL_ENABLED; ?></label> <?php if (cmtx_setting('akismet_enabled')) { ?> <input type="checkbox" checked="checked" name="enabled"/> <?php } else { ?> <input type="checkbox" name="enabled"/> <?php } ?>
 <p />
-<label class='settings_akismet'><?php echo CMTX_FIELD_LABEL_AKISMET_KEY ?></label> <input type="text" name="akismet_key" size="15" maxlength="250" value="<?php echo $cmtx_settings->akismet_key; ?>"/>
+<label class='settings_akismet'><?php echo CMTX_FIELD_LABEL_AKISMET_KEY; ?></label> <input type="text" name="akismet_key" size="15" maxlength="250" value="<?php echo cmtx_setting('akismet_key'); ?>"/>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>
 
 <?php

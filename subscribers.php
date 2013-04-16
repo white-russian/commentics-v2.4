@@ -74,23 +74,19 @@ if (isset($_GET['uid'])) {
 }
 
 //set the path
-$cmtx_path = "";
+$cmtx_path = '';
 
 /* Database Connection */
-require "includes/db/connect.php"; //connect to database
+require 'includes/db/connect.php'; //connect to database
 if (!$cmtx_db_ok) { die(); }
 
-//get settings
-require "includes/classes/settings.php";
-$cmtx_settings = new cmtx_settings;
-
 //load functions file
-require "includes/functions/page.php";
+require 'includes/functions/page.php';
 
 //load language file
-require "includes/language/" . $cmtx_settings->language_frontend . "/subscribers.php";
+require 'includes/language/' . cmtx_setting('language_frontend') . '/subscribers.php';
 
-if (!$cmtx_settings->enabled_notify) {
+if (!cmtx_setting('enabled_notify')) {
 	die(CMTX_SUB_FEATURE_DISABLED);
 }
 
@@ -101,10 +97,10 @@ if (!cmtx_is_administrator()) { //if not administrator
 }
 
 /* Error Reporting */
-cmtx_error_reporting("includes/logs/errors.log");
+cmtx_error_reporting('includes/logs/errors.log');
 
 /* Time Zone */
-cmtx_set_time_zone($cmtx_settings->time_zone);
+cmtx_set_time_zone(cmtx_setting('time_zone'));
 
 function cmtx_validate_token ($entry) { //validate user-supplied GET token
 

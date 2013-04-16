@@ -36,7 +36,7 @@ function check_passwords() {
 if (document.install.admin_password_1.value == document.install.admin_password_2.value) {
 return true;
 } else {
-alert("The two passwords do not match.");
+alert('The two passwords do not match.');
 return false;
 }
 }
@@ -62,7 +62,7 @@ define('CMTX_IN_INSTALLER', 'true');
 ?>
 
 <?php
-require "../includes/db/connect.php"; //connect to database
+require '../includes/db/connect.php'; //connect to database
 if (!$cmtx_db_ok) { die(); }
 ?>
 

@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_COMMENTS_SORT_BY ?></h3>
+<h3><?php echo CMTX_TITLE_COMMENTS_SORT_BY; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -59,13 +59,11 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$show_sort_by_6' WHERE `title` = 'show_sort_by_6'");
 
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="layout_comments_sort_by" id="layout_comments_sort_by" action="index.php?page=layout_comments_sort_by" method="post">
 
@@ -73,7 +71,7 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 
 <p />
 
-<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_ENABLED ?></label> <?php if ($cmtx_settings->show_sort_by) { ?> <input type="checkbox" checked="checked" name="show_sort_by"/> <?php } else { ?> <input type="checkbox" name="show_sort_by"/> <?php } ?>
+<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_ENABLED; ?></label> <?php if (cmtx_setting('show_sort_by')) { ?> <input type="checkbox" checked="checked" name="show_sort_by"/> <?php } else { ?> <input type="checkbox" name="show_sort_by"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_SORT_BY_ENABLED); ?>
 
 <p />
@@ -82,24 +80,24 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 
 <p />
 
-<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_1 ?></label> <?php if ($cmtx_settings->show_sort_by_1) { ?> <input type="checkbox" checked="checked" name="show_sort_by_1"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_1"/> <?php } ?>
+<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_1 ?></label> <?php if (cmtx_setting('show_sort_by_')1) { ?> <input type="checkbox" checked="checked" name="show_sort_by_1"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_1"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_SORT_BY_1); ?>
 <p />
-<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_2 ?></label> <?php if ($cmtx_settings->show_sort_by_2) { ?> <input type="checkbox" checked="checked" name="show_sort_by_2"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_2"/> <?php } ?>
+<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_2 ?></label> <?php if (cmtx_setting('show_sort_by_')2) { ?> <input type="checkbox" checked="checked" name="show_sort_by_2"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_2"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_SORT_BY_2); ?>
 <p />
-<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_3 ?></label> <?php if ($cmtx_settings->show_sort_by_3) { ?> <input type="checkbox" checked="checked" name="show_sort_by_3"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_3"/> <?php } ?>
+<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_3 ?></label> <?php if (cmtx_setting('show_sort_by_')3) { ?> <input type="checkbox" checked="checked" name="show_sort_by_3"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_3"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_SORT_BY_3); ?>
 <p />
-<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_4 ?></label> <?php if ($cmtx_settings->show_sort_by_4) { ?> <input type="checkbox" checked="checked" name="show_sort_by_4"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_4"/> <?php } ?>
+<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_4 ?></label> <?php if (cmtx_setting('show_sort_by_')4) { ?> <input type="checkbox" checked="checked" name="show_sort_by_4"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_4"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_SORT_BY_4); ?>
 <p />
-<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_5 ?></label> <?php if ($cmtx_settings->show_sort_by_5) { ?> <input type="checkbox" checked="checked" name="show_sort_by_5"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_5"/> <?php } ?>
+<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_5 ?></label> <?php if (cmtx_setting('show_sort_by_')5) { ?> <input type="checkbox" checked="checked" name="show_sort_by_5"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_5"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_SORT_BY_5); ?>
 <p />
-<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_6 ?></label> <?php if ($cmtx_settings->show_sort_by_6) { ?> <input type="checkbox" checked="checked" name="show_sort_by_6"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_6"/> <?php } ?>
+<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_6 ?></label> <?php if (cmtx_setting('show_sort_by_')6) { ?> <input type="checkbox" checked="checked" name="show_sort_by_6"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_6"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_SORT_BY_6); ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

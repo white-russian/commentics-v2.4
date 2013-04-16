@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_FLAGGING ?></h3>
+<h3><?php echo CMTX_TITLE_FLAGGING; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -55,30 +55,28 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$f
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$flag_min_per_comment_san' WHERE `title` = 'flag_min_per_comment'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$flag_disapprove' WHERE `title` = 'flag_disapprove'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_SETTINGS_FLAGGING ?>
+<?php echo CMTX_DESC_SETTINGS_FLAGGING; ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="settings_flagging" id="settings_flagging" action="index.php?page=settings_flagging" method="post">
-<label class='settings_flagging'><?php echo CMTX_FIELD_LABEL_ENABLED ?></label> <?php if ($cmtx_settings->show_flag) { ?> <input type="checkbox" checked="checked" name="show_flag"/> <?php } else { ?> <input type="checkbox" name="show_flag"/> <?php } ?>
+<label class='settings_flagging'><?php echo CMTX_FIELD_LABEL_ENABLED; ?></label> <?php if (cmtx_setting('show_flag')) { ?> <input type="checkbox" checked="checked" name="show_flag"/> <?php } else { ?> <input type="checkbox" name="show_flag"/> <?php } ?>
 <p />
-<label class='settings_flagging'><?php echo CMTX_FIELD_LABEL_MAX_PER_USER ?></label> <input type="text" required name="flag_max_per_user" size="1" maxlength="4" value="<?php echo $cmtx_settings->flag_max_per_user; ?>"/>
+<label class='settings_flagging'><?php echo CMTX_FIELD_LABEL_MAX_PER_USER; ?></label> <input type="text" required name="flag_max_per_user" size="1" maxlength="4" value="<?php echo cmtx_setting('flag_max_per_user'); ?>"/>
 <?php cmtx_generate_hint(CMTX_HINT_FLAG_MAX_PER_USER); ?>
 <p />
-<label class='settings_flagging'><?php echo CMTX_FIELD_LABEL_MIN_PER_COM ?></label> <input type="text" required name="flag_min_per_comment" size="1" maxlength="4" value="<?php echo $cmtx_settings->flag_min_per_comment; ?>"/>
+<label class='settings_flagging'><?php echo CMTX_FIELD_LABEL_MIN_PER_COM; ?></label> <input type="text" required name="flag_min_per_comment" size="1" maxlength="4" value="<?php echo cmtx_setting('flag_min_per_comment'); ?>"/>
 <?php cmtx_generate_hint(CMTX_HINT_FLAG_MIN_PER_COM); ?>
 <p />
-<label class='settings_flagging'><?php echo CMTX_FIELD_LABEL_DISAPPROVE ?></label> <?php if ($cmtx_settings->flag_disapprove) { ?> <input type="checkbox" checked="checked" name="flag_disapprove"/> <?php } else { ?> <input type="checkbox" name="flag_disapprove"/> <?php } ?>
+<label class='settings_flagging'><?php echo CMTX_FIELD_LABEL_DISAPPROVE; ?></label> <?php if (cmtx_setting('flag_disapprove')) { ?> <input type="checkbox" checked="checked" name="flag_disapprove"/> <?php } else { ?> <input type="checkbox" name="flag_disapprove"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_FLAG_DISAPPROVE); ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

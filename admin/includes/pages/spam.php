@@ -22,22 +22,22 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_SPAM ?></h3>
+<h3><?php echo CMTX_TITLE_SPAM; ?></h3>
 <hr class="title"/>
 
 <?php
 if (isset($_GET['id']) && ctype_digit($_GET['id']) && cmtx_record_exists($_GET['id'], "comments")) {
 } else { ?>
-<div class="error"><?php echo CMTX_MSG_RECORD_MISSING ?></div>
+<div class="error"><?php echo CMTX_MSG_RECORD_MISSING; ?></div>
 <div style="clear: left;"></div>
-<a href="index.php?page=manage_comments"><?php echo CMTX_LINK_BACK ?></a>
+<a href="index.php?page=manage_comments"><?php echo CMTX_LINK_BACK; ?></a>
 <?php
 die();
 }
@@ -55,17 +55,15 @@ $website = $comment_result["website"];
 
 <p />
 
-<?php $cmtx_settings = new cmtx_settings; ?>
-
 <form name="spam" id="spam" action="index.php?page=manage_comments" method="post">
 <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-<input type="radio" checked="checked" name="delete" value="delete_this"/> <?php echo CMTX_FIELD_VALUE_DELETE_THIS ?>
+<input type="radio" checked="checked" name="delete" value="delete_this"/> <?php echo CMTX_FIELD_VALUE_DELETE_THIS; ?>
 <br />
-<input type="radio" name="delete" value="delete_all"/> <?php echo CMTX_FIELD_VALUE_DELETE_ALL ?>
+<input type="radio" name="delete" value="delete_all"/> <?php echo CMTX_FIELD_VALUE_DELETE_ALL; ?>
 <p />
-<input type="radio" checked="checked" name="ban" value="do_ban"/> <?php echo CMTX_FIELD_VALUE_DO_BAN ?>
+<input type="radio" checked="checked" name="ban" value="do_ban"/> <?php echo CMTX_FIELD_VALUE_DO_BAN; ?>
 <br />
-<input type="radio" name="ban" value="no_ban"/> <?php echo CMTX_FIELD_VALUE_NO_BAN ?>
+<input type="radio" name="ban" value="no_ban"/> <?php echo CMTX_FIELD_VALUE_NO_BAN; ?>
 <p />
 <input type="checkbox" name="ban_name"/> <?php echo CMTX_FIELD_VALUE_ADD_NAME . "<b>" . $name . "</b>" . CMTX_FIELD_VALUE_TO_BANNED_NAMES; ?>
 <?php if (!empty($email)) { ?>
@@ -78,9 +76,9 @@ $website = $comment_result["website"];
 <?php } ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="spam" title="<?php echo CMTX_BUTTON_CONFIRM ?>" value="<?php echo CMTX_BUTTON_CONFIRM ?>"/>
+<input type="submit" class="button" name="spam" title="<?php echo CMTX_BUTTON_CONFIRM; ?>" value="<?php echo CMTX_BUTTON_CONFIRM; ?>"/>
 </form>
 
 <p />
 
-<a href="index.php?page=edit_comment&id=<?php echo $id ?>"><?php echo CMTX_LINK_BACK ?></a>
+<a href="index.php?page=edit_comment&id=<?php echo $id ?>"><?php echo CMTX_LINK_BACK; ?></a>

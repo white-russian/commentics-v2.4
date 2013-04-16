@@ -22,24 +22,24 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_PERMISSIONS ?></h3>
+<h3><?php echo CMTX_TITLE_PERMISSIONS; ?></h3>
 <hr class="title"/>
 
-<?php echo CMTX_DESC_REPORT_PERMISSIONS ?>
+<?php echo CMTX_DESC_REPORT_PERMISSIONS; ?>
 
 <p />
 
 <?php
 $permissions_correct = true;
 
-if ($cmtx_settings->check_db_file) {
+if (cmtx_setting('check_db_file')) {
 
 echo "<b><u>Database Connection</u></b>";
 
@@ -61,9 +61,9 @@ echo "<b><u>Database Backup</u></b>";
 echo "<p />";
 
 if (is_writable("backups/")) {
-echo "/comments/" . $cmtx_settings->admin_folder . "/backups/ <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
+echo "/comments/" . cmtx_setting('admin_folder') . "/backups/ <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
 } else {
-echo "/comments/" . $cmtx_settings->admin_folder . "/backups/ <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
+echo "/comments/" . cmtx_setting('admin_folder') . "/backups/ <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
 $permissions_correct = false;
 }
 
@@ -73,64 +73,64 @@ echo "<b><u>Emails</u></b>";
 
 echo "<p />";
 
-if (is_writable("../includes/emails/" . $cmtx_settings->language_frontend . "/user/subscriber_confirmation.txt")) {
-echo "/comments/includes/emails/" . $cmtx_settings->language_frontend . "/user/subscriber_confirmation.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
+if (is_writable("../includes/emails/" . cmtx_setting('language_frontend') . "/user/subscriber_confirmation.txt")) {
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/user/subscriber_confirmation.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
 } else {
-echo "/comments/includes/emails/" . $cmtx_settings->language_frontend . "/user/subscriber_confirmation.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/user/subscriber_confirmation.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
 $permissions_correct = false;
 }
 
 echo "<br />";
 
-if (is_writable("../includes/emails/" . $cmtx_settings->language_frontend . "/user/subscriber_notification.txt")) {
-echo "/comments/includes/emails/" . $cmtx_settings->language_frontend . "/user/subscriber_notification.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
+if (is_writable("../includes/emails/" . cmtx_setting('language_frontend') . "/user/subscriber_notification.txt")) {
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/user/subscriber_notification.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
 } else {
-echo "/comments/includes/emails/" . $cmtx_settings->language_frontend . "/user/subscriber_notification.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/user/subscriber_notification.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
 $permissions_correct = false;
 }
 
 echo "<br /><br />";
 
-if (is_writable("../includes/emails/" . $cmtx_settings->language_frontend . "/admin/new_ban.txt")) {
-echo "/comments/includes/emails/" . $cmtx_settings->language_frontend . "/admin/new_ban.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
+if (is_writable("../includes/emails/" . cmtx_setting('language_frontend') . "/admin/new_ban.txt")) {
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/new_ban.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
 } else {
-echo "/comments/includes/emails/" . $cmtx_settings->language_frontend . "/admin/new_ban.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/new_ban.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
 $permissions_correct = false;
 }
 
 echo "<br />";
 
-if (is_writable("../includes/emails/" . $cmtx_settings->language_frontend . "/admin/new_flag.txt")) {
-echo "/comments/includes/emails/" . $cmtx_settings->language_frontend . "/admin/new_flag.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
+if (is_writable("../includes/emails/" . cmtx_setting('language_frontend') . "/admin/new_flag.txt")) {
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/new_flag.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
 } else {
-echo "/comments/includes/emails/" . $cmtx_settings->language_frontend . "/admin/new_flag.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/new_flag.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
 $permissions_correct = false;
 }
 
 echo "<br />";
 
-if (is_writable("../includes/emails/" . $cmtx_settings->language_frontend . "/admin/new_comment_approve.txt")) {
-echo "/comments/includes/emails/" . $cmtx_settings->language_frontend . "/admin/new_comment_approve.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
+if (is_writable("../includes/emails/" . cmtx_setting('language_frontend') . "/admin/new_comment_approve.txt")) {
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/new_comment_approve.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
 } else {
-echo "/comments/includes/emails/" . $cmtx_settings->language_frontend . "/admin/new_comment_approve.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/new_comment_approve.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
 $permissions_correct = false;
 }
 
 echo "<br />";
 
-if (is_writable("../includes/emails/" . $cmtx_settings->language_frontend . "/admin/new_comment_okay.txt")) {
-echo "/comments/includes/emails/" . $cmtx_settings->language_frontend . "/admin/new_comment_okay.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
+if (is_writable("../includes/emails/" . cmtx_setting('language_frontend') . "/admin/new_comment_okay.txt")) {
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/new_comment_okay.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
 } else {
-echo "/comments/includes/emails/" . $cmtx_settings->language_frontend . "/admin/new_comment_okay.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/new_comment_okay.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
 $permissions_correct = false;
 }
 
 echo "<br />";
 
-if (is_writable("../includes/emails/" . $cmtx_settings->language_frontend . "/admin/reset_password.txt")) {
-echo "/comments/includes/emails/" . $cmtx_settings->language_frontend . "/admin/reset_password.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
+if (is_writable("../includes/emails/" . cmtx_setting('language_frontend') . "/admin/reset_password.txt")) {
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/reset_password.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
 } else {
-echo "/comments/includes/emails/" . $cmtx_settings->language_frontend . "/admin/reset_password.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/reset_password.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
 $permissions_correct = false;
 }
 
@@ -298,9 +298,9 @@ $permissions_correct = false;
 echo "<br />";
 
 if (is_writable("includes/logs/errors.log")) {
-echo "/comments/" . $cmtx_settings->admin_folder . "/includes/logs/errors.log <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
+echo "/comments/" . cmtx_setting('admin_folder') . "/includes/logs/errors.log <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
 } else {
-echo "/comments/" . $cmtx_settings->admin_folder . "/includes/logs/errors.log <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
+echo "/comments/" . cmtx_setting('admin_folder') . "/includes/logs/errors.log <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
 $permissions_correct = false;
 }
 
@@ -316,4 +316,4 @@ echo "<span class='negative'>" . CMTX_FIELD_VALUE_PERMISSIONS_INCORRECT . "</spa
 
 <p />
 
-<input type="button" class="button" name="refresh" title="<?php echo CMTX_BUTTON_REFRESH ?>" value="<?php echo CMTX_BUTTON_REFRESH ?>" onclick="window.location.reload()"/>
+<input type="button" class="button" name="refresh" title="<?php echo CMTX_BUTTON_REFRESH; ?>" value="<?php echo CMTX_BUTTON_REFRESH; ?>" onclick="window.location.reload()"/>

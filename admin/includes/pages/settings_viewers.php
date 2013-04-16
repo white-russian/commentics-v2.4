@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_VIEWERS ?></h3>
+<h3><?php echo CMTX_TITLE_VIEWERS; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -55,31 +55,29 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$v
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$viewers_refresh_enabled' WHERE `title` = 'viewers_refresh_enabled'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$viewers_refresh_time_san' WHERE `title` = 'viewers_refresh_time'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_SETTINGS_VIEWERS ?>
+<?php echo CMTX_DESC_SETTINGS_VIEWERS; ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="settings_viewers" id="settings_viewers" action="index.php?page=settings_viewers" method="post">
-<label class='settings_viewers'><?php echo CMTX_FIELD_LABEL_ENABLED ?></label> <?php if ($cmtx_settings->viewers_enabled) { ?> <input type="checkbox" checked="checked" name="viewers_enabled"/> <?php } else { ?> <input type="checkbox" name="viewers_enabled"/> <?php } ?>
+<label class='settings_viewers'><?php echo CMTX_FIELD_LABEL_ENABLED; ?></label> <?php if (cmtx_setting('viewers_enabled')) { ?> <input type="checkbox" checked="checked" name="viewers_enabled"/> <?php } else { ?> <input type="checkbox" name="viewers_enabled"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_VISITOR_ENABLED); ?>
 <p />
-<label class='settings_viewers'><?php echo CMTX_FIELD_LABEL_TIMEOUT ?></label> <input type="text" required name="viewers_timeout" size="1" maxlength="250" value="<?php echo $cmtx_settings->viewers_timeout; ?>"/> <span class='note'><?php echo CMTX_NOTE_SECONDS ?></span>
+<label class='settings_viewers'><?php echo CMTX_FIELD_LABEL_TIMEOUT; ?></label> <input type="text" required name="viewers_timeout" size="1" maxlength="250" value="<?php echo cmtx_setting('viewers_timeout'); ?>"/> <span class='note'><?php echo CMTX_NOTE_SECONDS; ?></span>
 <?php cmtx_generate_hint(CMTX_HINT_VISITOR_TIMEOUT); ?>
 <p />
-<label class='settings_viewers'><?php echo CMTX_FIELD_LABEL_REFRESH ?></label> <?php if ($cmtx_settings->viewers_refresh_enabled) { ?> <input type="checkbox" checked="checked" name="viewers_refresh_enabled"/> <?php } else { ?> <input type="checkbox" name="viewers_refresh_enabled"/> <?php } ?>
+<label class='settings_viewers'><?php echo CMTX_FIELD_LABEL_REFRESH; ?></label> <?php if (cmtx_setting('viewers_refresh_enabled')) { ?> <input type="checkbox" checked="checked" name="viewers_refresh_enabled"/> <?php } else { ?> <input type="checkbox" name="viewers_refresh_enabled"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_VISITOR_REFRESH); ?>
 <p />
-<label class='settings_viewers'><?php echo CMTX_FIELD_LABEL_INTERVAL ?></label> <input type="text" required name="viewers_refresh_time" size="1" maxlength="250" value="<?php echo $cmtx_settings->viewers_refresh_time; ?>"/> <span class='note'><?php echo CMTX_NOTE_SECONDS ?></span>
+<label class='settings_viewers'><?php echo CMTX_FIELD_LABEL_INTERVAL; ?></label> <input type="text" required name="viewers_refresh_time" size="1" maxlength="250" value="<?php echo cmtx_setting('viewers_refresh_time'); ?>"/> <span class='note'><?php echo CMTX_NOTE_SECONDS; ?></span>
 <?php cmtx_generate_hint(CMTX_HINT_VISITOR_INTERVAL); ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

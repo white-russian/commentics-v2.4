@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_PROCESSOR_WEBSITE ?></h3>
+<h3><?php echo CMTX_TITLE_PROCESSOR_WEBSITE; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -69,94 +69,92 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$b
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$banned_websites_as_website_action_san' WHERE `title` = 'banned_websites_as_website_action'");
 
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_SETTINGS_PROCESSING_WEBSITE ?>
+<?php echo CMTX_DESC_SETTINGS_PROCESSING_WEBSITE; ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="settings_processor_website" id="settings_processor_website" action="index.php?page=settings_processor_website" method="post">
-<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_APPROVE ?></label> <?php if ($cmtx_settings->approve_websites) { ?> <input type="checkbox" checked="checked" name="approve_websites"/> <?php } else { ?> <input type="checkbox" name="approve_websites"/> <?php } ?>
+<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_APPROVE; ?></label> <?php if (cmtx_setting('approve_websites')) { ?> <input type="checkbox" checked="checked" name="approve_websites"/> <?php } else { ?> <input type="checkbox" name="approve_websites"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_APPROVE_WEBSITE); ?>
 <p />
-<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_PING ?></label> <?php if ($cmtx_settings->validate_website_ping) { ?> <input type="checkbox" checked="checked" name="validate_website_ping"/> <?php } else { ?> <input type="checkbox" name="validate_website_ping"/> <?php } ?>
+<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_PING; ?></label> <?php if (cmtx_setting('validate_website_ping')) { ?> <input type="checkbox" checked="checked" name="validate_website_ping"/> <?php } else { ?> <input type="checkbox" name="validate_website_ping"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_PING); ?>
 <p />
-<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_NEW_WINDOW ?></label> <?php if ($cmtx_settings->website_new_window) { ?> <input type="checkbox" checked="checked" name="website_new_window"/> <?php } else { ?> <input type="checkbox" name="website_new_window"/> <?php } ?>
+<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_NEW_WINDOW; ?></label> <?php if (cmtx_setting('website_new_window')) { ?> <input type="checkbox" checked="checked" name="website_new_window"/> <?php } else { ?> <input type="checkbox" name="website_new_window"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_NEW_WIN); ?>
 <p />
-<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_NO_FOLLOW ?></label> <?php if ($cmtx_settings->website_nofollow) { ?> <input type="checkbox" checked="checked" name="website_nofollow"/> <?php } else { ?> <input type="checkbox" name="website_nofollow"/> <?php } ?>
+<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_NO_FOLLOW; ?></label> <?php if (cmtx_setting('website_nofollow')) { ?> <input type="checkbox" checked="checked" name="website_nofollow"/> <?php } else { ?> <input type="checkbox" name="website_nofollow"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_NO_FOLLOW); ?>
 <br /><hr class="separator"/><br />
-<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_RESERVED_WEBSITE ?></label> <?php if ($cmtx_settings->reserved_websites_enabled) { ?> <input type="checkbox" checked="checked" name="reserved_websites_enabled"/> <?php } else { ?> <input type="checkbox" name="reserved_websites_enabled"/> <?php } ?>
+<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_RESERVED_WEBSITE; ?></label> <?php if (cmtx_setting('reserved_websites_enabled')) { ?> <input type="checkbox" checked="checked" name="reserved_websites_enabled"/> <?php } else { ?> <input type="checkbox" name="reserved_websites_enabled"/> <?php } ?>
 <p />
-<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_LIST ?></label> <a href="index.php?page=list_reserved_websites"><?php echo CMTX_LINK_EDIT ?></a>
+<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_LIST; ?></label> <a href="index.php?page=list_reserved_websites"><?php echo CMTX_LINK_EDIT; ?></a>
 <p />
-<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_ACTION ?></label>
+<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_ACTION; ?></label>
 <select name='reserved_websites_action'>
-<?php if ($cmtx_settings->reserved_websites_action == "reject") { ?>
-<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
-<?php } else if ($cmtx_settings->reserved_websites_action == "approve") { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<?php if (cmtx_setting('reserved_websites_action') == "reject") { ?>
+<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
+<?php } else if (cmtx_setting('reserved_websites_action') == "approve") { ?>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } else { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } ?>
 </select>
 <br /><hr class="separator"/><br />
-<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_DUMMY_WEBSITE ?></label> <?php if ($cmtx_settings->dummy_websites_enabled) { ?> <input type="checkbox" checked="checked" name="dummy_websites_enabled"/> <?php } else { ?> <input type="checkbox" name="dummy_websites_enabled"/> <?php } ?>
+<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_DUMMY_WEBSITE; ?></label> <?php if (cmtx_setting('dummy_websites_enabled')) { ?> <input type="checkbox" checked="checked" name="dummy_websites_enabled"/> <?php } else { ?> <input type="checkbox" name="dummy_websites_enabled"/> <?php } ?>
 <p />
-<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_LIST ?></label> <a href="index.php?page=list_dummy_websites"><?php echo CMTX_LINK_EDIT ?></a>
+<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_LIST; ?></label> <a href="index.php?page=list_dummy_websites"><?php echo CMTX_LINK_EDIT; ?></a>
 <p />
-<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_ACTION ?></label>
+<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_ACTION; ?></label>
 <select name='dummy_websites_action'>
-<?php if ($cmtx_settings->dummy_websites_action == "reject") { ?>
-<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
-<?php } else if ($cmtx_settings->dummy_websites_action == "approve") { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<?php if (cmtx_setting('dummy_websites_action') == "reject") { ?>
+<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
+<?php } else if (cmtx_setting('dummy_websites_action') == "approve") { ?>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } else { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } ?>
 </select>
 <br /><hr class="separator"/><br />
-<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_BANNED_WEBSITE ?></label> <?php if ($cmtx_settings->banned_websites_as_website_enabled) { ?> <input type="checkbox" checked="checked" name="banned_websites_as_website_enabled"/> <?php } else { ?> <input type="checkbox" name="banned_websites_as_website_enabled"/> <?php } ?>
+<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_BANNED_WEBSITE; ?></label> <?php if (cmtx_setting('banned_websites_as_website_enabled')) { ?> <input type="checkbox" checked="checked" name="banned_websites_as_website_enabled"/> <?php } else { ?> <input type="checkbox" name="banned_websites_as_website_enabled"/> <?php } ?>
 <p />
-<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_LIST ?></label> <a href="index.php?page=list_banned_websites"><?php echo CMTX_LINK_EDIT ?></a>
+<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_LIST; ?></label> <a href="index.php?page=list_banned_websites"><?php echo CMTX_LINK_EDIT; ?></a>
 <p />
-<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_ACTION ?></label>
+<label class='settings_processor_website'><?php echo CMTX_FIELD_LABEL_ACTION; ?></label>
 <select name='banned_websites_as_website_action'>
-<?php if ($cmtx_settings->banned_websites_as_website_action == "reject") { ?>
-<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
-<?php } else if ($cmtx_settings->banned_websites_as_website_action == "approve") { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<?php if (cmtx_setting('banned_websites_as_website_action') == "reject") { ?>
+<option value='reject' selected='selected'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
+<?php } else if (cmtx_setting('banned_websites_as_website_action') == "approve") { ?>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve' selected='selected'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } else { ?>
-<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT ?></option>
-<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE ?></option>
-<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN ?></option>
+<option value='reject'><?php echo CMTX_FIELD_VALUE_REJECT; ?></option>
+<option value='approve'><?php echo CMTX_FIELD_VALUE_APPROVE; ?></option>
+<option value='ban' selected='selected'><?php echo CMTX_FIELD_VALUE_BAN; ?></option>
 <?php } ?>
 </select>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

@@ -22,7 +22,7 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['cmtx_preview']) || isset($_POST['cmtx_prev'])) { //if data submitted
 	
@@ -48,7 +48,7 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	if (!isset($_POST['cmtx_security_key'])) { //no security key submitted
 		cmtx_ban(CMTX_BAN_REASON_NO_SECURITY_KEY); //ban user for no security key
 	} else { //if security key submitted
-		if ($cmtx_settings->security_key != $_POST['cmtx_security_key']) { //security key incorrect
+		if (cmtx_setting('security_key') != $_POST['cmtx_security_key']) { //security key incorrect
 			cmtx_ban(CMTX_BAN_REASON_INCORRECT_SECURITY_KEY); //ban user for incorrect security key
 		}
 	}
@@ -63,7 +63,7 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	}
 	
 	/* Check Honeypot */
-	if ($cmtx_settings->check_honeypot) { //if honeypot-check enabled
+	if (cmtx_setting('check_honeypot')) { //if honeypot-check enabled
 		if (!isset($_POST['cmtx_honeypot'])) { //if honeypot not submitted
 			cmtx_error(CMTX_ERROR_MESSAGE_MISSING_DATA); //reject user for no honeypot
 		} else { //if honeypot submitted
@@ -74,7 +74,7 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	}
 	
 	/* Check Time */
-	if ($cmtx_settings->check_time) { //if time-check enabled
+	if (cmtx_setting('check_time')) { //if time-check enabled
 		if (!isset($_POST['cmtx_time'])) { //if time not submitted
 			cmtx_error(CMTX_ERROR_MESSAGE_MISSING_DATA); //reject user for no time
 		} else { //if time submitted
@@ -85,7 +85,7 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	}
 	
 	/* Check Referrer */
-	if ($cmtx_settings->check_referrer) {
+	if (cmtx_setting('check_referrer')) {
 		if (isset($_SERVER['HTTP_REFERER'])) { //if referrer available
 			$cmtx_referrer = cmtx_url_decode($_SERVER['HTTP_REFERER']); //get referrer
 			$cmtx_real_url = cmtx_url_decode(str_ireplace("www.", "", parse_url(cmtx_get_page_url(), PHP_URL_HOST))); //get host of page URL
@@ -100,12 +100,12 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	}
 	
 	/* Flood Control Delay */
-	if ($cmtx_settings->flood_control_delay_enabled && !$cmtx_is_admin) { //if 'flood control delay' enabled and user is not admin
+	if (cmtx_setting('flood_control_delay_enabled') && !$cmtx_is_admin) { //if 'flood control delay' enabled and user is not admin
 		cmtx_flood_control_delay();
 	}
 	
 	/* Flood Control Maximum */
-	if ($cmtx_settings->flood_control_maximum_enabled && !$cmtx_is_admin) { //if 'flood control maximum' enabled and user is not admin
+	if (cmtx_setting('flood_control_maximum_enabled') && !$cmtx_is_admin) { //if 'flood control maximum' enabled and user is not admin
 		cmtx_flood_control_maximum();
 	}
 	
@@ -119,23 +119,23 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	} else {
 		cmtx_is_injected($cmtx_name); //check for injection attempt
 		cmtx_validate_name($cmtx_name); //validate name
-		if ($cmtx_settings->reserved_names_enabled && !$cmtx_is_admin) {
-			$cmtx_name = cmtx_check_for_word("reserved_names", true, $cmtx_name, $cmtx_settings->reserved_names_action, CMTX_APPROVE_REASON_RESERVED_NAME, CMTX_ERROR_MESSAGE_RESERVED_NAME, CMTX_BAN_REASON_RESERVED_NAME);
+		if (cmtx_setting('reserved_names_enabled') && !$cmtx_is_admin) {
+			$cmtx_name = cmtx_check_for_word("reserved_names", true, $cmtx_name, cmtx_setting('reserved_names_action'), CMTX_APPROVE_REASON_RESERVED_NAME, CMTX_ERROR_MESSAGE_RESERVED_NAME, CMTX_BAN_REASON_RESERVED_NAME);
 		}
-		if ($cmtx_settings->dummy_names_enabled) {
-			$cmtx_name = cmtx_check_for_word("dummy_names", true, $cmtx_name, $cmtx_settings->dummy_names_action, CMTX_APPROVE_REASON_DUMMY_NAME, CMTX_ERROR_MESSAGE_DUMMY_NAME, CMTX_BAN_REASON_DUMMY_NAME);
+		if (cmtx_setting('dummy_names_enabled')) {
+			$cmtx_name = cmtx_check_for_word("dummy_names", true, $cmtx_name, cmtx_setting('dummy_names_action'), CMTX_APPROVE_REASON_DUMMY_NAME, CMTX_ERROR_MESSAGE_DUMMY_NAME, CMTX_BAN_REASON_DUMMY_NAME);
 		}
-		if ($cmtx_settings->banned_names_enabled) {
-			$cmtx_name = cmtx_check_for_word("banned_names", true, $cmtx_name, $cmtx_settings->banned_names_action, CMTX_APPROVE_REASON_BANNED_NAME, CMTX_ERROR_MESSAGE_BANNED_NAME, CMTX_BAN_REASON_BANNED_NAME);
+		if (cmtx_setting('banned_names_enabled')) {
+			$cmtx_name = cmtx_check_for_word("banned_names", true, $cmtx_name, cmtx_setting('banned_names_action'), CMTX_APPROVE_REASON_BANNED_NAME, CMTX_ERROR_MESSAGE_BANNED_NAME, CMTX_BAN_REASON_BANNED_NAME);
 		}
-		if ($cmtx_settings->one_name_enabled) {
+		if (cmtx_setting('one_name_enabled')) {
 			cmtx_check_for_one_name($cmtx_name); //check only one word is entered for name
 		}
-		if ($cmtx_settings->fix_name_enabled) {
+		if (cmtx_setting('fix_name_enabled')) {
 			$cmtx_name = cmtx_fix_entry($cmtx_name); //makes first letter uppercase and the rest lowercase
 		}
-		if ($cmtx_settings->detect_link_in_name_enabled) {
-			cmtx_check_for_link($cmtx_name, $cmtx_settings->link_in_name_action, CMTX_APPROVE_REASON_LINK_IN_NAME, CMTX_ERROR_MESSAGE_LINK_IN_NAME, CMTX_BAN_REASON_LINK_IN_NAME); //detect link
+		if (cmtx_setting('detect_link_in_name_enabled')) {
+			cmtx_check_for_link($cmtx_name, cmtx_setting('link_in_name_action'), CMTX_APPROVE_REASON_LINK_IN_NAME, CMTX_ERROR_MESSAGE_LINK_IN_NAME, CMTX_BAN_REASON_LINK_IN_NAME); //detect link
 		}
 		$cmtx_name = cmtx_sanitize($cmtx_name, true, true);
 	}
@@ -144,22 +144,22 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	if (!isset($_POST['cmtx_email'])) { //if email not submitted
 		$_POST['cmtx_email'] = ""; //set it with an empty value
 	}
-	if ($cmtx_settings->enabled_email) { //if email field is enabled
+	if (cmtx_setting('enabled_email')) { //if email field is enabled
 		$cmtx_email = trim($_POST['cmtx_email']); //remove any space at beginning and end
-		if ($cmtx_settings->required_email && empty($cmtx_email)) { //if field is required but value is empty
+		if (cmtx_setting('required_email') && empty($cmtx_email)) { //if field is required but value is empty
 			cmtx_error(CMTX_ERROR_MESSAGE_NO_EMAIL); //reject user for entering no email address
 		}
 		if (!empty($cmtx_email)) { //if email value is not empty
 			cmtx_is_injected($cmtx_email); //check for injection attempt
 			cmtx_validate_email($cmtx_email); //validate email address
-			if ($cmtx_settings->reserved_emails_enabled && !$cmtx_is_admin) {
-				$cmtx_email = cmtx_check_for_word("reserved_emails", false, $cmtx_email, $cmtx_settings->reserved_emails_action, CMTX_APPROVE_REASON_RESERVED_EMAIL, CMTX_ERROR_MESSAGE_RESERVED_EMAIL, CMTX_BAN_REASON_RESERVED_EMAIL);
+			if (cmtx_setting('reserved_emails_enabled') && !$cmtx_is_admin) {
+				$cmtx_email = cmtx_check_for_word("reserved_emails", false, $cmtx_email, cmtx_setting('reserved_emails_action'), CMTX_APPROVE_REASON_RESERVED_EMAIL, CMTX_ERROR_MESSAGE_RESERVED_EMAIL, CMTX_BAN_REASON_RESERVED_EMAIL);
 			}
-			if ($cmtx_settings->dummy_emails_enabled) {
-				$cmtx_email = cmtx_check_for_word("dummy_emails", false, $cmtx_email, $cmtx_settings->dummy_emails_action, CMTX_APPROVE_REASON_DUMMY_EMAIL, CMTX_ERROR_MESSAGE_DUMMY_EMAIL, CMTX_BAN_REASON_DUMMY_EMAIL);
+			if (cmtx_setting('dummy_emails_enabled')) {
+				$cmtx_email = cmtx_check_for_word("dummy_emails", false, $cmtx_email, cmtx_setting('dummy_emails_action'), CMTX_APPROVE_REASON_DUMMY_EMAIL, CMTX_ERROR_MESSAGE_DUMMY_EMAIL, CMTX_BAN_REASON_DUMMY_EMAIL);
 			}
-			if ($cmtx_settings->banned_emails_enabled) {
-				$cmtx_email = cmtx_check_for_word("banned_emails", false, $cmtx_email, $cmtx_settings->banned_emails_action, CMTX_APPROVE_REASON_BANNED_EMAIL, CMTX_ERROR_MESSAGE_BANNED_EMAIL, CMTX_BAN_REASON_BANNED_EMAIL);
+			if (cmtx_setting('banned_emails_enabled')) {
+				$cmtx_email = cmtx_check_for_word("banned_emails", false, $cmtx_email, cmtx_setting('banned_emails_action'), CMTX_APPROVE_REASON_BANNED_EMAIL, CMTX_ERROR_MESSAGE_BANNED_EMAIL, CMTX_BAN_REASON_BANNED_EMAIL);
 			}
 			$cmtx_email = cmtx_sanitize($cmtx_email, true, true);
 		} else {
@@ -173,25 +173,25 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	if (!isset($_POST['cmtx_website'])) { //if website not submitted
 		$_POST['cmtx_website'] = ""; //set it with an empty value
 	}
-	if ($cmtx_settings->enabled_website) { //if website field is enabled
+	if (cmtx_setting('enabled_website')) { //if website field is enabled
 		$cmtx_website = trim($_POST['cmtx_website']); //remove any space at beginning and end
-		if ($cmtx_settings->required_website && (empty($cmtx_website) || $cmtx_website == "http://")) { //if field is required but value is empty
+		if (cmtx_setting('required_website') && (empty($cmtx_website) || $cmtx_website == "http://")) { //if field is required but value is empty
 			cmtx_error(CMTX_ERROR_MESSAGE_NO_WEBSITE); //reject user for entering no website address
 		} else if (!empty($cmtx_website) && $cmtx_website != "http://") { //if a website address is entered
 			cmtx_is_injected($cmtx_website); //check for injection attempt
 			$cmtx_website = cmtx_url_encode_spaces($cmtx_website); //encode spaces
 			cmtx_validate_website($cmtx_website); //validate website
-			if ($cmtx_settings->approve_websites) { //if entering a website address requires approval
+			if (cmtx_setting('approve_websites')) { //if entering a website address requires approval
 				cmtx_approve(CMTX_APPROVE_REASON_WEBSITE_ENTERED); //approve user for entering website
 			}
-			if ($cmtx_settings->reserved_websites_enabled && !$cmtx_is_admin) {
-				$cmtx_website = cmtx_check_for_word("reserved_websites", false, $cmtx_website, $cmtx_settings->reserved_websites_action, CMTX_APPROVE_REASON_RESERVED_WEBSITE, CMTX_ERROR_MESSAGE_RESERVED_WEBSITE, CMTX_BAN_REASON_RESERVED_WEBSITE);
+			if (cmtx_setting('reserved_websites_enabled') && !$cmtx_is_admin) {
+				$cmtx_website = cmtx_check_for_word("reserved_websites", false, $cmtx_website, cmtx_setting('reserved_websites_action'), CMTX_APPROVE_REASON_RESERVED_WEBSITE, CMTX_ERROR_MESSAGE_RESERVED_WEBSITE, CMTX_BAN_REASON_RESERVED_WEBSITE);
 			}
-			if ($cmtx_settings->dummy_websites_enabled) {
-				$cmtx_website = cmtx_check_for_word("dummy_websites", false, $cmtx_website, $cmtx_settings->dummy_websites_action, CMTX_APPROVE_REASON_DUMMY_WEBSITE, CMTX_ERROR_MESSAGE_DUMMY_WEBSITE, CMTX_BAN_REASON_DUMMY_WEBSITE);
+			if (cmtx_setting('dummy_websites_enabled')) {
+				$cmtx_website = cmtx_check_for_word("dummy_websites", false, $cmtx_website, cmtx_setting('dummy_websites_action'), CMTX_APPROVE_REASON_DUMMY_WEBSITE, CMTX_ERROR_MESSAGE_DUMMY_WEBSITE, CMTX_BAN_REASON_DUMMY_WEBSITE);
 			}
-			if ($cmtx_settings->banned_websites_as_website_enabled) {
-				$cmtx_website = cmtx_check_for_word("banned_websites", false, $cmtx_website, $cmtx_settings->banned_websites_as_website_action, CMTX_APPROVE_REASON_BANNED_WEBSITE_IN_WEBSITE, CMTX_ERROR_MESSAGE_BANNED_WEBSITE_IN_WEBSITE, CMTX_BAN_REASON_BANNED_WEBSITE_IN_WEBSITE);
+			if (cmtx_setting('banned_websites_as_website_enabled')) {
+				$cmtx_website = cmtx_check_for_word("banned_websites", false, $cmtx_website, cmtx_setting('banned_websites_as_website_action'), CMTX_APPROVE_REASON_BANNED_WEBSITE_IN_WEBSITE, CMTX_ERROR_MESSAGE_BANNED_WEBSITE_IN_WEBSITE, CMTX_BAN_REASON_BANNED_WEBSITE_IN_WEBSITE);
 			}
 			$cmtx_website = cmtx_sanitize($cmtx_website, true, true); //sanitize website address
 		} else {
@@ -205,28 +205,28 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	if (!isset($_POST['cmtx_town'])) { //if town not submitted
 		$_POST['cmtx_town'] = ""; //set it with an empty value
 	}
-	if ($cmtx_settings->enabled_town) { //if town field is enabled
+	if (cmtx_setting('enabled_town')) { //if town field is enabled
 		$cmtx_town = trim($_POST['cmtx_town']); //remove any space at beginning and end
-		if ($cmtx_settings->required_town && empty($cmtx_town)) { //if field is required but value is empty
+		if (cmtx_setting('required_town') && empty($cmtx_town)) { //if field is required but value is empty
 			cmtx_error(CMTX_ERROR_MESSAGE_NO_TOWN); //reject user for entering no town
 		}
 		if (!empty($cmtx_town)) { //if town value is not empty
 			cmtx_is_injected($cmtx_town); //check for injection attempt
 			cmtx_validate_town($cmtx_town); //validate town
-			if ($cmtx_settings->reserved_towns_enabled && !$cmtx_is_admin) {
-				$cmtx_town = cmtx_check_for_word("reserved_towns", true, $cmtx_town, $cmtx_settings->reserved_towns_action, CMTX_APPROVE_REASON_RESERVED_TOWN, CMTX_ERROR_MESSAGE_RESERVED_TOWN, CMTX_BAN_REASON_RESERVED_TOWN);
+			if (cmtx_setting('reserved_towns_enabled') && !$cmtx_is_admin) {
+				$cmtx_town = cmtx_check_for_word("reserved_towns", true, $cmtx_town, cmtx_setting('reserved_towns_action'), CMTX_APPROVE_REASON_RESERVED_TOWN, CMTX_ERROR_MESSAGE_RESERVED_TOWN, CMTX_BAN_REASON_RESERVED_TOWN);
 			}
-			if ($cmtx_settings->dummy_towns_enabled) {
-				$cmtx_town = cmtx_check_for_word("dummy_towns", true, $cmtx_town, $cmtx_settings->dummy_towns_action, CMTX_APPROVE_REASON_DUMMY_TOWN, CMTX_ERROR_MESSAGE_DUMMY_TOWN, CMTX_BAN_REASON_DUMMY_TOWN);
+			if (cmtx_setting('dummy_towns_enabled')) {
+				$cmtx_town = cmtx_check_for_word("dummy_towns", true, $cmtx_town, cmtx_setting('dummy_towns_action'), CMTX_APPROVE_REASON_DUMMY_TOWN, CMTX_ERROR_MESSAGE_DUMMY_TOWN, CMTX_BAN_REASON_DUMMY_TOWN);
 			}
-			if ($cmtx_settings->banned_towns_enabled) {
-				$cmtx_town = cmtx_check_for_word("banned_towns", true, $cmtx_town, $cmtx_settings->banned_towns_action, CMTX_APPROVE_REASON_BANNED_TOWN, CMTX_ERROR_MESSAGE_BANNED_TOWN, CMTX_BAN_REASON_BANNED_TOWN);
+			if (cmtx_setting('banned_towns_enabled')) {
+				$cmtx_town = cmtx_check_for_word("banned_towns", true, $cmtx_town, cmtx_setting('banned_towns_action'), CMTX_APPROVE_REASON_BANNED_TOWN, CMTX_ERROR_MESSAGE_BANNED_TOWN, CMTX_BAN_REASON_BANNED_TOWN);
 			}
-			if ($cmtx_settings->fix_town_enabled) {
+			if (cmtx_setting('fix_town_enabled')) {
 				$cmtx_town = cmtx_fix_entry($cmtx_town); //makes first letter uppercase and the rest lowercase
 			}
-			if ($cmtx_settings->detect_link_in_town_enabled) {
-				cmtx_check_for_link($cmtx_town, $cmtx_settings->link_in_town_action, CMTX_APPROVE_REASON_LINK_IN_TOWN, CMTX_ERROR_MESSAGE_LINK_IN_TOWN, CMTX_BAN_REASON_LINK_IN_TOWN); //detect link
+			if (cmtx_setting('detect_link_in_town_enabled')) {
+				cmtx_check_for_link($cmtx_town, cmtx_setting('link_in_town_action'), CMTX_APPROVE_REASON_LINK_IN_TOWN, CMTX_ERROR_MESSAGE_LINK_IN_TOWN, CMTX_BAN_REASON_LINK_IN_TOWN); //detect link
 			}
 			$cmtx_town = cmtx_sanitize($cmtx_town, true, true); //sanitize town
 		} else {
@@ -240,9 +240,9 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	if (!isset($_POST['cmtx_country'])) { //if country not submitted
 		$_POST['cmtx_country'] = ""; //set it with an empty value
 	}
-	if ($cmtx_settings->enabled_country) { //if country field is enabled
+	if (cmtx_setting('enabled_country')) { //if country field is enabled
 		$cmtx_country = trim($_POST['cmtx_country']); //remove any space at beginning and end
-		if ($cmtx_settings->required_country && empty($cmtx_country)) { //if field is required but value is empty
+		if (cmtx_setting('required_country') && empty($cmtx_country)) { //if field is required but value is empty
 			cmtx_error(CMTX_ERROR_MESSAGE_NO_COUNTRY); //reject user for selecting no country
 		}
 		if (!empty($cmtx_country)) { //if country value is selected
@@ -258,13 +258,13 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	}
 
 	/* Rating */
-	if ($cmtx_settings->repeat_ratings != "allow" && cmtx_has_rated()) { $cmtx_rating = 0; } else {
+	if (cmtx_setting('repeat_ratings') != "allow" && cmtx_has_rated()) { $cmtx_rating = 0; } else {
 		if (!isset($_POST['cmtx_rating'])) { //if rating not submitted
 			$_POST['cmtx_rating'] = ""; //set it with an empty value
 		}
-		if ($cmtx_settings->enabled_rating) { //if rating field is enabled
+		if (cmtx_setting('enabled_rating')) { //if rating field is enabled
 			$cmtx_rating = trim($_POST['cmtx_rating']); //remove any space at beginning and end
-			if ($cmtx_settings->required_rating && empty($cmtx_rating)) { //if field is required but value is empty
+			if (cmtx_setting('required_rating') && empty($cmtx_rating)) { //if field is required but value is empty
 				cmtx_error(CMTX_ERROR_MESSAGE_NO_RATING); //reject user for selecting no rating
 			}
 			if (!empty($cmtx_rating)) { //if rating value is selected
@@ -287,44 +287,44 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	if (empty($cmtx_comment)) { //if comment value is empty
 		cmtx_error(CMTX_ERROR_MESSAGE_NO_COMMENT); //reject user for entering no comment
 	} else { //if comment entered
-		if ($cmtx_settings->check_repeats_enabled) {
-			cmtx_check_repeats($cmtx_comment, $cmtx_settings->check_repeats_action, CMTX_APPROVE_REASON_REPEATS, CMTX_ERROR_MESSAGE_REPEATS, CMTX_BAN_REASON_REPEATS);
+		if (cmtx_setting('check_repeats_enabled')) {
+			cmtx_check_repeats($cmtx_comment, cmtx_setting('check_repeats_action'), CMTX_APPROVE_REASON_REPEATS, CMTX_ERROR_MESSAGE_REPEATS, CMTX_BAN_REASON_REPEATS);
 		}
-		if ($cmtx_settings->mild_swear_words_enabled) {
-			$cmtx_comment = cmtx_check_for_word("mild_swear_words", true, $cmtx_comment, $cmtx_settings->mild_swear_words_action, CMTX_APPROVE_REASON_MILD_SWEARING, CMTX_ERROR_MESSAGE_MILD_SWEARING, CMTX_BAN_REASON_MILD_SWEARING);
+		if (cmtx_setting('mild_swear_words_enabled')) {
+			$cmtx_comment = cmtx_check_for_word("mild_swear_words", true, $cmtx_comment, cmtx_setting('mild_swear_words_action'), CMTX_APPROVE_REASON_MILD_SWEARING, CMTX_ERROR_MESSAGE_MILD_SWEARING, CMTX_BAN_REASON_MILD_SWEARING);
 		}
-		if ($cmtx_settings->strong_swear_words_enabled) {
-			$cmtx_comment = cmtx_check_for_word("strong_swear_words", true, $cmtx_comment, $cmtx_settings->strong_swear_words_action, CMTX_APPROVE_REASON_STRONG_SWEARING, CMTX_ERROR_MESSAGE_STRONG_SWEARING, CMTX_BAN_REASON_STRONG_SWEARING);
+		if (cmtx_setting('strong_swear_words_enabled')) {
+			$cmtx_comment = cmtx_check_for_word("strong_swear_words", true, $cmtx_comment, cmtx_setting('strong_swear_words_action'), CMTX_APPROVE_REASON_STRONG_SWEARING, CMTX_ERROR_MESSAGE_STRONG_SWEARING, CMTX_BAN_REASON_STRONG_SWEARING);
 		}
-		if ($cmtx_settings->spam_words_enabled) {
-			$cmtx_comment = cmtx_check_for_word("spam_words", true, $cmtx_comment, $cmtx_settings->spam_words_action, CMTX_APPROVE_REASON_SPAMMING, CMTX_ERROR_MESSAGE_SPAMMING, CMTX_BAN_REASON_SPAMMING);
+		if (cmtx_setting('spam_words_enabled')) {
+			$cmtx_comment = cmtx_check_for_word("spam_words", true, $cmtx_comment, cmtx_setting('spam_words_action'), CMTX_APPROVE_REASON_SPAMMING, CMTX_ERROR_MESSAGE_SPAMMING, CMTX_BAN_REASON_SPAMMING);
 		}
-		if ($cmtx_settings->check_capitals_enabled) {
+		if (cmtx_setting('check_capitals_enabled')) {
 			cmtx_comment_check_capitals($cmtx_comment); //check for too many capitals
 		}
-		if ($cmtx_settings->detect_link_in_comment_enabled) {
-			cmtx_check_for_link($cmtx_comment, $cmtx_settings->link_in_comment_action, CMTX_APPROVE_REASON_LINK_IN_COMMENT, CMTX_ERROR_MESSAGE_LINK_IN_COMMENT, CMTX_BAN_REASON_LINK_IN_COMMENT); //detect link
+		if (cmtx_setting('detect_link_in_comment_enabled')) {
+			cmtx_check_for_link($cmtx_comment, cmtx_setting('link_in_comment_action'), CMTX_APPROVE_REASON_LINK_IN_COMMENT, CMTX_ERROR_MESSAGE_LINK_IN_COMMENT, CMTX_BAN_REASON_LINK_IN_COMMENT); //detect link
 		}
-		if ($cmtx_settings->approve_images) {
+		if (cmtx_setting('approve_images')) {
 			cmtx_comment_detect_image($cmtx_comment); //detect images in comment
 		}
-		if ($cmtx_settings->approve_videos) {
+		if (cmtx_setting('approve_videos')) {
 			cmtx_comment_detect_video($cmtx_comment); //detect videos in comment
 		}
-		if ($cmtx_settings->banned_websites_as_comment_enabled) {
-			$cmtx_comment = cmtx_check_for_word("banned_websites", false, $cmtx_comment, $cmtx_settings->banned_websites_as_comment_action, CMTX_APPROVE_REASON_BANNED_WEBSITE_IN_COMMENT, CMTX_ERROR_MESSAGE_BANNED_WEBSITE_IN_COMMENT, CMTX_BAN_REASON_BANNED_WEBSITE_IN_COMMENT);
+		if (cmtx_setting('banned_websites_as_comment_enabled')) {
+			$cmtx_comment = cmtx_check_for_word("banned_websites", false, $cmtx_comment, cmtx_setting('banned_websites_as_comment_action'), CMTX_APPROVE_REASON_BANNED_WEBSITE_IN_COMMENT, CMTX_ERROR_MESSAGE_BANNED_WEBSITE_IN_COMMENT, CMTX_BAN_REASON_BANNED_WEBSITE_IN_COMMENT);
 		}
 		$cmtx_comment = cmtx_sanitize($cmtx_comment, true, false); //converts to HTML entities
-		if ($cmtx_settings->enabled_bb_code) {
+		if (cmtx_setting('enabled_bb_code')) {
 			$cmtx_comment = cmtx_comment_add_bb_code($cmtx_comment); //convert BB Code to HTML
 		}
-		if ($cmtx_settings->enabled_smilies) {
+		if (cmtx_setting('enabled_smilies')) {
 			$cmtx_comment = cmtx_comment_add_smilies($cmtx_comment); //convert smilies to HTML
 			cmtx_check_maximum_smilies($cmtx_comment); //check comment meets maximum smilies requirement
 		}
 		$cmtx_comment = cmtx_purify($cmtx_comment); //purify HTML
 		$cmtx_comment = cmtx_comment_parse_links($cmtx_comment); //convert links to HTML
-		if ($cmtx_settings->comment_line_breaks) {
+		if (cmtx_setting('comment_line_breaks')) {
 			$cmtx_comment = cmtx_comment_add_breaks($cmtx_comment); //add line breaks (<br /> and <p></p>)
 		} else {
 			$cmtx_comment = cmtx_comment_remove_breaks($cmtx_comment); //remove line breaks
@@ -341,7 +341,7 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	if (!isset($_POST['cmtx_reply_id'])) { //if reply ID not submitted
 		$_POST['cmtx_reply_id'] = 0; //set it with a zero value
 	}
-	if ($cmtx_settings->show_reply) { //if reply field is enabled
+	if (cmtx_setting('show_reply')) { //if reply field is enabled
 		$cmtx_reply_id = trim($_POST['cmtx_reply_id']); //remove any space at beginning and end
 		cmtx_is_injected($cmtx_reply_id); //check for injection attempt
 		cmtx_validate_reply($cmtx_reply_id, $cmtx_page_id); //validate reply
@@ -351,11 +351,11 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	}
 		
 	/* Question */
-	if (cmtx_session_set() && isset($_SESSION['cmtx_question']) && $_SESSION['cmtx_question'] == $cmtx_settings->session_key) {} else {
-		if ((!isset($_POST['cmtx_user_answer']) || !isset($_POST['cmtx_real_answer'])) && $cmtx_settings->enabled_question) {
+	if (cmtx_session_set() && isset($_SESSION['cmtx_question']) && $_SESSION['cmtx_question'] == cmtx_setting('session_key')) {} else {
+		if ((!isset($_POST['cmtx_user_answer']) || !isset($_POST['cmtx_real_answer'])) && cmtx_setting('enabled_question')) {
 			cmtx_error(CMTX_ERROR_MESSAGE_NO_ANSWER); //reject user for entering no answer
 		} else {
-			if ($cmtx_settings->enabled_question) { //if question field enabled
+			if (cmtx_setting('enabled_question')) { //if question field enabled
 				$cmtx_user_answer = trim(strtolower($_POST['cmtx_user_answer'])); //get user answer
 				$cmtx_real_answer = trim(strtolower($_POST['cmtx_real_answer'])); //get real answer
 				if (empty($cmtx_user_answer)) { //if no answer entered
@@ -365,7 +365,7 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 						cmtx_error(CMTX_ERROR_MESSAGE_WRONG_ANSWER); //reject user for entering wrong answer
 					} else {
 						if (cmtx_session_set()) { //if there's a session
-							$_SESSION['cmtx_question'] = $cmtx_settings->session_key; //add question completion to session
+							$_SESSION['cmtx_question'] = cmtx_setting('session_key'); //add question completion to session
 						}
 					}
 				}
@@ -374,25 +374,25 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	}
 	
 	/* Captcha */
-	if (cmtx_session_set() && isset($_SESSION['cmtx_captcha']) && $_SESSION['cmtx_captcha'] == $cmtx_settings->session_key) {} else {
-		if ($cmtx_settings->recaptcha_public_key == "" || $cmtx_settings->recaptcha_private_key == "") {} else {
+	if (cmtx_session_set() && isset($_SESSION['cmtx_captcha']) && $_SESSION['cmtx_captcha'] == cmtx_setting('session_key')) {} else {
+		if (cmtx_setting('recaptcha_public_key') == "" || cmtx_setting('recaptcha_private_key') == "") {} else {
 			if (function_exists('fsockopen') && is_callable('fsockopen')) {
-				if ((!isset($_POST['recaptcha_challenge_field']) || !isset($_POST['recaptcha_response_field'])) && $cmtx_settings->enabled_captcha) {
+				if ((!isset($_POST['recaptcha_challenge_field']) || !isset($_POST['recaptcha_response_field'])) && cmtx_setting('enabled_captcha')) {
 					cmtx_error(CMTX_ERROR_MESSAGE_NO_CAPTCHA); //reject user for entering no captcha value
 				} else {
-					if ($cmtx_settings->enabled_captcha) { //if captcha enabled
+					if (cmtx_setting('enabled_captcha')) { //if captcha enabled
 						$cmtx_captcha = trim($_POST['recaptcha_response_field']); //get and trim entered captcha value
 						if (empty($cmtx_captcha)) { //if no captcha value entered
 							cmtx_error(CMTX_ERROR_MESSAGE_NO_CAPTCHA); //reject user for entering no captcha value
 						} else { //if captcha value entered
-							require_once $cmtx_path . "includes/recaptcha/recaptchalib.php"; //load captcha script
-							$cmtx_recaptcha_private_key = $cmtx_settings->recaptcha_private_key;;
+							require_once $cmtx_path . 'includes/recaptcha/recaptchalib.php'; //load captcha script
+							$cmtx_recaptcha_private_key = cmtx_setting('recaptcha_private_key');
 							$cmtx_recaptcha_response = recaptcha_check_answer($cmtx_recaptcha_private_key, $cmtx_ip_address, $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
 							if (!$cmtx_recaptcha_response->is_valid) { //if entered captcha value invalid
 								cmtx_error(CMTX_ERROR_MESSAGE_WRONG_CAPTCHA); //reject user for entering wrong captcha value
 							} else {
 								if (cmtx_session_set()) { //if there's a session
-									$_SESSION['cmtx_captcha'] = $cmtx_settings->session_key; //add captcha completion to session
+									$_SESSION['cmtx_captcha'] = cmtx_setting('session_key'); //add captcha completion to session
 								}
 							}
 						}
@@ -403,7 +403,7 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	}
 	
 	/* Akismet */
-	if ($cmtx_settings->akismet_enabled && function_exists('fsockopen') && is_callable('fsockopen')) {
+	if (cmtx_setting('akismet_enabled') && function_exists('fsockopen') && is_callable('fsockopen')) {
 		if (cmtx_akismet($cmtx_name, $cmtx_email, $cmtx_website, $cmtx_comment)) {
 			cmtx_approve(CMTX_APPROVE_REASON_AKISMET); //approve user for failing Akismet test
 		}
@@ -457,9 +457,9 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 		
 		cmtx_repopulate(); //repopulate the form with submitted values
 	
-	} else if ($cmtx_approve || $cmtx_settings->approve_comments) { //if approval needed
+	} else if ($cmtx_approve || cmtx_setting('approve_comments')) { //if approval needed
 	
-		if ($cmtx_settings->approve_comments) { //if approving all comments
+		if (cmtx_setting('approve_comments')) { //if approving all comments
 			$cmtx_approve_reason = CMTX_APPROVE_REASON_ALL;
 		} else {
 			$cmtx_approve_reason = substr_replace($cmtx_approve_reason, "", -2); //remove ending line break
@@ -484,11 +484,11 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 		$cmtx_box .= "<div style='clear: left;'></div>";
 		
 		//add new subscriber
-		if ($cmtx_settings->enabled_notify && isset($_POST['cmtx_notify']) && $cmtx_settings->enabled_email && !empty($cmtx_email) && !cmtx_subscriber_exists($cmtx_email, $cmtx_page_id) && !cmtx_subscriber_bad($cmtx_email)) {
+		if (cmtx_setting('enabled_notify') && isset($_POST['cmtx_notify']) && cmtx_setting('enabled_email') && !empty($cmtx_email) && !cmtx_subscriber_exists($cmtx_email, $cmtx_page_id) && !cmtx_subscriber_bad($cmtx_email)) {
 			cmtx_add_subscriber($cmtx_name, $cmtx_email, $cmtx_page_id);
 		}
 		
-		if ( (isset($_POST['cmtx_remember'])) || (!$cmtx_settings->enabled_remember && $cmtx_settings->form_cookie) ) {
+		if ( (isset($_POST['cmtx_remember'])) || (!cmtx_setting('enabled_remember') && cmtx_setting('form_cookie')) ) {
 			cmtx_set_form_cookie($cmtx_name, $cmtx_email, $cmtx_website, $cmtx_town, $cmtx_country); //save form inputs
 			$cmtx_default_name = cmtx_strip_slashes(cmtx_decode($cmtx_name));
 			$cmtx_default_email = cmtx_strip_slashes(cmtx_decode($cmtx_email));
@@ -504,8 +504,8 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 		$cmtx_reply_id = 0; //reset the reply id
 		
 		if (cmtx_session_set()) { //if there's a session
-			$_SESSION['cmtx_question'] = ""; //reset session
-			$_SESSION['cmtx_captcha'] = ""; //reset session
+			$_SESSION['cmtx_question'] = ''; //reset session
+			$_SESSION['cmtx_captcha'] = ''; //reset session
 		}
 		
 	} else { //if comment is a success (no approval required)
@@ -525,16 +525,16 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 		$cmtx_box .= "<div style='clear: left;'></div>";
 		
 		//add new subscriber
-		if ($cmtx_settings->enabled_notify && isset($_POST['cmtx_notify']) && $cmtx_settings->enabled_email && !empty($cmtx_email) && !cmtx_subscriber_exists($cmtx_email, $cmtx_page_id) && !cmtx_subscriber_bad($cmtx_email) && !$cmtx_is_admin) {
+		if (cmtx_setting('enabled_notify') && isset($_POST['cmtx_notify']) && cmtx_setting('enabled_email') && !empty($cmtx_email) && !cmtx_subscriber_exists($cmtx_email, $cmtx_page_id) && !cmtx_subscriber_bad($cmtx_email) && !$cmtx_is_admin) {
 			cmtx_add_subscriber($cmtx_name, $cmtx_email, $cmtx_page_id);
 		}
 		
 		//notify subscribers of new comment
-		if ($cmtx_settings->enabled_notify) {
+		if (cmtx_setting('enabled_notify')) {
 			if ($cmtx_is_admin) {
 				cmtx_notify_subscribers($cmtx_name, $cmtx_comment, $cmtx_page_id);
 			} else {
-				if (!$cmtx_settings->approve_notifications) {
+				if (!cmtx_setting('approve_notifications')) {
 					cmtx_notify_subscribers($cmtx_name, $cmtx_comment, $cmtx_page_id);
 				}
 			}
@@ -542,7 +542,7 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 		
 		cmtx_notify_admin_new_comment_okay($cmtx_name, $cmtx_comment); //notify admin of new comment
 		
-		if ( (isset($_POST['cmtx_remember'])) || (!$cmtx_settings->enabled_remember && $cmtx_settings->form_cookie) ) {
+		if ( (isset($_POST['cmtx_remember'])) || (!cmtx_setting('enabled_remember') && cmtx_setting('form_cookie')) ) {
 			cmtx_set_form_cookie($cmtx_name, $cmtx_email, $cmtx_website, $cmtx_town, $cmtx_country); //save form inputs
 			$cmtx_default_name = cmtx_strip_slashes(cmtx_decode($cmtx_name));
 			$cmtx_default_email = cmtx_strip_slashes(cmtx_decode($cmtx_email));
@@ -558,8 +558,8 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 		$cmtx_reply_id = 0; //reset the reply id
 		
 		if (cmtx_session_set()) { //if there's a session
-			$_SESSION['cmtx_question'] = ""; //reset session
-			$_SESSION['cmtx_captcha'] = ""; //reset session
+			$_SESSION['cmtx_question'] = ''; //reset session
+			$_SESSION['cmtx_captcha'] = ''; //reset session
 		}
 		
 	}

@@ -25,23 +25,19 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 define('IN_COMMENTICS', 'true');
 
 //set the path
-$cmtx_path = "";
+$cmtx_path = '';
 
 /* Database Connection */
-require "includes/db/connect.php"; //connect to database
+require 'includes/db/connect.php'; //connect to database
 if (!$cmtx_db_ok) { die(); }
 
-//get settings
-require "includes/classes/settings.php";
-$cmtx_settings = new cmtx_settings;
-
 //load functions file
-require "includes/functions/page.php";
+require 'includes/functions/page.php';
 
 //load language file
-require "includes/language/" . $cmtx_settings->language_frontend . "/comments.php";
+require 'includes/language/' . cmtx_setting('language_frontend') . '/comments.php';
 
-if (!$cmtx_settings->show_flag) {
+if (!cmtx_setting('show_flag')) {
 	die();
 }
 
@@ -52,10 +48,10 @@ if (!cmtx_is_administrator()) { //if not administrator
 }
 
 /* Error Reporting */
-cmtx_error_reporting("includes/logs/errors.log");
+cmtx_error_reporting('includes/logs/errors.log');
 
 /* Time Zone */
-cmtx_set_time_zone($cmtx_settings->time_zone);
+cmtx_set_time_zone(cmtx_setting('time_zone'));
 
 $ip_address = cmtx_get_ip_address(); //get user's IP address
 
@@ -64,7 +60,7 @@ echo "<img src='" . cmtx_comments_folder() . "images/buttons/flag.png' alt='Flag
 if (isset($_POST['id'])) {
 
 	$id = $_POST['id'];
-	$id = str_ireplace("cmtx_flag_", "", $id);
+	$id = str_ireplace('cmtx_flag_', '', $id);
 	if (!ctype_digit($id)) { die(); }
 	$id = cmtx_sanitize($id, true, true);
 
@@ -104,7 +100,7 @@ if (isset($_POST['id'])) {
 	$query = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "reporters` WHERE `ip_address` = '$ip_address'");
 	$count = mysql_num_rows($query);
 
-	if ($count >= $cmtx_settings->flag_max_per_user) {
+	if ($count >= cmtx_setting('flag_max_per_user')) {
 		echo "<script language='javascript' type='text/javascript'>alert('" . cmtx_escape_js(CMTX_FLAG_REPORT_LIMIT) . "');</script>";
 		die();
 	}
@@ -123,7 +119,7 @@ if (isset($_POST['id'])) {
 	$result = mysql_fetch_assoc($query);
 	$count = $result["reports"];
 
-	if ($count >= $cmtx_settings->flag_min_per_comment) {
+	if ($count >= cmtx_setting('flag_min_per_comment')) {
 		echo "<script language='javascript' type='text/javascript'>alert('" . cmtx_escape_js(CMTX_FLAG_ALREADY_FLAGGED) . "');</script>";
 		die();
 	}
@@ -151,16 +147,16 @@ if (isset($_POST['id'])) {
 	$result = mysql_fetch_assoc($query);
 	$count = $result["reports"];
 
-	if ($count == $cmtx_settings->flag_min_per_comment) {
+	if ($count == cmtx_setting('flag_min_per_comment')) {
 
-		if ($cmtx_settings->flag_disapprove) {
+		if (cmtx_setting('flag_disapprove')) {
 			mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "comments` SET `is_approved` = '0' WHERE `id` = '$id'");
 			cmtx_unapprove_replies($id);
 		}
 
 		//send email
 
-		$admin_new_comment_flag_email_file = "includes/emails/" . $cmtx_settings->language_frontend . "/admin/new_flag.txt"; //build path to admin new flag email file
+		$admin_new_comment_flag_email_file = 'includes/emails/' . cmtx_setting('language_frontend') . '/admin/new_flag.txt'; //build path to admin new flag email file
 		$body = file_get_contents($admin_new_comment_flag_email_file); //get the file's contents
 
 		$comment_query = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "comments` WHERE `id` = '$id'");
@@ -175,14 +171,14 @@ if (isset($_POST['id'])) {
 		$page_url = cmtx_decode($page_result["url"]);
 		$poster = cmtx_decode($comment_result["name"]);
 		$comment = cmtx_prepare_comment_for_email($comment_result["comment"], false);
-		$admin_link = cmtx_url_encode_spaces($cmtx_settings->url_to_comments_folder . $cmtx_settings->admin_folder) . "/"; //build admin panel link
+		$admin_link = cmtx_url_encode_spaces(cmtx_setting('url_to_comments_folder') . cmtx_setting('admin_folder')) . '/'; //build admin panel link
 
 		//convert email variables with actual variables
-		$body = str_ireplace("[page reference]", $page_reference, $body);
-		$body = str_ireplace("[page url]", $page_url, $body);
-		$body = str_ireplace("[poster]", $poster, $body);
-		$body = str_ireplace("[comment]", $comment, $body);
-		$body = str_ireplace("[admin link]", $admin_link, $body);
+		$body = str_ireplace('[page reference]', $page_reference, $body);
+		$body = str_ireplace('[page url]', $page_url, $body);
+		$body = str_ireplace('[poster]', $poster, $body);
+		$body = str_ireplace('[comment]', $comment, $body);
+		$body = str_ireplace('[admin link]', $admin_link, $body);
 
 		//select administrators from database
 		$admins = mysql_query("SELECT `email` FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `receive_email_new_flag` = '1' AND `is_enabled` = '1'");
@@ -191,7 +187,7 @@ if (isset($_POST['id'])) {
 
 			$email = $admin["email"]; //get administrator email address
 
-			cmtx_email($email, null, $cmtx_settings->admin_new_flag_subject, $body, $cmtx_settings->admin_new_flag_from_email, $cmtx_settings->admin_new_flag_from_name, $cmtx_settings->admin_new_flag_reply_to);
+			cmtx_email($email, null, cmtx_setting('admin_new_flag_subject'), $body, cmtx_setting('admin_new_flag_from_email'), cmtx_setting('admin_new_flag_from_name'), cmtx_setting('admin_new_flag_reply_to'));
 
 		}
 

@@ -22,7 +22,7 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 
 function cmtx_sanitize ($value, $stage_one, $stage_two) { //sanitizes data
@@ -129,7 +129,7 @@ function cmtx_strip_slashes ($value) { //strip slashes
 
 function cmtx_validate_page_id() { //validate page ID
 
-	global $cmtx_page_id, $cmtx_reference, $cmtx_parameters, $cmtx_mysql_table_prefix, $cmtx_settings; //globalise variables
+	global $cmtx_page_id, $cmtx_reference, $cmtx_parameters, $cmtx_mysql_table_prefix; //globalise variables
 
 	if (!isset($cmtx_page_id) || empty($cmtx_page_id)) { //if no page ID
 
@@ -146,7 +146,7 @@ function cmtx_validate_page_id() { //validate page ID
 		//get URL
 		$url = "http" . ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "s" : "") . "://" . strtolower($_SERVER['HTTP_HOST']) . $_SERVER['REQUEST_URI'];
 		$url = cmtx_url_decode($url);
-		if ($cmtx_settings->lower_pages) {
+		if (cmtx_setting('lower_pages')) {
 			$url = strtolower($url);
 		}
 
@@ -276,7 +276,7 @@ function cmtx_validate_page_id() { //validate page ID
 
 		} else { //create page
 
-			if ($cmtx_settings->delay_pages) {
+			if (cmtx_setting('delay_pages')) {
 
 				if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['cmtx_preview']) || isset($_POST['cmtx_prev'])) {
 
@@ -379,13 +379,13 @@ function cmtx_get_user_agent() { //get user agent
 
 function cmtx_in_maintenance() { //check if in maintenance mode
 
-	global $cmtx_settings, $cmtx_is_admin; //globalise variables
+	global $cmtx_is_admin; //globalise variables
 
-	if ($cmtx_settings->maintenance_mode && !$cmtx_is_admin) {
+	if (cmtx_setting('maintenance_mode') && !$cmtx_is_admin) {
 		?><h3>Commentics</h3>
 		<div style="margin-bottom: 10px;"></div>
 		<div class="cmtx_maintenance_message"><?php
-		echo $cmtx_settings->maintenance_message;
+		echo cmtx_setting('maintenance_message');
 		?></div><?php
 		return true;
 	} else {
@@ -537,7 +537,7 @@ function cmtx_get_random_key ($length) { //generates a random key
 
 function cmtx_add_viewer() { //add viewer to database
 
-	global $cmtx_mysql_table_prefix, $cmtx_settings, $cmtx_page_id; //globalise variables
+	global $cmtx_mysql_table_prefix, $cmtx_page_id; //globalise variables
 
 	if ($cmtx_page_id != "cmtx_system_page") {
 
@@ -547,7 +547,7 @@ function cmtx_add_viewer() { //add viewer to database
 		$page_url = cmtx_sanitize(cmtx_get_page_url(), false, true);
 
 		$timestamp = time();
-		$timeout = $timestamp - $cmtx_settings->viewers_timeout;
+		$timeout = $timestamp - cmtx_setting('viewers_timeout');
 
 		mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "viewers` WHERE `timestamp` < '$timeout'");
 		mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "viewers` WHERE `ip_address` = '$ip_address'");
@@ -645,11 +645,9 @@ function cmtx_unapprove_replies($id) { //unapprove replies of given comment
 
 function cmtx_error_reporting($path) { //error reporting
 
-	global $cmtx_settings; //globalise variables
-
-	if ($cmtx_settings->error_reporting_frontend) { //if error reporting is turned on for frontend
+	if (cmtx_setting('error_reporting_frontend')) { //if error reporting is turned on for frontend
 		@error_reporting(-1); //show every possible error
-		if ($cmtx_settings->error_reporting_method == "log") { //if errors should be logged to file
+		if (cmtx_setting('error_reporting_method') == "log") { //if errors should be logged to file
 			@ini_set('display_errors', 0); //don't display errors
 			@ini_set('log_errors', 1); //log errors
 			@ini_set('error_log', $path); //set log path
@@ -699,8 +697,6 @@ function cmtx_escape_js($text) { //escape a JavaScript string for output
 
 function cmtx_set_time_zone($time_zone) { //set the time zone
 
-	global $cmtx_settings; //globalise variables
-
 	@date_default_timezone_set($time_zone); //set time zone PHP
 
 	@mysql_query("SET time_zone = '" . date("P") . "'"); //set time zone DB
@@ -710,14 +706,12 @@ function cmtx_set_time_zone($time_zone) { //set the time zone
 
 function cmtx_comments_folder() { //gets the URL to the /comments/ folder
 
-	global $cmtx_settings; //globalise variables
-
-	$url = cmtx_url_decode("http" . ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "s" : "") . "://" . strtolower($_SERVER['HTTP_HOST']) . parse_url($cmtx_settings->url_to_comments_folder, PHP_URL_PATH));
+	$url = cmtx_url_decode("http" . ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "s" : "") . "://" . strtolower($_SERVER['HTTP_HOST']) . parse_url(cmtx_setting('url_to_comments_folder'), PHP_URL_PATH));
 	
 	$url = cmtx_url_encode($url);
 	
-	if (!parse_url($cmtx_settings->url_to_comments_folder, PHP_URL_PATH) || !filter_var($url, FILTER_VALIDATE_URL)) {
-		$url = cmtx_url_encode($cmtx_settings->url_to_comments_folder);
+	if (!parse_url(cmtx_setting('url_to_comments_folder'), PHP_URL_PATH) || !filter_var($url, FILTER_VALIDATE_URL)) {
+		$url = cmtx_url_encode(cmtx_setting('url_to_comments_folder'));
 	}
 
 	return $url;
@@ -736,9 +730,9 @@ function cmtx_current_page() { //gets the URL of the current page
 
 function cmtx_email($to_email, $to_name, $subject, $body, $from_email, $from_name, $reply_email) { //sends an email
 
-	global $cmtx_settings, $cmtx_path; //globalise variables
+	global $cmtx_path; //globalise variables
 	
-	if ($cmtx_settings->transport_method == "php-basic") {
+	if (cmtx_setting('transport_method') == "php-basic") {
 	
 		//set email headers
 		$headers = 'From: ' . $from_name . ' <' . $from_email . '>' . "\r\n";
@@ -753,26 +747,26 @@ function cmtx_email($to_email, $to_name, $subject, $body, $from_email, $from_nam
 	
 	} else {
 	
-		require_once $cmtx_path . "includes/swift_mailer/lib/swift_required.php"; //load Swift Mailer
+		require_once $cmtx_path . 'includes/swift_mailer/lib/swift_required.php'; //load Swift Mailer
 
 		//set the transport method
-		if ($cmtx_settings->transport_method == "php") {
+		if (cmtx_setting('transport_method') == "php") {
 			$transport = Swift_MailTransport::newInstance();
-		} else if ($cmtx_settings->transport_method == "smtp") {
+		} else if (cmtx_setting('transport_method') == "smtp") {
 			$transport = Swift_SmtpTransport::newInstance();
-			$transport->setHost($cmtx_settings->smtp_host);
-			$transport->setPort($cmtx_settings->smtp_port);
-			if ($cmtx_settings->smtp_encrypt == "ssl") {
+			$transport->setHost(cmtx_setting('smtp_host'));
+			$transport->setPort(cmtx_setting('smtp_port'));
+			if (cmtx_setting('smtp_encrypt') == "ssl") {
 				$transport->setEncryption('ssl');
-			} else if ($cmtx_settings->smtp_encrypt == "tls") {
+			} else if (cmtx_setting('smtp_encrypt') == "tls") {
 				$transport->setEncryption('tls');
 			}
-			if ($cmtx_settings->smtp_auth) {
-				$transport->setUsername($cmtx_settings->smtp_username);
-				$transport->setPassword($cmtx_settings->smtp_password);
+			if (cmtx_setting('smtp_auth')) {
+				$transport->setUsername(cmtx_setting('smtp_username'));
+				$transport->setPassword(cmtx_setting('smtp_password'));
 			}
-		} else if ($cmtx_settings->transport_method == "sendmail") {
-			$transport = Swift_SendmailTransport::newInstance($cmtx_settings->sendmail_path . ' -bs');
+		} else if (cmtx_setting('transport_method') == "sendmail") {
+			$transport = Swift_SendmailTransport::newInstance(cmtx_setting('sendmail_path') . ' -bs');
 		}
 
 		//create the Mailer using the created Transport
@@ -814,4 +808,16 @@ function cmtx_email($to_email, $to_name, $subject, $body, $from_email, $from_nam
 	}
 
 } //end of email function
+
+
+function cmtx_setting($title) { //gets a setting
+
+	global $cmtx_mysql_table_prefix;
+	
+	$result = mysql_query("SELECT `value` FROM `" . $cmtx_mysql_table_prefix . "settings` WHERE `title` = '$title'");
+	$result = mysql_fetch_assoc($result);
+	
+	return $result['value'];
+
+} //end of setting function
 ?>

@@ -22,14 +22,14 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_ADMINS ?></h3>
+<h3><?php echo CMTX_TITLE_ADMINS; ?></h3>
 <hr class="title"/>
 
 <?php
@@ -40,9 +40,9 @@ die("<p />" . CMTX_MSG_ADMIN_ONLY);
 ?>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -72,7 +72,7 @@ $email = cmtx_sanitize($email);
 if (mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `username` = '$username'"))) {
 
 ?>
-<div class="error"><?php echo CMTX_MSG_ADMIN_EXISTS ?></div>
+<div class="error"><?php echo CMTX_MSG_ADMIN_EXISTS; ?></div>
 <div style="clear: left;"></div>
 <?php
 
@@ -80,7 +80,7 @@ if (mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "a
 
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "admins` (`username`, `password`, `email`, `ip_address`, `cookie_key`, `detect_admin`, `detect_method`, `receive_email_new_ban`, `receive_email_new_comment_approve`, `receive_email_new_comment_okay`, `login_attempts`, `resets`, `last_login`, `restrict_pages`, `allowed_pages`, `is_super`, `is_enabled`, `dated`) VALUES ('$username', '$password', '$email', '', '$cookie_key', '1', 'both', '1', '1', '1', '0', '0', NOW(), '0', '', '0', '1', NOW());");
 ?>
-<div class="success"><?php echo CMTX_MSG_ADMIN_ADDED ?></div>
+<div class="success"><?php echo CMTX_MSG_ADMIN_ADDED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
@@ -88,9 +88,9 @@ mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "admins` (`username`, `
 
 <?php
 if (isset($_GET['action']) && $_GET['action'] == "delete" && isset($_GET['id']) && ctype_digit($_GET['id']) && cmtx_record_exists($_GET['id'], "admins") && cmtx_check_csrf_url_key()) {
-if ($cmtx_settings->is_demo) {
+if (cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else {
@@ -98,27 +98,25 @@ $id = $_GET['id'];
 $id = cmtx_sanitize($id);
 if (mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `is_super` = '1' AND `id` = '$id'"))) {
 ?>
-<div class="error"><?php echo CMTX_MSG_ADMIN_SUP_DEL ?></div>
+<div class="error"><?php echo CMTX_MSG_ADMIN_SUP_DEL; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else {
 mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `id` = '$id'");
 ?>
-<div class="success"><?php echo CMTX_MSG_ADMIN_DELETED ?></div>
+<div class="success"><?php echo CMTX_MSG_ADMIN_DELETED; ?></div>
 <div style="clear: left;"></div>
 <?php } } } ?>
 
 <p />
 
-<?php $cmtx_settings = new cmtx_settings; ?>
-
 <form name="administrator" id="administrator" action="index.php?page=manage_administrators" method="post" onsubmit="return check_passwords()">
-<?php echo CMTX_FIELD_LABEL_USERNAME ?> <input type="text" required name="username" size="12" maxlength="250"/>&nbsp;
-<?php echo CMTX_FIELD_LABEL_PASSWORD ?> <input type="password" required name="password_1" size="20" maxlength="250"/>&nbsp;
-<?php echo CMTX_FIELD_LABEL_REPEAT ?> <input type="password" required name="password_2" size="20" maxlength="250"/>&nbsp;
-<?php echo CMTX_FIELD_LABEL_EMAIL ?> <input type="email" required name="email" size="30" maxlength="250"/>&nbsp;
+<?php echo CMTX_FIELD_LABEL_USERNAME; ?> <input type="text" required name="username" size="12" maxlength="250"/>&nbsp;
+<?php echo CMTX_FIELD_LABEL_PASSWORD; ?> <input type="password" required name="password_1" size="20" maxlength="250"/>&nbsp;
+<?php echo CMTX_FIELD_LABEL_REPEAT; ?> <input type="password" required name="password_2" size="20" maxlength="250"/>&nbsp;
+<?php echo CMTX_FIELD_LABEL_EMAIL; ?> <input type="email" required name="email" size="30" maxlength="250"/>&nbsp;
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_ADD_ADMIN ?>" value="<?php echo CMTX_BUTTON_ADD_ADMIN ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_ADD_ADMIN; ?>" value="<?php echo CMTX_BUTTON_ADD_ADMIN; ?>"/>
 </form>
 
 <br />
@@ -126,14 +124,14 @@ mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `id` = '
 <table id="data" class="display" summary="Administrators">
     <thead>
     	<tr>
-			<th><?php echo CMTX_TABLE_ID ?></th>
-			<th><?php echo CMTX_TABLE_USERNAME ?></th>
-            <th><?php echo CMTX_TABLE_EMAIL ?></th>
-			<th><?php echo CMTX_TABLE_ENABLED ?></th>
-			<th><?php echo CMTX_TABLE_SUPER_ADMIN ?></th>
-			<th><?php echo CMTX_TABLE_LAST_LOGIN ?></th>
-            <th><?php echo CMTX_TABLE_DATE_TIME ?></th>
-            <th><?php echo CMTX_TABLE_ACTION ?></th>
+			<th><?php echo CMTX_TABLE_ID; ?></th>
+			<th><?php echo CMTX_TABLE_USERNAME; ?></th>
+            <th><?php echo CMTX_TABLE_EMAIL; ?></th>
+			<th><?php echo CMTX_TABLE_ENABLED; ?></th>
+			<th><?php echo CMTX_TABLE_SUPER_ADMIN; ?></th>
+			<th><?php echo CMTX_TABLE_LAST_LOGIN; ?></th>
+            <th><?php echo CMTX_TABLE_DATE_TIME; ?></th>
+            <th><?php echo CMTX_TABLE_ACTION; ?></th>
         </tr>
     </thead>
     <tbody>

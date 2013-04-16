@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_FORM_SORT_ORDER ?></h3>
+<h3><?php echo CMTX_TITLE_FORM_SORT_ORDER; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -54,24 +54,22 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$sort_order_captchas_san' WHERE `title` = 'sort_order_captchas'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$sort_order_checkboxes_san' WHERE `title` = 'sort_order_checkboxes'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_LAYOUT_FORM_SORT_ORDER_FIELDS ?>
+<?php echo CMTX_DESC_LAYOUT_FORM_SORT_ORDER_FIELDS; ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="layout_form_sort_order_fields" id="layout_form_sort_order_fields" action="index.php?page=layout_form_sort_order_fields" method="post">
 
 <ul id="fields" class="fields">
 
 	<?php
-	$elements = explode(",", $cmtx_settings->sort_order_fields);
+	$elements = explode(",", cmtx_setting('sort_order_fields'));
 	foreach ($elements as $element) {
 		switch ($element) {
 			case "1":
@@ -121,7 +119,7 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 // ]]>
 </script>
 
-<input type="hidden" name="sort_order_fields" id="sort_order_fields" value="<?php echo $cmtx_settings->sort_order_fields; ?>"/>
+<input type="hidden" name="sort_order_fields" id="sort_order_fields" value="<?php echo cmtx_setting('sort_order_fields'); ?>"/>
 
 <p />
 
@@ -134,7 +132,7 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 <ul id="captchas" class="captchas">
 
 	<?php
-	$elements = explode(",", $cmtx_settings->sort_order_captchas);
+	$elements = explode(",", cmtx_setting('sort_order_captchas'));
 	foreach ($elements as $element) {
 		switch ($element) {
 			case "1":
@@ -168,14 +166,14 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 // ]]>
 </script>
 
-<input type="hidden" name="sort_order_captchas" id="sort_order_captchas" value="<?php echo $cmtx_settings->sort_order_captchas; ?>"/>
+<input type="hidden" name="sort_order_captchas" id="sort_order_captchas" value="<?php echo cmtx_setting('sort_order_captchas'); ?>"/>
 
 <p />
 
 <ul id="checkboxes" class="checkboxes">
 
 	<?php
-	$elements = explode(",", $cmtx_settings->sort_order_checkboxes);
+	$elements = explode(",", cmtx_setting('sort_order_checkboxes'));
 	foreach ($elements as $element) {
 		switch ($element) {
 			case "1":
@@ -217,11 +215,11 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 // ]]>
 </script>
 
-<input type="hidden" name="sort_order_checkboxes" id="sort_order_checkboxes" value="<?php echo $cmtx_settings->sort_order_checkboxes; ?>"/>
+<input type="hidden" name="sort_order_checkboxes" id="sort_order_checkboxes" value="<?php echo cmtx_setting('sort_order_checkboxes'); ?>"/>
 
 <p />
 
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 
 </form>

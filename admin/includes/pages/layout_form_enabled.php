@@ -22,21 +22,21 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_FORM_ENABLED ?></h3>
+<h3><?php echo CMTX_TITLE_FORM_ENABLED; ?></h3>
 <hr class="title"/>
 
 <?php
 
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -76,50 +76,48 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$e
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$enabled_preview' WHERE `title` = 'enabled_preview'");
 
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php $cmtx_settings = new cmtx_settings; ?>
-
 <form name="layout_form_enabled" id="layout_form_enabled" action="index.php?page=layout_form_enabled" method="post">
 
-<?php echo CMTX_DESC_LAYOUT_FORM_ENABLED ?>
+<?php echo CMTX_DESC_LAYOUT_FORM_ENABLED; ?>
 
 <p />
 
-<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_EMAIL ?></label> <?php if ($cmtx_settings->enabled_email) { ?> <input type="checkbox" checked="checked" name="enabled_email"/> <?php } else { ?> <input type="checkbox" name="enabled_email"/> <?php } ?>
+<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_EMAIL; ?></label> <?php if (cmtx_setting('enabled_email')) { ?> <input type="checkbox" checked="checked" name="enabled_email"/> <?php } else { ?> <input type="checkbox" name="enabled_email"/> <?php } ?>
 <p />
-<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_WEBSITE ?></label> <?php if ($cmtx_settings->enabled_website) { ?> <input type="checkbox" checked="checked" name="enabled_website"/> <?php } else { ?> <input type="checkbox" name="enabled_website"/> <?php } ?>
+<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_WEBSITE; ?></label> <?php if (cmtx_setting('enabled_website')) { ?> <input type="checkbox" checked="checked" name="enabled_website"/> <?php } else { ?> <input type="checkbox" name="enabled_website"/> <?php } ?>
 <p />
-<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_TOWN ?></label> <?php if ($cmtx_settings->enabled_town) { ?> <input type="checkbox" checked="checked" name="enabled_town"/> <?php } else { ?> <input type="checkbox" name="enabled_town"/> <?php } ?>
+<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_TOWN; ?></label> <?php if (cmtx_setting('enabled_town')) { ?> <input type="checkbox" checked="checked" name="enabled_town"/> <?php } else { ?> <input type="checkbox" name="enabled_town"/> <?php } ?>
 <p />
-<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_COUNTRY ?></label> <?php if ($cmtx_settings->enabled_country) { ?> <input type="checkbox" checked="checked" name="enabled_country"/> <?php } else { ?> <input type="checkbox" name="enabled_country"/> <?php } ?>
+<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_COUNTRY; ?></label> <?php if (cmtx_setting('enabled_country')) { ?> <input type="checkbox" checked="checked" name="enabled_country"/> <?php } else { ?> <input type="checkbox" name="enabled_country"/> <?php } ?>
 <p />
-<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_RATING ?></label> <?php if ($cmtx_settings->enabled_rating) { ?> <input type="checkbox" checked="checked" name="enabled_rating"/> <?php } else { ?> <input type="checkbox" name="enabled_rating"/> <?php } ?>
+<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_RATING; ?></label> <?php if (cmtx_setting('enabled_rating')) { ?> <input type="checkbox" checked="checked" name="enabled_rating"/> <?php } else { ?> <input type="checkbox" name="enabled_rating"/> <?php } ?>
 <p />
-<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_BB_CODE ?></label> <?php if ($cmtx_settings->enabled_bb_code) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code"/> <?php } ?>
+<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_BB_CODE; ?></label> <?php if (cmtx_setting('enabled_bb_code')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code"/> <?php } ?>
 <p />
-<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_SMILIES ?></label> <?php if ($cmtx_settings->enabled_smilies) { ?> <input type="checkbox" checked="checked" name="enabled_smilies"/> <?php } else { ?> <input type="checkbox" name="enabled_smilies"/> <?php } ?>
+<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_SMILIES; ?></label> <?php if (cmtx_setting('enabled_smilies')) { ?> <input type="checkbox" checked="checked" name="enabled_smilies"/> <?php } else { ?> <input type="checkbox" name="enabled_smilies"/> <?php } ?>
 <p />
-<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_COUNTER ?></label> <?php if ($cmtx_settings->enabled_counter) { ?> <input type="checkbox" checked="checked" name="enabled_counter"/> <?php } else { ?> <input type="checkbox" name="enabled_counter"/> <?php } ?>
+<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_COUNTER; ?></label> <?php if (cmtx_setting('enabled_counter')) { ?> <input type="checkbox" checked="checked" name="enabled_counter"/> <?php } else { ?> <input type="checkbox" name="enabled_counter"/> <?php } ?>
 <p />
-<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_QUESTION ?></label> <?php if ($cmtx_settings->enabled_question) { ?> <input type="checkbox" checked="checked" name="enabled_question"/> <?php } else { ?> <input type="checkbox" name="enabled_question"/> <?php } ?>
+<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_QUESTION; ?></label> <?php if (cmtx_setting('enabled_question')) { ?> <input type="checkbox" checked="checked" name="enabled_question"/> <?php } else { ?> <input type="checkbox" name="enabled_question"/> <?php } ?>
 <p />
-<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_CAPTCHA ?></label> <?php if ($cmtx_settings->enabled_captcha) { ?> <input type="checkbox" checked="checked" name="enabled_captcha"/> <?php } else { ?> <input type="checkbox" name="enabled_captcha"/> <?php } ?>
+<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_CAPTCHA; ?></label> <?php if (cmtx_setting('enabled_captcha')) { ?> <input type="checkbox" checked="checked" name="enabled_captcha"/> <?php } else { ?> <input type="checkbox" name="enabled_captcha"/> <?php } ?>
 <p />
-<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_NOTIFY ?></label> <?php if ($cmtx_settings->enabled_notify) { ?> <input type="checkbox" checked="checked" name="enabled_notify"/> <?php } else { ?> <input type="checkbox" name="enabled_notify"/> <?php } ?>
+<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_NOTIFY; ?></label> <?php if (cmtx_setting('enabled_notify')) { ?> <input type="checkbox" checked="checked" name="enabled_notify"/> <?php } else { ?> <input type="checkbox" name="enabled_notify"/> <?php } ?>
 <p />
-<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_COOKIE ?></label> <?php if ($cmtx_settings->enabled_remember) { ?> <input type="checkbox" checked="checked" name="enabled_remember"/> <?php } else { ?> <input type="checkbox" name="enabled_remember"/> <?php } ?>
+<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_COOKIE; ?></label> <?php if (cmtx_setting('enabled_remember')) { ?> <input type="checkbox" checked="checked" name="enabled_remember"/> <?php } else { ?> <input type="checkbox" name="enabled_remember"/> <?php } ?>
 <p />
-<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_PRIVACY ?></label> <?php if ($cmtx_settings->enabled_privacy) { ?> <input type="checkbox" checked="checked" name="enabled_privacy"/> <?php } else { ?> <input type="checkbox" name="enabled_privacy"/> <?php } ?>
+<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_PRIVACY; ?></label> <?php if (cmtx_setting('enabled_privacy')) { ?> <input type="checkbox" checked="checked" name="enabled_privacy"/> <?php } else { ?> <input type="checkbox" name="enabled_privacy"/> <?php } ?>
 <p />
-<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_TERMS ?></label> <?php if ($cmtx_settings->enabled_terms) { ?> <input type="checkbox" checked="checked" name="enabled_terms"/> <?php } else { ?> <input type="checkbox" name="enabled_terms"/> <?php } ?>
+<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_TERMS; ?></label> <?php if (cmtx_setting('enabled_terms')) { ?> <input type="checkbox" checked="checked" name="enabled_terms"/> <?php } else { ?> <input type="checkbox" name="enabled_terms"/> <?php } ?>
 <p />
-<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_PREVIEW ?></label> <?php if ($cmtx_settings->enabled_preview) { ?> <input type="checkbox" checked="checked" name="enabled_preview"/> <?php } else { ?> <input type="checkbox" name="enabled_preview"/> <?php } ?>
+<label class='layout_form_enabled'><?php echo CMTX_FIELD_LABEL_PREVIEW; ?></label> <?php if (cmtx_setting('enabled_preview')) { ?> <input type="checkbox" checked="checked" name="enabled_preview"/> <?php } else { ?> <input type="checkbox" name="enabled_preview"/> <?php } ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

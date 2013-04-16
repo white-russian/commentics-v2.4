@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_SYSTEM ?></h3>
+<h3><?php echo CMTX_TITLE_SYSTEM; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -65,25 +65,23 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$e
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$limit_comments_san' WHERE `title` = 'limit_comments'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$admin_cookie_days_san' WHERE `title` = 'admin_cookie_days'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_SETTINGS_SYSTEM ?>
+<?php echo CMTX_DESC_SETTINGS_SYSTEM; ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="settings_system" id="settings_system" action="index.php?page=settings_system" method="post">
-<label class='settings_system'><?php echo CMTX_FIELD_LABEL_ADMIN_FOLDER ?></label> <input type="text" required name="admin_folder" size="10" maxlength="250" value="<?php echo $cmtx_settings->admin_folder; ?>"/>
+<label class='settings_system'><?php echo CMTX_FIELD_LABEL_ADMIN_FOLDER; ?></label> <input type="text" required name="admin_folder" size="10" maxlength="250" value="<?php echo cmtx_setting('admin_folder'); ?>"/>
 <?php cmtx_generate_hint(CMTX_HINT_ADMIN_FOLDER); ?>
 <p />
-<label class='settings_system'><?php echo CMTX_FIELD_LABEL_TIME_ZONE ?></label>
+<label class='settings_system'><?php echo CMTX_FIELD_LABEL_TIME_ZONE; ?></label>
 <?php
-$selected_tz = $cmtx_settings->time_zone;
+$selected_tz = cmtx_setting('time_zone');
 $time_zones = DateTimeZone::listIdentifiers();
 echo "<select name='time_zone'>";
 foreach ($time_zones as $time_zone) {
@@ -97,21 +95,21 @@ echo "</select>";
 ?>
 <?php cmtx_generate_hint(CMTX_HINT_TIME_ZONE); ?>
 <p />
-<label class='settings_system'><?php echo CMTX_FIELD_LABEL_COMMENTS_URL ?></label> <input type="text" required name="url_to_comments_folder" size="45" maxlength="250" value="<?php echo $cmtx_settings->url_to_comments_folder; ?>"/>
+<label class='settings_system'><?php echo CMTX_FIELD_LABEL_COMMENTS_URL; ?></label> <input type="text" required name="url_to_comments_folder" size="45" maxlength="250" value="<?php echo cmtx_setting('url_to_comments_folder'); ?>"/>
 <?php cmtx_generate_hint(CMTX_HINT_COMMENTS_URL); ?>
 <p />
-<label class='settings_system'><?php echo CMTX_FIELD_LABEL_MYSQL_DUMP ?></label> <input type="text" name="mysqldump_path" size="45" maxlength="250" value="<?php echo $cmtx_settings->mysqldump_path; ?>"/>
+<label class='settings_system'><?php echo CMTX_FIELD_LABEL_MYSQL_DUMP; ?></label> <input type="text" name="mysqldump_path" size="45" maxlength="250" value="<?php echo cmtx_setting('mysqldump_path'); ?>"/>
 <?php cmtx_generate_hint(CMTX_HINT_MYSQL_DUMP); ?>
 <p />
-<label class='settings_system'><?php echo CMTX_FIELD_LABEL_WYSIWYG ?></label> <?php if ($cmtx_settings->enabled_wysiwyg) { ?> <input type="checkbox" checked="checked" name="enabled_wysiwyg"/> <?php } else { ?> <input type="checkbox" name="enabled_wysiwyg"/> <?php } ?>
+<label class='settings_system'><?php echo CMTX_FIELD_LABEL_WYSIWYG; ?></label> <?php if (cmtx_setting('enabled_wysiwyg')) { ?> <input type="checkbox" checked="checked" name="enabled_wysiwyg"/> <?php } else { ?> <input type="checkbox" name="enabled_wysiwyg"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_WYSIWYG); ?>
 <p />
-<label class='settings_system'><?php echo CMTX_FIELD_LABEL_LIMIT_COMMENTS ?></label> <input type="text" required name="limit_comments" size="3" maxlength="250" value="<?php echo $cmtx_settings->limit_comments; ?>"/>
+<label class='settings_system'><?php echo CMTX_FIELD_LABEL_LIMIT_COMMENTS; ?></label> <input type="text" required name="limit_comments" size="3" maxlength="250" value="<?php echo cmtx_setting('limit_comments'); ?>"/>
 <?php cmtx_generate_hint(CMTX_HINT_LIMIT_COMMENTS); ?>
 <p />
-<label class='settings_system'><?php echo CMTX_FIELD_LABEL_ADMIN_COOKIE_DAYS ?></label> <input type="text" required name="admin_cookie_days" size="1" maxlength="3" value="<?php echo $cmtx_settings->admin_cookie_days; ?>"/> <span class='note'><?php echo CMTX_NOTE_DAYS ?></span>
+<label class='settings_system'><?php echo CMTX_FIELD_LABEL_ADMIN_COOKIE_DAYS; ?></label> <input type="text" required name="admin_cookie_days" size="1" maxlength="3" value="<?php echo cmtx_setting('admin_cookie_days'); ?>"/> <span class='note'><?php echo CMTX_NOTE_DAYS; ?></span>
 <?php cmtx_generate_hint(CMTX_HINT_ADMIN_COOKIE_DAYS); ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

@@ -22,45 +22,45 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_VIEWERS ?></h3>
+<h3><?php echo CMTX_TITLE_VIEWERS; ?></h3>
 <hr class="title"/>
 
-<?php echo CMTX_DESC_REPORT_VIEWERS ?>
+<?php echo CMTX_DESC_REPORT_VIEWERS; ?>
 
 <p />
 
-<input type="button" class="button" name="refresh" title="<?php echo CMTX_BUTTON_REFRESH ?>" value="<?php echo CMTX_BUTTON_REFRESH ?>" onclick="window.location.reload()"/>
+<input type="button" class="button" name="refresh" title="<?php echo CMTX_BUTTON_REFRESH; ?>" value="<?php echo CMTX_BUTTON_REFRESH; ?>" onclick="window.location.reload()"/>
 
 <p />
 
 <?php
-if (!$cmtx_settings->viewers_enabled) {
+if (!cmtx_setting('viewers_enabled')) {
 mysql_query("TRUNCATE TABLE `" . $cmtx_mysql_table_prefix . "viewers`");
 }
 ?>
 
 <?php
 $timestamp = time();
-$timeout = $timestamp - $cmtx_settings->viewers_timeout;
+$timeout = $timestamp - cmtx_setting('viewers_timeout');
 mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "viewers` WHERE `timestamp` < '$timeout'");
 ?>
 
 <table id="data" class="display" summary="Viewers">
     <thead>
     	<tr>
-			<th><?php echo CMTX_TABLE_VIEWER ?></th>
-			<th><?php echo CMTX_TABLE_TYPE ?></th>
-        	<th><?php echo CMTX_TABLE_IP_ADDRESS ?></th>
-			<th><?php echo CMTX_TABLE_PAGE_REFERENCE ?></th>
-			<th><?php echo CMTX_TABLE_PAGE_URL ?></th>
-            <th><?php echo CMTX_TABLE_LAST_ACTIVITY ?></th>
+			<th><?php echo CMTX_TABLE_VIEWER; ?></th>
+			<th><?php echo CMTX_TABLE_TYPE; ?></th>
+        	<th><?php echo CMTX_TABLE_IP_ADDRESS; ?></th>
+			<th><?php echo CMTX_TABLE_PAGE_REFERENCE; ?></th>
+			<th><?php echo CMTX_TABLE_PAGE_URL; ?></th>
+            <th><?php echo CMTX_TABLE_LAST_ACTIVITY; ?></th>
         </tr>
     </thead>
     <tbody>

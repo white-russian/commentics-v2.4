@@ -25,7 +25,7 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 session_start();
 
 if (isset($_POST['submit'])) {
-	header("Location: " . "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/system.php");
+	header('Location: ' . 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/system.php');
 	die();
 }
 ?>
@@ -77,7 +77,7 @@ Click 'Start' to begin.
 
 <?php
 if (session_id() != '') {
-	$_SESSION['cmtx_session_test'] = "1";
+	$_SESSION['cmtx_session_test'] = '1';
 }
 ?>
 

@@ -22,7 +22,7 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 
 function cmtx_sanitize ($value, $stage_one = false, $stage_two = true) { //sanitizes data
@@ -173,7 +173,7 @@ function cmtx_get_current_version() { //gets current version
 
 function cmtx_notify_subscribers ($poster, $comment, $comment_id, $page_id) { //notify subscribers of new comment
 
-	global $cmtx_mysql_table_prefix, $cmtx_settings; //globalise variables
+	global $cmtx_mysql_table_prefix; //globalise variables
 	
 	$page_id = cmtx_sanitize($page_id);
 	$comment_id = cmtx_sanitize($comment_id);
@@ -186,7 +186,7 @@ function cmtx_notify_subscribers ($poster, $comment, $comment_id, $page_id) { //
 	$page_reference = cmtx_decode($page_result["reference"]);
 	$page_url = cmtx_decode($page_result["url"]);
 	
-	$subscriber_notification_email_file = "../includes/emails/" . $cmtx_settings->language_frontend . "/user/subscriber_notification.txt"; //build path to subscriber notification email file
+	$subscriber_notification_email_file = "../includes/emails/" . cmtx_setting('language_frontend') . "/user/subscriber_notification.txt"; //build path to subscriber notification email file
 	
 	$poster = cmtx_prepare_name_for_email($poster); //prepare name for email
 	$comment = cmtx_prepare_comment_for_email($comment); //prepare comment for email
@@ -203,7 +203,7 @@ function cmtx_notify_subscribers ($poster, $comment, $comment_id, $page_id) { //
 		
 		$token = $subscriber["token"];
 		
-		$unsubscribe_link = cmtx_url_encode_spaces($cmtx_settings->url_to_comments_folder) . "subscribers.php" . "?id=" . $token . "&unsubscribe=1"; //build unsubscribe link
+		$unsubscribe_link = cmtx_url_encode_spaces(cmtx_setting('url_to_comments_folder')) . "subscribers.php" . "?id=" . $token . "&unsubscribe=1"; //build unsubscribe link
 
 		//convert email variables with actual variables
 		$body = str_ireplace("[name]", $name, $body);
@@ -214,7 +214,7 @@ function cmtx_notify_subscribers ($poster, $comment, $comment_id, $page_id) { //
 		$body = str_ireplace("[unsubscribe link]", $unsubscribe_link, $body);
 
 		//send email
-		cmtx_email($email, $name, $cmtx_settings->subscriber_notification_subject, $body, $cmtx_settings->subscriber_notification_from_email, $cmtx_settings->subscriber_notification_from_name, $cmtx_settings->subscriber_notification_reply_to);
+		cmtx_email($email, $name, cmtx_setting('subscriber_notification_subject'), $body, cmtx_setting('subscriber_notification_from_email'), cmtx_setting('subscriber_notification_from_name'), cmtx_setting('subscriber_notification_reply_to'));
 		
 		$count++; //increment email counter
 	
@@ -394,11 +394,9 @@ function cmtx_unapprove_replies($id) { //unapprove replies of given comment
 
 function cmtx_error_reporting($path) { //error reporting
 
-	global $cmtx_settings; //globalise variables
-
-	if ($cmtx_settings->error_reporting_admin) { //if error reporting is turned on for admin panel
+	if (cmtx_setting('error_reporting_admin')) { //if error reporting is turned on for admin panel
 		@error_reporting(-1); //show every possible error
-		if ($cmtx_settings->error_reporting_method == "log") { //if errors should be logged to file
+		if (cmtx_setting('error_reporting_method') == "log") { //if errors should be logged to file
 			@ini_set('display_errors', 0); //don't display errors
 			@ini_set('log_errors', 1); //log errors
 			@ini_set('error_log', $path); //set log path
@@ -417,14 +415,14 @@ function cmtx_error_reporting($path) { //error reporting
 
 function cmtx_text_finder ($text, $file, $case) { //search file
 
-	global $text_found, $cmtx_settings;
+	global $text_found;
 	
 	$text = str_ireplace("'", "\'", $text);
 
 	if (substr($file, 0, 1) == ".") {
 		$path = str_ireplace("../", "/comments/", $file);
 	} else {
-		$path = "/comments/" . $cmtx_settings->admin_folder . "/" . $file;
+		$path = "/comments/" . cmtx_setting('admin_folder') . "/" . $file;
 	}
 	
 	$file = file($file);
@@ -679,8 +677,6 @@ function cmtx_log_out($text) { //log out
 
 function cmtx_set_time_zone($time_zone) { //set the time zone
 
-	global $cmtx_settings; //globalise variables
-
 	@date_default_timezone_set($time_zone); //set time zone PHP
 	
 	@mysql_query("SET time_zone = '" . date("P") . "'"); //set time zone DB
@@ -690,9 +686,9 @@ function cmtx_set_time_zone($time_zone) { //set the time zone
 
 function cmtx_email($to_email, $to_name, $subject, $body, $from_email, $from_name, $reply_email) { //sends an email
 
-	global $cmtx_settings, $cmtx_path; //globalise variables
+	global $cmtx_path; //globalise variables
 	
-	if ($cmtx_settings->transport_method == "php-basic") {
+	if (cmtx_setting('transport_method') == "php-basic") {
 	
 		//set email headers
 		$headers = 'From: ' . $from_name . ' <' . $from_email . '>' . "\r\n";
@@ -707,26 +703,26 @@ function cmtx_email($to_email, $to_name, $subject, $body, $from_email, $from_nam
 	
 	} else {
 	
-		require_once $cmtx_path . "includes/swift_mailer/lib/swift_required.php"; //load Swift Mailer
+		require_once $cmtx_path . 'includes/swift_mailer/lib/swift_required.php'; //load Swift Mailer
 
 		//set the transport method
-		if ($cmtx_settings->transport_method == "php") {
+		if (cmtx_setting('transport_method') == "php") {
 			$transport = Swift_MailTransport::newInstance();
-		} else if ($cmtx_settings->transport_method == "smtp") {
+		} else if (cmtx_setting('transport_method') == "smtp") {
 			$transport = Swift_SmtpTransport::newInstance();
-			$transport->setHost($cmtx_settings->smtp_host);
-			$transport->setPort($cmtx_settings->smtp_port);
-			if ($cmtx_settings->smtp_encrypt == "ssl") {
+			$transport->setHost(cmtx_setting('smtp_host'));
+			$transport->setPort(cmtx_setting('smtp_port'));
+			if (cmtx_setting('smtp_encrypt') == "ssl") {
 				$transport->setEncryption('ssl');
-			} else if ($cmtx_settings->smtp_encrypt == "tls") {
+			} else if (cmtx_setting('smtp_encrypt') == "tls") {
 				$transport->setEncryption('tls');
 			}
-			if ($cmtx_settings->smtp_auth) {
-				$transport->setUsername($cmtx_settings->smtp_username);
-				$transport->setPassword($cmtx_settings->smtp_password);
+			if (cmtx_setting('smtp_auth')) {
+				$transport->setUsername(cmtx_setting('smtp_username'));
+				$transport->setPassword(cmtx_setting('smtp_password'));
 			}
-		} else if ($cmtx_settings->transport_method == "sendmail") {
-			$transport = Swift_SendmailTransport::newInstance($cmtx_settings->sendmail_path . ' -bs');
+		} else if (cmtx_setting('transport_method') == "sendmail") {
+			$transport = Swift_SendmailTransport::newInstance(cmtx_setting('sendmail_path') . ' -bs');
 		}
 
 		//create the Mailer using the created Transport
@@ -768,4 +764,16 @@ function cmtx_email($to_email, $to_name, $subject, $body, $from_email, $from_nam
 	}
 
 } //end of email function
+
+
+function cmtx_setting($title) { //gets a setting
+
+	global $cmtx_mysql_table_prefix;
+	
+	$result = mysql_query("SELECT `value` FROM `" . $cmtx_mysql_table_prefix . "settings` WHERE `title` = '$title'");
+	$result = mysql_fetch_assoc($result);
+	
+	return $result['value'];
+
+} //end of setting function
 ?>

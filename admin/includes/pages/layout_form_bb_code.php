@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_FORM_BB_CODE ?></h3>
+<h3><?php echo CMTX_TITLE_FORM_BB_CODE; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -76,35 +76,33 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$e
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$enabled_bb_code_image' WHERE `title` = 'enabled_bb_code_image'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$enabled_bb_code_video' WHERE `title` = 'enabled_bb_code_video'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_LAYOUT_FORM_BB_CODE ?>
+<?php echo CMTX_DESC_LAYOUT_FORM_BB_CODE; ?>
 
 <p />
 
-<?php $cmtx_settings = new cmtx_settings; ?>
-
 <?php
-if (!$cmtx_settings->enabled_bb_code_bold 
-&& !$cmtx_settings->enabled_bb_code_italic 
-&& !$cmtx_settings->enabled_bb_code_underline 
-&& !$cmtx_settings->enabled_bb_code_strike 
-&& !$cmtx_settings->enabled_bb_code_superscript 
-&& !$cmtx_settings->enabled_bb_code_subscript 
-&& !$cmtx_settings->enabled_bb_code_code 
-&& !$cmtx_settings->enabled_bb_code_php_code 
-&& !$cmtx_settings->enabled_bb_code_quote 
-&& !$cmtx_settings->enabled_bb_code_line 
-&& !$cmtx_settings->enabled_bb_code_list_bullet 
-&& !$cmtx_settings->enabled_bb_code_list_numeric 
-&& !$cmtx_settings->enabled_bb_code_url 
-&& !$cmtx_settings->enabled_bb_code_email 
-&& !$cmtx_settings->enabled_bb_code_image 
-&& !$cmtx_settings->enabled_bb_code_video) {
+if (!cmtx_setting('enabled_bb_code_bold') 
+&& !cmtx_setting('enabled_bb_code_italic') 
+&& !cmtx_setting('enabled_bb_code_underline') 
+&& !cmtx_setting('enabled_bb_code_strike') 
+&& !cmtx_setting('enabled_bb_code_superscript') 
+&& !cmtx_setting('enabled_bb_code_subscript') 
+&& !cmtx_setting('enabled_bb_code_code') 
+&& !cmtx_setting('enabled_bb_code_php_code') 
+&& !cmtx_setting('enabled_bb_code_quote') 
+&& !cmtx_setting('enabled_bb_code_line') 
+&& !cmtx_setting('enabled_bb_code_list_bullet') 
+&& !cmtx_setting('enabled_bb_code_list_numeric') 
+&& !cmtx_setting('enabled_bb_code_url') 
+&& !cmtx_setting('enabled_bb_code_email') 
+&& !cmtx_setting('enabled_bb_code_image') 
+&& !cmtx_setting('enabled_bb_code_video')) {
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '0' WHERE `title` = 'enabled_bb_code'");
 } else {
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '1' WHERE `title` = 'enabled_bb_code'");
@@ -112,38 +110,38 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '1'
 ?>
 
 <form name="layout_form_bb_code" id="layout_form_bb_code" action="index.php?page=layout_form_bb_code" method="post">
-<label class='layout_form_bb_code'><img src="../images/bb_code/bold.png" title="Bold" alt="Bold"/></label> <?php if ($cmtx_settings->enabled_bb_code_bold) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_bold"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_bold"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/bold.png" title="Bold" alt="Bold"/></label> <?php if (cmtx_setting('enabled_bb_code_bold')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_bold"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_bold"/> <?php } ?>
 <p />
-<label class='layout_form_bb_code'><img src="../images/bb_code/italic.png" title="Italic" alt="Italic"/></label> <?php if ($cmtx_settings->enabled_bb_code_italic) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_italic"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_italic"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/italic.png" title="Italic" alt="Italic"/></label> <?php if (cmtx_setting('enabled_bb_code_italic')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_italic"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_italic"/> <?php } ?>
 <p />
-<label class='layout_form_bb_code'><img src="../images/bb_code/underline.png" title="Underline" alt="Underline"/></label> <?php if ($cmtx_settings->enabled_bb_code_underline) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_underline"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_underline"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/underline.png" title="Underline" alt="Underline"/></label> <?php if (cmtx_setting('enabled_bb_code_underline')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_underline"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_underline"/> <?php } ?>
 <p />
-<label class='layout_form_bb_code'><img src="../images/bb_code/strike.png" title="Strike" alt="Strike"/></label> <?php if ($cmtx_settings->enabled_bb_code_strike) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_strike"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_strike"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/strike.png" title="Strike" alt="Strike"/></label> <?php if (cmtx_setting('enabled_bb_code_strike')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_strike"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_strike"/> <?php } ?>
 <p />
-<label class='layout_form_bb_code'><img src="../images/bb_code/superscript.png" title="Superscript" alt="Superscript"/></label> <?php if ($cmtx_settings->enabled_bb_code_superscript) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_superscript"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_superscript"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/superscript.png" title="Superscript" alt="Superscript"/></label> <?php if (cmtx_setting('enabled_bb_code_superscript')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_superscript"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_superscript"/> <?php } ?>
 <p />
-<label class='layout_form_bb_code'><img src="../images/bb_code/subscript.png" title="Subscript" alt="Subscript"/></label> <?php if ($cmtx_settings->enabled_bb_code_subscript) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_subscript"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_subscript"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/subscript.png" title="Subscript" alt="Subscript"/></label> <?php if (cmtx_setting('enabled_bb_code_subscript')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_subscript"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_subscript"/> <?php } ?>
 <p />
-<label class='layout_form_bb_code'><img src="../images/bb_code/code.png" title="Code" alt="Code"/></label> <?php if ($cmtx_settings->enabled_bb_code_code) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_code"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_code"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/code.png" title="Code" alt="Code"/></label> <?php if (cmtx_setting('enabled_bb_code_code')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_code"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_code"/> <?php } ?>
 <p />
-<label class='layout_form_bb_code'><img src="../images/bb_code/php_code.png" title="PHP Code" alt="PHP Code"/></label> <?php if ($cmtx_settings->enabled_bb_code_php_code) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_php_code"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_php_code"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/php_code.png" title="PHP Code" alt="PHP Code"/></label> <?php if (cmtx_setting('enabled_bb_code_php_code')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_php_code"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_php_code"/> <?php } ?>
 <p />
-<label class='layout_form_bb_code'><img src="../images/bb_code/quote.png" title="Quote" alt="Quote"/></label> <?php if ($cmtx_settings->enabled_bb_code_quote) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_quote"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_quote"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/quote.png" title="Quote" alt="Quote"/></label> <?php if (cmtx_setting('enabled_bb_code_quote')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_quote"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_quote"/> <?php } ?>
 <p />
-<label class='layout_form_bb_code'><img src="../images/bb_code/line.png" title="Line" alt="Line"/></label> <?php if ($cmtx_settings->enabled_bb_code_line) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_line"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_line"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/line.png" title="Line" alt="Line"/></label> <?php if (cmtx_setting('enabled_bb_code_line')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_line"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_line"/> <?php } ?>
 <p />
-<label class='layout_form_bb_code'><img src="../images/bb_code/list_bullet.png" title="Bullet List" alt="Bullet List"/></label> <?php if ($cmtx_settings->enabled_bb_code_list_bullet) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_list_bullet"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_list_bullet"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/list_bullet.png" title="Bullet List" alt="Bullet List"/></label> <?php if (cmtx_setting('enabled_bb_code_list_bullet')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_list_bullet"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_list_bullet"/> <?php } ?>
 <p />
-<label class='layout_form_bb_code'><img src="../images/bb_code/list_numeric.png" title="Numeric List" alt="Numeric List"/></label> <?php if ($cmtx_settings->enabled_bb_code_list_numeric) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_list_numeric"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_list_numeric"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/list_numeric.png" title="Numeric List" alt="Numeric List"/></label> <?php if (cmtx_setting('enabled_bb_code_list_numeric')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_list_numeric"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_list_numeric"/> <?php } ?>
 <p />
-<label class='layout_form_bb_code'><img src="../images/bb_code/link.png" title="Link" alt="Link"/></label> <?php if ($cmtx_settings->enabled_bb_code_url) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_url"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_url"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/link.png" title="Link" alt="Link"/></label> <?php if (cmtx_setting('enabled_bb_code_url')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_url"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_url"/> <?php } ?>
 <p />
-<label class='layout_form_bb_code'><img src="../images/bb_code/email.png" title="Email" alt="Email"/></label> <?php if ($cmtx_settings->enabled_bb_code_email) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_email"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_email"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/email.png" title="Email" alt="Email"/></label> <?php if (cmtx_setting('enabled_bb_code_email')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_email"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_email"/> <?php } ?>
 <p />
-<label class='layout_form_bb_code'><img src="../images/bb_code/image.png" title="Image" alt="Image"/></label> <?php if ($cmtx_settings->enabled_bb_code_image) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_image"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_image"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/image.png" title="Image" alt="Image"/></label> <?php if (cmtx_setting('enabled_bb_code_image')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_image"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_image"/> <?php } ?>
 <p />
-<label class='layout_form_bb_code'><img src="../images/bb_code/video.png" title="Video" alt="Video"/></label> <?php if ($cmtx_settings->enabled_bb_code_video) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_video"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_video"/> <?php } ?>
+<label class='layout_form_bb_code'><img src="../images/bb_code/video.png" title="Video" alt="Video"/></label> <?php if (cmtx_setting('enabled_bb_code_video')) { ?> <input type="checkbox" checked="checked" name="enabled_bb_code_video"/> <?php } else { ?> <input type="checkbox" name="enabled_bb_code_video"/> <?php } ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

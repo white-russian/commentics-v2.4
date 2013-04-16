@@ -22,21 +22,21 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 
 function cmtx_is_form_enabled ($display_message) { //checks whether form is enabled
 
-	global $cmtx_mysql_table_prefix, $cmtx_settings, $cmtx_page_id; //globalise variables
+	global $cmtx_mysql_table_prefix, $cmtx_page_id; //globalise variables
 
-	if (!$cmtx_settings->enabled_form) {
+	if (!cmtx_setting('enabled_form')) {
 		if ($display_message) {
-			?><span class="cmtx_all_forms_disabled_message"><?php echo CMTX_ALL_FORMS_DISABLED ?></span><?php
+			?><span class="cmtx_all_forms_disabled_message"><?php echo CMTX_ALL_FORMS_DISABLED; ?></span><?php
 		}
 		return false;
 	} else if (mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "pages` WHERE `id` = '$cmtx_page_id' AND `is_form_enabled` = '0'"))) {
 		if ($display_message) {
-			?><span class="cmtx_this_form_disabled_message"><?php echo CMTX_THIS_FORM_DISABLED ?></span><?php
+			?><span class="cmtx_this_form_disabled_message"><?php echo CMTX_THIS_FORM_DISABLED; ?></span><?php
 		}
 		return false;
 	}
@@ -77,19 +77,19 @@ function cmtx_load_form_login() { //load login form field values
 
 function cmtx_load_form_defaults() { //load default form field values
 
-	global $cmtx_settings, $cmtx_default_name, $cmtx_default_email, $cmtx_default_website, $cmtx_default_town, $cmtx_default_country, $cmtx_default_rating, $cmtx_default_comment, $cmtx_default_notify, $cmtx_default_remember, $cmtx_default_privacy, $cmtx_default_terms; //globalise variables
+	global $cmtx_default_name, $cmtx_default_email, $cmtx_default_website, $cmtx_default_town, $cmtx_default_country, $cmtx_default_rating, $cmtx_default_comment, $cmtx_default_notify, $cmtx_default_remember, $cmtx_default_privacy, $cmtx_default_terms; //globalise variables
 
-	if (!isset($cmtx_default_name)) { $cmtx_default_name = $cmtx_settings->default_name; }
-	if (!isset($cmtx_default_email)) { $cmtx_default_email = $cmtx_settings->default_email; }
-	if (!isset($cmtx_default_website)) { $cmtx_default_website = $cmtx_settings->default_website; }
-	if (!isset($cmtx_default_town)) { $cmtx_default_town = $cmtx_settings->default_town; }
-	if (!isset($cmtx_default_country)) { $cmtx_default_country = $cmtx_settings->default_country; }
-	if (!isset($cmtx_default_rating)) { $cmtx_default_rating = $cmtx_settings->default_rating; }
-	if (!isset($cmtx_default_comment)) { $cmtx_default_comment = $cmtx_settings->default_comment; }
-	if (!isset($cmtx_default_notify)) { $cmtx_default_notify = $cmtx_settings->default_notify; }
-	if (!isset($cmtx_default_remember)) { $cmtx_default_remember = $cmtx_settings->default_remember; }
-	if (!isset($cmtx_default_privacy)) { $cmtx_default_privacy = $cmtx_settings->default_privacy; }
-	if (!isset($cmtx_default_terms)) { $cmtx_default_terms = $cmtx_settings->default_terms; }
+	if (!isset($cmtx_default_name)) { $cmtx_default_name = cmtx_setting('default_name'); }
+	if (!isset($cmtx_default_email)) { $cmtx_default_email = cmtx_setting('default_email'); }
+	if (!isset($cmtx_default_website)) { $cmtx_default_website = cmtx_setting('default_website'); }
+	if (!isset($cmtx_default_town)) { $cmtx_default_town = cmtx_setting('default_town'); }
+	if (!isset($cmtx_default_country)) { $cmtx_default_country = cmtx_setting('default_country'); }
+	if (!isset($cmtx_default_rating)) { $cmtx_default_rating = cmtx_setting('default_rating'); }
+	if (!isset($cmtx_default_comment)) { $cmtx_default_comment = cmtx_setting('default_comment'); }
+	if (!isset($cmtx_default_notify)) { $cmtx_default_notify = cmtx_setting('default_notify'); }
+	if (!isset($cmtx_default_remember)) { $cmtx_default_remember = cmtx_setting('default_remember'); }
+	if (!isset($cmtx_default_privacy)) { $cmtx_default_privacy = cmtx_setting('default_privacy'); }
+	if (!isset($cmtx_default_terms)) { $cmtx_default_terms = cmtx_setting('default_terms'); }
 	
 } //end of load-form-defaults function
 

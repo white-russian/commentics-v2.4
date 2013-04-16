@@ -22,29 +22,29 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_FORM_QUESTIONS ?></h3>
+<h3><?php echo CMTX_TITLE_FORM_QUESTIONS; ?></h3>
 <hr class="title"/>
 
 <?php
 if (isset($_GET['notice']) && $_GET['notice'] == "dismiss" && cmtx_check_csrf_url_key()) {
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '0' WHERE `title` = 'notice_layout_form_questions'");
 } else {
-if ($cmtx_settings->notice_layout_form_questions) { ?>
+if (cmtx_setting('notice_layout_form_questions')) { ?>
 <div class="info"><?php echo CMTX_MSG_NOTICE_LAYOUT_FORM_QUESTIONS . " <a href='index.php?page=layout_form_questions&notice=dismiss&key=" . $_SESSION['cmtx_csrf_key'] . "'>" . CMTX_LINK_DISMISS . "</a>"; ?></div>
 <div style="clear: left;"></div>
 <?php } } ?>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -59,15 +59,15 @@ $answer = cmtx_sanitize($answer);
 
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "questions` (`question`, `answer`) VALUES ('$question', '$answer');");
 ?>
-<div class="success"><?php echo CMTX_MSG_QUESTION_ADDED ?></div>
+<div class="success"><?php echo CMTX_MSG_QUESTION_ADDED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <?php
 if (isset($_GET['action']) && $_GET['action'] == "delete" && isset($_GET['id']) && ctype_digit($_GET['id']) && cmtx_record_exists($_GET['id'], "questions") && cmtx_check_csrf_url_key()) {
-if ($cmtx_settings->is_demo) {
+if (cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else {
@@ -75,19 +75,17 @@ $id = $_GET['id'];
 $id = cmtx_sanitize($id);
 mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "questions` WHERE `id` = '$id'");
 ?>
-<div class="success"><?php echo CMTX_MSG_QUESTION_DELETED ?></div>
+<div class="success"><?php echo CMTX_MSG_QUESTION_DELETED; ?></div>
 <div style="clear: left;"></div>
 <?php } } ?>
 
 <p />
 
-<?php $cmtx_settings = new cmtx_settings; ?>
-
 <form name="add_question" id="add_question" action="index.php?page=layout_form_questions" method="post">
-<?php echo CMTX_FIELD_LABEL_QUESTION ?> <input type="text" required name="question" size="50" maxlength="250"/>&nbsp;
-<?php echo CMTX_FIELD_LABEL_ANSWER ?> <input type="text" required name="answer" size="15" maxlength="250"/>&nbsp;
+<?php echo CMTX_FIELD_LABEL_QUESTION; ?> <input type="text" required name="question" size="50" maxlength="250"/>&nbsp;
+<?php echo CMTX_FIELD_LABEL_ANSWER; ?> <input type="text" required name="answer" size="15" maxlength="250"/>&nbsp;
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_ADD_QUESTION ?>" value="<?php echo CMTX_BUTTON_ADD_QUESTION ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_ADD_QUESTION; ?>" value="<?php echo CMTX_BUTTON_ADD_QUESTION; ?>"/>
 </form>
 
 <br />
@@ -95,9 +93,9 @@ mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "questions` WHERE `id` 
 <table id="data" class="display" summary="Questions">
     <thead>
     	<tr>
-        	<th><?php echo CMTX_TABLE_QUESTION ?></th>
-            <th><?php echo CMTX_TABLE_ANSWER ?></th>
-            <th><?php echo CMTX_TABLE_ACTION ?></th>
+        	<th><?php echo CMTX_TABLE_QUESTION; ?></th>
+            <th><?php echo CMTX_TABLE_ANSWER; ?></th>
+            <th><?php echo CMTX_TABLE_ACTION; ?></th>
         </tr>
     </thead>
     <tbody>

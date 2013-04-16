@@ -25,23 +25,19 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 define('IN_COMMENTICS', 'true');
 
 //set the path
-$cmtx_path = "";
+$cmtx_path = '';
 
 /* Database Connection */
-require "includes/db/connect.php"; //connect to database
+require 'includes/db/connect.php'; //connect to database
 if (!$cmtx_db_ok) { die(); }
 
-//get settings
-require "includes/classes/settings.php";
-$cmtx_settings = new cmtx_settings;
-
 //load functions file
-require "includes/functions/page.php";
+require 'includes/functions/page.php';
 
 //load language file
-require "includes/language/" . $cmtx_settings->language_frontend . "/rss.php";
+require 'includes/language/' . cmtx_setting('language_frontend') . '/rss.php';
 
-if (!$cmtx_settings->rss_enabled) {
+if (!cmtx_setting('rss_enabled')) {
 	die(CMTX_RSS_FEATURE_DISABLED);
 }
 
@@ -51,13 +47,13 @@ if (!cmtx_is_administrator()) { //if not administrator
 	}
 }
 
-header("Content-Type:text/xml; charset=utf-8");
+header('Content-Type:text/xml; charset=utf-8');
 
 /* Error Reporting */
-cmtx_error_reporting("includes/logs/errors.log");
+cmtx_error_reporting('includes/logs/errors.log');
 
 /* Time Zone */
-cmtx_set_time_zone($cmtx_settings->time_zone);
+cmtx_set_time_zone(cmtx_setting('time_zone'));
 
 if (isset($_GET['id']) && ctype_digit($_GET['id']) && cmtx_strlen($_GET['id']) < 10) { //if page ID is in URL and it validates
 
@@ -78,8 +74,8 @@ $last_build_date = date("r", strtotime($lbd_result["dated"]));
 }
 
 /* Most Recent */
-if ($cmtx_settings->rss_most_recent_enabled) {
-	$query .= " LIMIT " . $cmtx_settings->rss_most_recent_amount;
+if (cmtx_setting('rss_most_recent_enabled')) {
+	$query .= " LIMIT " . cmtx_setting('rss_most_recent_amount');
 }
 
 $result = mysql_query($query);
@@ -88,25 +84,25 @@ echo
 '<?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0">
 	<channel>
-		<title>' . cmtx_encode($cmtx_settings->rss_title) . '</title>
-		<link>' . cmtx_url_encode($cmtx_settings->rss_link) . '</link>
-		<description>' . cmtx_encode($cmtx_settings->rss_description) . '</description>
-		<language>' . $cmtx_settings->rss_language . '</language>';
+		<title>' . cmtx_encode(cmtx_setting('rss_title')) . '</title>
+		<link>' . cmtx_url_encode(cmtx_setting('rss_link')) . '</link>
+		<description>' . cmtx_encode(cmtx_setting('rss_description')) . '</description>
+		<language>' . cmtx_setting('rss_language') . '</language>';
 		if (isset($last_build_date)) {
 		echo '
-		<lastBuildDate>'.$last_build_date.'</lastBuildDate>';
+		<lastBuildDate>' . $last_build_date . '</lastBuildDate>';
 		}
 		echo '
 		<generator>Commentics</generator>
 		<ttl>60</ttl>'; //time to live
-		if ($cmtx_settings->rss_image_enabled) {
+		if (cmtx_setting('rss_image_enabled')) {
 		echo '
 		<image>
-			<url>' . cmtx_url_encode($cmtx_settings->rss_image_url) . '</url>
-			<title>' . cmtx_encode($cmtx_settings->rss_title) . '</title>
-			<link>' . cmtx_url_encode($cmtx_settings->rss_link) . '</link>
-			<width>' . $cmtx_settings->rss_image_width . '</width>
-			<height>' . $cmtx_settings->rss_image_height . '</height>
+			<url>' . cmtx_url_encode(cmtx_setting('rss_image_url')) . '</url>
+			<title>' . cmtx_encode(cmtx_setting('rss_title')) . '</title>
+			<link>' . cmtx_url_encode(cmtx_setting('rss_link')) . '</link>
+			<width>' . cmtx_setting('rss_image_width') . '</width>
+			<height>' . cmtx_setting('rss_image_height') . '</height>
 		</image>';
 		}
 

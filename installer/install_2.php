@@ -48,9 +48,9 @@ define('CMTX_IN_INSTALLER', 'true');
 ?>
 
 <?php
-require "version/version.php";
-require "functions/install.php";
-require "../includes/functions/page.php";
+require 'version/version.php';
+require 'functions/install.php';
+require '../includes/functions/page.php';
 ?>
 
 <?php
@@ -72,7 +72,7 @@ if (isset($_POST['submit'])) {
 ?>
 
 <?php
-require "../includes/db/connect.php"; //connect to database
+require '../includes/db/connect.php'; //connect to database
 if (!$cmtx_db_ok) { die(); }
 ?>
 
@@ -84,21 +84,21 @@ $cookie_key = cmtx_get_random_key(20);
 ?>
 
 <?php
-cmtx_add_signature("croatian");
-cmtx_add_signature("dutch");
-cmtx_add_signature("english");
-cmtx_add_signature("french");
-cmtx_add_signature("german");
-cmtx_add_signature("portuguese");
-cmtx_add_signature("russian");
-cmtx_add_signature("slovenian");
-cmtx_add_signature("spanish");
-cmtx_add_signature("thai");
+cmtx_add_signature('croatian');
+cmtx_add_signature('dutch');
+cmtx_add_signature('english');
+cmtx_add_signature('french');
+cmtx_add_signature('german');
+cmtx_add_signature('portuguese');
+cmtx_add_signature('russian');
+cmtx_add_signature('slovenian');
+cmtx_add_signature('spanish');
+cmtx_add_signature('thai');
 ?>
 
 <?php
-cmtx_write_reserved_data("../includes/words/reserved_emails.txt");
-cmtx_write_reserved_data("../includes/words/reserved_websites.txt");
+cmtx_write_reserved_data('../includes/words/reserved_emails.txt');
+cmtx_write_reserved_data('../includes/words/reserved_websites.txt');
 ?>
 
 <?php
@@ -132,7 +132,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "access`
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 /*****************************************************************************************************************/
@@ -164,14 +164,14 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "admins`
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "admins` (`username`, `password`, `email`, `ip_address`, `cookie_key`, `detect_admin`, `detect_method`, `receive_email_new_ban`, `receive_email_new_comment_approve`, `receive_email_new_comment_okay`, `receive_email_new_flag`, `login_attempts`, `resets`, `last_login`, `restrict_pages`, `allowed_pages`, `is_super`, `is_enabled`, `dated`) VALUES ('$username', '$password', '$email_address', '$ip_address', '$cookie_key', '1', 'both', '1', '1', '1', '1', '0', '0', NOW(), '0', '', '1', '1', NOW());");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 /*****************************************************************************************************************/
@@ -187,7 +187,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "attempt
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 /*****************************************************************************************************************/
@@ -204,7 +204,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "bans` (
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 /*****************************************************************************************************************/
@@ -240,7 +240,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "comment
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 /*****************************************************************************************************************/
@@ -254,7 +254,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "logins`
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 
@@ -262,7 +262,7 @@ mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "logins` VALUES ('1', N
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "logins` VALUES ('2', NOW());");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 /*****************************************************************************************************************/
@@ -280,7 +280,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "pages` 
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 /*****************************************************************************************************************/
@@ -295,7 +295,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "questio
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 
@@ -321,7 +321,7 @@ mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "questions` (`question`
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "questions` (`question`, `answer`) VALUES ('Type the word for the number 9.', 'nine');");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 /*****************************************************************************************************************/
@@ -337,7 +337,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "reporte
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 /*****************************************************************************************************************/
@@ -353,7 +353,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "setting
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 
@@ -679,7 +679,7 @@ mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`,
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('viewers', 'viewers_refresh_time', '60');"); //seconds
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 /*****************************************************************************************************************/
@@ -698,7 +698,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "subscri
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 /*****************************************************************************************************************/
@@ -714,14 +714,14 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "version
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "version` (`version`, `type`, `dated`) VALUES ('$latest_version', 'Installation', NOW());");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 /*****************************************************************************************************************/
@@ -739,7 +739,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "viewers
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 /*****************************************************************************************************************/
@@ -755,7 +755,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "voters`
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 /*****************************************************************************************************************/

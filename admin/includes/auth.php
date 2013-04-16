@@ -22,7 +22,7 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 if (!isset($_SESSION['cmtx_username']) && !isset($_SESSION['cmtx_password']) && isset($_POST['username']) && isset($_POST['password'])) {
 
@@ -60,7 +60,7 @@ if (!isset($_SESSION['cmtx_username']) && !isset($_SESSION['cmtx_password']) && 
 		
 	} else { //Wrong
 		
-		if (!$cmtx_settings->is_demo) {
+		if (!cmtx_setting('is_demo')) {
 			cmtx_add_attempt();
 		}
 		
@@ -110,18 +110,18 @@ if (!isset($_SESSION['cmtx_username']) && !isset($_SESSION['cmtx_password']) && 
 	<div style="position:absolute; height:auto; width:auto; margin-top:-70px; margin-left:-120px; top:50%; left:50%;">
 	<form name="reset" id="reset" action="index.php?page=reset" method="post">
 	<fieldset style="width:auto;">
-	<legend><?php echo CMTX_RESET_FIELDSET ?></legend>
-	<?php echo CMTX_RESET_EMAIL ?> <input type="email" required autofocus name="email"/>
+	<legend><?php echo CMTX_RESET_FIELDSET; ?></legend>
+	<?php echo CMTX_RESET_EMAIL; ?> <input type="email" required autofocus name="email"/>
 	<br />
 	<div style="margin-bottom:5px;"></div>
-	<input class='button' type='submit' title='<?php echo CMTX_RESET_BUTTON ?>' value='<?php echo CMTX_RESET_BUTTON ?>'/>
+	<input class='button' type='submit' title='<?php echo CMTX_RESET_BUTTON; ?>' value='<?php echo CMTX_RESET_BUTTON; ?>'/>
 	</fieldset>
 	</form>
 	<div style="text-align:center; margin-top:10px;">
 	<?php
 	if (isset($_POST['email'])) {
 	
-		if ($cmtx_settings->is_demo) {
+		if (cmtx_setting('is_demo')) {
 		
 			echo "<span class='negative'>" . CMTX_RESET_DEMO . "</span><p />";
 		
@@ -147,10 +147,10 @@ if (!isset($_SESSION['cmtx_username']) && !isset($_SESSION['cmtx_password']) && 
 				
 					$password = cmtx_get_random_key(10);
 					
-					$reset_password_email_file = "../includes/emails/" . $cmtx_settings->language_frontend . "/admin/reset_password.txt"; //build path to reset password email file
+					$reset_password_email_file = "../includes/emails/" . cmtx_setting('language_frontend') . "/admin/reset_password.txt"; //build path to reset password email file
 					$body = file_get_contents($reset_password_email_file); //get the file's contents
 					
-					$admin_link = cmtx_url_encode_spaces($cmtx_settings->url_to_comments_folder . $cmtx_settings->admin_folder) . "/"; //build admin panel link
+					$admin_link = cmtx_url_encode_spaces(cmtx_setting('url_to_comments_folder') . cmtx_setting('admin_folder')) . "/"; //build admin panel link
 					
 					//convert email variables with actual variables
 					$body = str_ireplace("[username]", $username, $body);
@@ -158,7 +158,7 @@ if (!isset($_SESSION['cmtx_username']) && !isset($_SESSION['cmtx_password']) && 
 					$body = str_ireplace("[admin link]", $admin_link, $body);
 					
 					//send email
-					cmtx_email($email, null, $cmtx_settings->admin_reset_password_subject, $body, $cmtx_settings->admin_reset_password_from_email, $cmtx_settings->admin_reset_password_from_name, $cmtx_settings->admin_reset_password_reply_to);
+					cmtx_email($email, null, cmtx_setting('admin_reset_password_subject'), $body, cmtx_setting('admin_reset_password_from_email'), cmtx_setting('admin_reset_password_from_name'), cmtx_setting('admin_reset_password_reply_to'));
 					
 					$password = md5($password);
 					$password = cmtx_sanitize($password);
@@ -181,7 +181,7 @@ if (!isset($_SESSION['cmtx_username']) && !isset($_SESSION['cmtx_password']) && 
 	?>
 	</div>
 	<div style="text-align:center; margin-top:10px;">
-	<span class="login_link"><a href="index.php" title="<?php echo CMTX_RESET_LOGIN ?>"><?php echo CMTX_RESET_LOGIN ?></a></span>
+	<span class="login_link"><a href="index.php" title="<?php echo CMTX_RESET_LOGIN; ?>"><?php echo CMTX_RESET_LOGIN; ?></a></span>
 	</div>
 	</div>
 	</body>
@@ -205,13 +205,13 @@ if (!isset($_SESSION['cmtx_username']) && !isset($_SESSION['cmtx_password']) && 
 	<div style="position:absolute; height:auto; width:auto; margin-top:-70px; margin-left:-120px; top:50%; left:50%;">
 	<form name="login" id="login" action="index.php?page=dashboard" method="post">
 	<fieldset style="width:auto;">
-	<legend><?php echo CMTX_LOGIN_FIELDSET ?></legend>
-	<label style='float:left; width:70px;'><?php echo CMTX_LOGIN_USERNAME ?></label> <input type="text" required autofocus name="username" style="width:150px"/>
+	<legend><?php echo CMTX_LOGIN_FIELDSET; ?></legend>
+	<label style='float:left; width:70px;'><?php echo CMTX_LOGIN_USERNAME; ?></label> <input type="text" required autofocus name="username" style="width:150px"/>
 	<br />
-	<label style='float:left; width:70px;'><?php echo CMTX_LOGIN_PASSWORD ?></label> <input type="password" required name="password" style="width:150px"/>
+	<label style='float:left; width:70px;'><?php echo CMTX_LOGIN_PASSWORD; ?></label> <input type="password" required name="password" style="width:150px"/>
 	<br />
 	<div style="margin-bottom:5px;"></div>
-	<input class='button' type='submit' title='<?php echo CMTX_LOGIN_BUTTON ?>' value='<?php echo CMTX_LOGIN_BUTTON ?>'/>
+	<input class='button' type='submit' title='<?php echo CMTX_LOGIN_BUTTON; ?>' value='<?php echo CMTX_LOGIN_BUTTON; ?>'/>
 	</fieldset>
 	</form>
 	<div style="text-align:center; margin-top:10px;">
@@ -234,7 +234,7 @@ if (!isset($_SESSION['cmtx_username']) && !isset($_SESSION['cmtx_password']) && 
 	?>
 	</div>
 	<div style="text-align:center; margin-top:10px;">
-	<span class="reset_link"><a href="index.php?page=reset" title="<?php echo CMTX_LOGIN_RESET ?>"><?php echo CMTX_LOGIN_RESET ?></a></span>
+	<span class="reset_link"><a href="index.php?page=reset" title="<?php echo CMTX_LOGIN_RESET; ?>"><?php echo CMTX_LOGIN_RESET; ?></a></span>
 	</div>
 	</div>
 	</body>

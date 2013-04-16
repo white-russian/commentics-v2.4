@@ -22,31 +22,31 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_EDIT_PAGE ?></h3>
+<h3><?php echo CMTX_TITLE_EDIT_PAGE; ?></h3>
 <hr class="title"/>
 
 <?php
 if (isset($_GET['id']) && ctype_digit($_GET['id']) && cmtx_record_exists($_GET['id'], "pages")) {
 } else { ?>
-<div class="error"><?php echo CMTX_MSG_RECORD_MISSING ?></div>
+<div class="error"><?php echo CMTX_MSG_RECORD_MISSING; ?></div>
 <div style="clear: left;"></div>
-<a href="index.php?page=manage_pages"><?php echo CMTX_LINK_BACK ?></a>
+<a href="index.php?page=manage_pages"><?php echo CMTX_LINK_BACK; ?></a>
 <?php
 die();
 }
 ?>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -69,7 +69,7 @@ $form_enabled_san = cmtx_sanitize($form_enabled);
 if (!empty($page_id) && mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "pages` WHERE `page_id` = '$page_id_san' AND `id` != '$id_san'"))) {
 
 ?>
-<div class="error"><?php echo CMTX_MSG_PAGE_EXISTS ?></div>
+<div class="error"><?php echo CMTX_MSG_PAGE_EXISTS; ?></div>
 <div style="clear: left;"></div>
 <?php
 
@@ -81,7 +81,7 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "pages` SET `url` = '$url_sa
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "pages` SET `is_form_enabled` = '$form_enabled_san' WHERE `id` = '$id_san'");
 
 ?>
-<div class="success"><?php echo CMTX_MSG_PAGE_UPDATED ?></div>
+<div class="success"><?php echo CMTX_MSG_PAGE_UPDATED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
@@ -102,37 +102,35 @@ $date = date("jS M Y", strtotime($page_result["dated"]));
 
 <p />
 
-<?php $cmtx_settings = new cmtx_settings; ?>
-
 <form name="edit_page" id="edit_page" action="index.php?page=edit_page&id=<?php echo $id ?>" method="post">
-<label class='edit_page'><?php echo CMTX_FIELD_LABEL_PAGE_ID ?></label> <input type="text" required name="page_id" size="30" maxlength="250" value="<?php echo $page_id; ?>"/>
+<label class='edit_page'><?php echo CMTX_FIELD_LABEL_PAGE_ID; ?></label> <input type="text" required name="page_id" size="30" maxlength="250" value="<?php echo $page_id; ?>"/>
 <p />
-<label class='edit_page'><?php echo CMTX_FIELD_LABEL_REFERENCE ?></label> <input type="text" required name="reference" size="30" maxlength="250" value="<?php echo $reference; ?>"/>
+<label class='edit_page'><?php echo CMTX_FIELD_LABEL_REFERENCE; ?></label> <input type="text" required name="reference" size="30" maxlength="250" value="<?php echo $reference; ?>"/>
 <p />
-<label class='edit_page'><?php echo CMTX_FIELD_LABEL_URL ?></label> <input type="text" required name="url" size="45" maxlength="250" value="<?php echo $url; ?>"/>
+<label class='edit_page'><?php echo CMTX_FIELD_LABEL_URL; ?></label> <input type="text" required name="url" size="45" maxlength="250" value="<?php echo $url; ?>"/>
 <p />
-<label class='edit_page'><?php echo CMTX_FIELD_LABEL_FORM_ENABLED ?></label>
+<label class='edit_page'><?php echo CMTX_FIELD_LABEL_FORM_ENABLED; ?></label>
 <?php if ($form_enabled) { ?>
 <select name='form_enabled'>
-<option value='0'><?php echo CMTX_FIELD_VALUE_NO ?></option>
-<option value='1' selected='selected'><?php echo CMTX_FIELD_VALUE_YES ?></option>
+<option value='0'><?php echo CMTX_FIELD_VALUE_NO; ?></option>
+<option value='1' selected='selected'><?php echo CMTX_FIELD_VALUE_YES; ?></option>
 </select>
 <?php } else { ?>
 <select name='form_enabled'>
-<option value='0' selected='selected'><?php echo CMTX_FIELD_VALUE_NO ?></option>
-<option value='1'><?php echo CMTX_FIELD_VALUE_YES ?></option>
+<option value='0' selected='selected'><?php echo CMTX_FIELD_VALUE_NO; ?></option>
+<option value='1'><?php echo CMTX_FIELD_VALUE_YES; ?></option>
 </select>
 <?php } ?>
 <p />
-<label class='edit_page'><?php echo CMTX_FIELD_LABEL_TIME ?></label> <input readonly="readonly" type="text" class="readonly" name="time" size="5" maxlength="250" value="<?php echo $time; ?>"/>
+<label class='edit_page'><?php echo CMTX_FIELD_LABEL_TIME; ?></label> <input readonly="readonly" type="text" class="readonly" name="time" size="5" maxlength="250" value="<?php echo $time; ?>"/>
 <p />
-<label class='edit_page'><?php echo CMTX_FIELD_LABEL_DATE ?></label> <input readonly="readonly" type="text" class="readonly" name="date" size="12" maxlength="250" value="<?php echo $date; ?>"/>
+<label class='edit_page'><?php echo CMTX_FIELD_LABEL_DATE; ?></label> <input readonly="readonly" type="text" class="readonly" name="date" size="12" maxlength="250" value="<?php echo $date; ?>"/>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
-<input type="button" class="button" name="delete" onclick="if(delete_page_confirmation()){window.location='index.php?page=manage_pages&action=delete&id=<?php echo $id . "&key=" . $_SESSION['cmtx_csrf_key']?>'};" title="<?php echo CMTX_BUTTON_DELETE ?>" value="<?php echo CMTX_BUTTON_DELETE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
+<input type="button" class="button" name="delete" onclick="if(delete_page_confirmation()){window.location='index.php?page=manage_pages&action=delete&id=<?php echo $id . "&key=" . $_SESSION['cmtx_csrf_key']?>'};" title="<?php echo CMTX_BUTTON_DELETE; ?>" value="<?php echo CMTX_BUTTON_DELETE; ?>"/>
 </form>
 
 <p />
 
-<a href="index.php?page=manage_pages"><?php echo CMTX_LINK_BACK ?></a>
+<a href="index.php?page=manage_pages"><?php echo CMTX_LINK_BACK; ?></a>

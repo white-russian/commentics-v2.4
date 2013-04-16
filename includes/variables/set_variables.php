@@ -22,7 +22,7 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 //Integration
 
@@ -114,7 +114,6 @@ global $cmtx_approve_reason;
 
 global $cmtx_is_admin;
 global $cmtx_reply_id;
-global $cmtx_settings;
 
 global $cmtx_loop_counter;
 global $cmtx_comment_counter;

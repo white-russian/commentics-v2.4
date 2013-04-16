@@ -22,7 +22,7 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 mysql_query("UPDATE `".$cmtx_mysql_table_prefix."settings` SET title = 'show_page_number' WHERE title = 'show_comments_info'");
 
@@ -109,7 +109,7 @@ mysql_query("UPDATE `".$cmtx_mysql_table_prefix."settings` SET value = '60' WHER
 mysql_query("UPDATE `".$cmtx_mysql_table_prefix."settings` SET value = '5' WHERE title = 'flood_control_maximum_amount'");
 
 if (mysql_errno()) {
-echo mysql_errno() . ": " . mysql_error() . "<br />";
+echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
 }
 

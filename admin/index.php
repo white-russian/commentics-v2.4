@@ -28,35 +28,32 @@ define('CMTX_IN_ADMIN', 'true');
 session_start();
 ob_start();
 
-$cmtx_path = "../"; //set the path
+$cmtx_path = '../'; //set the path
 
-require "../includes/db/connect.php"; //connect to database
+require '../includes/db/connect.php'; //connect to database
 if (!$cmtx_db_ok) { die(); }
 
-require "../includes/classes/settings.php"; //get settings
-$cmtx_settings = new cmtx_settings;
+require 'includes/functions/general.php'; //load functions
 
-require "includes/language/" . $cmtx_settings->language_backend . "/login.php"; //load language file for login
-require "includes/language/" . $cmtx_settings->language_backend . "/dashboard.php"; //load language file for dashboard
-require "includes/language/" . $cmtx_settings->language_backend . "/menu.php"; //load language file for menu
-require "includes/language/" . $cmtx_settings->language_backend . "/titles.php"; //load language file for titles
-require "includes/language/" . $cmtx_settings->language_backend . "/descriptions.php"; //load language file for descriptions
-require "includes/language/" . $cmtx_settings->language_backend . "/links.php"; //load language file for links
-require "includes/language/" . $cmtx_settings->language_backend . "/messages.php"; //load language file for messages
-require "includes/language/" . $cmtx_settings->language_backend . "/fields.php"; //load language file for fields
-require "includes/language/" . $cmtx_settings->language_backend . "/notes.php"; //load language file for notes
-require "includes/language/" . $cmtx_settings->language_backend . "/hints.php"; //load language file for hints
-require "includes/language/" . $cmtx_settings->language_backend . "/tables.php"; //load language file for tables
-require "includes/language/" . $cmtx_settings->language_backend . "/buttons.php"; //load language file for buttons
-require "includes/language/" . $cmtx_settings->language_backend . "/prompts.php"; //load language file for prompts
+require 'includes/language/' . cmtx_setting('language_backend') . '/login.php'; //load language file for login
+require 'includes/language/' . cmtx_setting('language_backend') . '/dashboard.php'; //load language file for dashboard
+require 'includes/language/' . cmtx_setting('language_backend') . '/menu.php'; //load language file for menu
+require 'includes/language/' . cmtx_setting('language_backend') . '/titles.php'; //load language file for titles
+require 'includes/language/' . cmtx_setting('language_backend') . '/descriptions.php'; //load language file for descriptions
+require 'includes/language/' . cmtx_setting('language_backend') . '/links.php'; //load language file for links
+require 'includes/language/' . cmtx_setting('language_backend') . '/messages.php'; //load language file for messages
+require 'includes/language/' . cmtx_setting('language_backend') . '/fields.php'; //load language file for fields
+require 'includes/language/' . cmtx_setting('language_backend') . '/notes.php'; //load language file for notes
+require 'includes/language/' . cmtx_setting('language_backend') . '/hints.php'; //load language file for hints
+require 'includes/language/' . cmtx_setting('language_backend') . '/tables.php'; //load language file for tables
+require 'includes/language/' . cmtx_setting('language_backend') . '/buttons.php'; //load language file for buttons
+require 'includes/language/' . cmtx_setting('language_backend') . '/prompts.php'; //load language file for prompts
 
-require "includes/functions/general.php"; //load functions
+cmtx_error_reporting('includes/logs/errors.log'); //error reporting
 
-cmtx_error_reporting("includes/logs/errors.log"); //error reporting
+cmtx_set_time_zone(cmtx_setting('time_zone')); //set the time zone
 
-cmtx_set_time_zone($cmtx_settings->time_zone); //set the time zone
-
-require_once "includes/auth.php"; //authorise login
+require_once 'includes/auth.php'; //authorise login
 
 if (isset($_GET['page']) && $_GET['page'] == "log_out") {
 	cmtx_log_out("logout");
@@ -99,7 +96,7 @@ $(document).ready(function() {
 $('#data').dataTable( {
 "aaSorting": [ ]
 <?php switch ($_GET['page']) { ?>
-<?php case "manage_comments":?>,"aoColumns": [null,null,null,null,<?php if ($cmtx_settings->enabled_notify) { echo "null,"; } if ($cmtx_settings->show_flag) { echo "null,null,"; } ?>null,{ "bSearchable": false }] <?php break; ?>
+<?php case "manage_comments":?>,"aoColumns": [null,null,null,null,<?php if (cmtx_setting('enabled_notify')) { echo "null,"; } if (cmtx_setting('show_flag')) { echo "null,null,"; } ?>null,{ "bSearchable": false }] <?php break; ?>
 <?php case "manage_pages": ?>,"aoColumns": [null,null,null,null,null,{ "bSearchable": false }] <?php break; ?>
 <?php case "manage_administrators": ?>,"aoColumns": [null,null,null,null,null,null,null,{ "bSearchable": false }] <?php break; ?>
 <?php case "manage_bans": ?>,"aoColumns": [null,null,null,{ "bSearchable": false }] <?php break; ?>
@@ -113,7 +110,7 @@ $('#data').dataTable( {
 </script>
 <?php } ?>
 
-<?php if ($_GET['page'] == "edit_comment" && $cmtx_settings->enabled_wysiwyg) { ?>
+<?php if ($_GET['page'] == "edit_comment" && cmtx_setting('enabled_wysiwyg')) { ?>
 <script type="text/javascript" src="tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript">
 // <![CDATA[
@@ -255,8 +252,8 @@ if (id == "php") {
 // ]]>
 </script>
 
-<?php if ($_GET['page'] == "report_viewers" && $cmtx_settings->viewers_refresh_enabled) { ?>
-<meta http-equiv="refresh" content="<?php echo $cmtx_settings->viewers_refresh_time; ?>">
+<?php if ($_GET['page'] == "report_viewers" && cmtx_setting('viewers_refresh_enabled')) { ?>
+<meta http-equiv="refresh" content="<?php echo cmtx_setting('viewers_refresh_time'); ?>">
 <?php } ?>
 
 </head>
@@ -265,7 +262,7 @@ if (id == "php") {
 <a href="index.php?page=dashboard"><img src="images/commentics/logo.png" class="logo" title="Commentics" alt="Commentics"/></a>
 
 <?php
-require "menu/menu.php";
+require 'menu/menu.php';
 
 echo "<p />";
 
@@ -300,7 +297,7 @@ To delete the installer folder, load your FTP software (e.g. FileZilla) and dele
 <p />
 Then refresh this page.
 <p />
-<input type="button" class="button" name="refresh" title="<?php echo CMTX_BUTTON_REFRESH ?>" value="<?php echo CMTX_BUTTON_REFRESH ?>" onclick="window.location.reload()"/>
+<input type="button" class="button" name="refresh" title="<?php echo CMTX_BUTTON_REFRESH; ?>" value="<?php echo CMTX_BUTTON_REFRESH; ?>" onclick="window.location.reload()"/>
 <?php
 die();
 }
@@ -313,7 +310,7 @@ if (isset($_POST['check'])) {
 cmtx_check_csrf_form_key();
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '0' WHERE `title` = 'check_db_file'");
 }
-if ($cmtx_settings->check_db_file && !isset($_POST['check']) && is_writable("../includes/db/details.php")) {
+if (cmtx_setting('check_db_file') && !isset($_POST['check']) && is_writable("../includes/db/details.php")) {
 ?>
 <span class='negative'>The database file is writable.</span>
 <p />
@@ -325,8 +322,8 @@ If that fails then you may have to disable the check.
 <p />
 <form name="db_file" id="db_file" action="index.php?page=dashboard" method="post">
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="chmod" title="<?php echo CMTX_BUTTON_CHMOD ?>" value="<?php echo CMTX_BUTTON_CHMOD ?>"/>
-<input type="submit" class="button" name="check" title="<?php echo CMTX_BUTTON_CHECK ?>" value="<?php echo CMTX_BUTTON_CHECK ?>"/>
+<input type="submit" class="button" name="chmod" title="<?php echo CMTX_BUTTON_CHMOD; ?>" value="<?php echo CMTX_BUTTON_CHMOD; ?>"/>
+<input type="submit" class="button" name="check" title="<?php echo CMTX_BUTTON_CHECK; ?>" value="<?php echo CMTX_BUTTON_CHECK; ?>"/>
 </form>
 <?php
 die();
@@ -341,9 +338,8 @@ if (isset($_POST['check_url'])) {
 		mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '0' WHERE `title` = 'check_comments_url'");
 	}
 }
-$cmtx_settings = new cmtx_settings;
-if ($cmtx_settings->check_comments_url && !isset($_SESSION['cmtx_comments_url'])) {
-$setting = cmtx_url_decode(str_ireplace("www.", "", parse_url($cmtx_settings->url_to_comments_folder, PHP_URL_HOST)) . parse_url($cmtx_settings->url_to_comments_folder, PHP_URL_PATH));
+if (cmtx_setting('check_comments_url') && !isset($_SESSION['cmtx_comments_url'])) {
+$setting = cmtx_url_decode(str_ireplace("www.", "", parse_url(cmtx_setting('url_to_comments_folder'), PHP_URL_HOST)) . parse_url(cmtx_setting('url_to_comments_folder'), PHP_URL_PATH));
 $the_url = cmtx_url_decode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 if (stripos($the_url, $setting) === false) {
 ?>
@@ -351,7 +347,7 @@ if (stripos($the_url, $setting) === false) {
 <p />
 The URL to the /comments/ folder in Settings -> System appears to be incorrect:
 <p />
-<?php echo $cmtx_settings->url_to_comments_folder; ?>
+<?php echo cmtx_setting('url_to_comments_folder'); ?>
 <p />
 <form name="comments_url" id="comments_url" action="index.php?page=dashboard" method="post">
 <input type="radio" checked="checked" name="comments_url_action" value="1"> I will fix this now.
@@ -359,18 +355,18 @@ The URL to the /comments/ folder in Settings -> System appears to be incorrect:
 <input type="radio" name="comments_url_action" value="2"> It's actually correct.
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="check_url" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="check_url" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>
 <?php
 die();
 }
 }
 
-if ($cmtx_settings->check_comments_url && !isset($_SESSION['cmtx_comments_url'])) {
-	if ($cmtx_settings->check_referrer) {
+if (cmtx_setting('check_comments_url') && !isset($_SESSION['cmtx_comments_url'])) {
+	if (cmtx_setting('check_referrer')) {
 		if (isset($_SERVER['HTTP_REFERER'])) {
 			$referrer = cmtx_url_decode($_SERVER['HTTP_REFERER']);
-			$host = cmtx_url_decode(str_ireplace("www.", "", parse_url($cmtx_settings->url_to_comments_folder, PHP_URL_HOST)));
+			$host = cmtx_url_decode(str_ireplace("www.", "", parse_url(cmtx_setting('url_to_comments_folder'), PHP_URL_HOST)));
 			if (!empty($host) && !preg_match('/\.[0-9]+\./i', $host)) {
 				if (!stristr($referrer, $host)) {
 					?>
@@ -408,11 +404,11 @@ if (file_exists("includes/pages/" . basename($_GET['page']) . ".php")) {
 	$ip_address = cmtx_get_ip_address();
 	mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "access` (`admin_id`, `username`, `ip_address`, `page`, `dated`) VALUES ('$admin_id', '$username', '$ip_address','$page', NOW());");
 
-	require "includes/pages/" . basename($_GET['page']) . ".php";
+	require 'includes/pages/' . basename($_GET['page']) . '.php';
 	
 } else {
 
-	require "includes/pages/dashboard.php";
+	require 'includes/pages/dashboard.php';
 
 }
 

@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_COMMENTS_GRAVATAR ?></h3>
+<h3><?php echo CMTX_TITLE_COMMENTS_GRAVATAR; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -59,22 +59,20 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$g
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$gravatar_size_san' WHERE `title` = 'gravatar_size'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$gravatar_rating_san' WHERE `title` = 'gravatar_rating'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_LAYOUT_COMMENTS_GRAVATAR ?>
+<?php echo CMTX_DESC_LAYOUT_COMMENTS_GRAVATAR; ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="layout_comments_gravatar" id="layout_comments_gravatar" action="index.php?page=layout_comments_gravatar" method="post">
-<label class='layout_comments_gravatar'><?php echo CMTX_FIELD_LABEL_ENABLED ?></label> <?php if ($cmtx_settings->show_gravatar) { ?> <input type="checkbox" checked="checked" name="show_gravatar"/> <?php } else { ?> <input type="checkbox" name="show_gravatar"/> <?php } ?>
+<label class='layout_comments_gravatar'><?php echo CMTX_FIELD_LABEL_ENABLED; ?></label> <?php if (cmtx_setting('show_gravatar')) { ?> <input type="checkbox" checked="checked" name="show_gravatar"/> <?php } else { ?> <input type="checkbox" name="show_gravatar"/> <?php } ?>
 <p />
-<label class='layout_comments_gravatar'><?php echo CMTX_FIELD_LABEL_GRAVATAR_DEFAULT ?></label>
+<label class='layout_comments_gravatar'><?php echo CMTX_FIELD_LABEL_GRAVATAR_DEFAULT; ?></label>
 <?php
 $gravatar_defaults = "<select name='gravatar_defaults' id='gravatar_defaults' onchange=\"show_hide('gravatar');\">
 <option value='default'>default</option>
@@ -85,20 +83,20 @@ $gravatar_defaults = "<select name='gravatar_defaults' id='gravatar_defaults' on
 <option value='wavatar'>wavatar</option>
 <option value='retro'>retro</option>
 </select>";
-$gravatar_defaults = str_ireplace("'".$cmtx_settings->gravatar_default."'", "'".$cmtx_settings->gravatar_default."' selected='selected'", $gravatar_defaults);
+$gravatar_defaults = str_ireplace("'".cmtx_setting('gravatar_default')."'", "'".cmtx_setting('gravatar_default')."' selected='selected'", $gravatar_defaults);
 echo $gravatar_defaults;
 ?>
 <?php cmtx_generate_hint(CMTX_HINT_GRAVATAR_DEFAULT); ?>
-<div id="gravatar_custom" <?php if ($cmtx_settings->gravatar_default != "custom") { echo "style='display:none;'"; } ?> >
+<div id="gravatar_custom" <?php if (cmtx_setting('gravatar_default') != "custom") { echo "style='display:none;'"; } ?> >
 <p />
-<label class='layout_comments_gravatar'><?php echo CMTX_FIELD_LABEL_GRAVATAR_CUSTOM ?></label> <input type="text" required name="gravatar_custom" size="35" maxlength="250" value="<?php echo $cmtx_settings->gravatar_custom; ?>"/>
+<label class='layout_comments_gravatar'><?php echo CMTX_FIELD_LABEL_GRAVATAR_CUSTOM; ?></label> <input type="text" required name="gravatar_custom" size="35" maxlength="250" value="<?php echo cmtx_setting('gravatar_custom'); ?>"/>
 <?php cmtx_generate_hint(CMTX_HINT_GRAVATAR_CUSTOM); ?>
 </div>
 <p />
-<label class='layout_comments_gravatar'><?php echo CMTX_FIELD_LABEL_GRAVATAR_SIZE ?></label> <input type="text" required name="gravatar_size" size="1" maxlength="250" value="<?php echo $cmtx_settings->gravatar_size; ?>"/>
-<span class='note'><?php echo CMTX_NOTE_PIXELS ?></span>
+<label class='layout_comments_gravatar'><?php echo CMTX_FIELD_LABEL_GRAVATAR_SIZE; ?></label> <input type="text" required name="gravatar_size" size="1" maxlength="250" value="<?php echo cmtx_setting('gravatar_size'); ?>"/>
+<span class='note'><?php echo CMTX_NOTE_PIXELS; ?></span>
 <p />
-<label class='layout_comments_gravatar'><?php echo CMTX_FIELD_LABEL_GRAVATAR_RATING ?></label>
+<label class='layout_comments_gravatar'><?php echo CMTX_FIELD_LABEL_GRAVATAR_RATING; ?></label>
 <?php
 $gravatar_ratings = "<select name='gravatar_ratings'>
 <option value='g'>g</option>
@@ -106,11 +104,11 @@ $gravatar_ratings = "<select name='gravatar_ratings'>
 <option value='r'>r</option>
 <option value='x'>x</option>
 </select>";
-$gravatar_ratings = str_ireplace("'".$cmtx_settings->gravatar_rating."'", "'".$cmtx_settings->gravatar_rating."' selected='selected'", $gravatar_ratings);
+$gravatar_ratings = str_ireplace("'".cmtx_setting('gravatar_rating')."'", "'".cmtx_setting('gravatar_rating')."' selected='selected'", $gravatar_ratings);
 echo $gravatar_ratings;
 ?>
 <?php cmtx_generate_hint(CMTX_HINT_GRAVATAR_RATING); ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

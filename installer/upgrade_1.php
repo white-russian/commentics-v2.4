@@ -48,12 +48,12 @@ define('CMTX_IN_INSTALLER', 'true');
 ?>
 
 <?php
-require "version/version.php";
-require "functions/upgrade.php";
+require 'version/version.php';
+require 'functions/upgrade.php';
 ?>
 
 <?php
-require "../includes/db/connect.php"; //connect to database
+require '../includes/db/connect.php'; //connect to database
 if (!$cmtx_db_ok) { die(); }
 ?>
 

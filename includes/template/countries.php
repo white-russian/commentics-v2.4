@@ -22,7 +22,7 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 $cmtx_countries = '<select name="cmtx_country" class="cmtx_country_field" title="' . cmtx_define(CMTX_TITLE_COUNTRY) . '">
 <option value="">' . cmtx_define(CMTX_TOP_COUNTRY)  . '</option>

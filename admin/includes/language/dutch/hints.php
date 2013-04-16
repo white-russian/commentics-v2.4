@@ -22,7 +22,7 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 define('CMTX_HINT_SEND', 'Stuur een e-mailbericht van deze opmerking aan de abonnees.');
 define('CMTX_HINT_VERIFY', 'Verify this comment to reset and stop any further reports. This will unflag a flagged comment.');

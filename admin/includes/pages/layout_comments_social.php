@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_COMMENTS_SOCIAL ?></h3>
+<h3><?php echo CMTX_TITLE_COMMENTS_SOCIAL; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -69,13 +69,11 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$show_social_linkedin' WHERE `title` = 'show_social_linkedin'");
 
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="layout_comments_social" id="layout_comments_social" action="index.php?page=layout_comments_social" method="post">
 
@@ -83,10 +81,10 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 
 <p />
 
-<label class='layout_comments_social'><?php echo CMTX_FIELD_LABEL_ENABLED ?></label> <?php if ($cmtx_settings->show_social) { ?> <input type="checkbox" checked="checked" name="show_social"/> <?php } else { ?> <input type="checkbox" name="show_social"/> <?php } ?>
+<label class='layout_comments_social'><?php echo CMTX_FIELD_LABEL_ENABLED; ?></label> <?php if (cmtx_setting('show_social')) { ?> <input type="checkbox" checked="checked" name="show_social"/> <?php } else { ?> <input type="checkbox" name="show_social"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_SOCIAL_ENABLED); ?>
 <p />
-<label class='layout_comments_social'><?php echo CMTX_FIELD_LABEL_NEW_WINDOW ?></label> <?php if ($cmtx_settings->social_new_window) { ?> <input type="checkbox" checked="checked" name="social_new_window"/> <?php } else { ?> <input type="checkbox" name="social_new_window"/> <?php } ?>
+<label class='layout_comments_social'><?php echo CMTX_FIELD_LABEL_NEW_WINDOW; ?></label> <?php if (cmtx_setting('social_new_window')) { ?> <input type="checkbox" checked="checked" name="social_new_window"/> <?php } else { ?> <input type="checkbox" name="social_new_window"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_NEW_WIN); ?>
 
 <p />
@@ -95,26 +93,26 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 
 <p />
 
-<label class='layout_comments_social'><img src="../images/social/facebook.png" title="Facebook" alt="Facebook"/></label> <?php if ($cmtx_settings->show_social_facebook) { ?> <input type="checkbox" checked="checked" name="show_social_facebook"/> <?php } else { ?> <input type="checkbox" name="show_social_facebook"/> <?php } ?>
+<label class='layout_comments_social'><img src="../images/social/facebook.png" title="Facebook" alt="Facebook"/></label> <?php if (cmtx_setting('show_social_facebook')) { ?> <input type="checkbox" checked="checked" name="show_social_facebook"/> <?php } else { ?> <input type="checkbox" name="show_social_facebook"/> <?php } ?>
 <p />
-<label class='layout_comments_social'><img src="../images/social/delicious.png" title="del.icio.us" alt="del.icio.us"/></label> <?php if ($cmtx_settings->show_social_delicious) { ?> <input type="checkbox" checked="checked" name="show_social_delicious"/> <?php } else { ?> <input type="checkbox" name="show_social_delicious"/> <?php } ?>
+<label class='layout_comments_social'><img src="../images/social/delicious.png" title="del.icio.us" alt="del.icio.us"/></label> <?php if (cmtx_setting('show_social_delicious')) { ?> <input type="checkbox" checked="checked" name="show_social_delicious"/> <?php } else { ?> <input type="checkbox" name="show_social_delicious"/> <?php } ?>
 <p />
-<label class='layout_comments_social'><img src="../images/social/stumbleupon.png" title="StumbleUpon" alt="StumbleUpon"/></label> <?php if ($cmtx_settings->show_social_stumbleupon) { ?> <input type="checkbox" checked="checked" name="show_social_stumbleupon"/> <?php } else { ?> <input type="checkbox" name="show_social_stumbleupon"/> <?php } ?>
+<label class='layout_comments_social'><img src="../images/social/stumbleupon.png" title="StumbleUpon" alt="StumbleUpon"/></label> <?php if (cmtx_setting('show_social_stumbleupon')) { ?> <input type="checkbox" checked="checked" name="show_social_stumbleupon"/> <?php } else { ?> <input type="checkbox" name="show_social_stumbleupon"/> <?php } ?>
 <p />
-<label class='layout_comments_social'><img src="../images/social/digg.png" title="Digg" alt="Digg"/></label> <?php if ($cmtx_settings->show_social_digg) { ?> <input type="checkbox" checked="checked" name="show_social_digg"/> <?php } else { ?> <input type="checkbox" name="show_social_digg"/> <?php } ?>
+<label class='layout_comments_social'><img src="../images/social/digg.png" title="Digg" alt="Digg"/></label> <?php if (cmtx_setting('show_social_digg')) { ?> <input type="checkbox" checked="checked" name="show_social_digg"/> <?php } else { ?> <input type="checkbox" name="show_social_digg"/> <?php } ?>
 <p />
-<label class='layout_comments_social'><img src="../images/social/technorati.png" title="Technorati" alt="Technorati"/></label> <?php if ($cmtx_settings->show_social_technorati) { ?> <input type="checkbox" checked="checked" name="show_social_technorati"/> <?php } else { ?> <input type="checkbox" name="show_social_technorati"/> <?php } ?>
+<label class='layout_comments_social'><img src="../images/social/technorati.png" title="Technorati" alt="Technorati"/></label> <?php if (cmtx_setting('show_social_technorati')) { ?> <input type="checkbox" checked="checked" name="show_social_technorati"/> <?php } else { ?> <input type="checkbox" name="show_social_technorati"/> <?php } ?>
 <p />
-<label class='layout_comments_social'><img src="../images/social/google.png" title="Google+" alt="Google+"/></label> <?php if ($cmtx_settings->show_social_google) { ?> <input type="checkbox" checked="checked" name="show_social_google"/> <?php } else { ?> <input type="checkbox" name="show_social_google"/> <?php } ?>
+<label class='layout_comments_social'><img src="../images/social/google.png" title="Google+" alt="Google+"/></label> <?php if (cmtx_setting('show_social_google')) { ?> <input type="checkbox" checked="checked" name="show_social_google"/> <?php } else { ?> <input type="checkbox" name="show_social_google"/> <?php } ?>
 <p />
-<label class='layout_comments_social'><img src="../images/social/reddit.png" title="Reddit" alt="Reddit"/></label> <?php if ($cmtx_settings->show_social_reddit) { ?> <input type="checkbox" checked="checked" name="show_social_reddit"/> <?php } else { ?> <input type="checkbox" name="show_social_reddit"/> <?php } ?>
+<label class='layout_comments_social'><img src="../images/social/reddit.png" title="Reddit" alt="Reddit"/></label> <?php if (cmtx_setting('show_social_reddit')) { ?> <input type="checkbox" checked="checked" name="show_social_reddit"/> <?php } else { ?> <input type="checkbox" name="show_social_reddit"/> <?php } ?>
 <p />
-<label class='layout_comments_social'><img src="../images/social/myspace.png" title="MySpace" alt="MySpace"/></label> <?php if ($cmtx_settings->show_social_myspace) { ?> <input type="checkbox" checked="checked" name="show_social_myspace"/> <?php } else { ?> <input type="checkbox" name="show_social_myspace"/> <?php } ?>
+<label class='layout_comments_social'><img src="../images/social/myspace.png" title="MySpace" alt="MySpace"/></label> <?php if (cmtx_setting('show_social_myspace')) { ?> <input type="checkbox" checked="checked" name="show_social_myspace"/> <?php } else { ?> <input type="checkbox" name="show_social_myspace"/> <?php } ?>
 <p />
-<label class='layout_comments_social'><img src="../images/social/twitter.png" title="Twitter" alt="Twitter"/></label> <?php if ($cmtx_settings->show_social_twitter) { ?> <input type="checkbox" checked="checked" name="show_social_twitter"/> <?php } else { ?> <input type="checkbox" name="show_social_twitter"/> <?php } ?>
+<label class='layout_comments_social'><img src="../images/social/twitter.png" title="Twitter" alt="Twitter"/></label> <?php if (cmtx_setting('show_social_twitter')) { ?> <input type="checkbox" checked="checked" name="show_social_twitter"/> <?php } else { ?> <input type="checkbox" name="show_social_twitter"/> <?php } ?>
 <p />
-<label class='layout_comments_social'><img src="../images/social/linkedin.png" title="LinkedIn" alt="LinkedIn"/></label> <?php if ($cmtx_settings->show_social_linkedin) { ?> <input type="checkbox" checked="checked" name="show_social_linkedin"/> <?php } else { ?> <input type="checkbox" name="show_social_linkedin"/> <?php } ?>
+<label class='layout_comments_social'><img src="../images/social/linkedin.png" title="LinkedIn" alt="LinkedIn"/></label> <?php if (cmtx_setting('show_social_linkedin')) { ?> <input type="checkbox" checked="checked" name="show_social_linkedin"/> <?php } else { ?> <input type="checkbox" name="show_social_linkedin"/> <?php } ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

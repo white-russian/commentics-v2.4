@@ -22,20 +22,20 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_EMAIL_METHOD ?></h3>
+<h3><?php echo CMTX_TITLE_EMAIL_METHOD; ?></h3>
 <hr class="title"/>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -68,60 +68,58 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$smtp_password_san' WHERE `title` = 'smtp_password'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$sendmail_path_san' WHERE `title` = 'sendmail_path'");
 ?>
-<div class="success"><?php echo CMTX_MSG_SAVED ?></div>
+<div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <p />
 
-<?php echo CMTX_DESC_SETTINGS_EMAIL_METHOD ?>
+<?php echo CMTX_DESC_SETTINGS_EMAIL_METHOD; ?>
 
 <p />
-
-<?php $cmtx_settings = new cmtx_settings; ?>
 
 <form name="settings_email_method" id="settings_email_method" action="index.php?page=settings_email_method" method="post">
-<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_METHOD ?></label> <?php if ($cmtx_settings->transport_method == "php-basic") { ?> <input type="radio" checked="checked" name="transport_method" value="php-basic" onclick="show_hide('php');"/> <?php } else { ?> <input type="radio" name="transport_method" value="php-basic" onclick="show_hide('php');"/> <?php } ?> PHP (Basic)
+<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_METHOD; ?></label> <?php if (cmtx_setting('transport_method') == "php-basic") { ?> <input type="radio" checked="checked" name="transport_method" value="php-basic" onclick="show_hide('php');"/> <?php } else { ?> <input type="radio" name="transport_method" value="php-basic" onclick="show_hide('php');"/> <?php } ?> PHP (Basic)
 <br />
-<label class='settings_email_method'>&nbsp;</label> <?php if ($cmtx_settings->transport_method == "php") { ?> <input type="radio" checked="checked" name="transport_method" value="php" onclick="show_hide('php');"/> <?php } else { ?> <input type="radio" name="transport_method" value="php" onclick="show_hide('php');"/> <?php } ?> PHP (Swift) &nbsp;<span class="note"><?php echo CMTX_NOTE_TYPICAL;?></span>
+<label class='settings_email_method'>&nbsp;</label> <?php if (cmtx_setting('transport_method') == "php") { ?> <input type="radio" checked="checked" name="transport_method" value="php" onclick="show_hide('php');"/> <?php } else { ?> <input type="radio" name="transport_method" value="php" onclick="show_hide('php');"/> <?php } ?> PHP (Swift) &nbsp;<span class="note"><?php echo CMTX_NOTE_TYPICAL;?></span>
 <br />
-<label class='settings_email_method'>&nbsp;</label> <?php if ($cmtx_settings->transport_method == "smtp") { ?> <input type="radio" checked="checked" name="transport_method" value="smtp" onclick="show_hide('smtp');"/> <?php } else { ?> <input type="radio" name="transport_method" value="smtp" onclick="show_hide('smtp');"/> <?php } ?> SMTP (Swift)
+<label class='settings_email_method'>&nbsp;</label> <?php if (cmtx_setting('transport_method') == "smtp") { ?> <input type="radio" checked="checked" name="transport_method" value="smtp" onclick="show_hide('smtp');"/> <?php } else { ?> <input type="radio" name="transport_method" value="smtp" onclick="show_hide('smtp');"/> <?php } ?> SMTP (Swift)
 <br />
-<label class='settings_email_method'>&nbsp;</label> <?php if ($cmtx_settings->transport_method == "sendmail") { ?> <input type="radio" checked="checked" name="transport_method" value="sendmail" onclick="show_hide('sendmail');"/> <?php } else { ?> <input type="radio" name="transport_method" value="sendmail" onclick="show_hide('sendmail');"/> <?php } ?> Sendmail (Swift)
-<div id="smtp" <?php if ($cmtx_settings->transport_method != "smtp") { echo "style='display:none;'"; } ?> >
+<label class='settings_email_method'>&nbsp;</label> <?php if (cmtx_setting('transport_method') == "sendmail") { ?> <input type="radio" checked="checked" name="transport_method" value="sendmail" onclick="show_hide('sendmail');"/> <?php } else { ?> <input type="radio" name="transport_method" value="sendmail" onclick="show_hide('sendmail');"/> <?php } ?> Sendmail (Swift)
+<div id="smtp" <?php if (cmtx_setting('transport_method') != "smtp") { echo "style='display:none;'"; } ?> >
 <p />
-<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_SMTP_HOST ?></label> <input type="text" required name="smtp_host" size="20" maxlength="250" value="<?php echo $cmtx_settings->smtp_host; ?>"/>
+<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_SMTP_HOST; ?></label> <input type="text" required name="smtp_host" size="20" maxlength="250" value="<?php echo cmtx_setting('smtp_host'); ?>"/>
 <p />
-<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_SMTP_PORT ?></label> <input type="text" required name="smtp_port" size="1" maxlength="250" value="<?php echo $cmtx_settings->smtp_port; ?>"/>
+<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_SMTP_PORT; ?></label> <input type="text" required name="smtp_port" size="1" maxlength="250" value="<?php echo cmtx_setting('smtp_port'); ?>"/>
 <p />
-<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_SMTP_ENCRYPT ?></label>
+<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_SMTP_ENCRYPT; ?></label>
 <select name='smtp_encrypt'>
-<?php if ($cmtx_settings->smtp_encrypt == "off") { ?>
-<option value='off' selected='selected'><?php echo CMTX_FIELD_VALUE_OFF ?></option>
-<option value='ssl'><?php echo CMTX_FIELD_VALUE_SSL ?></option>
-<option value='tls'><?php echo CMTX_FIELD_VALUE_TLS ?></option>
-<?php } else if ($cmtx_settings->smtp_encrypt == "ssl") { ?>
-<option value='off'><?php echo CMTX_FIELD_VALUE_OFF ?></option>
-<option value='ssl' selected='selected'><?php echo CMTX_FIELD_VALUE_SSL ?></option>
-<option value='tls'><?php echo CMTX_FIELD_VALUE_TLS ?></option>
+<?php if (cmtx_setting('smtp_encrypt') == "off") { ?>
+<option value='off' selected='selected'><?php echo CMTX_FIELD_VALUE_OFF; ?></option>
+<option value='ssl'><?php echo CMTX_FIELD_VALUE_SSL; ?></option>
+<option value='tls'><?php echo CMTX_FIELD_VALUE_TLS; ?></option>
+<?php } else if (cmtx_setting('smtp_encrypt') == "ssl") { ?>
+<option value='off'><?php echo CMTX_FIELD_VALUE_OFF; ?></option>
+<option value='ssl' selected='selected'><?php echo CMTX_FIELD_VALUE_SSL; ?></option>
+<option value='tls'><?php echo CMTX_FIELD_VALUE_TLS; ?></option>
 <?php } else { ?>
-<option value='off'><?php echo CMTX_FIELD_VALUE_OFF ?></option>
-<option value='ssl'><?php echo CMTX_FIELD_VALUE_SSL ?></option>
-<option value='tls' selected='selected'><?php echo CMTX_FIELD_VALUE_TLS ?></option>
+<option value='off'><?php echo CMTX_FIELD_VALUE_OFF; ?></option>
+<option value='ssl'><?php echo CMTX_FIELD_VALUE_SSL; ?></option>
+<option value='tls' selected='selected'><?php echo CMTX_FIELD_VALUE_TLS; ?></option>
 <?php } ?>
 </select>
 <p />
-<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_SMTP_AUTH ?></label> <?php if ($cmtx_settings->smtp_auth) { ?> <input type="checkbox" checked="checked" name="smtp_auth"/> <?php } else { ?> <input type="checkbox" name="smtp_auth"/> <?php } ?>
+<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_SMTP_AUTH; ?></label> <?php if (cmtx_setting('smtp_auth')) { ?> <input type="checkbox" checked="checked" name="smtp_auth"/> <?php } else { ?> <input type="checkbox" name="smtp_auth"/> <?php } ?>
 <p />
-<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_USER ?></label> <input type="text" name="smtp_username" size="20" maxlength="250" value="<?php echo $cmtx_settings->smtp_username; ?>"/>
+<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_USER; ?></label> <input type="text" name="smtp_username" size="20" maxlength="250" value="<?php echo cmtx_setting('smtp_username'); ?>"/>
 <p />
-<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_PASS ?></label> <input type="password" name="smtp_password" size="20" maxlength="250" value="<?php echo $cmtx_settings->smtp_password; ?>"/>
+<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_PASS; ?></label> <input type="password" name="smtp_password" size="20" maxlength="250" value="<?php echo cmtx_setting('smtp_password'); ?>"/>
 </div>
-<div id="sendmail" <?php if ($cmtx_settings->transport_method != "sendmail") { echo "style='display:none;'"; } ?> >
+<div id="sendmail" <?php if (cmtx_setting('transport_method') != "sendmail") { echo "style='display:none;'"; } ?> >
 <p />
-<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_SENDMAIL_PATH ?></label> <input type="text" required name="sendmail_path" size="20" maxlength="250" value="<?php echo $cmtx_settings->sendmail_path; ?>"/>
+<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_SENDMAIL_PATH; ?></label> <input type="text" required name="sendmail_path" size="20" maxlength="250" value="<?php echo cmtx_setting('sendmail_path'); ?>"/>
 </div>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE ?>" value="<?php echo CMTX_BUTTON_UPDATE ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>

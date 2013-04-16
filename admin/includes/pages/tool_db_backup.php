@@ -22,14 +22,14 @@ along with Commentics. If not, see <http://www.gnu.org/licenses/>.
 Text to help preserve UTF-8 file encoding: 汉语漢語.
 */
 
-if (!defined("IN_COMMENTICS")) { die("Access Denied."); }
+if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
 <div class='page_help_block'>
-<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP ?></a>
+<a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
 
-<h3><?php echo CMTX_TITLE_DATABASE_BACKUP ?></h3>
+<h3><?php echo CMTX_TITLE_DATABASE_BACKUP; ?></h3>
 <hr class="title"/>
 
 <?php
@@ -37,9 +37,9 @@ if (function_exists('system') && is_callable('system')) {
 ?>
 
 <?php
-if (isset($_POST['submit']) && $cmtx_settings->is_demo) {
+if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else if (isset($_POST['submit'])) {
@@ -48,19 +48,19 @@ cmtx_check_csrf_form_key();
 
 $backup_file = "backups/" . cmtx_get_random_key(20)  . ".sql";
 if (!empty($cmtx_mysql_port)) {	$cmtx_mysql_host .= ":" . $cmtx_mysql_port; }
-$command = $cmtx_settings->mysqldump_path . "mysqldump --host=$cmtx_mysql_host --user=$cmtx_mysql_username --password=$cmtx_mysql_password $cmtx_mysql_database > $backup_file";
+$command = cmtx_setting('mysqldump_path') . "mysqldump --host=$cmtx_mysql_host --user=$cmtx_mysql_username --password=$cmtx_mysql_password $cmtx_mysql_database > $backup_file";
 system($command);
 
 ?>
-<div class="success"><?php echo CMTX_MSG_BACKUP_CREATED ?></div>
+<div class="success"><?php echo CMTX_MSG_BACKUP_CREATED; ?></div>
 <div style="clear: left;"></div>
 <?php } ?>
 
 <?php
 if ( isset($_GET['action']) && $_GET['action'] == "delete" && isset($_GET['id']) && cmtx_check_csrf_url_key()) {
-if ($cmtx_settings->is_demo) {
+if (cmtx_setting('is_demo')) {
 ?>
-<div class="warning"><?php echo CMTX_MSG_DEMO ?></div>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else {
@@ -68,24 +68,22 @@ $id = basename($_GET['id']);
 if (ctype_alnum($id) && strlen($id) == 20 && file_exists("backups/" . $id . ".sql")) {
 unlink("backups/" . $id . ".sql");
 ?>
-<div class="success"><?php echo CMTX_MSG_BACKUP_DELETED ?></div>
+<div class="success"><?php echo CMTX_MSG_BACKUP_DELETED; ?></div>
 <div style="clear: left;"></div>
 <?php } else { ?>
-<div class="error"><?php echo CMTX_MSG_BACKUP_NOT_FOUND ?></div>
+<div class="error"><?php echo CMTX_MSG_BACKUP_NOT_FOUND; ?></div>
 <div style="clear: left;"></div>
 <?php } } } ?>
 
 <p />
 
-<?php echo CMTX_DESC_TOOL_DATABASE_BACKUP ?>
+<?php echo CMTX_DESC_TOOL_DATABASE_BACKUP; ?>
 
 <p />
 
-<?php $cmtx_settings = new cmtx_settings; ?>
-
 <form name="db_backup" id="db_backup" action="index.php?page=tool_db_backup" method="post">
 <?php cmtx_set_csrf_form_key(); ?>
-<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_BACKUP ?>" value="<?php echo CMTX_BUTTON_BACKUP ?>"/>
+<input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_BACKUP; ?>" value="<?php echo CMTX_BUTTON_BACKUP; ?>"/>
 </form>
 
 <br />
@@ -93,10 +91,10 @@ unlink("backups/" . $id . ".sql");
 <table id="data" class="display" summary="Backups">
     <thead>
     	<tr>
-        	<th><?php echo CMTX_TABLE_FILENAME ?></th>
-            <th><?php echo CMTX_TABLE_SIZE ?></th>
-            <th><?php echo CMTX_TABLE_DATE_TIME ?></th>
-            <th><?php echo CMTX_TABLE_ACTION ?></th>
+        	<th><?php echo CMTX_TABLE_FILENAME; ?></th>
+            <th><?php echo CMTX_TABLE_SIZE; ?></th>
+            <th><?php echo CMTX_TABLE_DATE_TIME; ?></th>
+            <th><?php echo CMTX_TABLE_ACTION; ?></th>
         </tr>
     </thead>
     <tbody>

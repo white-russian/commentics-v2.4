@@ -25,7 +25,7 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 session_start();
 
 if (isset($_POST['submit'])) {
-	header("Location: " . "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/menu.php");
+	header('Location: ' . 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/menu.php');
 	die();
 }
 ?>
@@ -55,7 +55,7 @@ define('CMTX_IN_INSTALLER', 'true');
 ?>
 
 <?php
-require "../includes/db/connect.php"; //connect to database
+require '../includes/db/connect.php'; //connect to database
 if (!$cmtx_db_ok) { die(); }
 ?>
 
@@ -93,7 +93,7 @@ echo "<br />";
 
 echo "<label class='system_item'>A PHP session is available</label>";
 if (session_id() != '') {
-	if (isset($_SESSION['cmtx_session_test']) && $_SESSION['cmtx_session_test'] == "1") {
+	if (isset($_SESSION['cmtx_session_test']) && $_SESSION['cmtx_session_test'] == '1') {
 		echo "<span class='system_green'>Pass</span>";
 	} else {
 		echo "<span class='system_red'>Fail</span>";
