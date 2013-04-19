@@ -97,7 +97,7 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$d
 <label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_COUNTRY; ?></label>
 <?php
 require '../includes/template/countries.php';
-if (!empty(cmtx_setting('default_country'))) {
+if (cmtx_setting('default_country')) {
 	$cmtx_countries = str_ireplace('"'.cmtx_setting('default_country').'"', '"'.cmtx_setting('default_country').'" selected="selected"', $cmtx_countries);
 }
 echo $cmtx_countries;
@@ -106,7 +106,7 @@ echo $cmtx_countries;
 <label class='layout_form_defaults'><?php echo CMTX_FIELD_LABEL_RATING; ?></label>
 <?php
 require '../includes/template/ratings.php';
-if (!empty(cmtx_setting('default_rating'))) {
+if (cmtx_setting('default_rating')) {
 	$cmtx_ratings = str_ireplace('"'.cmtx_setting('default_rating').'"', '"'.cmtx_setting('default_rating').'" selected="selected"', $cmtx_ratings);
 }
 echo $cmtx_ratings;

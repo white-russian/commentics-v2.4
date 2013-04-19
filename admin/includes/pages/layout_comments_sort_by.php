@@ -80,22 +80,22 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 
 <p />
 
-<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_1 ?></label> <?php if (cmtx_setting('show_sort_by_')1) { ?> <input type="checkbox" checked="checked" name="show_sort_by_1"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_1"/> <?php } ?>
+<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_1 ?></label> <?php if (cmtx_setting('show_sort_by_1')) { ?> <input type="checkbox" checked="checked" name="show_sort_by_1"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_1"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_SORT_BY_1); ?>
 <p />
-<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_2 ?></label> <?php if (cmtx_setting('show_sort_by_')2) { ?> <input type="checkbox" checked="checked" name="show_sort_by_2"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_2"/> <?php } ?>
+<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_2 ?></label> <?php if (cmtx_setting('show_sort_by_2')) { ?> <input type="checkbox" checked="checked" name="show_sort_by_2"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_2"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_SORT_BY_2); ?>
 <p />
-<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_3 ?></label> <?php if (cmtx_setting('show_sort_by_')3) { ?> <input type="checkbox" checked="checked" name="show_sort_by_3"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_3"/> <?php } ?>
+<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_3 ?></label> <?php if (cmtx_setting('show_sort_by_3')) { ?> <input type="checkbox" checked="checked" name="show_sort_by_3"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_3"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_SORT_BY_3); ?>
 <p />
-<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_4 ?></label> <?php if (cmtx_setting('show_sort_by_')4) { ?> <input type="checkbox" checked="checked" name="show_sort_by_4"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_4"/> <?php } ?>
+<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_4 ?></label> <?php if (cmtx_setting('show_sort_by_4')) { ?> <input type="checkbox" checked="checked" name="show_sort_by_4"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_4"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_SORT_BY_4); ?>
 <p />
-<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_5 ?></label> <?php if (cmtx_setting('show_sort_by_')5) { ?> <input type="checkbox" checked="checked" name="show_sort_by_5"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_5"/> <?php } ?>
+<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_5 ?></label> <?php if (cmtx_setting('show_sort_by_5')) { ?> <input type="checkbox" checked="checked" name="show_sort_by_5"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_5"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_SORT_BY_5); ?>
 <p />
-<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_6 ?></label> <?php if (cmtx_setting('show_sort_by_')6) { ?> <input type="checkbox" checked="checked" name="show_sort_by_6"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_6"/> <?php } ?>
+<label class='layout_comments_sort_by'><?php echo CMTX_FIELD_LABEL_SORT_BY_6 ?></label> <?php if (cmtx_setting('show_sort_by_6')) { ?> <input type="checkbox" checked="checked" name="show_sort_by_6"/> <?php } else { ?> <input type="checkbox" name="show_sort_by_6"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_SORT_BY_6); ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
