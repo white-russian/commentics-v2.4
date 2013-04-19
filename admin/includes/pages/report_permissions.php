@@ -134,6 +134,15 @@ echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/
 $permissions_correct = false;
 }
 
+echo "<br />";
+
+if (is_writable("../includes/emails/" . cmtx_setting('language_frontend') . "/admin/method_test.txt")) {
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/method_test.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
+} else {
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/method_test.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
+$permissions_correct = false;
+}
+
 echo "<p />";
 
 echo "<b><u>Words</u></b>";

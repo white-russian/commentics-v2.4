@@ -71,6 +71,7 @@ define('CMTX_TITLE_EMAIL_NEW_FLAG', 'Email: Nieuwe rapportage');
 define('CMTX_TITLE_EMAIL_NEW_COMMENT_APPROVE', 'Email: Nieuw bericht goedkeuren');
 define('CMTX_TITLE_EMAIL_NEW_COMMENT_OKAY', 'Email: Nieuw bericht Okay');
 define('CMTX_TITLE_EMAIL_RESET_PASSWORD', 'Email: Reset wachtwoord');
+define('CMTX_TITLE_EMAIL_METHOD_TEST', 'Email: Method Test');
 define('CMTX_TITLE_ERROR_REPORTING', 'Error Rapportage');
 define('CMTX_TITLE_ERROR_LOG_FRONTEND', 'Error Log: Frontend');
 define('CMTX_TITLE_ERROR_LOG_BACKEND', 'Error Log: Backend');

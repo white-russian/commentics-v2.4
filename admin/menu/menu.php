@@ -134,6 +134,7 @@ ddlevelsmenu.setup("ddtopmenubar", "topbar");
 				<?php if (!cmtx_restrict_page("settings_email_editor_admin_new_comment_approve")) { ?> <li><a href="index.php?page=settings_email_editor_admin_new_comment_approve"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_EDITOR_ADMIN_NEW_COMMENT_APPROVE; ?></a></li> <?php } ?>
 				<?php if (!cmtx_restrict_page("settings_email_editor_admin_new_comment_okay")) { ?> <li><a href="index.php?page=settings_email_editor_admin_new_comment_okay"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_EDITOR_ADMIN_NEW_COMMENT_OKAY; ?></a></li> <?php } ?>
 				<?php if (!cmtx_restrict_page("settings_email_editor_admin_reset_password")) { ?> <li><a href="index.php?page=settings_email_editor_admin_reset_password"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_EDITOR_ADMIN_RESET_PASSWORD; ?></a></li> <?php } ?>
+				<?php if (!cmtx_restrict_page("settings_email_editor_admin_method_test")) { ?> <li><a href="index.php?page=settings_email_editor_admin_method_test"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_EDITOR_ADMIN_METHOD_TEST; ?></a></li> <?php } ?>
 				</ul>
 			</li>
 			<?php } ?>

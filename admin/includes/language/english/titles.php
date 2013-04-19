@@ -71,6 +71,7 @@ define('CMTX_TITLE_EMAIL_NEW_FLAG', 'Email: New Flag');
 define('CMTX_TITLE_EMAIL_NEW_COMMENT_APPROVE', 'Email: New Comment Approve');
 define('CMTX_TITLE_EMAIL_NEW_COMMENT_OKAY', 'Email: New Comment Okay');
 define('CMTX_TITLE_EMAIL_RESET_PASSWORD', 'Email: Reset Password');
+define('CMTX_TITLE_EMAIL_METHOD_TEST', 'Email: Method Test');
 define('CMTX_TITLE_ERROR_REPORTING', 'Error Reporting');
 define('CMTX_TITLE_ERROR_LOG_FRONTEND', 'Error Log: Frontend');
 define('CMTX_TITLE_ERROR_LOG_BACKEND', 'Error Log: Backend');

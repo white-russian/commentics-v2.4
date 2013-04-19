@@ -206,6 +206,7 @@ echo cmtx_page_checkbox("settings", $id, "0") . "<span class='menu_checkbox'>Set
 				echo cmtx_page_checkbox("settings_email_editor_admin_new_comment_approve", $id, "80") . "New Comment Approve" . "<br />";
 				echo cmtx_page_checkbox("settings_email_editor_admin_new_comment_okay", $id, "80") . "New Comment Okay" . "<br />";
 				echo cmtx_page_checkbox("settings_email_editor_admin_reset_password", $id, "80") . "Reset Password" . "<br />";
+				echo cmtx_page_checkbox("settings_email_editor_admin_method_test", $id, "80") . "Method Test" . "<br />";
 	echo cmtx_page_checkbox("settings_error_reporting", $id, "20") . "Error Reporting" . "<br />";
 		echo cmtx_page_checkbox("error_log_frontend", $id, "40") . "Frontend" . "<br />";
 		echo cmtx_page_checkbox("error_log_backend", $id, "40") . "Backend" . "<br />";

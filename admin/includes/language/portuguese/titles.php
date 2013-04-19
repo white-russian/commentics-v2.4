@@ -71,6 +71,7 @@ define('CMTX_TITLE_EMAIL_NEW_FLAG', 'Email: Nova Marca');
 define('CMTX_TITLE_EMAIL_NEW_COMMENT_APPROVE', 'Email: Novo Comentário a Aprovar');
 define('CMTX_TITLE_EMAIL_NEW_COMMENT_OKAY', 'Email: Novo Comentário OK');
 define('CMTX_TITLE_EMAIL_RESET_PASSWORD', 'Email: Resetar Senha');
+define('CMTX_TITLE_EMAIL_METHOD_TEST', 'Email: Method Test');
 define('CMTX_TITLE_ERROR_REPORTING', 'Relatando Erro');
 define('CMTX_TITLE_ERROR_LOG_FRONTEND', 'Log Erro: Interface do Usuário');
 define('CMTX_TITLE_ERROR_LOG_BACKEND', 'Log Erro: Interface Administrativa');

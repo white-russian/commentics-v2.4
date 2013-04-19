@@ -58,6 +58,7 @@ define('CMTX_DESC_SETTINGS_EMAIL_NEW_FLAG', 'Dit is de email die de admin ontvan
 define('CMTX_DESC_SETTINGS_EMAIL_NEW_COMMENT_APPROVE', 'Dit is de email voor de admin als er een bericht moet worden gekeurd.');
 define('CMTX_DESC_SETTINGS_EMAIL_NEW_COMMENT_OKAY', 'Dit is de email voor de admin als er een goedgekeurd bericht is geplaatst.');
 define('CMTX_DESC_SETTINGS_EMAIL_RESET_PASSWORD', 'Dit is de email voor de admin bij een wachtwoord reset.');
+define('CMTX_DESC_SETTINGS_EMAIL_METHOD_TEST', 'This is the email sent from the \'Settings -> Email -> Method\' page.');
 define('CMTX_DESC_SETTINGS_ERROR_REPORTING', 'Schakel deze instelling in om mogelijke fouten te produceren. Handig voor debugging.');
 define('CMTX_DESC_SETTINGS_FLAGGING', 'Deze instellingen horen bij de rapportage optie.');
 define('CMTX_DESC_SETTINGS_FLOODING', 'Deze instellingen horen bij het toevoegen van meerdere berichten in korte tijd.');

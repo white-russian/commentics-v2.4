@@ -58,6 +58,7 @@ define('CMTX_DESC_SETTINGS_EMAIL_NEW_FLAG', 'Este é o email que o administrador
 define('CMTX_DESC_SETTINGS_EMAIL_NEW_COMMENT_APPROVE', 'Este é o email que o administrador recebe quando um novo comentário necessita de aprovação.');
 define('CMTX_DESC_SETTINGS_EMAIL_NEW_COMMENT_OKAY', 'Este é o email que o administrador recebe quando um novo comentário está ok.');
 define('CMTX_DESC_SETTINGS_EMAIL_RESET_PASSWORD', 'Este é o email que o administrador recebe quando está resetando a senha.');
+define('CMTX_DESC_SETTINGS_EMAIL_METHOD_TEST', 'This is the email sent from the \'Settings -> Email -> Method\' page.');
 define('CMTX_DESC_SETTINGS_ERROR_REPORTING', 'Habilite estas configurações para produzir qualquer erro possível. Útil para depurar.');
 define('CMTX_DESC_SETTINGS_FLAGGING', 'Estas configurações são relativas a funcionalidade de marcar / relatar.');
 define('CMTX_DESC_SETTINGS_FLOODING', 'Estas configurações são relativas ao envio de múltiplos comentários em um período curto de tempo.');

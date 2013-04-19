@@ -225,6 +225,7 @@ define('CMTX_FIELD_LABEL_CHECK_TIME', 'Check Time:');
 define('CMTX_FIELD_LABEL_SPLIT_SCREEN', 'Split Screen:');
 define('CMTX_FIELD_LABEL_PERMALINK', 'Permalink:');
 define('CMTX_FIELD_LABEL_VERIFY', 'Verify:');
+define('CMTX_FIELD_LABEL_TEST', 'Test:');
 
 /* Values */
 define('CMTX_FIELD_VALUE_COMMENTS', 'Comentários');
@@ -300,5 +301,6 @@ define('CMTX_FIELD_VALUE_DELAY_PAGES', 'Não crie a página até que as mensagen
 define('CMTX_FIELD_VALUE_LOWER_PAGES', 'Convert the URL of the page to lowercase.');
 define('CMTX_FIELD_VALUE_ENABLED_FORM', 'Disable the form of all pages to stop posts.');
 define('CMTX_FIELD_VALUE_VERIFIED', 'This comment is verified');
+define('CMTX_FIELD_VALUE_METHOD_TEST', 'Send me an email.');
 
 ?>

@@ -181,6 +181,10 @@ label.settings_email_editor_admin_reset_password {
 width: 80px;
 }
 
+label.settings_email_editor_admin_method_test {
+width: 80px;
+}
+
 label.settings_error_reporting {
 width: 70px;
 }

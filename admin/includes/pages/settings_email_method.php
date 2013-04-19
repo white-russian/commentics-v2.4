@@ -67,6 +67,16 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$smtp_username_san' WHERE `title` = 'smtp_username'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$smtp_password_san' WHERE `title` = 'smtp_password'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$sendmail_path_san' WHERE `title` = 'sendmail_path'");
+
+if (isset($_POST['method_test'])) {
+	$admin_method_test_email_file = '../includes/emails/' . cmtx_setting('language_frontend') . '/admin/method_test.txt'; //build path to admin method test email file
+	$body = file_get_contents($admin_method_test_email_file); //get the file's contents
+	$admin_id = cmtx_get_admin_id();
+	$administrator = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `id` = '$admin_id'");
+	$administrator = mysql_fetch_assoc($administrator);
+	$email = $administrator["email"];
+	cmtx_email($email, null, cmtx_setting('admin_method_test_subject'), $body, cmtx_setting('admin_method_test_from_email'), cmtx_setting('admin_method_test_from_name'), cmtx_setting('admin_method_test_reply_to'));
+}
 ?>
 <div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
@@ -81,7 +91,7 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 <form name="settings_email_method" id="settings_email_method" action="index.php?page=settings_email_method" method="post">
 <label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_METHOD; ?></label> <?php if (cmtx_setting('transport_method') == "php-basic") { ?> <input type="radio" checked="checked" name="transport_method" value="php-basic" onclick="show_hide('php');"/> <?php } else { ?> <input type="radio" name="transport_method" value="php-basic" onclick="show_hide('php');"/> <?php } ?> PHP (Basic)
 <br />
-<label class='settings_email_method'>&nbsp;</label> <?php if (cmtx_setting('transport_method') == "php") { ?> <input type="radio" checked="checked" name="transport_method" value="php" onclick="show_hide('php');"/> <?php } else { ?> <input type="radio" name="transport_method" value="php" onclick="show_hide('php');"/> <?php } ?> PHP (Swift) &nbsp;<span class="note"><?php echo CMTX_NOTE_TYPICAL;?></span>
+<label class='settings_email_method'>&nbsp;</label> <?php if (cmtx_setting('transport_method') == "php") { ?> <input type="radio" checked="checked" name="transport_method" value="php" onclick="show_hide('php');"/> <?php } else { ?> <input type="radio" name="transport_method" value="php" onclick="show_hide('php');"/> <?php } ?> PHP (Swift) &nbsp;<span class="note"><?php echo CMTX_NOTE_TYPICAL; ?></span>
 <br />
 <label class='settings_email_method'>&nbsp;</label> <?php if (cmtx_setting('transport_method') == "smtp") { ?> <input type="radio" checked="checked" name="transport_method" value="smtp" onclick="show_hide('smtp');"/> <?php } else { ?> <input type="radio" name="transport_method" value="smtp" onclick="show_hide('smtp');"/> <?php } ?> SMTP (Swift)
 <br />
@@ -119,6 +129,8 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 <p />
 <label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_SENDMAIL_PATH; ?></label> <input type="text" required name="sendmail_path" size="20" maxlength="250" value="<?php echo cmtx_setting('sendmail_path'); ?>"/>
 </div>
+<p />
+<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_TEST; ?></label> <input type="checkbox" name="method_test"/> <?php echo CMTX_FIELD_VALUE_METHOD_TEST; ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
 <input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>

@@ -32,6 +32,7 @@ function cmtx_add_signature($language) { //adds signature to email files
 	cmtx_write_signature('../includes/emails/' . $language . '/admin/new_comment_okay.txt');
 	cmtx_write_signature('../includes/emails/' . $language . '/admin/reset_password.txt');
 	cmtx_write_signature('../includes/emails/' . $language . '/admin/new_flag.txt');
+	cmtx_write_signature('../includes/emails/' . $language . '/admin/method_test.txt');
 	cmtx_write_signature('../includes/emails/' . $language . '/user/subscriber_confirmation.txt');
 	cmtx_write_signature('../includes/emails/' . $language . '/user/subscriber_notification.txt');
 

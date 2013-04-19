@@ -26,6 +26,23 @@ if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('comments', 'gravatar_custom', 'http://');");
 
+$from_name = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "settings` WHERE `title` = 'admin_new_ban_from_name'");
+$from_name = mysql_fetch_assoc($from_name);
+$from_name = $from_name["value"];
+
+$from_email = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "settings` WHERE `title` = 'admin_new_ban_from_email'");
+$from_email = mysql_fetch_assoc($from_email);
+$from_email = $from_email["value"];
+
+$reply_to = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "settings` WHERE `title` = 'admin_new_ban_reply_to'");
+$reply_to = mysql_fetch_assoc($reply_to);
+$reply_to = $reply_to["value"];
+
+mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('email', 'admin_method_test_subject', 'Comments: Method Test');");
+mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('email', 'admin_method_test_from_name', '$from_name');");
+mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('email', 'admin_method_test_from_email', '$from_email');");
+mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('email', 'admin_method_test_reply_to', '$reply_to');");
+
 if (mysql_errno()) {
 echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
