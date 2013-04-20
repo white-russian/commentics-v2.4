@@ -1332,15 +1332,11 @@ function cmtx_error ($message) { //process error
 
 function cmtx_approve ($reason) { //process approval
 
-	global $cmtx_approve, $cmtx_approve_reason, $cmtx_is_admin; //globalise variables
+	global $cmtx_approve, $cmtx_approve_reason; //globalise variables
 
-	if (!$cmtx_is_admin) { //if not administrator
+	$cmtx_approve = true; //there is an approval
 
-		$cmtx_approve = true; //there is an approval
-
-		$cmtx_approve_reason .= $reason . "\r\n"; //concatenate to approval reasoning
-
-	}
+	$cmtx_approve_reason .= $reason . "\r\n"; //concatenate to approval reasoning
 
 } //end of approve function
 ?>
