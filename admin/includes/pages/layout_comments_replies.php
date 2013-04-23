@@ -46,13 +46,16 @@ if (isset($_POST['show_reply'])) { $show_reply = 1; } else { $show_reply = 0; }
 $reply_depth = $_POST['reply_depth'];
 if (isset($_POST['reply_arrow'])) { $reply_arrow = 1; } else { $reply_arrow = 0; }
 if (isset($_POST['scroll_reply'])) { $scroll_reply = 1; } else { $scroll_reply = 0; }
+$scroll_speed = $_POST['scroll_speed'];
 
 $reply_depth_san = cmtx_sanitize($reply_depth);
+$scroll_speed_san = cmtx_sanitize($scroll_speed);
 
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$show_reply' WHERE `title` = 'show_reply'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$reply_depth_san' WHERE `title` = 'reply_depth'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$reply_arrow' WHERE `title` = 'reply_arrow'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$scroll_reply' WHERE `title` = 'scroll_reply'");
+mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$scroll_speed_san' WHERE `title` = 'scroll_speed'");
 ?>
 <div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
@@ -76,6 +79,8 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 <p />
 <label class='layout_comments_replies'><?php echo CMTX_FIELD_LABEL_SCROLL_REPLY; ?></label> <?php if (cmtx_setting('scroll_reply')) { ?> <input type="checkbox" checked="checked" name="scroll_reply"/> <?php } else { ?> <input type="checkbox" name="scroll_reply"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_SCROLL_REPLY); ?>
+<p />
+<label class='layout_comments_replies'><?php echo CMTX_FIELD_LABEL_SCROLL_SPEED; ?></label> <input type="text" required name="scroll_speed" size="1" maxlength="250" value="<?php echo cmtx_setting('scroll_speed'); ?>"/> <span class='note'><?php echo CMTX_NOTE_STEPS; ?></span>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
 <input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>

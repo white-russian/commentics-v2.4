@@ -156,7 +156,7 @@ setInterval('ss.scrollWindow('+ss_stepsize+','+desty+',"'+anchor+'")',10);
   } 
 }
 
-ss.STEPS = 30;
+ss.STEPS = <?php echo cmtx_setting('scroll_speed'); ?>;
 
 ss.addEvent(window,"load",ss.fixAllLinks);
 // ]]>

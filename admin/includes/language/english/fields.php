@@ -98,6 +98,7 @@ define('CMTX_FIELD_LABEL_SORT_BY_6', 'Critical:');
 define('CMTX_FIELD_LABEL_REPLY_DEPTH', 'Reply Depth:');
 define('CMTX_FIELD_LABEL_REPLY_ARROW', 'Reply Arrow:');
 define('CMTX_FIELD_LABEL_SCROLL_REPLY', 'Scroll Reply:');
+define('CMTX_FIELD_LABEL_SCROLL_SPEED', 'Scroll Speed:');
 define('CMTX_FIELD_LABEL_NEW_WINDOW', 'New Win:');
 define('CMTX_FIELD_LABEL_GRAVATAR_DEFAULT', 'Default:');
 define('CMTX_FIELD_LABEL_GRAVATAR_CUSTOM', 'Custom:');
