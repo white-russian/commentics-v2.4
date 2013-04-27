@@ -70,12 +70,11 @@ if (!$cmtx_db_ok) { die(); }
 ?>
 
 <?php
-$time_zone = cmtx_get_time_zone();
-cmtx_set_time_zone($time_zone); //set the time zone
+cmtx_set_time_zone(cmtx_setting('time_zone')); //set the time zone
 ?>
 
 <?php
-$admin_folder = cmtx_get_admin_folder();
+$admin_folder = cmtx_setting('admin_folder');
 ?>
 
 <?php
