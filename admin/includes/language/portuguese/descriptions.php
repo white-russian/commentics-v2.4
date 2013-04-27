@@ -51,6 +51,7 @@ define('CMTX_DESC_SETTINGS_ADMIN_DETECTION', 'Esta seção permite a detecção 
 define('CMTX_DESC_SETTINGS_AKISMET', 'Akismet é um serviço gratuito externo automatizado usado para identificar comentários como spam. Obter a sua chave API <a href="http://akismet.com/" target="_blank">aqui</a>.<p/>Comentários identificados necessitam de aprovação. O \'Akismet\' palavra aparecerá na seção de comentários do Notes.');
 define('CMTX_DESC_SETTINGS_APPROVAL', 'Selecione estes se você quer <i>manualmente</i> aprovar os dados abaixo.<p /><b>Obs</b>: Opções detalhadas estão em Configurações -> Processador.');
 define('CMTX_DESC_SETTINGS_EMAIL_METHOD', 'Selecione o método de envio de email.');
+define('CMTX_DESC_SETTINGS_EMAIL_SIGNATURE', 'This is the signature for the emails.');
 define('CMTX_DESC_SETTINGS_EMAIL_SUB_CONFIRMATION', 'Este é o email de confirmação que o usuário recebe quando se inscreve em uma página.');
 define('CMTX_DESC_SETTINGS_EMAIL_SUB_NOTIFICATION', 'Este é o email que o usuário recebe quando ele é notificado de um novo comentário.');
 define('CMTX_DESC_SETTINGS_EMAIL_NEW_BAN', 'Este é o email que o administrador recebe quando há um novo banimento.');

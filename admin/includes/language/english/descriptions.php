@@ -51,6 +51,7 @@ define('CMTX_DESC_SETTINGS_ADMIN_DETECTION', 'This section allows for the detect
 define('CMTX_DESC_SETTINGS_AKISMET', 'Akismet is an external, free, automated service used to identify comments as spam. Get your API key <a href="http://akismet.com/" target="_blank">here</a>.<p/>Identified comments require approval. The word \'Akismet\' will appear in the comment\'s Notes section.');
 define('CMTX_DESC_SETTINGS_APPROVAL', 'Select these if you want to <i>manually</i> approve the data below.<p /><b>Note</b>: Detailed options are in Settings -> Processor.');
 define('CMTX_DESC_SETTINGS_EMAIL_METHOD', 'Select the email transport method to use.');
+define('CMTX_DESC_SETTINGS_EMAIL_SIGNATURE', 'This is the signature for the emails.');
 define('CMTX_DESC_SETTINGS_EMAIL_SUB_CONFIRMATION', 'This is the confirmation email the user receives when they subscribe to a page.');
 define('CMTX_DESC_SETTINGS_EMAIL_SUB_NOTIFICATION', 'This is the email the user receives when they are notified of a new comment.');
 define('CMTX_DESC_SETTINGS_EMAIL_NEW_BAN', 'This is the email the administrator receives when there is a new ban.');

@@ -16,3 +16,4 @@ Komentar je dodal [poster] , vsebina komentarja pa je:
 
 Lep pozdrav,
 
+[signature]

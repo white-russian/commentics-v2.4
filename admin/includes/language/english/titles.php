@@ -64,6 +64,7 @@ define('CMTX_TITLE_ADMIN_DETECTION', 'Admin Detection');
 define('CMTX_TITLE_AKISMET', 'Akismet');
 define('CMTX_TITLE_APPROVAL', 'Approval');
 define('CMTX_TITLE_EMAIL_METHOD', 'Email Method');
+define('CMTX_TITLE_EMAIL_SIGNATURE', 'Email Signature');
 define('CMTX_TITLE_EMAIL_SUB_CONFIRMATION', 'Email: Subscriber Confirmation');
 define('CMTX_TITLE_EMAIL_SUB_NOTIFICATION', 'Email: Subscriber Notification');
 define('CMTX_TITLE_EMAIL_NEW_BAN', 'Email: New Ban');

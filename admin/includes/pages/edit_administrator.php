@@ -196,6 +196,7 @@ echo cmtx_page_checkbox("settings", $id, "0") . "<span class='menu_checkbox'>Set
 	echo cmtx_page_checkbox("settings_approval", $id, "20") . "Approval" . "<br />";
 	echo cmtx_page_checkbox("settings_email", $id, "20") . "<b>Email</b>" . "<br />";
 		echo cmtx_page_checkbox("settings_email_method", $id, "40") . "Method" . "<br />";
+		echo cmtx_page_checkbox("settings_email_signature", $id, "40") . "Signature" . "<br />";
 		echo cmtx_page_checkbox("settings_email_editor", $id, "40") . "<b>Editor</b>" . "<br />";
 			echo cmtx_page_checkbox("settings_email_editor_user", $id, "60") . "<b>User</b>" . "<br />";
 				echo cmtx_page_checkbox("settings_email_editor_user_subscriber_confirmation", $id, "80") . "Subscriber Confirmation" . "<br />";

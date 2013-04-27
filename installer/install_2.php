@@ -84,24 +84,6 @@ $cookie_key = cmtx_get_random_key(20);
 ?>
 
 <?php
-cmtx_add_signature('croatian');
-cmtx_add_signature('dutch');
-cmtx_add_signature('english');
-cmtx_add_signature('french');
-cmtx_add_signature('german');
-cmtx_add_signature('portuguese');
-cmtx_add_signature('russian');
-cmtx_add_signature('slovenian');
-cmtx_add_signature('spanish');
-cmtx_add_signature('thai');
-?>
-
-<?php
-cmtx_write_reserved_data('../includes/words/reserved_emails.txt');
-cmtx_write_reserved_data('../includes/words/reserved_websites.txt');
-?>
-
-<?php
 cmtx_set_time_zone($time_zone); //set the time zone
 ?>
 
@@ -113,6 +95,10 @@ $admin_folder = cmtx_sanitize($admin_folder, false, true);
 $site_name = cmtx_sanitize($site_name, false, true);
 $site_domain = cmtx_sanitize($site_domain, false, true);
 $comments_url = cmtx_sanitize($comments_url, false, true);
+?>
+
+<?php
+$signature = $site_name . '\r\n' . 'http://www.' . $site_domain;
 ?>
 
 <?php
@@ -451,6 +437,7 @@ mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`,
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('email', 'admin_method_test_from_name', '$site_name');");
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('email', 'admin_method_test_from_email', 'comments@$site_domain');");
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('email', 'admin_method_test_reply_to', 'no-reply@$site_domain');");
+mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('email', 'signature', '$signature');");
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('error_reporting', 'error_reporting_admin', '0');");
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('error_reporting', 'error_reporting_frontend', '0');");
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('error_reporting', 'error_reporting_method', 'log');"); //log, screen

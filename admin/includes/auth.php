@@ -153,9 +153,10 @@ if (!isset($_SESSION['cmtx_username']) && !isset($_SESSION['cmtx_password']) && 
 					$admin_link = cmtx_url_encode_spaces(cmtx_setting('url_to_comments_folder') . cmtx_setting('admin_folder')) . "/"; //build admin panel link
 					
 					//convert email variables with actual variables
-					$body = str_ireplace("[username]", $username, $body);
-					$body = str_ireplace("[password]", $password, $body);
-					$body = str_ireplace("[admin link]", $admin_link, $body);
+					$body = str_ireplace('[username]', $username, $body);
+					$body = str_ireplace('[password]', $password, $body);
+					$body = str_ireplace('[admin link]', $admin_link, $body);
+					$body = str_ireplace('[signature]', cmtx_setting('signature'), $body);
 					
 					//send email
 					cmtx_email($email, null, cmtx_setting('admin_reset_password_subject'), $body, cmtx_setting('admin_reset_password_from_email'), cmtx_setting('admin_reset_password_from_name'), cmtx_setting('admin_reset_password_reply_to'));

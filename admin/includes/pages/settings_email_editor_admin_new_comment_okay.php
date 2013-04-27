@@ -86,7 +86,7 @@ $data = file_get_contents("../includes/emails/" . cmtx_setting('language_fronten
 <p />
 <label class='settings_email_editor_admin_new_comment_okay'><?php echo CMTX_FIELD_LABEL_REPLY_EMAIL; ?></label> <input type="email" required name="admin_new_comment_okay_reply_to" size="35" maxlength="250" value="<?php echo cmtx_setting('admin_new_comment_okay_reply_to'); ?>"/>
 <p /><br />
-<b><?php echo CMTX_FIELD_VALUE_VARIABLES; ?></b>: <i> [page reference] [page url] [poster] [comment] [admin link] </i>
+<b><?php echo CMTX_FIELD_VALUE_VARIABLES; ?></b>: <i>[page reference] [page url] [poster] [comment] [admin link] [signature]</i>
 <textarea name="email_content" cols="" rows="10" style="width:100%"><?php echo $data; ?></textarea>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>

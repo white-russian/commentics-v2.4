@@ -88,10 +88,11 @@ function cmtx_add_subscriber ($name, $email, $page_id) { //adds new subscriber
 	$page_url = cmtx_decode(cmtx_get_page_url()); //get the URL of the current page
 
 	//convert email variables with actual variables
-	$body = str_ireplace("[name]", $name, $body);
-	$body = str_ireplace("[page reference]", $page_reference, $body);
-	$body = str_ireplace("[page url]", $page_url, $body);
-	$body = str_ireplace("[confirmation link]", $confirmation_link, $body);
+	$body = str_ireplace('[name]', $name, $body);
+	$body = str_ireplace('[page reference]', $page_reference, $body);
+	$body = str_ireplace('[page url]', $page_url, $body);
+	$body = str_ireplace('[confirmation link]', $confirmation_link, $body);
+	$body = str_ireplace('[signature]', cmtx_setting('signature'), $body);
 
 	//send email
 	cmtx_email($email, $name, cmtx_setting('subscriber_confirmation_subject'), $body, cmtx_setting('subscriber_confirmation_from_email'), cmtx_setting('subscriber_confirmation_from_name'), cmtx_setting('subscriber_confirmation_reply_to'));
@@ -129,12 +130,13 @@ function cmtx_notify_subscribers ($poster, $comment, $page_id) { //notify subscr
 		$unsubscribe_link = cmtx_url_encode_spaces(cmtx_setting('url_to_comments_folder')) . "subscribers.php" . "?id=" . $token . "&unsubscribe=1"; //build unsubscribe link
 
 		//convert email variables with actual variables
-		$body = str_ireplace("[name]", $name, $body);
-		$body = str_ireplace("[page reference]", $page_reference, $body);
-		$body = str_ireplace("[page url]", $page_url, $body);
-		$body = str_ireplace("[poster]", $poster, $body);
-		$body = str_ireplace("[comment]", $comment, $body);
-		$body = str_ireplace("[unsubscribe link]", $unsubscribe_link, $body);
+		$body = str_ireplace('[name]', $name, $body);
+		$body = str_ireplace('[page reference]', $page_reference, $body);
+		$body = str_ireplace('[page url]', $page_url, $body);
+		$body = str_ireplace('[poster]', $poster, $body);
+		$body = str_ireplace('[comment]', $comment, $body);
+		$body = str_ireplace('[unsubscribe link]', $unsubscribe_link, $body);
+		$body = str_ireplace('[signature]', cmtx_setting('signature'), $body);
 
 		//send email
 		cmtx_email($email, $name, cmtx_setting('subscriber_notification_subject'), $body, cmtx_setting('subscriber_notification_from_email'), cmtx_setting('subscriber_notification_from_name'), cmtx_setting('subscriber_notification_reply_to'));
@@ -161,9 +163,10 @@ function cmtx_notify_admin_new_ban ($reason) { //notify admin of new ban
 	$admin_link = cmtx_url_encode_spaces(cmtx_setting('url_to_comments_folder') . cmtx_setting('admin_folder')) . "/"; //build admin panel link
 
 	//convert email variables with actual variables
-	$body = str_ireplace("[ip address]", $ip_address, $body);
-	$body = str_ireplace("[ban reasoning]", $reason, $body);
-	$body = str_ireplace("[admin link]", $admin_link, $body);
+	$body = str_ireplace('[ip address]', $ip_address, $body);
+	$body = str_ireplace('[ban reasoning]', $reason, $body);
+	$body = str_ireplace('[admin link]', $admin_link, $body);
+	$body = str_ireplace('[signature]', cmtx_setting('signature'), $body);
 
 	//select administrators from database
 	$admins = mysql_query("SELECT `email` FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `receive_email_new_ban` = '1' AND `is_enabled` = '1'");
@@ -195,12 +198,13 @@ function cmtx_notify_admin_new_comment_approve ($poster, $comment) { //notify ad
 	$admin_link = cmtx_url_encode_spaces(cmtx_setting('url_to_comments_folder') . cmtx_setting('admin_folder')) . "/"; //build admin panel link
 
 	//convert email variables with actual variables
-	$body = str_ireplace("[page reference]", $page_reference, $body);
-	$body = str_ireplace("[page url]", $page_url, $body);
-	$body = str_ireplace("[poster]", $poster, $body);
-	$body = str_ireplace("[comment]", $comment, $body);
-	$body = str_ireplace("[approval reasoning]", $cmtx_approve_reason, $body);
-	$body = str_ireplace("[admin link]", $admin_link, $body);
+	$body = str_ireplace('[page reference]', $page_reference, $body);
+	$body = str_ireplace('[page url]', $page_url, $body);
+	$body = str_ireplace('[poster]', $poster, $body);
+	$body = str_ireplace('[comment]', $comment, $body);
+	$body = str_ireplace('[approval reasoning]', $cmtx_approve_reason, $body);
+	$body = str_ireplace('[admin link]', $admin_link, $body);
+	$body = str_ireplace('[signature]', cmtx_setting('signature'), $body);
 
 	//select administrators from database
 	$admins = mysql_query("SELECT `email` FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `receive_email_new_comment_approve` = '1' AND `is_enabled` = '1'");
@@ -232,11 +236,12 @@ function cmtx_notify_admin_new_comment_okay ($poster, $comment) { //notify admin
 	$admin_link = cmtx_url_encode_spaces(cmtx_setting('url_to_comments_folder') . cmtx_setting('admin_folder')) . "/"; //build admin panel link
 
 	//convert email variables with actual variables
-	$body = str_ireplace("[page reference]", $page_reference, $body);
-	$body = str_ireplace("[page url]", $page_url, $body);
-	$body = str_ireplace("[poster]", $poster, $body);
-	$body = str_ireplace("[comment]", $comment, $body);
-	$body = str_ireplace("[admin link]", $admin_link, $body);
+	$body = str_ireplace('[page reference]', $page_reference, $body);
+	$body = str_ireplace('[page url]', $page_url, $body);
+	$body = str_ireplace('[poster]', $poster, $body);
+	$body = str_ireplace('[comment]', $comment, $body);
+	$body = str_ireplace('[admin link]', $admin_link, $body);
+	$body = str_ireplace('[signature]', cmtx_setting('signature'), $body);
 
 	//select administrators from database
 	$admins = mysql_query("SELECT `email` FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `receive_email_new_comment_okay` = '1' AND `is_enabled` = '1'");

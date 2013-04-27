@@ -153,6 +153,10 @@ label.settings_email_method {
 width: 50px;
 }
 
+label.settings_email_signature {
+width: 65px;
+}
+
 label.settings_email_editor_user_subscriber_confirmation {
 width: 80px;
 }

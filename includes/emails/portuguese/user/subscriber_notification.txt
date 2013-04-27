@@ -16,3 +16,4 @@ Para cancelar sua assinatura, você pode cancelar a assinatura, clicando aqui:
 
 Obrigado,
 
+[signature]

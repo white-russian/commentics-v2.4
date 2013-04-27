@@ -226,7 +226,8 @@ define('CMTX_FIELD_LABEL_CHECK_TIME', 'Check Time:');
 define('CMTX_FIELD_LABEL_SPLIT_SCREEN', 'Split Screen:');
 define('CMTX_FIELD_LABEL_PERMALINK', 'Permalink:');
 define('CMTX_FIELD_LABEL_VERIFY', 'Verify:');
-define('CMTX_FIELD_LABEL_TEST', 'Test:');
+define('CMTX_FIELD_LABEL_TEST_IT', 'Test It:');
+define('CMTX_FIELD_LABEL_SIGNATURE', 'Signature:');
 
 /* Values */
 define('CMTX_FIELD_VALUE_YES', 'ja');

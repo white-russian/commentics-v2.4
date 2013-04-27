@@ -206,12 +206,13 @@ function cmtx_notify_subscribers ($poster, $comment, $comment_id, $page_id) { //
 		$unsubscribe_link = cmtx_url_encode_spaces(cmtx_setting('url_to_comments_folder')) . "subscribers.php" . "?id=" . $token . "&unsubscribe=1"; //build unsubscribe link
 
 		//convert email variables with actual variables
-		$body = str_ireplace("[name]", $name, $body);
-		$body = str_ireplace("[page reference]", $page_reference, $body);
-		$body = str_ireplace("[page url]", $page_url, $body);
-		$body = str_ireplace("[poster]", $poster, $body);
-		$body = str_ireplace("[comment]", $comment, $body);
-		$body = str_ireplace("[unsubscribe link]", $unsubscribe_link, $body);
+		$body = str_ireplace('[name]', $name, $body);
+		$body = str_ireplace('[page reference]', $page_reference, $body);
+		$body = str_ireplace('[page url]', $page_url, $body);
+		$body = str_ireplace('[poster]', $poster, $body);
+		$body = str_ireplace('[comment]', $comment, $body);
+		$body = str_ireplace('[unsubscribe link]', $unsubscribe_link, $body);
+		$body = str_ireplace('[signature]', cmtx_setting('signature'), $body);
 
 		//send email
 		cmtx_email($email, $name, cmtx_setting('subscriber_notification_subject'), $body, cmtx_setting('subscriber_notification_from_email'), cmtx_setting('subscriber_notification_from_name'), cmtx_setting('subscriber_notification_reply_to'));

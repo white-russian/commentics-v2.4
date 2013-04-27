@@ -179,6 +179,7 @@ if (isset($_POST['id'])) {
 		$body = str_ireplace('[poster]', $poster, $body);
 		$body = str_ireplace('[comment]', $comment, $body);
 		$body = str_ireplace('[admin link]', $admin_link, $body);
+		$body = str_ireplace('[signature]', cmtx_setting('signature'), $body);
 
 		//select administrators from database
 		$admins = mysql_query("SELECT `email` FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `receive_email_new_flag` = '1' AND `is_enabled` = '1'");
