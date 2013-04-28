@@ -50,8 +50,8 @@ define('CMTX_DESC_SETTINGS_ADMIN', 'Deze instellingen horen bij de admin panel a
 define('CMTX_DESC_SETTINGS_ADMIN_DETECTION', 'Deze sectie staat de detectie van de administrator toe.');
 define('CMTX_DESC_SETTINGS_AKISMET', 'Akismet is een externe, gratis, geautomatiseerde dienst gebruikt om opmerkingen als spam te identificeren. Ontvang uw API-sleutel <a href="http://akismet.com/" target="_blank">hier</a>.<p/>Vastgestelde reacties toestemming nodig. Het woord \'Akismet\' zal verschijnen in de reactie\'s Notes sectie.');
 define('CMTX_DESC_SETTINGS_APPROVAL', 'Select deze als je <i>handmatig</i> onderstaande data wilt goedkeuren.<p /><b>Note</b>: Uitgebreide opties in Instellinge/Settings -> Processor.');
+define('CMTX_DESC_SETTINGS_EMAIL_SIGNATURE', 'This is your signature for the emails.');
 define('CMTX_DESC_SETTINGS_EMAIL_METHOD', 'Kies de email verstuur methode.');
-define('CMTX_DESC_SETTINGS_EMAIL_SIGNATURE', 'This is the signature for the emails.');
 define('CMTX_DESC_SETTINGS_EMAIL_SUB_CONFIRMATION', 'Dit is de bevestigingsmail die een gebruiker ontvangt na inschrijving op een pagina.');
 define('CMTX_DESC_SETTINGS_EMAIL_SUB_NOTIFICATION', 'Dit is de email die een gebruiker ontvangt wanneer er een nieuw berciht wordt geplaatst.');
 define('CMTX_DESC_SETTINGS_EMAIL_NEW_BAN', 'Dit is de email die de admin ontvangt als er een nieuwe blokkering/ban is.');

@@ -111,8 +111,9 @@ ddlevelsmenu.setup("ddtopmenubar", "topbar");
 <li>
 <a href="#"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL; ?></a>
 	<ul>
-	<?php if (!cmtx_restrict_page("settings_email_method")) { ?> <li><a href="index.php?page=settings_email_method"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_METHOD; ?></a></li> <?php } ?>
 	<?php if (!cmtx_restrict_page("settings_email_signature")) { ?> <li><a href="index.php?page=settings_email_signature"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_SIGNATURE; ?></a></li> <?php } ?>
+	<?php if (!cmtx_restrict_page("settings_email_method")) { ?> <li><a href="index.php?page=settings_email_method"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_METHOD; ?></a></li> <?php } ?>
+	
 	<?php if (!cmtx_restrict_page("settings_email_editor")) { ?>
 	<li>
 	<a href="#"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_EDITOR; ?></a>

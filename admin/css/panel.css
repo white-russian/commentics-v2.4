@@ -149,12 +149,12 @@ label.settings_approval {
 width: 125px;
 }
 
-label.settings_email_method {
-width: 50px;
-}
-
 label.settings_email_signature {
 width: 65px;
+}
+
+label.settings_email_method {
+width: 50px;
 }
 
 label.settings_email_editor_user_subscriber_confirmation {
@@ -455,11 +455,11 @@ color: #EE4000;
 font-weight: bold;
 }
 
-#hintbox{ /* CSS for pop up hint box */
+#hintbox { /* CSS for pop up hint box */
 position: absolute;
 top: 0;
 background-color: #FFFFE0;
-width: 200px; /*Default width of hint.*/ 
+width: 200px; /* Default width of hint */ 
 padding: 3px;
 border: 1px solid black;
 font: normal 11px Verdana;
@@ -470,8 +470,15 @@ border-bottom: 3px solid black;
 visibility: hidden;
 }
 
-.hintanchor{ /* CSS for link that shows hint onmouseover */
+.hintanchor { /* CSS for link that shows hint onmouseover */
 color: navy;
 margin: 3px 8px;
 text-decoration: none;
+}
+
+.signature_preview {
+float: left;
+border: 1px solid #DBDBDB;
+background-color: #F7F7F7;
+padding: 4px;
 }

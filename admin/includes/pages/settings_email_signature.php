@@ -25,6 +25,17 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 ?>
 
+<script type="text/javascript">
+// <![CDATA[
+function signature_preview() {
+text = document.getElementById('signature').value;
+text = text.replace(/\n/g, '<br/>');
+text = 'Hello,<br/><br/>This is a sample email to help you to decide your preferred signature.<br/><br/>Adjust the signature below to see a live preview of what it will look like.<br/><br/>Regards,<br/><br/>' + text;
+document.getElementById('signature_preview').innerHTML = text;
+}
+// ]]>
+</script>
+
 <div class='page_help_block'>
 <a class='page_help_text' href="http://www.commentics.org/wiki/doku.php?id=admin:<?php echo $_GET['page']; ?>" target="_blank"><?php echo CMTX_LINK_HELP; ?></a>
 </div>
@@ -59,8 +70,13 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 <p />
 
 <form name="settings_email_signature" id="settings_email_signature" action="index.php?page=settings_email_signature" method="post">
-<label class='settings_email_signature'><?php echo CMTX_FIELD_LABEL_SIGNATURE; ?></label> <textarea name="signature" cols="35" rows="4"><?php echo cmtx_setting('signature'); ?></textarea>
+<label class='settings_email_signature'><?php echo CMTX_FIELD_LABEL_PREVIEW; ?></label> <div id="signature_preview" class="signature_preview"></div>
+<div style="clear: left;"></div>
+<p />
+<label class='settings_email_signature'><?php echo CMTX_FIELD_LABEL_SIGNATURE; ?></label> <textarea name="signature" id="signature" cols="46" rows="4" onkeyup="signature_preview();"><?php echo cmtx_setting('signature'); ?></textarea>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
 <input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>
+
+<script type="text/javascript">signature_preview();</script>
