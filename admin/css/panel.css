@@ -149,12 +149,16 @@ label.settings_approval {
 width: 125px;
 }
 
-label.settings_email_signature {
-width: 65px;
-}
-
 label.settings_email_method {
 width: 50px;
+}
+
+label.settings_email_sender {
+width: 80px;
+}
+
+label.settings_email_signature {
+width: 65px;
 }
 
 label.settings_email_editor_user_subscriber_confirmation {
@@ -162,6 +166,10 @@ width: 80px;
 }
 
 label.settings_email_editor_user_subscriber_notification {
+width: 80px;
+}
+
+label.settings_email_editor_admin_email_test {
 width: 80px;
 }
 
@@ -182,10 +190,6 @@ width: 80px;
 }
 
 label.settings_email_editor_admin_reset_password {
-width: 80px;
-}
-
-label.settings_email_editor_admin_method_test {
 width: 80px;
 }
 
@@ -474,6 +478,17 @@ visibility: hidden;
 color: navy;
 margin: 3px 8px;
 text-decoration: none;
+}
+
+table.email_setup {
+padding-top: 5px;
+}
+
+table.email_setup td {
+padding-right: 20px;
+padding-bottom: 20px;
+color: #696969;
+text-align: center;
 }
 
 .signature_preview {

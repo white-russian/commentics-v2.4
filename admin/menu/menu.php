@@ -111,9 +111,7 @@ ddlevelsmenu.setup("ddtopmenubar", "topbar");
 <li>
 <a href="#"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL; ?></a>
 	<ul>
-	<?php if (!cmtx_restrict_page("settings_email_signature")) { ?> <li><a href="index.php?page=settings_email_signature"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_SIGNATURE; ?></a></li> <?php } ?>
-	<?php if (!cmtx_restrict_page("settings_email_method")) { ?> <li><a href="index.php?page=settings_email_method"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_METHOD; ?></a></li> <?php } ?>
-	
+	<?php if (!cmtx_restrict_page("settings_email_setup")) { ?> <li><a href="index.php?page=settings_email_setup"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_SETUP; ?></a></li> <?php } ?>
 	<?php if (!cmtx_restrict_page("settings_email_editor")) { ?>
 	<li>
 	<a href="#"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_EDITOR; ?></a>
@@ -131,12 +129,13 @@ ddlevelsmenu.setup("ddtopmenubar", "topbar");
 			<li>
 			<a href="#"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_EDITOR_ADMIN; ?></a>
 				<ul>
+				<?php if (!cmtx_restrict_page("settings_email_editor_admin_email_test")) { ?> <li><a href="index.php?page=settings_email_editor_admin_email_test"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_EDITOR_ADMIN_EMAIL_TEST; ?></a></li> <?php } ?>
 				<?php if (!cmtx_restrict_page("settings_email_editor_admin_new_ban")) { ?> <li><a href="index.php?page=settings_email_editor_admin_new_ban"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_EDITOR_ADMIN_NEW_BAN; ?></a></li> <?php } ?>
-				<?php if (!cmtx_restrict_page("settings_email_editor_admin_new_flag")) { ?> <li><a href="index.php?page=settings_email_editor_admin_new_flag"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_EDITOR_ADMIN_NEW_FLAG; ?></a></li> <?php } ?>
 				<?php if (!cmtx_restrict_page("settings_email_editor_admin_new_comment_approve")) { ?> <li><a href="index.php?page=settings_email_editor_admin_new_comment_approve"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_EDITOR_ADMIN_NEW_COMMENT_APPROVE; ?></a></li> <?php } ?>
 				<?php if (!cmtx_restrict_page("settings_email_editor_admin_new_comment_okay")) { ?> <li><a href="index.php?page=settings_email_editor_admin_new_comment_okay"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_EDITOR_ADMIN_NEW_COMMENT_OKAY; ?></a></li> <?php } ?>
+				<?php if (!cmtx_restrict_page("settings_email_editor_admin_new_flag")) { ?> <li><a href="index.php?page=settings_email_editor_admin_new_flag"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_EDITOR_ADMIN_NEW_FLAG; ?></a></li> <?php } ?>
 				<?php if (!cmtx_restrict_page("settings_email_editor_admin_reset_password")) { ?> <li><a href="index.php?page=settings_email_editor_admin_reset_password"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_EDITOR_ADMIN_RESET_PASSWORD; ?></a></li> <?php } ?>
-				<?php if (!cmtx_restrict_page("settings_email_editor_admin_method_test")) { ?> <li><a href="index.php?page=settings_email_editor_admin_method_test"><?php echo CMTX_MENU_TITLE_SETTINGS_EMAIL_EDITOR_ADMIN_METHOD_TEST; ?></a></li> <?php } ?>
+				
 				</ul>
 			</li>
 			<?php } ?>

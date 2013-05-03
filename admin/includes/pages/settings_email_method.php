@@ -68,18 +68,6 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$smtp_password_san' WHERE `title` = 'smtp_password'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$sendmail_path_san' WHERE `title` = 'sendmail_path'");
 
-if (isset($_POST['method_test'])) {
-	$admin_method_test_email_file = '../includes/emails/' . cmtx_setting('language_frontend') . '/admin/method_test.txt'; //build path to admin method test email file
-	$body = file_get_contents($admin_method_test_email_file); //get the file's contents
-	$admin_link = cmtx_url_encode_spaces(cmtx_setting('url_to_comments_folder') . cmtx_setting('admin_folder')) . "/"; //build admin panel link
-	$body = str_ireplace('[admin link]', $admin_link, $body);
-	$body = str_ireplace('[signature]', cmtx_setting('signature'), $body);
-	$admin_id = cmtx_get_admin_id();
-	$administrator = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `id` = '$admin_id'");
-	$administrator = mysql_fetch_assoc($administrator);
-	$email = $administrator["email"];
-	cmtx_email($email, null, cmtx_setting('admin_method_test_subject'), $body, cmtx_setting('admin_method_test_from_email'), cmtx_setting('admin_method_test_from_name'), cmtx_setting('admin_method_test_reply_to'));
-}
 ?>
 <div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
@@ -133,8 +121,8 @@ if (isset($_POST['method_test'])) {
 <label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_SENDMAIL_PATH; ?></label> <input type="text" required name="sendmail_path" size="20" maxlength="250" value="<?php echo cmtx_setting('sendmail_path'); ?>"/>
 </div>
 <p />
-<label class='settings_email_method'><?php echo CMTX_FIELD_LABEL_TEST_IT; ?></label> <input type="checkbox" name="method_test"/> <?php echo CMTX_FIELD_VALUE_METHOD_TEST; ?>
-<p />
 <?php cmtx_set_csrf_form_key(); ?>
 <input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
 </form>
+
+<a href="index.php?page=settings_email_setup"><?php echo CMTX_LINK_BACK; ?></a>

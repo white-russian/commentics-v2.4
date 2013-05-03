@@ -30,6 +30,7 @@ define('CMTX_BUTTON_SPAM', 'Spam');
 define('CMTX_BUTTON_CONFIRM', 'Confirmar');
 define('CMTX_BUTTON_REFRESH', 'Atualizar');
 define('CMTX_BUTTON_RESET', 'Resetar');
+define('CMTX_BUTTON_SEND', 'Send');
 
 define('CMTX_BUTTON_ADD_ADMIN', 'Adicionar Admin');
 define('CMTX_BUTTON_ADD_BAN', 'Adicionar Ban');

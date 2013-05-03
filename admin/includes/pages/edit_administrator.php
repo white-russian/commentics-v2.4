@@ -70,6 +70,8 @@ if (isset($_POST['allowed_pages'])) { $allowed_pages = implode(",", $_POST['allo
 
 $allowed_pages = str_ireplace("edit_comment", "edit_comment,spam", $allowed_pages);
 
+$allowed_pages = str_ireplace("settings_email_setup", "settings_email_setup,settings_email_method,settings_email_sender,settings_email_signature,settings_email_test", $allowed_pages);
+
 $id_san = cmtx_sanitize($id);
 $username_san = cmtx_sanitize($username);
 if (!empty($_POST['password_1'])) { $password_san = cmtx_sanitize($password); }
@@ -195,19 +197,18 @@ echo cmtx_page_checkbox("settings", $id, "0") . "<span class='menu_checkbox'>Set
 	echo cmtx_page_checkbox("settings_akismet", $id, "20") . "Akismet" . "<br />";
 	echo cmtx_page_checkbox("settings_approval", $id, "20") . "Approval" . "<br />";
 	echo cmtx_page_checkbox("settings_email", $id, "20") . "<b>Email</b>" . "<br />";
-		echo cmtx_page_checkbox("settings_email_signature", $id, "40") . "Signature" . "<br />";
-		echo cmtx_page_checkbox("settings_email_method", $id, "40") . "Method" . "<br />";
+		echo cmtx_page_checkbox("settings_email_setup", $id, "40") . "Setup" . "<br />";
 		echo cmtx_page_checkbox("settings_email_editor", $id, "40") . "<b>Editor</b>" . "<br />";
 			echo cmtx_page_checkbox("settings_email_editor_user", $id, "60") . "<b>User</b>" . "<br />";
 				echo cmtx_page_checkbox("settings_email_editor_user_subscriber_confirmation", $id, "80") . "Subscriber Confirmation" . "<br />";
 				echo cmtx_page_checkbox("settings_email_editor_user_subscriber_notification", $id, "80") . "Subscriber Notification" . "<br />";
 			echo cmtx_page_checkbox("settings_email_editor_admin", $id, "60") . "<b>Admin</b>" . "<br />";
+				echo cmtx_page_checkbox("settings_email_editor_admin_email_test", $id, "80") . "Email Test" . "<br />";
 				echo cmtx_page_checkbox("settings_email_editor_admin_new_ban", $id, "80") . "New Ban" . "<br />";
+				echo cmtx_page_checkbox("settings_email_editor_admin_new_comment_approve", $id, "80") . "New Comment: Approve" . "<br />";
+				echo cmtx_page_checkbox("settings_email_editor_admin_new_comment_okay", $id, "80") . "New Comment: Okay" . "<br />";
 				echo cmtx_page_checkbox("settings_email_editor_admin_new_flag", $id, "80") . "New Flag" . "<br />";
-				echo cmtx_page_checkbox("settings_email_editor_admin_new_comment_approve", $id, "80") . "New Comment Approve" . "<br />";
-				echo cmtx_page_checkbox("settings_email_editor_admin_new_comment_okay", $id, "80") . "New Comment Okay" . "<br />";
 				echo cmtx_page_checkbox("settings_email_editor_admin_reset_password", $id, "80") . "Reset Password" . "<br />";
-				echo cmtx_page_checkbox("settings_email_editor_admin_method_test", $id, "80") . "Method Test" . "<br />";
 	echo cmtx_page_checkbox("settings_error_reporting", $id, "20") . "Error Reporting" . "<br />";
 		echo cmtx_page_checkbox("error_log_frontend", $id, "40") . "Frontend" . "<br />";
 		echo cmtx_page_checkbox("error_log_backend", $id, "40") . "Backend" . "<br />";

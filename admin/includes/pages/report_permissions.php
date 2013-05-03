@@ -91,6 +91,15 @@ $permissions_correct = false;
 
 echo "<br /><br />";
 
+if (is_writable("../includes/emails/" . cmtx_setting('language_frontend') . "/admin/email_test.txt")) {
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/email_test.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
+} else {
+echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/email_test.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
+$permissions_correct = false;
+}
+
+echo "<br />";
+
 if (is_writable("../includes/emails/" . cmtx_setting('language_frontend') . "/admin/new_ban.txt")) {
 echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/new_ban.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
 } else {
@@ -131,15 +140,6 @@ if (is_writable("../includes/emails/" . cmtx_setting('language_frontend') . "/ad
 echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/reset_password.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
 } else {
 echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/reset_password.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
-$permissions_correct = false;
-}
-
-echo "<br />";
-
-if (is_writable("../includes/emails/" . cmtx_setting('language_frontend') . "/admin/method_test.txt")) {
-echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/method_test.txt <span class='positive'>" . CMTX_FIELD_VALUE_IS_WRITABLE . "</span>.";
-} else {
-echo "/comments/includes/emails/" . cmtx_setting('language_frontend') . "/admin/method_test.txt <span class='negative'>" . CMTX_FIELD_VALUE_IS_NOT_WRITABLE . "</span>.";
 $permissions_correct = false;
 }
 

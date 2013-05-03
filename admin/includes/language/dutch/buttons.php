@@ -30,6 +30,7 @@ define('CMTX_BUTTON_SPAM', 'Spam');
 define('CMTX_BUTTON_CONFIRM', 'Bevestigen');
 define('CMTX_BUTTON_REFRESH', 'Verversen');
 define('CMTX_BUTTON_RESET', 'Reset');
+define('CMTX_BUTTON_SEND', 'Send');
 
 define('CMTX_BUTTON_ADD_ADMIN', 'Voeg Admin toe');
 define('CMTX_BUTTON_ADD_BAN', 'Voeg Blokkering toe');

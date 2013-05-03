@@ -46,10 +46,8 @@ Welcome to Commentics - here is a checklist to help get you started:
 
 <ul>
 <li>Check File Permissions (<b>Reports</b> -> <b>Permissions</b>)</li>
-<li>Add the Admin Cookie (<b>Settings</b> -> <b>Admin Detection</b>)</li>
-<li>Check Email Signature (<b>Setttings</b> -> <b>Email</b> -> <b>Signature</b>)</li>
-<li>Select Email Method (<b>Setttings</b> -> <b>Email</b> -> <b>Method</b>)</li>
-<li>Set up Form Fields (<b>Layout</b> -> <b>Form</b> -> <b>Enabled</b>)</li>
+<li>Set Up Email Settings (<b>Setttings</b> -> <b>Email</b> -> <b>Setup</b>)</li>
+<li>Configure Form Fields (<b>Layout</b> -> <b>Form</b> -> <b>Enabled</b>)</li>
 <li>Enter ReCaptcha Keys (<b>Settings</b> -> <b>ReCaptcha</b>)</li>
 </ul>
 

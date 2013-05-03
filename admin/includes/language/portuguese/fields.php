@@ -226,7 +226,6 @@ define('CMTX_FIELD_LABEL_CHECK_TIME', 'Check Time:');
 define('CMTX_FIELD_LABEL_SPLIT_SCREEN', 'Split Screen:');
 define('CMTX_FIELD_LABEL_PERMALINK', 'Permalink:');
 define('CMTX_FIELD_LABEL_VERIFY', 'Verify:');
-define('CMTX_FIELD_LABEL_TEST_IT', 'Test It:');
 define('CMTX_FIELD_LABEL_SIGNATURE', 'Signature:');
 
 /* Values */
@@ -303,6 +302,13 @@ define('CMTX_FIELD_VALUE_DELAY_PAGES', 'Não crie a página até que as mensagen
 define('CMTX_FIELD_VALUE_LOWER_PAGES', 'Convert the URL of the page to lowercase.');
 define('CMTX_FIELD_VALUE_ENABLED_FORM', 'Disable the form of all pages to stop posts.');
 define('CMTX_FIELD_VALUE_VERIFIED', 'This comment is verified');
-define('CMTX_FIELD_VALUE_METHOD_TEST', 'Send me an email.');
+define('CMTX_FIELD_VALUE_EMAIL_SETUP_METHOD', 'Method');
+define('CMTX_FIELD_VALUE_EMAIL_SETUP_SENDER', 'Sender');
+define('CMTX_FIELD_VALUE_EMAIL_SETUP_SIGNATURE', 'Signature');
+define('CMTX_FIELD_VALUE_EMAIL_SETUP_TEST', 'Test');
+define('CMTX_FIELD_VALUE_EMAIL_SETUP_METHOD_INFO', 'Select the transport method to use');
+define('CMTX_FIELD_VALUE_EMAIL_SETUP_SENDER_INFO', 'Set up all of your sender details');
+define('CMTX_FIELD_VALUE_EMAIL_SETUP_SIGNATURE_INFO', 'Choose your preferred signature');
+define('CMTX_FIELD_VALUE_EMAIL_SETUP_TEST_INFO', 'Send an email to test that it works');
 
 ?>

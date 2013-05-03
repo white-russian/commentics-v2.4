@@ -62,6 +62,8 @@ define('CMTX_MSG_IP_ADDRESS_UPDATED', 'IP Address Updated.');
 
 define('CMTX_MSG_AKISMET_UNABLE', '<p>The fsockopen() function on your server appears to be disabled.</p><p>This feature requires it. Please contact your host to enable it.</p>');
 
+define('CMTX_MSG_EMAIL_SENT', 'Email sent.');
+
 define('CMTX_MSG_LOG_RESET', 'Error log reset.');
 
 define('CMTX_MSG_LIST_UPDATED', 'List updated.');

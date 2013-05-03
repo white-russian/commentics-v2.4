@@ -29,6 +29,7 @@ if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 // <![CDATA[
 function signature_preview() {
 text = document.getElementById('signature').value;
+text = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 text = text.replace(/\n/g, '<br/>');
 text = 'Hello,<br/><br/>This is a sample email to help you to decide your preferred signature.<br/><br/>Adjust the signature below to see a live preview of what it will look like.<br/><br/>Regards,<br/><br/>' + text;
 document.getElementById('signature_preview').innerHTML = text;
@@ -80,3 +81,5 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$s
 </form>
 
 <script type="text/javascript">signature_preview();</script>
+
+<a href="index.php?page=settings_email_setup"><?php echo CMTX_LINK_BACK; ?></a>
