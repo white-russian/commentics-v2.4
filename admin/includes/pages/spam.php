@@ -57,22 +57,22 @@ $website = $comment_result["website"];
 
 <form name="spam" id="spam" action="index.php?page=manage_comments" method="post">
 <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-<input type="radio" checked="checked" name="delete" value="delete_this"/> <?php echo CMTX_FIELD_VALUE_DELETE_THIS; ?>
+<input type="radio" checked="checked" name="delete" value="delete_this"/> <?php echo CMTX_FIELD_VALUE_SPAM_DELETE_THIS; ?>
 <br />
-<input type="radio" name="delete" value="delete_all"/> <?php echo CMTX_FIELD_VALUE_DELETE_ALL; ?>
+<input type="radio" name="delete" value="delete_all"/> <?php echo CMTX_FIELD_VALUE_SPAM_DELETE_ALL; ?>
 <p />
-<input type="radio" checked="checked" name="ban" value="do_ban"/> <?php echo CMTX_FIELD_VALUE_DO_BAN; ?>
+<input type="radio" checked="checked" name="ban" value="do_ban"/> <?php echo CMTX_FIELD_VALUE_SPAM_DO_BAN; ?>
 <br />
-<input type="radio" name="ban" value="no_ban"/> <?php echo CMTX_FIELD_VALUE_NO_BAN; ?>
+<input type="radio" name="ban" value="no_ban"/> <?php echo CMTX_FIELD_VALUE_SPAM_NO_BAN; ?>
 <p />
-<input type="checkbox" name="ban_name"/> <?php echo CMTX_FIELD_VALUE_ADD_NAME . "<b>" . $name . "</b>" . CMTX_FIELD_VALUE_TO_BANNED_NAMES; ?>
+<input type="checkbox" name="ban_name"/> <?php printf(CMTX_FIELD_VALUE_SPAM_NAME, $name); ?>
 <?php if (!empty($email)) { ?>
 <br />
-<input type="checkbox" name="ban_email"/> <?php echo CMTX_FIELD_VALUE_ADD_EMAIL . "<b>" . $email . "</b>" . CMTX_FIELD_VALUE_TO_BANNED_EMAILS; ?>
+<input type="checkbox" name="ban_email"/> <?php printf(CMTX_FIELD_VALUE_SPAM_EMAIL, $email); ?>
 <?php } ?>
 <?php if ($website != "http://") { ?>
 <br />
-<input type="checkbox" name="ban_website"/> <?php echo CMTX_FIELD_VALUE_ADD_WEBSITE . "<b>" . $website . "</b>" . CMTX_FIELD_VALUE_TO_BANNED_WEBSITES; ?>
+<input type="checkbox" name="ban_website"/> <?php printf(CMTX_FIELD_VALUE_SPAM_WEBSITE, $website); ?>
 <?php } ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
