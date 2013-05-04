@@ -84,7 +84,7 @@ if (session_id() != '') {
 <p></p>
 
 <form name="installer" id="installer" action="index.php" method="post">
-<input type="submit" name="submit" value="Start"/>
+<input type="submit" class="button" name="submit" value="Start" title="Start"/>
 </form>
 
 </body>

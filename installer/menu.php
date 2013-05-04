@@ -58,7 +58,7 @@ Would you like to install or upgrade the programme?
 
 <p></p>
 
-<input type="submit" name="submit" value="Continue"/>
+<input type="submit" class="button" name="submit" value="Continue" title="Continue"/>
 
 </form>
 

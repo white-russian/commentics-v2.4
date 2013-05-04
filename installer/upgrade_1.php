@@ -92,7 +92,7 @@ if ($installed_version == $latest_version) {
 <form name="upgrade" id="upgrade" action="upgrade_2.php" method="post">
 <input type="hidden" name="installed_version" value="<?php echo $installed_version; ?>"/>
 <input type="hidden" name="latest_version" value="<?php echo $latest_version; ?>"/>
-<input type="submit" name="submit" value="Upgrade"/>
+<input type="submit" class="button" name="submit" value="Upgrade" title="Upgrade"/>
 </form>
 
 <?php } ?>

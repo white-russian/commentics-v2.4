@@ -176,7 +176,7 @@ When ready click 'Install' below.
 
 <p></p>
 
-<input type="submit" name="submit" value="Install"/>
+<input type="submit" class="button" name="submit" value="Install" title="Install"/>
 </form>
 
 </body>

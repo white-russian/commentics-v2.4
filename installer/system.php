@@ -199,7 +199,7 @@ echo "<p></p>";
 
 <?php if ($proceed) { ?>
 <form name="system" id="system" action="system.php" method="post">
-<input type="submit" name="submit" value="Continue"/>
+<input type="submit" class="button" name="submit" value="Continue" title="Continue"/>
 </form>
 <?php } else { ?>
 <span class='fail'>The installer can not proceed.</span>
