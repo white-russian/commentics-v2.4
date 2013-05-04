@@ -59,7 +59,7 @@ define('CMTX_SAYS', 'dice...');
 define('CMTX_READ_MORE', '... Leer más');
 define('CMTX_TITLE_READ_MORE', 'Leer el comentario completo');
 
-/* Admin */
+/* Admin Reply */
 define('CMTX_REPLY_INTRO', 'Admin:');
 
 /* Date */

@@ -59,7 +59,7 @@ define('CMTX_SAYS', 'говорит...');
 define('CMTX_READ_MORE', '... Читать дальше');
 define('CMTX_TITLE_READ_MORE', 'Читать отзыв полностью');
 
-/* Admin */
+/* Admin Reply */
 define('CMTX_REPLY_INTRO', 'Администратор:');
 
 /* Date */

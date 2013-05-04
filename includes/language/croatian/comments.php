@@ -59,7 +59,7 @@ define('CMTX_SAYS', 'kaže...');
 define('CMTX_READ_MORE', '... Pročitajte više');
 define('CMTX_TITLE_READ_MORE', 'Pročitajte cijeli komentar');
 
-/* Admin */
+/* Admin Reply */
 define('CMTX_REPLY_INTRO', 'Admin:');
 
 /* Date */
