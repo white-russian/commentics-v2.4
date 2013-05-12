@@ -28,35 +28,57 @@ define('CMTX_MSG_SAVED', 'Instellingen opgeslagen.');
 
 define('CMTX_MSG_COMMENT_UPDATED', 'Bericht aangepast.');
 define('CMTX_MSG_COMMENT_DELETED', 'bericht verwijderd.');
-define('CMTX_MSG_COMMENT_ALREADY_APPROVED', 'Comment already approved.');
+define('CMTX_MSG_COMMENT_BULK_DELETED', '1 comment deleted.');
+define('CMTX_MSG_COMMENTS_BULK_DELETED', '%d comments deleted.');
 define('CMTX_MSG_COMMENT_APPROVED', 'Comment approved.');
-define('CMTX_MSG_COMMENT_ALREADY_SENT', 'Comment already sent.');
+define('CMTX_MSG_COMMENT_BULK_APPROVED', '1 comment approved.');
+define('CMTX_MSG_COMMENTS_BULK_APPROVED', '%d comments approved.');
+define('CMTX_MSG_COMMENT_ALREADY_APPROVED', 'Comment already approved.');
+define('CMTX_MSG_COMMENT_BULK_ALREADY_APPROVED', '1 comment already approved.');
+define('CMTX_MSG_COMMENTS_BULK_ALREADY_APPROVED', '%d comments already approved.');
 define('CMTX_MSG_COMMENT_SENT', 'Comment sent.');
+define('CMTX_MSG_COMMENT_BULK_SENT', '1 comment sent.');
+define('CMTX_MSG_COMMENTS_BULK_SENT', '%d comments sent.');
+define('CMTX_MSG_COMMENT_ALREADY_SENT', 'Comment already sent.');
+define('CMTX_MSG_COMMENT_BULK_ALREADY_SENT', '1 comment already sent.');
+define('CMTX_MSG_COMMENTS_BULK_ALREADY_SENT', '%d comments already sent.');
 define('CMTX_MSG_SPAM_REMOVED', 'Spam verwijderd.');
 
 define('CMTX_MSG_PAGE_UPDATED', 'Pagina aangepast.');
 define('CMTX_MSG_PAGE_DELETED', 'Pagina verwijderd.');
+define('CMTX_MSG_PAGE_BULK_DELETED', '1 page deleted.');
+define('CMTX_MSG_PAGES_BULK_DELETED', '%d pages deleted.');
 define('CMTX_MSG_PAGE_EXISTS', 'Custom ID bestaat al.');
 
 define('CMTX_MSG_ADMIN_ADDED', 'Administrator toegevoegd.');
 define('CMTX_MSG_ADMIN_UPDATED', 'Administrator aangepast.');
 define('CMTX_MSG_ADMIN_DELETED', 'Administrator verwijderd.');
+define('CMTX_MSG_ADMIN_BULK_DELETED', '1 administrator deleted.');
+define('CMTX_MSG_ADMINS_BULK_DELETED', '%d administrators deleted.');
 define('CMTX_MSG_ADMIN_EXISTS', 'Gebruikersnaam bestaat al.');
 define('CMTX_MSG_ADMIN_SUP_DEL', 'De super admin kan niet worden verwijderd.');
+define('CMTX_MSG_ADMIN_BULK_SUP_DEL', '1 super administrator could not be deleted.');
+define('CMTX_MSG_ADMINS_BULK_SUP_DEL', '&d super administrator could not be deleted.');
 define('CMTX_MSG_ADMIN_SUP_DIS', 'De super admin kan niet worden uitgeschakeld.');
 define('CMTX_MSG_ADMIN_ONLY', 'Sorry, alleen de super admin heeft toegang tot deze pagina.');
 
 define('CMTX_MSG_BAN_ADDED', 'Ban-blokkering toegevoegd.');
 define('CMTX_MSG_BAN_UPDATED', 'Ban updated.');
 define('CMTX_MSG_BAN_DELETED', 'Ban-blokkering verwijderd.');
+define('CMTX_MSG_BAN_BULK_DELETED', '1 ban deleted.');
+define('CMTX_MSG_BANS_BULK_DELETED', '%d bans deleted.');
 
 define('CMTX_MSG_SUB_ADDED', 'Inschrijver toegevoegd.');
 define('CMTX_MSG_SUB_UPDATED', 'Inschrijver aangepast.');
 define('CMTX_MSG_SUB_DELETED', 'Inschrijver verwijderd.');
+define('CMTX_MSG_SUB_BULK_DELETED', '1 subscriber deleted.');
+define('CMTX_MSG_SUBS_BULK_DELETED', '%d subscribers deleted.');
 
 define('CMTX_MSG_QUESTION_ADDED', 'Vraag toegevoegd.');
 define('CMTX_MSG_QUESTION_UPDATED', 'Vraag aangeapst.');
 define('CMTX_MSG_QUESTION_DELETED', 'Vraag verwijderd.');
+define('CMTX_MSG_QUESTION_BULK_DELETED', '1 question deleted.');
+define('CMTX_MSG_QUESTIONS_BULK_DELETED', '%d questions deleted.');
 
 define('CMTX_MSG_IP_ADDRESS_UPDATED', 'IP Address aangepast.');
 
@@ -72,7 +94,11 @@ define('CMTX_MSG_RECAPTCHA_UNABLE', '<p>The fsockopen() function on your server 
 
 define('CMTX_MSG_BACKUP_CREATED', 'Backup gemaakt.');
 define('CMTX_MSG_BACKUP_DELETED', 'Backup verwijderd.');
+define('CMTX_MSG_BACKUP_BULK_DELETED', '1 backup deleted.');
+define('CMTX_MSG_BACKUPS_BULK_DELETED', '%d backups deleted.');
 define('CMTX_MSG_BACKUP_NOT_FOUND', 'Backup not found.');
+define('CMTX_MSG_BACKUP_BULK_NOT_FOUND', '1 backup not found.');
+define('CMTX_MSG_BACKUPS_BULK_NOT_FOUND', '%d backups not found.');
 define('CMTX_MSG_BACKUP_UNABLE', '<p>The system() function on your server appears to be disabled.</p><p>This feature requires it. Please contact your host to enable it.</p>');
 
 define('CMTX_MSG_OPTIMIZED', 'Tables geoptimaliseerd.');

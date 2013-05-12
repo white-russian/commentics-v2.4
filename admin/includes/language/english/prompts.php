@@ -25,9 +25,7 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 define('CMTX_PROMPT_PASSWORDS', 'The two passwords do not match.');
-
 define('CMTX_PROMPT_DELETE', 'Are you sure you want to delete this?');
-define('CMTX_PROMPT_DELETE_COMMENT', 'Any replies will also be deleted.\nAre you sure you want to proceed?');
-define('CMTX_PROMPT_DELETE_PAGE', 'The page\'s comments and subscribers will also be deleted.\nAre you sure you want to proceed?');
+define('CMTX_PROMPT_DELETE_BULK', 'Are you sure you want to delete the selected items?');
 
 ?>

@@ -128,7 +128,7 @@ if ($_GET['action'] == "delete") {
 } else if ($_GET['action'] == "approve") {
 	if (cmtx_is_approved($_GET['id'])) {
 		?>
-		<div class="info"><?php echo CMTX_MSG_COMMENT_ALREADY_APPROVED; ?></div>
+		<div class="error"><?php echo CMTX_MSG_COMMENT_ALREADY_APPROVED; ?></div>
 		<div style="clear: left;"></div>
 		<?php
 	} else {
@@ -143,7 +143,7 @@ if ($_GET['action'] == "delete") {
 } else if ($_GET['action'] == "send" && cmtx_setting('enabled_notify')) {
 	if (cmtx_is_sent($_GET['id'])) {
 		?>
-		<div class="info"><?php echo CMTX_MSG_COMMENT_ALREADY_SENT; ?></div>
+		<div class="error"><?php echo CMTX_MSG_COMMENT_ALREADY_SENT; ?></div>
 		<div style="clear: left;"></div>
 		<?php
 	} else {
@@ -165,11 +165,110 @@ if ($_GET['action'] == "delete") {
 ?>
 <?php } } ?>
 
+<?php
+if (isset($_POST['bulk_delete']) && isset($_POST['bulk']) && cmtx_setting('is_demo')) {
+?>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
+<div style="clear: left;"></div>
+<?php
+} else if (isset($_POST['bulk_delete']) && isset($_POST['bulk'])) {
+cmtx_check_csrf_form_key();
+$items = $_POST['bulk'];
+$count = count($items);
+for ($i = 0; $i < $count; $i++) {
+	$id = $items[$i];
+	$id = cmtx_sanitize($id);
+	mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "comments` WHERE `id` = '$id'");
+	cmtx_delete_replies($id);
+	mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "voters` WHERE `comment_id` = '$id'");
+	mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "reporters` WHERE `comment_id` = '$id'");
+}
+?>
+<?php if ($count == 1) { ?><div class="success"><?php echo CMTX_MSG_COMMENT_BULK_DELETED; ?></div><?php } ?>
+<?php if ($count > 1) { ?><div class="success"><?php printf(CMTX_MSG_COMMENTS_BULK_DELETED, $count); ?></div><?php } ?>
+<div style="clear: left;"></div>
+<?php
+}
+?>
+
+<?php
+if (isset($_POST['bulk_approve']) && isset($_POST['bulk']) && cmtx_setting('is_demo')) {
+?>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
+<div style="clear: left;"></div>
+<?php
+} else if (isset($_POST['bulk_approve']) && isset($_POST['bulk'])) {
+cmtx_check_csrf_form_key();
+$items = $_POST['bulk'];
+$count = count($items);
+$success = 0; $failure = 0;
+for ($i = 0; $i < $count; $i++) {
+	$id = $items[$i];
+	$id = cmtx_sanitize($id);
+	if (cmtx_is_approved($id)) {
+		$failure ++;
+	} else {
+		mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "comments` SET `is_approved` = '1' WHERE `id` = '$id'");
+		$success ++;
+	}
+}
+?>
+<?php if ($success == 1) { ?><div class="success"><?php echo CMTX_MSG_COMMENT_BULK_APPROVED; ?></div><?php } ?>
+<?php if ($success > 1) { ?><div class="success"><?php printf(CMTX_MSG_COMMENTS_BULK_APPROVED, $success); ?></div><?php } ?>
+<div style="clear: left;"></div>
+<?php if ($failure == 1) { ?><div class="error"><?php echo CMTX_MSG_COMMENT_BULK_ALREADY_APPROVED; ?></div><?php } ?>
+<?php if ($failure > 1) { ?><div class="error"><?php printf(CMTX_MSG_COMMENTS_BULK_ALREADY_APPROVED, $failure); ?></div><?php } ?>
+<div style="clear: left;"></div>
+<?php
+}
+?>
+
+<?php
+if (isset($_POST['bulk_send']) && isset($_POST['bulk']) && cmtx_setting('is_demo')) {
+?>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
+<div style="clear: left;"></div>
+<?php
+} else if (isset($_POST['bulk_send']) && isset($_POST['bulk'])) {
+cmtx_check_csrf_form_key();
+$items = $_POST['bulk'];
+$count = count($items);
+$success = 0; $failure = 0;
+for ($i = 0; $i < $count; $i++) {
+	$id = $items[$i];
+	$id = cmtx_sanitize($id);
+	if (cmtx_is_sent($id)) {
+		$failure ++;
+	} else {
+		$comment_query = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "comments` WHERE `id` = '$id'");
+		$comment_result = mysql_fetch_assoc($comment_query);
+		$name = $comment_result["name"];
+		$comment = $comment_result["comment"];
+		$page_id = $comment_result["page_id"];
+		cmtx_notify_subscribers($name, $comment, $id, $page_id);
+		mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "comments` SET `is_approved` = '1' WHERE `id` = '$id'");
+		$success ++;
+	}
+}
+?>
+<?php if ($success == 1) { ?><div class="success"><?php echo CMTX_MSG_COMMENT_BULK_SENT; ?></div><?php } ?>
+<?php if ($success > 1) { ?><div class="success"><?php printf(CMTX_MSG_COMMENTS_BULK_SENT, $success); ?></div><?php } ?>
+<div style="clear: left;"></div>
+<?php if ($failure == 1) { ?><div class="error"><?php echo CMTX_MSG_COMMENT_BULK_ALREADY_SENT; ?></div><?php } ?>
+<?php if ($failure > 1) { ?><div class="error"><?php printf(CMTX_MSG_COMMENTS_BULK_ALREADY_SENT, $failure); ?></div><?php } ?>
+<div style="clear: left;"></div>
+<?php
+}
+?>
+
 <p />
+
+<form name="datatables" id="datatables" action="index.php?page=manage_comments" method="post">
 
 <table id="data" class="display" summary="Comments">
     <thead>
     	<tr>
+			<th style='width:0px;'><input type="checkbox" name="select_all" id="select_all" onclick="bulk_select();"/></th>
         	<th><?php echo CMTX_TABLE_NAME; ?></th>
 			<th><?php echo CMTX_TABLE_PAGE; ?></th>
 			<th><?php echo CMTX_TABLE_COMMENT; ?></th>
@@ -192,6 +291,7 @@ $comments = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "comments
 while ($comment = mysql_fetch_assoc($comments)) {
 ?>
     	<tr>
+			<td><input type="checkbox" name="bulk[]" value="<?php echo $comment["id"]; ?>" onclick="bulk_check();"/></td>
 			<?php $id = $comment["id"]; ?>
 			<td><?php echo $comment["name"]; ?></td>
 			<?php
@@ -226,10 +326,20 @@ while ($comment = mysql_fetch_assoc($comments)) {
 			<a href="<?php echo "index.php?page=manage_comments&action=approve&id=" . $comment["id"] . "&key=" . $_SESSION['cmtx_csrf_key'];?>"><img src="images/buttons/approve.png" class="button_approve" title="Approve" alt="Approve"></a>
 			<?php if (cmtx_setting('enabled_notify')) { ?> <a href="<?php echo "index.php?page=manage_comments&action=send&id=" . $comment["id"] . "&key=" . $_SESSION['cmtx_csrf_key'];?>"><img src="images/buttons/send.png" class="button_send" title="Send to email subscribers" alt="Send"></a> <?php } ?>
 			<a href="<?php echo "index.php?page=edit_comment&id=" . $comment["id"];?>"><img src="images/buttons/edit.png" class="button_edit" title="Edit" alt="Edit"></a>
-			<a href="<?php echo "index.php?page=manage_comments&action=delete&id=" . $comment["id"] . "&key=" . $_SESSION['cmtx_csrf_key'];?>"><img src="images/buttons/delete.png" class="button_delete" onclick="return delete_comment_confirmation()" title="Delete" alt="Delete"></a>
+			<a href="<?php echo "index.php?page=manage_comments&action=delete&id=" . $comment["id"] . "&key=" . $_SESSION['cmtx_csrf_key'];?>"><img src="images/buttons/delete.png" class="button_delete" onclick="return delete_confirmation()" title="Delete" alt="Delete"></a>
 			</td>
         </tr>	
 <?php } ?>
 
     </tbody>
 </table>
+
+<div style="clear: left;"></div>
+
+<div style="margin-top:10px;"></div>
+
+<?php cmtx_set_csrf_form_key(); ?>
+<input type="submit" class="button" name="bulk_approve" title="<?php echo CMTX_BUTTON_APPROVE; ?>" value="<?php echo CMTX_BUTTON_APPROVE; ?>"/>
+<?php if (cmtx_setting('enabled_notify')) { ?><input type="submit" class="button" name="bulk_send" title="Send to email subscribers" value="<?php echo CMTX_BUTTON_SEND; ?>"/> <?php } ?>
+<input type="submit" class="button" name="bulk_delete" title="<?php echo CMTX_BUTTON_DELETE; ?>" value="<?php echo CMTX_BUTTON_DELETE; ?>" onclick="return delete_bulk_confirmation()"/>
+</form>

@@ -128,7 +128,7 @@ $date = date("jS M Y", strtotime($page_result["dated"]));
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
 <input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
-<input type="button" class="button" name="delete" onclick="if(delete_page_confirmation()){window.location='index.php?page=manage_pages&action=delete&id=<?php echo $id . "&key=" . $_SESSION['cmtx_csrf_key']?>'};" title="<?php echo CMTX_BUTTON_DELETE; ?>" value="<?php echo CMTX_BUTTON_DELETE; ?>"/>
+<input type="button" class="button" name="delete" onclick="if(delete_confirmation()){window.location='index.php?page=manage_pages&action=delete&id=<?php echo $id . "&key=" . $_SESSION['cmtx_csrf_key']?>'};" title="<?php echo CMTX_BUTTON_DELETE; ?>" value="<?php echo CMTX_BUTTON_DELETE; ?>"/>
 </form>
 
 <p />

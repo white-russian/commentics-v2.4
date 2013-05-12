@@ -75,6 +75,37 @@ unlink("backups/" . $id . ".sql");
 <div style="clear: left;"></div>
 <?php } } } ?>
 
+<?php
+if (isset($_POST['bulk_delete']) && isset($_POST['bulk']) && cmtx_setting('is_demo')) {
+?>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
+<div style="clear: left;"></div>
+<?php
+} else if (isset($_POST['bulk_delete']) && isset($_POST['bulk'])) {
+cmtx_check_csrf_form_key();
+$items = $_POST['bulk'];
+$count = count($items);
+$success = 0; $failure = 0;
+for ($i = 0; $i < $count; $i++) {
+	$id = basename($items[$i]);
+	if (ctype_alnum($id) && strlen($id) == 20 && file_exists("backups/" . $id . ".sql")) {
+		unlink("backups/" . $id . ".sql");
+		$success ++;
+	} else {
+		$failure ++;
+	}
+}
+?>
+<?php if ($success == 1) { ?><div class="success"><?php echo CMTX_MSG_BACKUP_BULK_DELETED; ?></div><?php } ?>
+<?php if ($success > 1) { ?><div class="success"><?php printf(CMTX_MSG_BACKUPS_BULK_DELETED, $success); ?></div><?php } ?>
+<div style="clear: left;"></div>
+<?php if ($failure == 1) { ?><div class="error"><?php echo CMTX_MSG_BACKUP_BULK_NOT_FOUND; ?></div><?php } ?>
+<?php if ($failure > 1) { ?><div class="error"><?php printf(CMTX_MSG_BACKUPS_BULK_NOT_FOUND, $failure); ?></div><?php } ?>
+<div style="clear: left;"></div>
+<?php
+}
+?>
+
 <p />
 
 <?php echo CMTX_DESC_TOOL_DATABASE_BACKUP; ?>
@@ -88,9 +119,12 @@ unlink("backups/" . $id . ".sql");
 
 <br />
 
+<form name="datatables" id="datatables" action="index.php?page=tool_db_backup" method="post">
+
 <table id="data" class="display" summary="Backups">
     <thead>
     	<tr>
+			<th style='width:0px;'><input type="checkbox" name="select_all" id="select_all" onclick="bulk_select();"/></th>
         	<th><?php echo CMTX_TABLE_FILENAME; ?></th>
             <th><?php echo CMTX_TABLE_SIZE; ?></th>
             <th><?php echo CMTX_TABLE_DATE_TIME; ?></th>
@@ -111,6 +145,7 @@ $count = 0;
 foreach ($backups as $backup) {
 ?>
     	<tr>
+			<td><input type="checkbox" name="bulk[]" value="<?php echo str_ireplace(".sql", "", basename($backup)); ?>" onclick="bulk_check();"/></td>
         	<td><?php echo "<a href='" . $backup . "'>" . basename($backup) . "</a>"; ?></td>
             <td><?php echo round(filesize($backup)/1024,2) . " KB"; ?></td>
             <td><?php echo date ("jS F Y g:ia", filemtime($backup)); ?></td>
@@ -123,6 +158,14 @@ $count++;
 
     </tbody>
 </table>
+
+<div style="clear: left;"></div>
+
+<div style="margin-top:10px;"></div>
+
+<?php cmtx_set_csrf_form_key(); ?>
+<input type="submit" class="button" name="bulk_delete" title="<?php echo CMTX_BUTTON_DELETE; ?>" value="<?php echo CMTX_BUTTON_DELETE; ?>" onclick="return delete_bulk_confirmation()"/>
+</form>
 
 <?php
 } else {

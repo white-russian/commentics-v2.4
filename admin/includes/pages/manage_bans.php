@@ -70,6 +70,29 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "bans` SET `unban` = '1' WHE
 <div style="clear: left;"></div>
 <?php } } ?>
 
+<?php
+if (isset($_POST['bulk_delete']) && isset($_POST['bulk']) && cmtx_setting('is_demo')) {
+?>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
+<div style="clear: left;"></div>
+<?php
+} else if (isset($_POST['bulk_delete']) && isset($_POST['bulk'])) {
+cmtx_check_csrf_form_key();
+$items = $_POST['bulk'];
+$count = count($items);
+for ($i = 0; $i < $count; $i++) {
+	$id = $items[$i];
+	$id = cmtx_sanitize($id);
+	mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "bans` SET `unban` = '1' WHERE `id` = '$id'");
+}
+?>
+<?php if ($count == 1) { ?><div class="success"><?php echo CMTX_MSG_BAN_BULK_DELETED; ?></div><?php } ?>
+<?php if ($count > 1) { ?><div class="success"><?php printf(CMTX_MSG_BANS_BULK_DELETED, $count); ?></div><?php } ?>
+<div style="clear: left;"></div>
+<?php
+}
+?>
+
 <p />
 
 <form name="add_ban" id="add_ban" action="index.php?page=manage_bans" method="post">
@@ -81,10 +104,13 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "bans` SET `unban` = '1' WHE
 
 <br />
 
+<form name="datatables" id="datatables" action="index.php?page=manage_bans" method="post">
+
 <table id="data" class="display" summary="Bans">
     <thead>
     	<tr>
-        	<th><?php echo CMTX_TABLE_IP_ADDRESS; ?></th>
+        	<th style='width:0px;'><input type="checkbox" name="select_all" id="select_all" onclick="bulk_select();"/></th>
+			<th><?php echo CMTX_TABLE_IP_ADDRESS; ?></th>
             <th><?php echo CMTX_TABLE_REASON; ?></th>
             <th><?php echo CMTX_TABLE_DATE_TIME; ?></th>
             <th><?php echo CMTX_TABLE_ACTION; ?></th>
@@ -98,7 +124,8 @@ $bans = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "bans` WHERE 
 while ($ban = mysql_fetch_assoc($bans)) {
 ?>
     	<tr>
-        	<td><?php echo $ban["ip_address"]; ?></td>
+        	<td><input type="checkbox" name="bulk[]" value="<?php echo $ban["id"]; ?>" onclick="bulk_check();"/></td>
+			<td><?php echo $ban["ip_address"]; ?></td>
             <td><?php echo $ban["reason"]; ?></td>
             <td><span style="display:none;"><?php echo date("YmdHis", strtotime($ban["dated"])); ?></span><?php echo date("jS F Y g:ia", strtotime($ban["dated"])); ?></td>
 			<td>
@@ -110,3 +137,11 @@ while ($ban = mysql_fetch_assoc($bans)) {
 
     </tbody>
 </table>
+
+<div style="clear: left;"></div>
+
+<div style="margin-top:10px;"></div>
+
+<?php cmtx_set_csrf_form_key(); ?>
+<input type="submit" class="button" name="bulk_delete" title="<?php echo CMTX_BUTTON_DELETE; ?>" value="<?php echo CMTX_BUTTON_DELETE; ?>" onclick="return delete_bulk_confirmation()"/>
+</form>

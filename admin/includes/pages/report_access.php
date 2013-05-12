@@ -39,7 +39,6 @@ if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 <table id="data" class="display" summary="Access">
     <thead>
     	<tr>
-        	<th><?php echo CMTX_TABLE_ADMIN_ID; ?></th>
 			<th><?php echo CMTX_TABLE_USERNAME; ?></th>
             <th><?php echo CMTX_TABLE_IP_ADDRESS; ?></th>
 			<th><?php echo CMTX_TABLE_PAGE; ?></th>
@@ -53,7 +52,6 @@ $access_log = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "access
 while ($access = mysql_fetch_assoc($access_log)) {
 ?>
     	<tr>
-        	<td><?php echo $access["admin_id"]; ?></td>
 			<td><?php echo cmtx_sanitize($access["username"], true, false); ?></td>
 			<td><?php if (cmtx_setting('is_demo')) { echo "(<i>" . CMTX_TABLE_IP_HIDDEN . "</i>)"; } else { echo $access["ip_address"]; } ?></td>
 			<td><?php echo $access["page"]; ?></td>

@@ -26,6 +26,7 @@ if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 define('CMTX_BUTTON_UPDATE', 'Editar');
 define('CMTX_BUTTON_DELETE', 'Apagar');
+define('CMTX_BUTTON_APPROVE', 'Approve');
 define('CMTX_BUTTON_SPAM', 'Spam');
 define('CMTX_BUTTON_CONFIRM', 'Confirmar');
 define('CMTX_BUTTON_REFRESH', 'Atualizar');

@@ -79,6 +79,29 @@ mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "questions` WHERE `id` 
 <div style="clear: left;"></div>
 <?php } } ?>
 
+<?php
+if (isset($_POST['bulk_delete']) && isset($_POST['bulk']) && cmtx_setting('is_demo')) {
+?>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
+<div style="clear: left;"></div>
+<?php
+} else if (isset($_POST['bulk_delete']) && isset($_POST['bulk'])) {
+cmtx_check_csrf_form_key();
+$items = $_POST['bulk'];
+$count = count($items);
+for ($i = 0; $i < $count; $i++) {
+	$id = $items[$i];
+	$id = cmtx_sanitize($id);
+	mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "questions` WHERE `id` = '$id'");
+}
+?>
+<?php if ($count == 1) { ?><div class="success"><?php echo CMTX_MSG_QUESTION_BULK_DELETED; ?></div><?php } ?>
+<?php if ($count > 1) { ?><div class="success"><?php printf(CMTX_MSG_QUESTIONS_BULK_DELETED, $count); ?></div><?php } ?>
+<div style="clear: left;"></div>
+<?php
+}
+?>
+
 <p />
 
 <form name="add_question" id="add_question" action="index.php?page=layout_form_questions" method="post">
@@ -90,9 +113,12 @@ mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "questions` WHERE `id` 
 
 <br />
 
+<form name="datatables" id="datatables" action="index.php?page=layout_form_questions" method="post">
+
 <table id="data" class="display" summary="Questions">
     <thead>
     	<tr>
+			<th style='width:0px;'><input type="checkbox" name="select_all" id="select_all" onclick="bulk_select();"/></th>
         	<th><?php echo CMTX_TABLE_QUESTION; ?></th>
             <th><?php echo CMTX_TABLE_ANSWER; ?></th>
             <th><?php echo CMTX_TABLE_ACTION; ?></th>
@@ -105,6 +131,7 @@ $questions = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "questio
 while ($question = mysql_fetch_assoc($questions)) {
 ?>
     	<tr>
+			<td><input type="checkbox" name="bulk[]" value="<?php echo $question["id"]; ?>" onclick="bulk_check();"/></td>
         	<td><?php echo $question["question"]; ?></td>
             <td><?php echo $question["answer"]; ?></td>
 			<td>
@@ -116,3 +143,11 @@ while ($question = mysql_fetch_assoc($questions)) {
 
     </tbody>
 </table>
+
+<div style="clear: left;"></div>
+
+<div style="margin-top:10px;"></div>
+
+<?php cmtx_set_csrf_form_key(); ?>
+<input type="submit" class="button" name="bulk_delete" title="<?php echo CMTX_BUTTON_DELETE; ?>" value="<?php echo CMTX_BUTTON_DELETE; ?>" onclick="return delete_bulk_confirmation()"/>
+</form>

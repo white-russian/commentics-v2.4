@@ -25,9 +25,7 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 define('CMTX_PROMPT_PASSWORDS', 'De twee wachtwoorden komen niet overeen.');
-
 define('CMTX_PROMPT_DELETE', 'Weet je zeker dat je dit wilt verwijderen?');
-define('CMTX_PROMPT_DELETE_COMMENT', 'Alle reacties worden verwijderd.\nWeet je het zeker?');
-define('CMTX_PROMPT_DELETE_PAGE', 'De pagina\'s berichten en inschrijvers worden ook verwijderd.\nWeet je het zeker?');
+define('CMTX_PROMPT_DELETE_BULK', 'Are you sure you want to delete the selected items?');
 
 ?>

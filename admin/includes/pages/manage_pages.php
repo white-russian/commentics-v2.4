@@ -78,6 +78,37 @@ mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "comments` WHERE `page_
 <div style="clear: left;"></div>
 <?php } } ?>
 
+<?php
+if (isset($_POST['bulk_delete']) && isset($_POST['bulk']) && cmtx_setting('is_demo')) {
+?>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
+<div style="clear: left;"></div>
+<?php
+} else if (isset($_POST['bulk_delete']) && isset($_POST['bulk'])) {
+cmtx_check_csrf_form_key();
+$items = $_POST['bulk'];
+$count = count($items);
+for ($i = 0; $i < $count; $i++) {
+	$id = $items[$i];
+	$id = cmtx_sanitize($id);
+	mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "pages` WHERE `id` = '$id'");
+	mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "subscribers` WHERE `page_id` = '$id'");
+	$comments = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "comments` WHERE `page_id` = '$id'");
+	while ($comment = mysql_fetch_assoc($comments)) {
+	$comment_id = $comment["id"];
+	mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "voters` WHERE `comment_id` = '$comment_id'");
+	mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "reporters` WHERE `comment_id` = '$comment_id'");
+	}
+	mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "comments` WHERE `page_id` = '$id'");
+}
+?>
+<?php if ($count == 1) { ?><div class="success"><?php echo CMTX_MSG_PAGE_BULK_DELETED; ?></div><?php } ?>
+<?php if ($count > 1) { ?><div class="success"><?php printf(CMTX_MSG_PAGES_BULK_DELETED, $count); ?></div><?php } ?>
+<div style="clear: left;"></div>
+<?php
+}
+?>
+
 <p />
 
 <div id="pages" style="display:none;">
@@ -100,9 +131,12 @@ mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "comments` WHERE `page_
 
 <p />
 
+<form name="datatables" id="datatables" action="index.php?page=manage_pages" method="post">
+
 <table id="data" class="display" summary="Pages">
     <thead>
     	<tr>
+			<th style='width:0px;'><input type="checkbox" name="select_all" id="select_all" onclick="bulk_select();"/></th>
 			<th><?php echo CMTX_TABLE_PAGE_ID; ?></th>
         	<th><?php echo CMTX_TABLE_REFERENCE; ?></th>
             <th><?php echo CMTX_TABLE_URL; ?></th>
@@ -118,6 +152,7 @@ $pages = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "pages` ORDE
 while ($page = mysql_fetch_assoc($pages)) {
 ?>
     	<tr>
+			<td><input type="checkbox" name="bulk[]" value="<?php echo $page["id"]; ?>" onclick="bulk_check();"/></td>
 			<td><?php echo $page["page_id"]; ?></td>
         	<td><?php echo $page["reference"]; ?></td>
             <td><?php echo "<a href='" . $page["url"] . "' target='_blank'>" . $page["url"] . "</a>"; ?></td>
@@ -125,10 +160,18 @@ while ($page = mysql_fetch_assoc($pages)) {
             <td><span style="display:none;"><?php echo date("YmdHis", strtotime($page["dated"])); ?></span><?php echo date("jS F Y g:ia", strtotime($page["dated"])); ?></td>
 			<td>
 			<a href="<?php echo "index.php?page=edit_page&id=" . $page["id"];?>"><img src="images/buttons/edit.png" class="button_edit" title="Edit" alt="Edit"></a>
-			<a href="<?php echo "index.php?page=manage_pages&action=delete&id=" . $page["id"] . "&key=" . $_SESSION['cmtx_csrf_key'];?>"><img src="images/buttons/delete.png" class="button_delete" onclick="return delete_page_confirmation()" title="Delete" alt="Delete"></a>
+			<a href="<?php echo "index.php?page=manage_pages&action=delete&id=" . $page["id"] . "&key=" . $_SESSION['cmtx_csrf_key'];?>"><img src="images/buttons/delete.png" class="button_delete" onclick="return delete_confirmation()" title="Delete" alt="Delete"></a>
 			</td>
         </tr>	
 <?php } ?>
 
     </tbody>
 </table>
+
+<div style="clear: left;"></div>
+
+<div style="margin-top:10px;"></div>
+
+<?php cmtx_set_csrf_form_key(); ?>
+<input type="submit" class="button" name="bulk_delete" title="<?php echo CMTX_BUTTON_DELETE; ?>" value="<?php echo CMTX_BUTTON_DELETE; ?>" onclick="return delete_bulk_confirmation()"/>
+</form>

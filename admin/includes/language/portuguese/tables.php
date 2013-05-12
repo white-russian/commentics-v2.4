@@ -24,9 +24,7 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 
 if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
-define('CMTX_TABLE_ID', 'ID');
 define('CMTX_TABLE_PAGE_ID', 'Page ID');
-define('CMTX_TABLE_ADMIN_ID', 'ID Admin');
 define('CMTX_TABLE_NAME', 'Nome');
 define('CMTX_TABLE_USERNAME', 'Usuário');
 define('CMTX_TABLE_EMAIL', 'Endereço de Email');

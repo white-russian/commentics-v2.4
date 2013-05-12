@@ -108,6 +108,38 @@ mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `id` = '
 <div style="clear: left;"></div>
 <?php } } } ?>
 
+<?php
+if (isset($_POST['bulk_delete']) && isset($_POST['bulk']) && cmtx_setting('is_demo')) {
+?>
+<div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>
+<div style="clear: left;"></div>
+<?php
+} else if (isset($_POST['bulk_delete']) && isset($_POST['bulk'])) {
+cmtx_check_csrf_form_key();
+$items = $_POST['bulk'];
+$count = count($items);
+$success = 0; $failure = 0;
+for ($i = 0; $i < $count; $i++) {
+	$id = $items[$i];
+	$id = cmtx_sanitize($id);
+	if (mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `is_super` = '1' AND `id` = '$id'"))) {
+		$failure ++;
+	} else {
+		mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `id` = '$id'");
+		$success ++;
+	}
+}
+?>
+<?php if ($success == 1) { ?><div class="success"><?php echo CMTX_MSG_ADMIN_BULK_DELETED; ?></div><?php } ?>
+<?php if ($success > 1) { ?><div class="success"><?php printf(CMTX_MSG_ADMINS_BULK_DELETED, $success); ?></div><?php } ?>
+<div style="clear: left;"></div>
+<?php if ($failure == 1) { ?><div class="error"><?php echo CMTX_MSG_ADMIN_BULK_SUP_DEL; ?></div><?php } ?>
+<?php if ($failure > 1) { ?><div class="error"><?php printf(CMTX_MSG_ADMINS_BULK_SUP_DEL, $failure); ?></div><?php } ?>
+<div style="clear: left;"></div>
+<?php
+}
+?>
+
 <p />
 
 <form name="administrator" id="administrator" action="index.php?page=manage_administrators" method="post" onsubmit="return check_passwords()">
@@ -121,10 +153,12 @@ mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `id` = '
 
 <br />
 
+<form name="datatables" id="datatables" action="index.php?page=manage_administrators" method="post">
+
 <table id="data" class="display" summary="Administrators">
     <thead>
     	<tr>
-			<th><?php echo CMTX_TABLE_ID; ?></th>
+			<th style='width:0px;'><input type="checkbox" name="select_all" id="select_all" onclick="bulk_select();"/></th>
 			<th><?php echo CMTX_TABLE_USERNAME; ?></th>
             <th><?php echo CMTX_TABLE_EMAIL; ?></th>
 			<th><?php echo CMTX_TABLE_ENABLED; ?></th>
@@ -141,7 +175,7 @@ $administrators = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "ad
 while ($administrator = mysql_fetch_assoc($administrators)) {
 ?>
     	<tr>
-			<td><?php echo $administrator["id"]; ?></td>
+			<td><input type="checkbox" name="bulk[]" value="<?php echo $administrator["id"]; ?>" onclick="bulk_check();"/></td>
         	<td><?php echo cmtx_sanitize($administrator["username"], true, false); ?></td>
             <td><?php echo $administrator["email"]; ?></td>
 			<td><?php if ($administrator["is_enabled"]) { echo CMTX_TABLE_YES; } else { echo CMTX_TABLE_NO; } ?></td>
@@ -157,3 +191,11 @@ while ($administrator = mysql_fetch_assoc($administrators)) {
 
     </tbody>
 </table>
+
+<div style="clear: left;"></div>
+
+<div style="margin-top:10px;"></div>
+
+<?php cmtx_set_csrf_form_key(); ?>
+<input type="submit" class="button" name="bulk_delete" title="<?php echo CMTX_BUTTON_DELETE; ?>" value="<?php echo CMTX_BUTTON_DELETE; ?>" onclick="return delete_bulk_confirmation()"/>
+</form>

@@ -325,7 +325,7 @@ cmtx_generate_hint(CMTX_HINT_VERIFY);
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
 <input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>
-<input type="button" class="button" name="delete" onclick="if(delete_comment_confirmation()){window.location='index.php?page=manage_comments&action=delete&id=<?php echo $id . "&key=" . $_SESSION['cmtx_csrf_key']?>'};" title="<?php echo CMTX_BUTTON_DELETE; ?>" value="<?php echo CMTX_BUTTON_DELETE; ?>"/>
+<input type="button" class="button" name="delete" onclick="if(delete_confirmation()){window.location='index.php?page=manage_comments&action=delete&id=<?php echo $id . "&key=" . $_SESSION['cmtx_csrf_key']?>'};" title="<?php echo CMTX_BUTTON_DELETE; ?>" value="<?php echo CMTX_BUTTON_DELETE; ?>"/>
 <input type="button" class="button" name="spam" onclick="window.location='index.php?page=spam&id=<?php echo $id ?>';" title="<?php echo CMTX_BUTTON_SPAM; ?>" value="<?php echo CMTX_BUTTON_SPAM; ?>"/>
 </form>
 

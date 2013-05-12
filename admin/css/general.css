@@ -29,6 +29,7 @@ font: bold 12px arial,helvetica,sans-serif;
 padding: 1px 7px 2px;
 text-align: center !important;
 white-space: nowrap;
+margin-right: 2px;
 }
 
 span.positive {

@@ -96,13 +96,13 @@ $(document).ready(function() {
 $('#data').dataTable( {
 "aaSorting": [ ]
 <?php switch ($_GET['page']) { ?>
-<?php case "manage_comments":?>,"aoColumns": [null,null,null,null,<?php if (cmtx_setting('enabled_notify')) { echo "null,"; } if (cmtx_setting('show_flag')) { echo "null,null,"; } ?>null,{ "bSearchable": false }] <?php break; ?>
-<?php case "manage_pages": ?>,"aoColumns": [null,null,null,null,null,{ "bSearchable": false }] <?php break; ?>
-<?php case "manage_administrators": ?>,"aoColumns": [null,null,null,null,null,null,null,{ "bSearchable": false }] <?php break; ?>
-<?php case "manage_bans": ?>,"aoColumns": [null,null,null,{ "bSearchable": false }] <?php break; ?>
-<?php case "manage_subscribers": ?>,"aoColumns": [null,null,null,null,null,{ "bSearchable": false }] <?php break; ?>
-<?php case "layout_form_questions": ?>,"aoColumns": [null,null,{ "bSearchable": false }] <?php break; ?>
-<?php case "tool_db_backup": ?>,"aoColumns": [null,null,null,{ "bSearchable": false }] <?php break; ?>
+<?php case "manage_comments":?>,"aoColumns": [{ "bSearchable": false, "bSortable": false },null,null,null,null,<?php if (cmtx_setting('enabled_notify')) { echo "null,"; } if (cmtx_setting('show_flag')) { echo "null,null,"; } ?>null,{ "bSearchable": false, "bSortable": false }] <?php break; ?>
+<?php case "manage_pages": ?>,"aoColumns": [{ "bSearchable": false, "bSortable": false },null,null,null,null,null,{ "bSearchable": false, "bSortable": false }] <?php break; ?>
+<?php case "manage_administrators": ?>,"aoColumns": [{ "bSearchable": false, "bSortable": false },null,null,null,null,null,null,{ "bSearchable": false, "bSortable": false }] <?php break; ?>
+<?php case "manage_bans": ?>,"aoColumns": [{ "bSearchable": false, "bSortable": false },null,null,null,{ "bSearchable": false, "bSortable": false }] <?php break; ?>
+<?php case "manage_subscribers": ?>,"aoColumns": [{ "bSearchable": false, "bSortable": false },null,null,null,null,null,{ "bSearchable": false, "bSortable": false }] <?php break; ?>
+<?php case "layout_form_questions": ?>,"aoColumns": [{ "bSearchable": false, "bSortable": false },null,null,{ "bSearchable": false, "bSortable": false }] <?php break; ?>
+<?php case "tool_db_backup": ?>,"aoColumns": [{ "bSearchable": false, "bSortable": false },null,null,null,{ "bSearchable": false, "bSortable": false }] <?php break; ?>
 <?php } ?>
 } );
 } );
@@ -186,21 +186,8 @@ return false;
 
 <script type="text/javascript">
 // <![CDATA[
-function delete_comment_confirmation() {
-var answer = confirm('<?php echo cmtx_escape_js(CMTX_PROMPT_DELETE_COMMENT) ?>')
-if (answer) {
-return true;
-} else {
-return false;
-}
-}
-// ]]>
-</script>
-
-<script type="text/javascript">
-// <![CDATA[
-function delete_page_confirmation() {
-var answer = confirm('<?php echo cmtx_escape_js(CMTX_PROMPT_DELETE_PAGE) ?>')
+function delete_bulk_confirmation() {
+var answer = confirm('<?php echo cmtx_escape_js(CMTX_PROMPT_DELETE_BULK) ?>')
 if (answer) {
 return true;
 } else {
@@ -247,6 +234,40 @@ if (id == "php") {
 	} else {
 		document.getElementById('gravatar_custom').style.display = "none";
 	}
+}
+}
+// ]]>
+</script>
+
+<script type="text/javascript">
+// <![CDATA[
+function bulk_select() {
+if (document.getElementById('select_all').checked) {
+	for (var i = 0; i < document.getElementById('datatables').elements.length; i++) {
+		document.getElementById('datatables').elements[i].checked = true;
+	}
+} else {
+	for (var i = 0; i < document.getElementById('datatables').elements.length; i++) {
+		document.getElementById('datatables').elements[i].checked = false;
+	}
+}
+}
+// ]]>
+</script>
+
+<script type="text/javascript">
+// <![CDATA[
+function bulk_check() {
+var all_checked = true;
+for (var i = 0; i < document.getElementById('datatables').elements.length; i++) {
+	if (document.getElementById('datatables').elements[i].type == 'checkbox' && document.getElementById('datatables').elements[i].id != 'select_all'  && !document.getElementById('datatables').elements[i].checked) {
+		all_checked = false;
+	}
+}
+if (all_checked) {
+	document.getElementById('select_all').checked = true;
+} else {
+	document.getElementById('select_all').checked = false;
 }
 }
 // ]]>
