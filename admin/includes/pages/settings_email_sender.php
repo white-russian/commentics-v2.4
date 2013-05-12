@@ -33,6 +33,15 @@ if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 <hr class="title"/>
 
 <?php
+if (isset($_GET['notice']) && $_GET['notice'] == "dismiss" && cmtx_check_csrf_url_key()) {
+mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '0' WHERE `title` = 'notice_settings_email_sender'");
+} else {
+if (cmtx_setting('notice_settings_email_sender')) { ?>
+<div class="info"><?php echo CMTX_MSG_NOTICE_SETTINGS_EMAIL_SENDER . " <a href='index.php?page=settings_email_sender&notice=dismiss&key=" . $_SESSION['cmtx_csrf_key'] . "'>" . CMTX_LINK_DISMISS . "</a>"; ?></div>
+<div style="clear: left;"></div>
+<?php } } ?>
+
+<?php
 if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 ?>
 <div class="warning"><?php echo CMTX_MSG_DEMO; ?></div>

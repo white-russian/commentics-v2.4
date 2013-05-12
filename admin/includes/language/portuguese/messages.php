@@ -107,6 +107,7 @@ define('CMTX_MSG_NOTICE_MANAGE_COMMENTS', 'Para melhorar o desempenho, apenas os
 define('CMTX_MSG_NOTICE_LAYOUT_FORM_SIZES_MAXIMUMS', 'Os tamanhos de campo são controlados e substituído pelo estilo CSS.');
 define('CMTX_MSG_NOTICE_LAYOUT_FORM_QUESTIONS', 'Answers are case-insensitive. Separate multiple answers with the | character.');
 define('CMTX_MSG_NOTICE_SETTINGS_ADMIN_DETECTION', 'Posting as the admin has <a href="http://www.commentics.org/wiki/doku.php?id=admin:settings_admin_detection" target="_blank">differences</a>.');
+define('CMTX_MSG_NOTICE_SETTINGS_EMAIL_SENDER', 'The "<b>From Email</b>" should be a registered address.');
 
 define('CMTX_MSG_RECORD_MISSING', 'Not found.');
 
