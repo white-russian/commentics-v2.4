@@ -56,11 +56,12 @@ define('CMTX_MSG_ADMIN_DELETED', 'Administrator verwijderd.');
 define('CMTX_MSG_ADMIN_BULK_DELETED', '1 administrator deleted.');
 define('CMTX_MSG_ADMINS_BULK_DELETED', '%d administrators deleted.');
 define('CMTX_MSG_ADMIN_EXISTS', 'Gebruikersnaam bestaat al.');
-define('CMTX_MSG_ADMIN_SUP_DEL', 'De super admin kan niet worden verwijderd.');
-define('CMTX_MSG_ADMIN_BULK_SUP_DEL', '1 super administrator could not be deleted.');
-define('CMTX_MSG_ADMINS_BULK_SUP_DEL', '&d super administrator could not be deleted.');
-define('CMTX_MSG_ADMIN_SUP_DIS', 'De super admin kan niet worden uitgeschakeld.');
-define('CMTX_MSG_ADMIN_ONLY', 'Sorry, alleen de super admin heeft toegang tot deze pagina.');
+define('CMTX_MSG_ADMIN_SUPER_DELETE', 'De super admin kan niet worden verwijderd.');
+define('CMTX_MSG_ADMIN_BULK_SUPER_DELETE', '1 super administrator could not be deleted.');
+define('CMTX_MSG_ADMINS_BULK_SUPER_DELETE', '&d super administrator could not be deleted.');
+define('CMTX_MSG_ADMIN_SUPER_DISABLE', 'The super administrator can not be disabled.');
+define('CMTX_MSG_ADMIN_SUPER_RESTRICT', 'The super administrator can not be restricted.');
+define('CMTX_MSG_ADMIN_SUPER_ONLY', 'Sorry, alleen de super admin heeft toegang tot deze pagina.');
 
 define('CMTX_MSG_BAN_ADDED', 'Ban-blokkering toegevoegd.');
 define('CMTX_MSG_BAN_UPDATED', 'Ban updated.');

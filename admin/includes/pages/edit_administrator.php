@@ -35,7 +35,7 @@ if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 <?php
 $admin_id = cmtx_get_admin_id();
 if (mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `is_super` = '1' AND `id` = '$admin_id'")) == 0) {
-die("<p />" . CMTX_MSG_ADMIN_ONLY);
+die("<p />" . CMTX_MSG_ADMIN_SUPER_ONLY);
 }
 ?>
 
@@ -86,10 +86,17 @@ if (mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "a
 <div style="clear: left;"></div>
 <?php
 
-} else if ((!$is_enabled || $restrict_pages) && mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `is_super` = '1' AND `id` = '$id_san'"))) {
+} else if ((!$is_enabled) && mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `is_super` = '1' AND `id` = '$id_san'"))) {
 
 ?>
-<div class="error"><?php echo CMTX_MSG_ADMIN_SUP_DIS; ?></div>
+<div class="error"><?php echo CMTX_MSG_ADMIN_SUPER_DISABLE; ?></div>
+<div style="clear: left;"></div>
+<?php
+
+} else if (($restrict_pages) && mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `is_super` = '1' AND `id` = '$id_san'"))) {
+
+?>
+<div class="error"><?php echo CMTX_MSG_ADMIN_SUPER_RESTRICT; ?></div>
 <div style="clear: left;"></div>
 <?php
 

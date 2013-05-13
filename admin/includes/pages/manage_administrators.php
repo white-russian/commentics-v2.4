@@ -35,7 +35,7 @@ if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 <?php
 $admin_id = cmtx_get_admin_id();
 if (mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `is_super` = '1' AND `id` = '$admin_id'")) == 0) {
-die("<p />" . CMTX_MSG_ADMIN_ONLY);
+die("<p />" . CMTX_MSG_ADMIN_SUPER_ONLY);
 }
 ?>
 
@@ -98,7 +98,7 @@ $id = $_GET['id'];
 $id = cmtx_sanitize($id);
 if (mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "admins` WHERE `is_super` = '1' AND `id` = '$id'"))) {
 ?>
-<div class="error"><?php echo CMTX_MSG_ADMIN_SUP_DEL; ?></div>
+<div class="error"><?php echo CMTX_MSG_ADMIN_SUPER_DELETE; ?></div>
 <div style="clear: left;"></div>
 <?php
 } else {
@@ -133,8 +133,8 @@ for ($i = 0; $i < $count; $i++) {
 <?php if ($success == 1) { ?><div class="success"><?php echo CMTX_MSG_ADMIN_BULK_DELETED; ?></div><?php } ?>
 <?php if ($success > 1) { ?><div class="success"><?php printf(CMTX_MSG_ADMINS_BULK_DELETED, $success); ?></div><?php } ?>
 <div style="clear: left;"></div>
-<?php if ($failure == 1) { ?><div class="error"><?php echo CMTX_MSG_ADMIN_BULK_SUP_DEL; ?></div><?php } ?>
-<?php if ($failure > 1) { ?><div class="error"><?php printf(CMTX_MSG_ADMINS_BULK_SUP_DEL, $failure); ?></div><?php } ?>
+<?php if ($failure == 1) { ?><div class="error"><?php echo CMTX_MSG_ADMIN_BULK_SUPER_DELETE; ?></div><?php } ?>
+<?php if ($failure > 1) { ?><div class="error"><?php printf(CMTX_MSG_ADMINS_BULK_SUPER_DELETE, $failure); ?></div><?php } ?>
 <div style="clear: left;"></div>
 <?php
 }
