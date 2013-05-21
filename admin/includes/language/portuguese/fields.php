@@ -25,8 +25,6 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 /* Labels */
-define('CMTX_FIELD_LABEL_ID', 'ID:');
-define('CMTX_FIELD_LABEL_PAGE_ID', 'Page ID:');
 define('CMTX_FIELD_LABEL_USER', 'Usuário:');
 define('CMTX_FIELD_LABEL_USERNAME', 'Usuário:');
 define('CMTX_FIELD_LABEL_NAME', 'Nome:');
@@ -63,6 +61,7 @@ define('CMTX_FIELD_LABEL_FLAG', 'Marcar:');
 define('CMTX_FIELD_LABEL_REASON', 'Razão:');
 define('CMTX_FIELD_LABEL_CONFIRMED', 'Confirmado:');
 define('CMTX_FIELD_LABEL_PAGE', 'Página:');
+define('CMTX_FIELD_LABEL_IDENTIFIER', 'Identifier:');
 define('CMTX_FIELD_LABEL_REFERENCE', 'Referência:');
 define('CMTX_FIELD_LABEL_URL', 'URL:');
 define('CMTX_FIELD_LABEL_ENABLED', 'Habilitado:');

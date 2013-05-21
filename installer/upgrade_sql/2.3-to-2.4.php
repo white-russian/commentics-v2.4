@@ -53,6 +53,8 @@ mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`,
 
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('notice', 'notice_settings_email_sender', '1');");
 
+mysql_query("ALTER TABLE `" . $cmtx_mysql_table_prefix . "pages` CHANGE `page_id` `identifier` varchar(250) NOT NULL default ''");
+
 if (mysql_errno()) {
 echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;

@@ -127,187 +127,226 @@ function cmtx_strip_slashes ($value) { //strip slashes
 } //end of strip-slashes function
 
 
-function cmtx_validate_page_id() { //validate page ID
+function cmtx_set_page_id() { //set the Page ID
 
-	global $cmtx_page_id, $cmtx_reference, $cmtx_parameters, $cmtx_mysql_table_prefix; //globalise variables
+	global $cmtx_page_id; //globalise variables
 
-	if (!isset($cmtx_page_id) || empty($cmtx_page_id)) { //if no page ID
+	cmtx_validate_identifier(); //validate identifier
+	cmtx_establish_identifier(); //establish identifier
+	
+	if (cmtx_page_exists()) { //if the page exists
+		$cmtx_page_id = cmtx_get_page_id(); //set its ID
+	} else { //if the page does not exist
+		if (cmtx_setting('delay_pages')) { //don't create the page yet
+			$cmtx_page_id = ''; //set a blank ID
+		} else {
+			cmtx_create_page(); //create the page
+		}
+	}
 
-		?><span class="cmtx_page_id_alert"><?php echo CMTX_ALERT_MESSAGE_NO_PAGE_ID;?></span><?php
+} //end of set-page-id function
+
+
+function cmtx_validate_identifier() { //validate identifier
+
+	global $cmtx_identifier; //globalise variables
+
+	$cmtx_identifier = trim($cmtx_identifier); //remove any space at beginning and end
+	
+	if (empty($cmtx_identifier)) { //if no identifier
+
+		echo "<h3>Commentics</h3>";
+		echo "<div style='margin-bottom: 10px;'></div>";
+		?><span class="cmtx_identifier_alert"><?php echo CMTX_ALERT_MESSAGE_NO_IDENTIFIER;?></span><?php
 		die();
 
-	} else if ($cmtx_page_id == "cmtx_system_page") { //if a system page
+	} else if (cmtx_strlen($cmtx_identifier) > 250) { //if invalid identifier
 
-		?><span class="cmtx_page_id_alert"><?php echo CMTX_ALERT_MESSAGE_INVALID_PAGE_ID;?></span><?php
-		die();
-
-	} else if (cmtx_strlen($cmtx_page_id) < 250) { //if page ID validates
-
-		//get URL
-		$url = "http" . ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "s" : "") . "://" . strtolower($_SERVER['HTTP_HOST']) . $_SERVER['REQUEST_URI'];
-		$url = cmtx_url_decode($url);
-		if (cmtx_setting('lower_pages')) {
-			$url = strtolower($url);
-		}
-
-		//remove URL parameters if configured
-		if (isset($cmtx_parameters)) {
-			if (empty($cmtx_parameters) || $cmtx_parameters == "none") {
-				$url = strtok($url, "?");
-			} else {
-				$queries = explode(",", $cmtx_parameters);
-				$query_string = "";
-				foreach ($queries as $query) {
-					if (isset($_GET[$query])) { $query_string .= $query . "=" . $_GET[$query] . "&"; } else { die(); }
-				}
-				if (preg_match('/[&$]/i', $query_string)) { //if query ends in &
-					$query_string = substr($query_string, 0, -1); //remove &
-				}
-				$url = strtok($url, "?");
-				$url .= "?" . $query_string;
-			}
-		}
-
-		//ensure reference is set
-		if (!isset($cmtx_reference)) {
-			$cmtx_reference = "";
-		}
-
-		//get page title
-		if (stristr($cmtx_page_id, "cmtx_title") || stristr($cmtx_reference, "cmtx_title")) {
-			if (cmtx_get_ip_address() == "127.0.0.1") { //if on localhost
-				$path = $_SERVER['SCRIPT_FILENAME'];
-			} else {
-				$path = cmtx_url_encode($url);
-			}
-			if ((bool)ini_get('allow_url_fopen')) {
-				$file = file_get_contents($path);
-			} else if (extension_loaded('curl') && cmtx_get_ip_address() != "127.0.0.1") { //if cURL is available and not on localhost
-				$ch = curl_init();
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				curl_setopt($ch, CURLOPT_HEADER, false);
-				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-				curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
-				curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-				curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-				curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)");
-				curl_setopt($ch, CURLOPT_URL, $path);
-				$file = curl_exec($ch);
-				curl_close($ch);
-			}
-			if (isset($file)) {
-				if (preg_match("/<title>(.+)<\/title>/i", $file, $match)) {
-					$cmtx_page_id = str_ireplace("cmtx_title", $match[1], $cmtx_page_id);
-					$cmtx_reference = str_ireplace("cmtx_title", $match[1], $cmtx_reference);
-				} else {
-					$cmtx_page_id = str_ireplace("cmtx_title", "Title not found", $cmtx_page_id);
-					$cmtx_reference = str_ireplace("cmtx_title", "Title not found", $cmtx_reference);
-				}
-			} else {
-				$cmtx_page_id = str_ireplace("cmtx_title", "Server incapable", $cmtx_page_id);
-				$cmtx_reference = str_ireplace("cmtx_title", "Server incapable", $cmtx_reference);
-			}
-		}
-
-		//get page filename
-		if (stristr($cmtx_page_id, "cmtx_filename") || stristr($cmtx_reference, "cmtx_filename")) {
-			if (isset($_SERVER['SCRIPT_NAME'])) {
-				$cmtx_page_id = str_ireplace("cmtx_filename", $_SERVER['SCRIPT_NAME'], $cmtx_page_id);
-				$cmtx_reference = str_ireplace("cmtx_filename", basename($_SERVER['SCRIPT_NAME']), $cmtx_reference);
-			} else {
-				$cmtx_page_id = str_ireplace("cmtx_filename", "Server incapable", $cmtx_page_id);
-				$cmtx_reference = str_ireplace("cmtx_filename", "Server incapable", $cmtx_reference);
-			}
-		}
-
-		//set page ID as reference
-		if (stristr($cmtx_page_id, "cmtx_reference")) {
-			$cmtx_page_id = str_ireplace("cmtx_reference", $cmtx_reference, $cmtx_page_id);
-		}
-
-		//set reference as page ID
-		if (stristr($cmtx_reference, "cmtx_page_id")) {
-			$cmtx_reference = str_ireplace("cmtx_page_id", $cmtx_page_id, $cmtx_reference);
-		}
-
-		//set reference as URL
-		if (stristr($cmtx_reference, "cmtx_url")) {
-			$cmtx_reference = str_ireplace("cmtx_url", $cmtx_url, $cmtx_reference);
-		}
-
-		//set page ID as URL
-		if (stristr($cmtx_page_id, "cmtx_url")) {
-			$cmtx_temp = $url;
-			$cmtx_temp = str_ireplace("www.", "", $cmtx_temp); //remove 'www.' if there
-			$cmtx_temp = str_ireplace("index.php", "", $cmtx_temp); //remove 'index.php' if there
-			$cmtx_temp = str_ireplace("index.htm", "", $cmtx_temp); //remove 'index.htm' if there
-			$cmtx_temp = str_ireplace("index.html", "", $cmtx_temp); //remove 'index.html' if there
-			$cmtx_temp = str_ireplace("index.shtml", "", $cmtx_temp); //remove 'index.shtml' if there
-			$cmtx_temp = str_ireplace("https://", "http://", $cmtx_temp); //remove SSL if there
-			$cmtx_temp = preg_replace("/&cmtx_page=[0-9]*/", "", $cmtx_temp); //remove cmtx_page=x if there (1)
-			$cmtx_temp = preg_replace("/cmtx_page=[0-9]*&/", "", $cmtx_temp); //remove cmtx_page=x if there (2)
-			$cmtx_temp = preg_replace("/cmtx_page=[0-9]*/", "", $cmtx_temp); //remove cmtx_page=x if there (3)
-			$cmtx_temp = preg_replace("/&cmtx_sort=[0-9]*/", "", $cmtx_temp); //remove cmtx_sort=x if there (1)
-			$cmtx_temp = preg_replace("/cmtx_sort=[0-9]*&/", "", $cmtx_temp); //remove cmtx_sort=x if there (2)
-			$cmtx_temp = preg_replace("/cmtx_sort=[0-9]*/", "", $cmtx_temp); //remove cmtx_sort=x if there (3)
-			$cmtx_temp = preg_replace("/&cmtx_perm=[0-9]*/", "", $cmtx_temp); //remove cmtx_perm=x if there (1)
-			$cmtx_temp = preg_replace("/cmtx_perm=[0-9]*&/", "", $cmtx_temp); //remove cmtx_perm=x if there (2)
-			$cmtx_temp = preg_replace("/cmtx_perm=[0-9]*/", "", $cmtx_temp); //remove cmtx_perm=x if there (3)
-			$cmtx_temp = strtolower($cmtx_temp); //convert to lowercase
-			$cmtx_page_id = str_ireplace("cmtx_url", $cmtx_temp, $cmtx_page_id);
-		}
-
-		//sanitize data
-		$cmtx_page_id = cmtx_sanitize($cmtx_page_id, true, true);
-		
-		$cmtx_reference = cmtx_sanitize($cmtx_reference, true, true);
-		
-		$url = cmtx_url_encode_spaces($url); //encode spaces
-		$url = cmtx_sanitize($url, true, true);
-
-		if (mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "pages` WHERE `page_id` = '$cmtx_page_id'"))) { //if ID is found
-
-			$query = mysql_query("SELECT `id` FROM `" . $cmtx_mysql_table_prefix . "pages` WHERE `page_id` = '$cmtx_page_id'"); //get real ID
-			$result = mysql_fetch_assoc($query);
-			$cmtx_page_id = $result["id"];
-			return $cmtx_page_id;
-
-		} else { //create page
-
-			if (cmtx_setting('delay_pages')) {
-
-				if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['cmtx_preview']) || isset($_POST['cmtx_prev'])) {
-
-					mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "pages` (`page_id`, `reference`, `url`, `is_form_enabled`, `dated`) VALUES ('$cmtx_page_id', '$cmtx_reference', '$url', 1, NOW())");
-
-					return mysql_insert_id();
-
-				} else {
-
-					return "cmtx_system_page";
-
-				}
-
-			} else {
-
-				mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "pages` (`page_id`, `reference`, `url`, `is_form_enabled`, `dated`) VALUES ('$cmtx_page_id', '$cmtx_reference', '$url', 1, NOW())");
-
-				return mysql_insert_id();
-
-			}
-
-		}
-
-	} else { //page ID did not validate
-
-		?><span class="cmtx_page_id_alert"><?php echo CMTX_ALERT_MESSAGE_INVALID_PAGE_ID;?></span><?php
+		echo "<h3>Commentics</h3>";
+		echo "<div style='margin-bottom: 10px;'></div>";
+		?><span class="cmtx_identifier_alert"><?php echo CMTX_ALERT_MESSAGE_INVALID_IDENTIFIER;?></span><?php
 		die();
 
 	}
 
-} //end of validate-page-id function
+} //end of validate-identifier function
+
+
+function cmtx_establish_identifier() { //establish identifier
+
+	global $cmtx_identifier, $cmtx_reference, $cmtx_parameters; //globalise variables
+
+	//get URL
+	$url = cmtx_url_decode(cmtx_current_page());
+
+	//remove URL parameters if configured
+	if (isset($cmtx_parameters)) {
+		if (empty($cmtx_parameters) || $cmtx_parameters == "none") {
+			$url = strtok($url, "?");
+		} else {
+			$queries = explode(",", $cmtx_parameters);
+			$query_string = "";
+			foreach ($queries as $query) {
+				if (isset($_GET[$query])) { $query_string .= $query . "=" . $_GET[$query] . "&"; } else { die(); }
+			}
+			if (preg_match('/[&$]/i', $query_string)) { //if query ends in &
+				$query_string = substr($query_string, 0, -1); //remove &
+			}
+			$url = strtok($url, "?");
+			$url .= "?" . $query_string;
+		}
+	}
+
+	//ensure reference is set
+	if (!isset($cmtx_reference)) {
+		$cmtx_reference = "";
+	}
+
+	//get page title
+	if (stristr($cmtx_identifier, "cmtx_title") || stristr($cmtx_reference, "cmtx_title")) {
+		if (cmtx_get_ip_address() == "127.0.0.1") { //if on localhost
+			$path = $_SERVER['SCRIPT_FILENAME'];
+		} else {
+			$path = cmtx_url_encode($url);
+		}
+		if ((bool)ini_get('allow_url_fopen')) {
+			$file = file_get_contents($path);
+		} else if (extension_loaded('curl') && cmtx_get_ip_address() != "127.0.0.1") { //if cURL is available and not on localhost
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_HEADER, false);
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+			curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+			curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)");
+			curl_setopt($ch, CURLOPT_URL, $path);
+			$file = curl_exec($ch);
+			curl_close($ch);
+		}
+		if (isset($file)) {
+			if (preg_match("/<title>(.+)<\/title>/i", $file, $match)) {
+				$cmtx_identifier = str_ireplace("cmtx_title", $match[1], $cmtx_identifier);
+				$cmtx_reference = str_ireplace("cmtx_title", $match[1], $cmtx_reference);
+			} else {
+				$cmtx_identifier = str_ireplace("cmtx_title", "Title not found", $cmtx_identifier);
+				$cmtx_reference = str_ireplace("cmtx_title", "Title not found", $cmtx_reference);
+			}
+		} else {
+			$cmtx_identifier = str_ireplace("cmtx_title", "Server incapable", $cmtx_identifier);
+			$cmtx_reference = str_ireplace("cmtx_title", "Server incapable", $cmtx_reference);
+		}
+	}
+
+	//get page filename
+	if (stristr($cmtx_identifier, "cmtx_filename") || stristr($cmtx_identifier, "cmtx_filename")) {
+		if (isset($_SERVER['SCRIPT_NAME'])) {
+			$cmtx_identifier = str_ireplace("cmtx_filename", $_SERVER['SCRIPT_NAME'], $cmtx_identifier);
+			$cmtx_reference = str_ireplace("cmtx_filename", basename($_SERVER['SCRIPT_NAME']), $cmtx_reference);
+		} else {
+			$cmtx_identifier = str_ireplace("cmtx_filename", "Server incapable", $cmtx_identifier);
+			$cmtx_reference = str_ireplace("cmtx_filename", "Server incapable", $cmtx_reference);
+		}
+	}
+
+	//set identifier as reference
+	if (stristr($cmtx_identifier, "cmtx_reference")) {
+		$cmtx_identifier = str_ireplace("cmtx_reference", $cmtx_reference, $cmtx_identifier);
+	}
+
+	//set reference as identifier
+	if (stristr($cmtx_reference, "cmtx_identifier")) {
+		$cmtx_reference = str_ireplace("cmtx_identifier", $cmtx_identifier, $cmtx_reference);
+	}
+
+	//set reference as URL
+	if (stristr($cmtx_reference, "cmtx_url")) {
+		$cmtx_reference = str_ireplace("cmtx_url", $cmtx_url, $cmtx_reference);
+	}
+
+	//set identifier as URL
+	if (stristr($cmtx_identifier, "cmtx_url")) {
+		$cmtx_temp = $url;
+		$cmtx_temp = str_ireplace("www.", "", $cmtx_temp); //remove 'www.' if there
+		$cmtx_temp = str_ireplace("index.php", "", $cmtx_temp); //remove 'index.php' if there
+		$cmtx_temp = str_ireplace("index.htm", "", $cmtx_temp); //remove 'index.htm' if there
+		$cmtx_temp = str_ireplace("index.html", "", $cmtx_temp); //remove 'index.html' if there
+		$cmtx_temp = str_ireplace("index.shtml", "", $cmtx_temp); //remove 'index.shtml' if there
+		$cmtx_temp = str_ireplace("https://", "http://", $cmtx_temp); //remove SSL if there
+		$cmtx_temp = preg_replace("/&cmtx_page=[0-9]*/", "", $cmtx_temp); //remove cmtx_page=x if there (1)
+		$cmtx_temp = preg_replace("/cmtx_page=[0-9]*&/", "", $cmtx_temp); //remove cmtx_page=x if there (2)
+		$cmtx_temp = preg_replace("/cmtx_page=[0-9]*/", "", $cmtx_temp); //remove cmtx_page=x if there (3)
+		$cmtx_temp = preg_replace("/&cmtx_sort=[0-9]*/", "", $cmtx_temp); //remove cmtx_sort=x if there (1)
+		$cmtx_temp = preg_replace("/cmtx_sort=[0-9]*&/", "", $cmtx_temp); //remove cmtx_sort=x if there (2)
+		$cmtx_temp = preg_replace("/cmtx_sort=[0-9]*/", "", $cmtx_temp); //remove cmtx_sort=x if there (3)
+		$cmtx_temp = preg_replace("/&cmtx_perm=[0-9]*/", "", $cmtx_temp); //remove cmtx_perm=x if there (1)
+		$cmtx_temp = preg_replace("/cmtx_perm=[0-9]*&/", "", $cmtx_temp); //remove cmtx_perm=x if there (2)
+		$cmtx_temp = preg_replace("/cmtx_perm=[0-9]*/", "", $cmtx_temp); //remove cmtx_perm=x if there (3)
+		$cmtx_temp = strtolower($cmtx_temp); //convert to lowercase
+		$cmtx_identifier = str_ireplace("cmtx_url", $cmtx_temp, $cmtx_identifier);
+	}
+
+} //end of establish-identifier function
+
+
+function cmtx_page_exists() { //check if the page exists
+
+	global $cmtx_identifier, $cmtx_mysql_table_prefix; //globalise variables
+	
+	//sanitize data
+	$cmtx_identifier = cmtx_sanitize($cmtx_identifier, true, true);
+
+	if (mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "pages` WHERE `identifier` = '$cmtx_identifier'"))) { //if page exists
+		return true;
+	} else {
+		return false;
+	}
+
+} //end of page-exists function
+
+
+function cmtx_get_page_id() { //get the page ID
+
+	global $cmtx_identifier, $cmtx_mysql_table_prefix; //globalise variables
+	
+	//sanitize data
+	$cmtx_identifier = cmtx_sanitize($cmtx_identifier, true, true);
+
+	$query = mysql_query("SELECT `id` FROM `" . $cmtx_mysql_table_prefix . "pages` WHERE `identifier` = '$cmtx_identifier'"); //get page ID
+	$result = mysql_fetch_assoc($query);
+	$cmtx_page_id = $result["id"];
+	
+	return $cmtx_page_id;
+
+} //end of get-page-id function
+
+
+function cmtx_create_page() { //create page
+
+	global $cmtx_identifier, $cmtx_reference, $cmtx_mysql_table_prefix, $cmtx_page_id; //globalise variables
+	
+	//get URL
+	$url = cmtx_url_decode(cmtx_current_page());
+	
+	if (cmtx_setting('lower_pages')) {
+		$url = strtolower($url);
+	}
+	
+	//sanitize data
+	$cmtx_identifier = cmtx_sanitize($cmtx_identifier, true, true);
+	
+	$cmtx_reference = cmtx_sanitize($cmtx_reference, true, true);
+	
+	$url = cmtx_url_encode_spaces($url); //encode spaces
+	$url = cmtx_sanitize($url, true, true);
+
+	mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "pages` (`identifier`, `reference`, `url`, `is_form_enabled`, `dated`) VALUES ('$cmtx_identifier', '$cmtx_reference', '$url', 1, NOW())");
+
+	$cmtx_page_id = mysql_insert_id();
+
+} //end of create-page function
 
 
 function cmtx_get_page_reference() { //get page reference
@@ -537,23 +576,19 @@ function cmtx_get_random_key ($length) { //generates a random key
 
 function cmtx_add_viewer() { //add viewer to database
 
-	global $cmtx_mysql_table_prefix, $cmtx_page_id; //globalise variables
+	global $cmtx_mysql_table_prefix, $cmtx_reference; //globalise variables
 
-	if ($cmtx_page_id != "cmtx_system_page") {
+	$ip_address = cmtx_get_ip_address();
+	$user_agent = cmtx_get_user_agent();
+	$page_reference = cmtx_sanitize($cmtx_reference, true, true);
+	$page_url = cmtx_sanitize(cmtx_current_page(), true, true);
 
-		$ip_address = cmtx_get_ip_address();
-		$user_agent = cmtx_get_user_agent();
-		$page_reference = cmtx_sanitize(cmtx_get_page_reference(), false, true);
-		$page_url = cmtx_sanitize(cmtx_get_page_url(), false, true);
+	$timestamp = time();
+	$timeout = $timestamp - cmtx_setting('viewers_timeout');
 
-		$timestamp = time();
-		$timeout = $timestamp - cmtx_setting('viewers_timeout');
-
-		mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "viewers` WHERE `timestamp` < '$timeout'");
-		mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "viewers` WHERE `ip_address` = '$ip_address'");
-		mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "viewers` (`user_agent`, `ip_address`, `page_reference`, `page_url`, `timestamp`) VALUES ('$user_agent', '$ip_address', '$page_reference', '$page_url', '$timestamp')");
-
-	}
+	mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "viewers` WHERE `timestamp` < '$timeout'");
+	mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "viewers` WHERE `ip_address` = '$ip_address'");
+	mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "viewers` (`user_agent`, `ip_address`, `page_reference`, `page_url`, `timestamp`) VALUES ('$user_agent', '$ip_address', '$page_reference', '$page_url', '$timestamp')");
 
 } //end of add-viewer function
 

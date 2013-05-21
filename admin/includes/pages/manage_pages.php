@@ -137,7 +137,7 @@ for ($i = 0; $i < $count; $i++) {
     <thead>
     	<tr>
 			<th style='width:0px;'><input type="checkbox" name="select_all" id="select_all" onclick="bulk_select();"/></th>
-			<th><?php echo CMTX_TABLE_PAGE_ID; ?></th>
+			<th><?php echo CMTX_TABLE_IDENTIFIER; ?></th>
         	<th><?php echo CMTX_TABLE_REFERENCE; ?></th>
             <th><?php echo CMTX_TABLE_URL; ?></th>
 			<th><?php echo CMTX_TABLE_FORM_ENABLED; ?></th>
@@ -153,7 +153,7 @@ while ($page = mysql_fetch_assoc($pages)) {
 ?>
     	<tr>
 			<td><input type="checkbox" name="bulk[]" value="<?php echo $page["id"]; ?>" onclick="bulk_check();"/></td>
-			<td><?php echo $page["page_id"]; ?></td>
+			<td><?php echo $page["identifier"]; ?></td>
         	<td><?php echo $page["reference"]; ?></td>
             <td><?php echo "<a href='" . $page["url"] . "' target='_blank'>" . $page["url"] . "</a>"; ?></td>
 			<td><?php if ($page["is_form_enabled"]) { echo CMTX_TABLE_YES; } else { echo CMTX_TABLE_NO; } ?></td>

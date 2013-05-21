@@ -966,7 +966,7 @@ function cmtx_akismet ($name, $email, $website, $comment) { //check Akismet test
 
 	$WordPressAPIKey = cmtx_setting('akismet_key'); //set API key
 
-	$MyBlogURL = parse_url(cmtx_get_page_url(), PHP_URL_HOST);
+	$MyBlogURL = parse_url(cmtx_current_page(), PHP_URL_HOST);
 
 	$akismet = new Akismet($MyBlogURL, $WordPressAPIKey);
 
@@ -975,7 +975,7 @@ function cmtx_akismet ($name, $email, $website, $comment) { //check Akismet test
 	$akismet->setCommentAuthorURL($website);
 	$akismet->setCommentContent($comment);
 	$akismet->setCommentType("comment");
-	$akismet->setPermalink(cmtx_get_page_url());
+	$akismet->setPermalink(cmtx_current_page());
 
 	if ($akismet->isCommentSpam()) {
 		return true;

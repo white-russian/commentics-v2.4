@@ -48,7 +48,7 @@ define('CMTX_MSG_PAGE_UPDATED', 'Page updated.');
 define('CMTX_MSG_PAGE_DELETED', 'Page deleted.');
 define('CMTX_MSG_PAGE_BULK_DELETED', '1 page deleted.');
 define('CMTX_MSG_PAGES_BULK_DELETED', '%d pages deleted.');
-define('CMTX_MSG_PAGE_EXISTS', 'Page ID already exists.');
+define('CMTX_MSG_IDENTIFIER_EXISTS', 'Identifier already exists.');
 
 define('CMTX_MSG_ADMIN_ADDED', 'Administrator added.');
 define('CMTX_MSG_ADMIN_UPDATED', 'Administrator updated.');

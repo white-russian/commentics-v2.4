@@ -24,11 +24,9 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 
 if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
-//Integration
-
 unset($cmtx_temp);
 
-unset($cmtx_page_id);
+unset($cmtx_identifier);
 unset($cmtx_reference);
 unset($cmtx_path);
 unset($cmtx_parameters);
@@ -41,6 +39,7 @@ unset($cmtx_set_country_value);
 
 unset($cmtx_set_topic);
 
+unset($cmtx_page_id);
 
 unset($cmtx_mysql_database);
 unset($cmtx_mysql_username);

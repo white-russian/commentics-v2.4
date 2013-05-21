@@ -25,8 +25,6 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
 /* Labels */
-define('CMTX_FIELD_LABEL_ID', 'ID:');
-define('CMTX_FIELD_LABEL_PAGE_ID', 'Page ID:');
 define('CMTX_FIELD_LABEL_USER', 'Gebruiker:');
 define('CMTX_FIELD_LABEL_USERNAME', 'Gebruikersnaam:');
 define('CMTX_FIELD_LABEL_NAME', 'Naam:');
@@ -63,6 +61,7 @@ define('CMTX_FIELD_LABEL_FLAG', 'Meld:');
 define('CMTX_FIELD_LABEL_REASON', 'Reden:');
 define('CMTX_FIELD_LABEL_CONFIRMED', 'Bevestigd:');
 define('CMTX_FIELD_LABEL_PAGE', 'Pagina:');
+define('CMTX_FIELD_LABEL_IDENTIFIER', 'Identifier:');
 define('CMTX_FIELD_LABEL_REFERENCE', 'Referentie:');
 define('CMTX_FIELD_LABEL_URL', 'URL:');
 define('CMTX_FIELD_LABEL_ENABLED', 'Ingeschakeld:');

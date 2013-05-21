@@ -257,7 +257,7 @@ $error = true;
 /********************************************** CREATE TABLE 'pages' *********************************************/
 mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "pages` (
   `id` int(10) unsigned NOT NULL auto_increment,
-  `page_id` varchar(250) NOT NULL default '',
+  `identifier` varchar(250) NOT NULL default '',
   `reference` varchar(250) NOT NULL default '',
   `url` varchar(250) NOT NULL default '',
   `is_form_enabled` tinyint(1) unsigned NOT NULL default '1',

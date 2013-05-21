@@ -88,7 +88,7 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	if (cmtx_setting('check_referrer')) {
 		if (isset($_SERVER['HTTP_REFERER'])) { //if referrer available
 			$cmtx_referrer = cmtx_url_decode($_SERVER['HTTP_REFERER']); //get referrer
-			$cmtx_real_url = cmtx_url_decode(str_ireplace("www.", "", parse_url(cmtx_get_page_url(), PHP_URL_HOST))); //get host of page URL
+			$cmtx_real_url = cmtx_url_decode(str_ireplace("www.", "", parse_url(cmtx_current_page(), PHP_URL_HOST))); //get host of page URL
 			if (!empty($cmtx_real_url) && !preg_match('/\.[0-9]+\./i', $cmtx_real_url)) { //if not empty and URL is not an IP address
 				if (!stristr($cmtx_referrer, $cmtx_real_url)) { //if referrer does not contain host of page URL
 					cmtx_error(CMTX_ERROR_MESSAGE_INCORRECT_REFERRER); //reject user for incorrect referrer
@@ -459,6 +459,10 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	
 	} else if (($cmtx_approve || cmtx_setting('approve_comments')) && !$cmtx_is_admin) { //if approval needed
 	
+		if (!cmtx_page_exists()) { //if page does not exist
+			cmtx_create_page(); //create it now
+		}
+	
 		if (cmtx_setting('approve_comments')) { //if approving all comments
 			$cmtx_approve_reason = CMTX_APPROVE_REASON_ALL;
 		} else {
@@ -509,6 +513,10 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 		}
 		
 	} else { //if comment is a success (no approval required)
+	
+		if (!cmtx_page_exists()) { //if page does not exist
+			cmtx_create_page(); //create it now
+		}
 		
 		//insert user's comment into 'comments' database table
 		mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "comments` (`name`, `email`, `website`, `town`, `country`, `rating`, `reply_to`, `comment`, `reply`, `ip_address`, `page_id`, `is_approved`, `approval_reasoning`, `is_admin`, `is_sent`, `sent_to`, `vote_up`, `vote_down`, `is_sticky`, `is_locked`, `is_verified`, `dated`) VALUES ('$cmtx_name', '$cmtx_email', '$cmtx_website', '$cmtx_town', '$cmtx_country', '$cmtx_rating', '$cmtx_reply_to', '$cmtx_comment', '', '$cmtx_ip_address', '$cmtx_page_id', 1, '', '$cmtx_is_admin', 0, 0, 0, 0, 0, 0, 0, NOW())");

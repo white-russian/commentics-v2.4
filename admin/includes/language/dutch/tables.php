@@ -24,7 +24,6 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 
 if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
-define('CMTX_TABLE_PAGE_ID', 'Page ID');
 define('CMTX_TABLE_NAME', 'Naam');
 define('CMTX_TABLE_USERNAME', 'Gebruikersnaam');
 define('CMTX_TABLE_EMAIL', 'Email Adres');
@@ -40,6 +39,7 @@ define('CMTX_TABLE_LAST_LOGIN', 'Laatste Login');
 define('CMTX_TABLE_REASON', 'Redenen');
 define('CMTX_TABLE_FILENAME', 'Filename');
 define('CMTX_TABLE_SIZE', 'Grootte');
+define('CMTX_TABLE_IDENTIFIER', 'Identifier');
 define('CMTX_TABLE_REFERENCE', 'Referentie');
 define('CMTX_TABLE_URL', 'URL');
 define('CMTX_TABLE_FORM_ENABLED', 'Formulier ingeschakeld');

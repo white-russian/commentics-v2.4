@@ -24,12 +24,14 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 
 if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
-//Integration
+if (!isset($cmtx_identifier)) {
+	$cmtx_identifier = '';
+}
 
-$cmtx_temp = $cmtx_page_id;
-unset($cmtx_page_id);
-global $cmtx_page_id;
-$cmtx_page_id = $cmtx_temp;
+$cmtx_temp = $cmtx_identifier;
+unset($cmtx_identifier);
+global $cmtx_identifier;
+$cmtx_identifier = $cmtx_temp;
 
 $cmtx_temp = $cmtx_reference;
 unset($cmtx_reference);
@@ -83,6 +85,7 @@ if (isset($cmtx_set_country_value)) {
 	$cmtx_set_country_value = $cmtx_temp;
 }
 
+global $cmtx_page_id;
 
 global $cmtx_mysql_table_prefix;
 

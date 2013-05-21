@@ -54,28 +54,28 @@ if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 cmtx_check_csrf_form_key();
 
 $id = $_GET['id'];
-$page_id = $_POST['page_id'];
+$identifier = $_POST['identifier'];
 $reference = $_POST['reference'];
 $url = $_POST['url'];
 $form_enabled = $_POST['form_enabled'];
 
 $id_san = cmtx_sanitize($id);
-$page_id_san = cmtx_sanitize($page_id, true, true);
+$identifier_san = cmtx_sanitize($identifier, true, true);
 $reference_san = cmtx_sanitize($reference, true, true);
 $url_san = cmtx_url_encode_spaces($url);
 $url_san = cmtx_sanitize($url_san, true, true);
 $form_enabled_san = cmtx_sanitize($form_enabled);
 
-if (!empty($page_id) && mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "pages` WHERE `page_id` = '$page_id_san' AND `id` != '$id_san'"))) {
+if (!empty($identifier) && mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "pages` WHERE `identifier` = '$identifier_san' AND `id` != '$id_san'"))) {
 
 ?>
-<div class="error"><?php echo CMTX_MSG_PAGE_EXISTS; ?></div>
+<div class="error"><?php echo CMTX_MSG_IDENTIFIER_EXISTS; ?></div>
 <div style="clear: left;"></div>
 <?php
 
 } else {
 
-mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "pages` SET `page_id` = '$page_id_san' WHERE `id` = '$id_san'");
+mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "pages` SET `identifier` = '$identifier_san' WHERE `id` = '$id_san'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "pages` SET `reference` = '$reference_san' WHERE `id` = '$id_san'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "pages` SET `url` = '$url_san' WHERE `id` = '$id_san'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "pages` SET `is_form_enabled` = '$form_enabled_san' WHERE `id` = '$id_san'");
@@ -92,7 +92,7 @@ $id = $_GET['id'];
 $id_san = cmtx_sanitize($id);
 $page_query = mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "pages` WHERE `id` = '$id_san'");
 $page_result = mysql_fetch_assoc($page_query);
-$page_id = $page_result["page_id"];
+$identifier = $page_result["identifier"];
 $reference = $page_result["reference"];
 $url = $page_result["url"];
 $form_enabled = $page_result["is_form_enabled"];
@@ -103,7 +103,7 @@ $date = date("jS M Y", strtotime($page_result["dated"]));
 <p />
 
 <form name="edit_page" id="edit_page" action="index.php?page=edit_page&id=<?php echo $id ?>" method="post">
-<label class='edit_page'><?php echo CMTX_FIELD_LABEL_PAGE_ID; ?></label> <input type="text" required name="page_id" size="30" maxlength="250" value="<?php echo $page_id; ?>"/>
+<label class='edit_page'><?php echo CMTX_FIELD_LABEL_IDENTIFIER; ?></label> <input type="text" required name="identifier" size="30" maxlength="250" value="<?php echo $identifier; ?>"/>
 <p />
 <label class='edit_page'><?php echo CMTX_FIELD_LABEL_REFERENCE; ?></label> <input type="text" required name="reference" size="30" maxlength="250" value="<?php echo $reference; ?>"/>
 <p />

@@ -24,8 +24,8 @@ Text to help preserve UTF-8 file encoding: 汉语漢語.
 
 if (!defined('IN_COMMENTICS')) { die('Access Denied.'); }
 
-/* Page ID alert messages */
-define('CMTX_ALERT_MESSAGE_NO_PAGE_ID', 'Please ensure that this page contains a Page ID in its file.');
-define('CMTX_ALERT_MESSAGE_INVALID_PAGE_ID', 'The supplied Page ID for this page appears to be invalid.');
+/* Identifier alert messages */
+define('CMTX_ALERT_MESSAGE_NO_IDENTIFIER', 'Please ensure that this page has an identifier.');
+define('CMTX_ALERT_MESSAGE_INVALID_IDENTIFIER', 'The supplied identifier appears to be invalid.');
 
 ?>
