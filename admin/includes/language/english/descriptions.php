@@ -48,7 +48,7 @@ define('CMTX_DESC_LAYOUT_FORM_SMILIES', 'These settings are for the form\'s smil
 define('CMTX_DESC_LAYOUT_POWERED', 'These settings relate to the \'Powered by\' statement.');
 define('CMTX_DESC_SETTINGS_ADMIN', 'These settings are for the admin panel administrator.');
 define('CMTX_DESC_SETTINGS_ADMIN_DETECTION', 'This section allows for the detection of the administrator.');
-define('CMTX_DESC_SETTINGS_AKISMET', 'Akismet is an external, free, automated service used to identify comments as spam. Get your API key <a href="http://akismet.com/" target="_blank">here</a>.<p/>Identified comments require approval. The word \'Akismet\' will appear in the comment\'s Notes section.');
+define('CMTX_DESC_SETTINGS_AKISMET', 'Akismet is an external, free, automated service used to identify comments as spam. Get your API key <a href="http://akismet.com/" target="_blank">here</a>.<p/>Identified comments will require approval. The word \'Akismet\' will appear in the comment\'s <b>Notes</b> section.');
 define('CMTX_DESC_SETTINGS_APPROVAL', 'Select these if you want to <i>manually</i> approve the data below.<p /><b>Note</b>: Detailed options are in Settings -> Processor.');
 define('CMTX_DESC_SETTINGS_EMAIL_SETUP', 'Set up your email settings and preferences here.');
 define('CMTX_DESC_SETTINGS_EMAIL_METHOD', 'Select the email transport method to use.');
@@ -103,6 +103,6 @@ define('CMTX_DESC_REPORT_VERSION_2', 'Below is a history of your upgrades.');
 define('CMTX_DESC_REPORT_VIEWERS', 'The following people or search engines are currently viewing your page(s).');
 define('CMTX_DESC_TOOL_DATABASE_BACKUP', 'Create a backup of the database.<p/><b>Note</b>: It is strongly advised that you download these backups to your computer.');
 define('CMTX_DESC_TOOL_OPTIMIZE_TABLES', 'This tool will optimize all of the database tables. This speeds up the database and helps avoid data corruption.<p/><b>Note</b>: For a normal site, running this tool every couple of weeks should suffice.');
-define('CMTX_DESC_TOOL_TEXT_FINDER', 'Search the language files for a specific word (or phrase) to find out exactly where to change it.');
+define('CMTX_DESC_TOOL_TEXT_FINDER', 'Search the language files for a specific word (or phrase).');
 
 ?>

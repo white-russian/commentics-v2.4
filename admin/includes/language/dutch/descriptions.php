@@ -103,6 +103,6 @@ define('CMTX_DESC_REPORT_VERSION_2', 'Hieronder zie je de geschiedenis van je up
 define('CMTX_DESC_REPORT_VIEWERS', 'De volgende mensen en spiders bekijken momenteel je paginas.');
 define('CMTX_DESC_TOOL_DATABASE_BACKUP', 'Maak een backup van de database.<p/><b>Note</b>: We raden je aan deze backups naar je eigen PC te downloaden.');
 define('CMTX_DESC_TOOL_OPTIMIZE_TABLES', 'Deze tool optimalisserd alle database tables. Dit versneld de database en voorkomt data corruptie.<p/><b>Note</b>: Voor een normale site is het voldoende om dit om de paar weken te doen.');
-define('CMTX_DESC_TOOL_TEXT_FINDER', 'Search the language files for a specific word (or phrase) to find out exactly where to change it.');
+define('CMTX_DESC_TOOL_TEXT_FINDER', 'Search the language files for a specific word (or phrase).');
 
 ?>

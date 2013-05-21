@@ -103,6 +103,6 @@ define('CMTX_DESC_REPORT_VERSION_2', 'Abaixo está um histórico de suas atualiz
 define('CMTX_DESC_REPORT_VIEWERS', 'As seguintes pessoas ou robôs de mecanismo de busca estão atualmente vendo sua(s) página(s).');
 define('CMTX_DESC_TOOL_DATABASE_BACKUP', 'Criar um backup da sua base de dados.<p/><b>Obs</b>: É extremamente recomendado que voc:e baixe estes backups para seu computador.');
 define('CMTX_DESC_TOOL_OPTIMIZE_TABLES', 'Esta ferramenta irá otimizar todas as tabelas da sua base de dados. Isto acelera o tempo de resposta da base de dados e ajuda a evitar dados corrompidos.<p/><b>Obs</b>: Para um site normal, executar esta ferramenta a cada 2 semanas deve ser o suficiente.');
-define('CMTX_DESC_TOOL_TEXT_FINDER', 'Search the language files for a specific word (or phrase) to find out exactly where to change it.');
+define('CMTX_DESC_TOOL_TEXT_FINDER', 'Search the language files for a specific word (or phrase).');
 
 ?>
