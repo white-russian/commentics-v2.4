@@ -69,8 +69,9 @@ define('CMTX_HINT_FORM_COOKIE_DAYS', 'The amount of days before the form cookie 
 define('CMTX_HINT_REPEAT_RATINGS', 'What to do with the rating field once a user has already rated.');
 define('CMTX_HINT_AGREE_TO_PREVIEW', 'Should the user have to agree to the privacy policy and the terms & conditions before being able to preview the comment?');
 
-define('CMTX_HINT_APPROVE_COMMENTS', 'Manually approve all comments.');
-define('CMTX_HINT_APPROVE_NOTIFICATIONS', 'Manually approve all subscriber notification emails.');
+define('CMTX_HINT_APPROVE_COMMENTS', 'If this is selected, the admin must always approve the comment.');
+define('CMTX_HINT_APPROVE_NOTIFICATIONS', 'If this is selected, the admin must always approve the notification email which is sent to subscribers.');
+define('CMTX_HINT_TRUST_USERS', 'If this is selected, the admin does not need to approve the comment if the user has previously posted an approved comment.');
 
 define('CMTX_HINT_FLAG_MAX_PER_USER', 'The maximum number of reports a user can submit.');
 define('CMTX_HINT_FLAG_MIN_PER_COM', 'The minimum number of reports before a comment is flagged.');

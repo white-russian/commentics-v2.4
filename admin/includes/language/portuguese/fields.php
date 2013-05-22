@@ -123,6 +123,7 @@ define('CMTX_FIELD_LABEL_DEL_COOKIE', 'Excluir Cookie:');
 define('CMTX_FIELD_LABEL_AKISMET_KEY', 'API Key:');
 define('CMTX_FIELD_LABEL_APPROVE_COMMENTS', 'Aprovar Comentários:');
 define('CMTX_FIELD_LABEL_APPROVE_NOTIFICATIONS', 'Aprovar Notificações:');
+define('CMTX_FIELD_LABEL_TRUST_USERS', 'Trust Previous Users:');
 define('CMTX_FIELD_LABEL_SMTP_HOST', 'Servidor:');
 define('CMTX_FIELD_LABEL_SMTP_PORT', 'Porta:');
 define('CMTX_FIELD_LABEL_SMTP_ENCRYPT', 'Encriptar:');

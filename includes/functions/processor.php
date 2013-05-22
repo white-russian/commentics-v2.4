@@ -1344,4 +1344,45 @@ function cmtx_approve ($reason) { //process approval
 	$cmtx_approve_reason .= $reason . "\r\n"; //concatenate to approval reasoning
 
 } //end of approve function
+
+
+function cmtx_approval_needed() { //determine whether approval is needed
+
+	global $cmtx_approve, $cmtx_is_admin; //globalise variables
+	
+	if ($cmtx_is_admin) { //if it's the administrator
+		return false; //no approval needed
+	}
+
+	if ($cmtx_approve) { //if there's an approval reason
+		return true; //approval needed
+	}
+	
+	if (cmtx_setting('approve_comments') && !cmtx_setting('trust_users')) { //if approving all and previous users are not trusted
+		return true; //approval needed
+	}
+	
+	if (cmtx_setting('approve_comments') && cmtx_setting('trust_users') && cmtx_user_trusted()) { //if approving all and previous users are trusted and user is trusted
+		return false; //no approval needed
+	}
+	
+	return true; //approval needed
+
+} //end of approval-needed function
+
+
+function cmtx_user_trusted() { //check if user has previously posted an approved comment
+
+	global $cmtx_name, $cmtx_mysql_table_prefix; //globalise variables
+	
+	$ip_address = cmtx_get_ip_address(); //get user's IP address
+	
+	//if the user's name and IP address match and an approved comment is found
+	if (mysql_num_rows(mysql_query("SELECT * FROM `" . $cmtx_mysql_table_prefix . "comments` WHERE `name` = '$cmtx_name' AND `ip_address` = '$ip_address' AND `is_approved` = '1'"))) {
+		return true; //user is trusted
+	} else {
+		return false; //user is not trusted
+	}
+
+} //end of user-trusted function
 ?>

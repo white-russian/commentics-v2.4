@@ -69,8 +69,9 @@ define('CMTX_HINT_FORM_COOKIE_DAYS', 'The amount of days before the form cookie 
 define('CMTX_HINT_REPEAT_RATINGS', 'Wat te doen met het waarderingsveld als de gebruker al heeft gestemd.');
 define('CMTX_HINT_AGREE_TO_PREVIEW', 'Moet de gebruiker akkoord gaan met de privacy policy en de algemene voorwarden voordat hij een previeuw krijgt van het bericht?');
 
-define('CMTX_HINT_APPROVE_COMMENTS', 'Handmatig goedkeuren van alle berichten.');
-define('CMTX_HINT_APPROVE_NOTIFICATIONS', 'Handmatig goedkeuren van alle inschrijvers notificatie emails.');
+define('CMTX_HINT_APPROVE_COMMENTS', 'If this is selected, the admin must always approve the comment.');
+define('CMTX_HINT_APPROVE_NOTIFICATIONS', 'If this is selected, the admin must always approve the notification email which is sent to subscribers.');
+define('CMTX_HINT_TRUST_USERS', 'If this is selected, the admin does not need to approve the comment if the user has previously posted an approved comment.');
 
 define('CMTX_HINT_FLAG_MAX_PER_USER', 'The maximum number of reports a user can submit.');
 define('CMTX_HINT_FLAG_MIN_PER_COM', 'The minimum number of reports before a comment is flagged.');

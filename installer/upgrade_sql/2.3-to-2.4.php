@@ -55,6 +55,8 @@ mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`,
 
 mysql_query("ALTER TABLE `" . $cmtx_mysql_table_prefix . "pages` CHANGE `page_id` `identifier` varchar(250) NOT NULL default ''");
 
+mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('approval', 'trust_users', '1');");
+
 if (mysql_errno()) {
 echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;

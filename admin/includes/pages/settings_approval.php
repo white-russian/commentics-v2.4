@@ -44,9 +44,11 @@ cmtx_check_csrf_form_key();
 
 if (isset($_POST['approve_comments'])) { $approve_comments = 1; } else { $approve_comments = 0; }
 if (isset($_POST['approve_notifications'])) { $approve_notifications = 1; } else { $approve_notifications = 0; }
+if (isset($_POST['trust_users'])) { $trust_users = 1; } else { $trust_users = 0; }
 
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$approve_comments' WHERE `title` = 'approve_comments'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$approve_notifications' WHERE `title` = 'approve_notifications'");
+mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$trust_users' WHERE `title` = 'trust_users'");
 ?>
 <div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
@@ -64,6 +66,9 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$a
 <p />
 <label class='settings_approval'><?php echo CMTX_FIELD_LABEL_APPROVE_NOTIFICATIONS; ?></label> <?php if (cmtx_setting('approve_notifications')) { ?> <input type="checkbox" checked="checked" name="approve_notifications"/> <?php } else { ?> <input type="checkbox" name="approve_notifications"/> <?php } ?>
 <?php cmtx_generate_hint(CMTX_HINT_APPROVE_NOTIFICATIONS); ?>
+<p />
+<label class='settings_approval'><?php echo CMTX_FIELD_LABEL_TRUST_USERS; ?></label> <?php if (cmtx_setting('trust_users')) { ?> <input type="checkbox" checked="checked" name="trust_users"/> <?php } else { ?> <input type="checkbox" name="trust_users"/> <?php } ?>
+<?php cmtx_generate_hint(CMTX_HINT_TRUST_USERS); ?>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
 <input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>

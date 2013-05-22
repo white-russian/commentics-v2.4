@@ -49,7 +49,7 @@ define('CMTX_DESC_LAYOUT_POWERED', 'These settings relate to the \'Powered by\' 
 define('CMTX_DESC_SETTINGS_ADMIN', 'These settings are for the admin panel administrator.');
 define('CMTX_DESC_SETTINGS_ADMIN_DETECTION', 'This section allows for the detection of the administrator.');
 define('CMTX_DESC_SETTINGS_AKISMET', 'Akismet is an external, free, automated service used to identify comments as spam. Get your API key <a href="http://akismet.com/" target="_blank">here</a>.<p/>Identified comments will require approval. The word \'Akismet\' will appear in the comment\'s <b>Notes</b> section.');
-define('CMTX_DESC_SETTINGS_APPROVAL', 'Select these if you want to <i>manually</i> approve the data below.<p /><b>Note</b>: Detailed options are in Settings -> Processor.');
+define('CMTX_DESC_SETTINGS_APPROVAL', 'These settings relate to the approval of new comments.<p /><b>Note</b>: Detailed options are in Settings -> Processor.');
 define('CMTX_DESC_SETTINGS_EMAIL_SETUP', 'Set up your email settings and preferences here.');
 define('CMTX_DESC_SETTINGS_EMAIL_METHOD', 'Select the email transport method to use.');
 define('CMTX_DESC_SETTINGS_EMAIL_SENDER', 'Change your sender details here to update <b>all</b> the emails.<p />Or use the \'Settings -> Email -> Editor\' to do it individually.');

@@ -457,7 +457,7 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 		
 		cmtx_repopulate(); //repopulate the form with submitted values
 	
-	} else if (($cmtx_approve || cmtx_setting('approve_comments')) && !$cmtx_is_admin) { //if approval needed
+	} else if (cmtx_approval_needed()) { //if approval needed
 	
 		if (!cmtx_page_exists()) { //if page does not exist
 			cmtx_create_page(); //create it now
