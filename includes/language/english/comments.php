@@ -39,8 +39,8 @@ define('CMTX_TITLE_SORT_BY', 'Sort by');
 /* Sort By items */
 define('CMTX_SORT_1', 'Newest');
 define('CMTX_SORT_2', 'Oldest');
-define('CMTX_SORT_3', 'Helpful');
-define('CMTX_SORT_4', 'Useless');
+define('CMTX_SORT_3', 'Likes');
+define('CMTX_SORT_4', 'Dislikes');
 define('CMTX_SORT_5', 'Positive');
 define('CMTX_SORT_6', 'Critical');
 
@@ -67,10 +67,10 @@ define('CMTX_TODAY', 'Today');
 define('CMTX_YESTERDAY', 'Yesterday');
 
 /* Like Dislike */
-define('CMTX_TITLE_VOTE_UP', 'Vote this comment up');
-define('CMTX_TITLE_VOTE_DOWN', 'Vote this comment down');
-define('CMTX_VOTE_UP', 'Thank you for the vote');
-define('CMTX_VOTE_DOWN', 'Thank you for the vote');
+define('CMTX_TITLE_LIKE', 'Like this comment');
+define('CMTX_TITLE_DISLIKE', 'Dislike this comment');
+define('CMTX_VOTE_LIKE', 'Thank you for the vote');
+define('CMTX_VOTE_DISLIKE', 'Thank you for the vote');
 define('CMTX_VOTE_NO_COMMENT', 'This comment no longer exists');
 define('CMTX_VOTE_OWN_COMMENT', 'You cannot vote for your own comment');
 define('CMTX_VOTE_ALREADY_VOTED', 'You have already voted for this comment');

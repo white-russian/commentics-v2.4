@@ -67,10 +67,10 @@ define('CMTX_TODAY', 'Vandaag');
 define('CMTX_YESTERDAY', 'Gisteren');
 
 /* Like Dislike */
-define('CMTX_TITLE_VOTE_UP', 'Waardeer dit bericht hoger');
-define('CMTX_TITLE_VOTE_DOWN', 'Waardeer dit bericht lager');
-define('CMTX_VOTE_UP', 'Bedankt voor je stem');
-define('CMTX_VOTE_DOWN', 'Bedankt voor je stem');
+define('CMTX_TITLE_LIKE', 'Waardeer dit bericht hoger');
+define('CMTX_TITLE_DISLIKE', 'Waardeer dit bericht lager');
+define('CMTX_VOTE_LIKE', 'Bedankt voor je stem');
+define('CMTX_VOTE_DISLIKE', 'Bedankt voor je stem');
 define('CMTX_VOTE_NO_COMMENT', 'Dit bericht bestaat niet meer');
 define('CMTX_VOTE_OWN_COMMENT', 'Je kunt niet stemmen voor uw eigen reactie');
 define('CMTX_VOTE_ALREADY_VOTED', 'Je hebt al gestemd op deze reactie');

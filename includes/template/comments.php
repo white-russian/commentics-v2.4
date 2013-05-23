@@ -183,10 +183,10 @@ jQuery(".cmtx_vote").click(function() {
 var id = jQuery(this).attr("id");
 var parent = jQuery(this);
 
-if (id.indexOf('up') != -1) {
-	var type = "up";
+if (id.indexOf('dislike') != -1) {
+	var type = "dislike";
 } else {
-	var type = "down";
+	var type = "like";
 }
 
 

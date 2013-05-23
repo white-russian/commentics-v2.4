@@ -67,10 +67,10 @@ define('CMTX_TODAY', 'Сегодня');
 define('CMTX_YESTERDAY', 'Вчера');
 
 /* Like Dislike */
-define('CMTX_TITLE_VOTE_UP', 'Проголосовать за отзыв');
-define('CMTX_TITLE_VOTE_DOWN', 'Проголосовать против отзыва');
-define('CMTX_VOTE_UP', 'Спасибо за Ваш голос');
-define('CMTX_VOTE_DOWN', 'Спасибо за Ваш голос');
+define('CMTX_TITLE_LIKE', 'Проголосовать за отзыв');
+define('CMTX_TITLE_DISLIKE', 'Проголосовать против отзыва');
+define('CMTX_VOTE_LIKE', 'Спасибо за Ваш голос');
+define('CMTX_VOTE_DISLIKE', 'Спасибо за Ваш голос');
 define('CMTX_VOTE_NO_COMMENT', 'Данный комментарий больше не существует');
 define('CMTX_VOTE_OWN_COMMENT', 'Вы не можете голосовать за собственный отзыв');
 define('CMTX_VOTE_ALREADY_VOTED', 'Вы уже голосовали за данный отзыв');

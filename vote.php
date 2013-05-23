@@ -58,13 +58,13 @@ $ip_address = cmtx_get_ip_address(); //get user's IP address
 if (isset($_POST['id']) && isset($_POST['type'])) {
 
 	$id = $_POST['id'];
-	$id = str_ireplace('cmtx_vote_up_', '', $id);
-	$id = str_ireplace('cmtx_vote_down_', '', $id);
+	$id = str_ireplace('cmtx_like_', '', $id);
+	$id = str_ireplace('cmtx_dislike_', '', $id);
 	if (!ctype_digit($id)) { die(); }
 	$id = cmtx_sanitize($id, true, true);
 	
 	$type = $_POST['type'];
-	if ($type != 'up' && $type != 'down') { die(); }
+	if ($type != 'like' && $type != 'dislike') { die(); }
 	
 	$issue = false;
 	
@@ -102,18 +102,18 @@ if (isset($_POST['id']) && isset($_POST['type'])) {
 
 	if (!$issue) {
 	
-		if ($type == 'up' && cmtx_setting('show_like')) {
+		if ($type == 'like' && cmtx_setting('show_like')) {
 		
-			mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "comments` SET `vote_up` = `vote_up` + 1 WHERE `id` = '$id'");
+			mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "comments` SET `likes` = `likes` + 1 WHERE `id` = '$id'");
 			mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "voters` (`comment_id`, `ip_address`, `dated`) values ('$id', '$ip_address', NOW())");
 			
 			if (cmtx_setting('js_vote_ok')) {
 				echo "<script language='javascript' type='text/javascript'>alert('" . cmtx_escape_js(CMTX_VOTE_UP) . "');</script>";
 			}
 
-		} else if ($type == 'down' && cmtx_setting('show_dislike')) {
+		} else if ($type == 'dislike' && cmtx_setting('show_dislike')) {
 		
-			mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "comments` SET `vote_down` = `vote_down` + 1 WHERE `id` = '$id'");
+			mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "comments` SET `dislikes` = `dislikes` + 1 WHERE `id` = '$id'");
 			mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "voters` (`comment_id`, `ip_address`, `dated`) values ('$id', '$ip_address', NOW())");
 
 			if (cmtx_setting('js_vote_ok')) {
@@ -124,27 +124,27 @@ if (isset($_POST['id']) && isset($_POST['type'])) {
 		
 	}
 	
-	if ($type == 'up') {
+	if ($type == 'like') {
 	
-		$result = mysql_query("SELECT `vote_up` FROM `" . $cmtx_mysql_table_prefix . "comments` WHERE `id` = '$id'");
+		$result = mysql_query("SELECT `likes` FROM `" . $cmtx_mysql_table_prefix . "comments` WHERE `id` = '$id'");
 		if (mysql_num_rows($result)) {
 			$row = mysql_fetch_array($result);
-			$vote_up = $row['vote_up'];
+			$likes = $row['likes'];
 		} else {
-			$vote_up = 0;
+			$likes = 0;
 		}
-		echo "<img src='" . cmtx_comments_folder() . "images/buttons/up.png' alt='Up' title='" . CMTX_TITLE_VOTE_UP . "'/>" . $vote_up;
+		echo "<img src='" . cmtx_comments_folder() . "images/buttons/like.png' alt='Like' title='" . CMTX_TITLE_LIKE . "'/>" . $likes;
 	
-	} else if ($type == 'down') {
+	} else if ($type == 'dislike') {
 	
-		$result = mysql_query("SELECT `vote_down` FROM `" . $cmtx_mysql_table_prefix . "comments` WHERE `id` = '$id'");
+		$result = mysql_query("SELECT `dislikes` FROM `" . $cmtx_mysql_table_prefix . "comments` WHERE `id` = '$id'");
 		if (mysql_num_rows($result)) {
 			$row = mysql_fetch_array($result);
-			$vote_down = $row['vote_down'];
+			$dislikes = $row['dislikes'];
 		} else {
-			$vote_down = 0;
+			$dislikes = 0;
 		}
-		echo "<img src='" . cmtx_comments_folder() . "images/buttons/down.png' alt='Down' title='" . CMTX_TITLE_VOTE_DOWN . "'/>" . $vote_down;
+		echo "<img src='" . cmtx_comments_folder() . "images/buttons/dislike.png' alt='Dislike' title='" . CMTX_TITLE_DISLIKE . "'/>" . $dislikes;
 		
 	}
 

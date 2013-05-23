@@ -67,10 +67,10 @@ define('CMTX_TODAY', 'Heute');
 define('CMTX_YESTERDAY', 'Gestern');
 
 /* Like Dislike */
-define('CMTX_TITLE_VOTE_UP', 'Bewerte diesen Kommentar als gut');
-define('CMTX_TITLE_VOTE_DOWN', 'Bewerte diesen Kommentar als schlecht');
-define('CMTX_VOTE_UP', 'Vielen Dank für die Abstimmung');
-define('CMTX_VOTE_DOWN', 'Vielen Dank für die Abstimmung');
+define('CMTX_TITLE_LIKE', 'Bewerte diesen Kommentar als gut');
+define('CMTX_TITLE_DISLIKE', 'Bewerte diesen Kommentar als schlecht');
+define('CMTX_VOTE_LIKE', 'Vielen Dank für die Abstimmung');
+define('CMTX_VOTE_DISLIKE', 'Vielen Dank für die Abstimmung');
 define('CMTX_VOTE_NO_COMMENT', 'Dieser Kommentar ist nicht mehr vorhanden');
 define('CMTX_VOTE_OWN_COMMENT', 'Sie können nicht für Ihre persönlichen Eindrücke zu stimmen');
 define('CMTX_VOTE_ALREADY_VOTED', 'Sie haben bereits diesen Kommentar gestimmt');

@@ -279,12 +279,12 @@ width: 16px;
 height: 16px;
 }
 
-.cmtx_buttons a.cmtx_vote_up {
+.cmtx_buttons a.cmtx_like {
 color: #529214;
 margin-right: 8px;
 }
 
-.cmtx_buttons a.cmtx_vote_down {
+.cmtx_buttons a.cmtx_dislike {
 color: #d12f19;
 margin-right: 8px;
 }

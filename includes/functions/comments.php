@@ -49,7 +49,7 @@ function cmtx_get_comment_and_replies($id) {
 			$comments = mysql_fetch_assoc($comments_q);
 
 			//display comment
-			echo cmtx_generate_comment (false, $alternate, $comments["id"], $comments["name"], $comments["email"], $comments["website"], $comments["town"], $comments["country"], $comments["rating"], $comments["reply_to"], $comments["comment"], $comments["reply"], $comments["is_admin"], $comments["vote_up"], $comments["vote_down"], $comments["is_sticky"], $comments["is_locked"], $comments["dated"]);
+			echo cmtx_generate_comment (false, $alternate, $comments["id"], $comments["name"], $comments["email"], $comments["website"], $comments["town"], $comments["country"], $comments["rating"], $comments["reply_to"], $comments["comment"], $comments["reply"], $comments["is_admin"], $comments["likes"], $comments["dislikes"], $comments["is_sticky"], $comments["is_locked"], $comments["dated"]);
 
 			$cmtx_comment_counter++; //increase comment counter by 1
 
@@ -77,7 +77,7 @@ function cmtx_get_comment_and_replies($id) {
 			$comments = mysql_fetch_assoc($comments_q);
 	
 			//display comment
-			echo cmtx_generate_comment (false, $alternate, $comments["id"], $comments["name"], $comments["email"], $comments["website"], $comments["town"], $comments["country"], $comments["rating"], $comments["reply_to"], $comments["comment"], $comments["reply"], $comments["is_admin"], $comments["vote_up"], $comments["vote_down"], $comments["is_sticky"], $comments["is_locked"], $comments["dated"]);
+			echo cmtx_generate_comment (false, $alternate, $comments["id"], $comments["name"], $comments["email"], $comments["website"], $comments["town"], $comments["country"], $comments["rating"], $comments["reply_to"], $comments["comment"], $comments["reply"], $comments["is_admin"], $comments["likes"], $comments["dislikes"], $comments["is_sticky"], $comments["is_locked"], $comments["dated"]);
 
 			$cmtx_comment_counter++; //increase comment counter by 1
 
@@ -159,7 +159,7 @@ function cmtx_get_reply_depth($id) {
 } //end of get-reply-depth function
 
 
-function cmtx_generate_comment ($is_preview, $alternate, $id, $name, $email, $website, $town, $country, $rating, $reply_to, $comment, $reply, $is_admin, $vote_up, $vote_down, $is_sticky, $is_locked, $dated) { //generate comment
+function cmtx_generate_comment ($is_preview, $alternate, $id, $name, $email, $website, $town, $country, $rating, $reply_to, $comment, $reply, $is_admin, $likes, $dislikes, $is_sticky, $is_locked, $dated) { //generate comment
 
 	$cmtx_box = ""; //initialise box
 
@@ -375,10 +375,10 @@ function cmtx_generate_comment ($is_preview, $alternate, $id, $name, $email, $we
 		$cmtx_box .= "<div class='cmtx_like_block'>";
 		$cmtx_box .= "<div class='cmtx_buttons'>";
 		if (cmtx_setting('show_like')) {
-			$cmtx_box .= "<a class='cmtx_vote cmtx_vote_up' href='" . cmtx_url_encode(cmtx_current_page()) . "' id='cmtx_vote_up_" . $id . "' title='" . CMTX_TITLE_VOTE_UP . "' rel='nofollow'><img src='" . cmtx_comments_folder() . "images/buttons/up.png' alt='Up' title='" . CMTX_TITLE_VOTE_UP . "'/>" . $vote_up . "</a>";
+			$cmtx_box .= "<a class='cmtx_vote cmtx_like' href='" . cmtx_url_encode(cmtx_current_page()) . "' id='cmtx_like_" . $id . "' title='" . CMTX_TITLE_LIKE . "' rel='nofollow'><img src='" . cmtx_comments_folder() . "images/buttons/like.png' alt='Like' title='" . CMTX_TITLE_LIKE . "'/>" . $likes . "</a>";
 		}
 		if (cmtx_setting('show_dislike')) {
-			$cmtx_box .= "<a class='cmtx_vote cmtx_vote_down' href='" . cmtx_url_encode(cmtx_current_page()) . "' id='cmtx_vote_down_" . $id . "' title='" . CMTX_TITLE_VOTE_DOWN . "' rel='nofollow'><img src='" . cmtx_comments_folder() . "images/buttons/down.png' alt='Down' title='" . CMTX_TITLE_VOTE_DOWN . "'/>" . $vote_down . "</a>";
+			$cmtx_box .= "<a class='cmtx_vote cmtx_dislike' href='" . cmtx_url_encode(cmtx_current_page()) . "' id='cmtx_dislike_" . $id . "' title='" . CMTX_TITLE_DISLIKE . "' rel='nofollow'><img src='" . cmtx_comments_folder() . "images/buttons/dislike.png' alt='Dislike' title='" . CMTX_TITLE_DISLIKE . "'/>" . $dislikes . "</a>";
 		}
 		$cmtx_box .= "</div>";
 		$cmtx_box .= "</div>";
@@ -620,10 +620,10 @@ function cmtx_get_sort_by() { //get Sort By or set default
 			$cmtx_sort = "`is_sticky` DESC, `dated` ASC"; //oldest
 			break;
 			case "3":
-			$cmtx_sort = "`is_sticky` DESC, `vote_up` DESC"; //helpful
+			$cmtx_sort = "`is_sticky` DESC, `likes` DESC"; //likes
 			break;
 			case "4":
-			$cmtx_sort = "`is_sticky` DESC, `vote_down` DESC"; //useless
+			$cmtx_sort = "`is_sticky` DESC, `dislikes` DESC"; //dislikes
 			break;
 			case "5":
 			$cmtx_sort = "`is_sticky` DESC, `rating` DESC"; //positive
@@ -637,9 +637,9 @@ function cmtx_get_sort_by() { //get Sort By or set default
 			} else if (cmtx_setting('comments_order') == "2") {
 				$cmtx_sort = "`is_sticky` DESC, `dated` ASC"; //oldest
 			} else if (cmtx_setting('comments_order') == "3") {
-				$cmtx_sort = "`is_sticky` DESC, `vote_up` DESC"; //helpful
+				$cmtx_sort = "`is_sticky` DESC, `likes` DESC"; //likes
 			} else if (cmtx_setting('comments_order') == "4") {
-				$cmtx_sort = "`is_sticky` DESC, `vote_down` DESC"; //useless
+				$cmtx_sort = "`is_sticky` DESC, `dislikes` DESC"; //dislikes
 			} else if (cmtx_setting('comments_order') == "5") {
 				$cmtx_sort = "`is_sticky` DESC, `rating` DESC"; //positive
 			} else if (cmtx_setting('comments_order') == "6") {
@@ -652,9 +652,9 @@ function cmtx_get_sort_by() { //get Sort By or set default
 			} else if (cmtx_setting('comments_order') == "2") {
 				$cmtx_sort = "`is_sticky` DESC, `dated` ASC"; //oldest
 			} else if (cmtx_setting('comments_order') == "3") {
-				$cmtx_sort = "`is_sticky` DESC, `vote_up` DESC"; //helpful
+				$cmtx_sort = "`is_sticky` DESC, `likes` DESC"; //likes
 			} else if (cmtx_setting('comments_order') == "4") {
-				$cmtx_sort = "`is_sticky` DESC, `vote_down` DESC"; //useless
+				$cmtx_sort = "`is_sticky` DESC, `dislikes` DESC"; //dislikes
 			} else if (cmtx_setting('comments_order') == "5") {
 				$cmtx_sort = "`is_sticky` DESC, `rating` DESC"; //positive
 			} else if (cmtx_setting('comments_order') == "6") {

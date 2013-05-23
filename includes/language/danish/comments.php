@@ -67,10 +67,10 @@ define('CMTX_TODAY', 'I dag');
 define('CMTX_YESTERDAY', 'I går');
 
 /* Like Dislike */
-define('CMTX_TITLE_VOTE_UP', 'Stem denne kommentar op');
-define('CMTX_TITLE_VOTE_DOWN', 'Stem denne kommentar ned');
-define('CMTX_VOTE_UP', 'Tak for din stemme');
-define('CMTX_VOTE_DOWN', 'Tak for din stemme');
+define('CMTX_TITLE_LIKE', 'Stem denne kommentar op');
+define('CMTX_TITLE_DISLIKE', 'Stem denne kommentar ned');
+define('CMTX_VOTE_LIKE', 'Tak for din stemme');
+define('CMTX_VOTE_DISLIKE', 'Tak for din stemme');
 define('CMTX_VOTE_NO_COMMENT', 'Denne kommentar findes ikke længere');
 define('CMTX_VOTE_OWN_COMMENT', 'Du kan ikke stemme på dine egne kommentarer');
 define('CMTX_VOTE_ALREADY_VOTED', 'Du har allerede stemt på denne kommentar');

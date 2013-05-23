@@ -67,10 +67,10 @@ define('CMTX_TODAY', 'วันนี้');
 define('CMTX_YESTERDAY', 'เมื่อวาน');
 
 /* Like Dislike */
-define('CMTX_TITLE_VOTE_UP', 'โหวต: เห็นด้วย');
-define('CMTX_TITLE_VOTE_DOWN', 'โหวต: ไม่เห็นด้วย');
-define('CMTX_VOTE_UP', 'ขอบคุณที่โหวต');
-define('CMTX_VOTE_DOWN', 'ขอบคุณที่โหวต');
+define('CMTX_TITLE_LIKE', 'โหวต: เห็นด้วย');
+define('CMTX_TITLE_DISLIKE', 'โหวต: ไม่เห็นด้วย');
+define('CMTX_VOTE_LIKE', 'ขอบคุณที่โหวต');
+define('CMTX_VOTE_DISLIKE', 'ขอบคุณที่โหวต');
 define('CMTX_VOTE_NO_COMMENT', 'ไม่พบข้อความคิดเห็นนี้');
 define('CMTX_VOTE_OWN_COMMENT', 'คุณไม่สามารถลงคะแนนสำหรับความเห็นของคุณเอง');
 define('CMTX_VOTE_ALREADY_VOTED', 'คุณได้โหวตสำหรับข้อความคิดเห็นนี้ไปแล้ว');

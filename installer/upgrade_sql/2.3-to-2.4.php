@@ -57,6 +57,9 @@ mysql_query("ALTER TABLE `" . $cmtx_mysql_table_prefix . "pages` CHANGE `page_id
 
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('approval', 'trust_users', '1');");
 
+mysql_query("ALTER TABLE `" . $cmtx_mysql_table_prefix . "comments` CHANGE `vote_up` `likes` int(10) unsigned NOT NULL default '0'");
+mysql_query("ALTER TABLE `" . $cmtx_mysql_table_prefix . "comments` CHANGE `vote_down` `dislikes` int(10) unsigned NOT NULL default '0'");
+
 if (mysql_errno()) {
 echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
