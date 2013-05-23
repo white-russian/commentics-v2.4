@@ -1366,7 +1366,11 @@ function cmtx_approval_needed() { //determine whether approval is needed
 		return false; //no approval needed
 	}
 	
-	return true; //approval needed
+	if (cmtx_setting('approve_comments') && cmtx_setting('trust_users') && !cmtx_user_trusted()) { //if approving all and previous users are trusted and user is not trusted
+		return true; //approval needed
+	}
+	
+	return false; //no approval needed
 
 } //end of approval-needed function
 
