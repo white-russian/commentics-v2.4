@@ -72,7 +72,7 @@ define('CMTX_ERROR_MESSAGE_COUNTRY_SEARCH', 'The selected country could not be f
 define('CMTX_ERROR_MESSAGE_NO_RATING', 'The rating field was not selected. Please select your rating.');
 define('CMTX_ERROR_MESSAGE_INVALID_RATING', 'The selected rating is invalid. Please contact the administrator.');
 define('CMTX_ERROR_MESSAGE_INVALID_REPLY', 'The comment you are replying to is invalid. Please try again.');
-define('CMTX_ERROR_MESSAGE_NO_COMMENT', 'The comment field can not be empty. Please enter your comment.');
+define('CMTX_ERROR_MESSAGE_NO_COMMENT', 'The comment field can not be empty. Please enter a comment.');
 define('CMTX_ERROR_MESSAGE_COMMENT_MIN', 'The comment entered was too short. Please enter a longer comment.');
 define('CMTX_ERROR_MESSAGE_COMMENT_MAX', 'The comment entered was too long. Please enter a shorter comment.');
 define('CMTX_ERROR_MESSAGE_COMMENT_MAX_LINES', 'The comment entered contains too many lines. Please enter fewer lines.');
@@ -81,7 +81,7 @@ define('CMTX_ERROR_MESSAGE_SMILIES_MAX', 'The comment entered contains too many 
 define('CMTX_ERROR_MESSAGE_MILD_SWEARING', 'The comment entered contains offensive words. Please remove these words.');
 define('CMTX_ERROR_MESSAGE_STRONG_SWEARING', 'Swearing is not allowed. Please remove the swear words from your comment.');
 define('CMTX_ERROR_MESSAGE_SPAMMING', 'Spamming is not allowed. Please remove the spam from your comment.');
-define('CMTX_ERROR_MESSAGE_LONG_WORD', 'The comment entered contains a long word. Please shorten or remove this word.');
+define('CMTX_ERROR_MESSAGE_LONG_WORD', 'The comment contains a long word. Please remove this word.');
 define('CMTX_ERROR_MESSAGE_CAPITALS', 'The comment entered contains too many capitals. Please enter fewer capitals.');
 define('CMTX_ERROR_MESSAGE_LINK_IN_COMMENT', 'The comment entered contains a link. Please remove the link.');
 define('CMTX_ERROR_MESSAGE_REPEATS', 'The comment entered contains repeating characters. Please remove them.');
