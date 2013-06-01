@@ -39,6 +39,8 @@ unset($cmtx_set_country_value);
 
 unset($cmtx_set_topic);
 
+unset($cmtx_url);
+
 unset($cmtx_page_id);
 
 unset($cmtx_mysql_database);

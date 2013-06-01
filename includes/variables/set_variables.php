@@ -85,6 +85,8 @@ if (isset($cmtx_set_country_value)) {
 	$cmtx_set_country_value = $cmtx_temp;
 }
 
+global $cmtx_url;
+
 global $cmtx_page_id;
 
 global $cmtx_mysql_table_prefix;

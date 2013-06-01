@@ -127,12 +127,13 @@ function cmtx_strip_slashes ($value) { //strip slashes
 } //end of strip-slashes function
 
 
-function cmtx_set_page_id() { //set the Page ID
+function cmtx_page_setup() { //page setup
 
 	global $cmtx_page_id; //globalise variables
 
-	cmtx_validate_identifier(); //validate identifier
-	cmtx_establish_identifier(); //establish identifier
+	cmtx_identifier_exists(); //check identifier exists
+	cmtx_get_page_details(); //get page details
+	cmtx_validate_page_details(); //validate page details
 	
 	if (cmtx_page_exists()) { //if the page exists
 		$cmtx_page_id = cmtx_get_page_id(); //set its ID
@@ -144,10 +145,10 @@ function cmtx_set_page_id() { //set the Page ID
 		}
 	}
 
-} //end of set-page-id function
+} //end of page-setup function
 
 
-function cmtx_validate_identifier() { //validate identifier
+function cmtx_identifier_exists() { //check identifier exists
 
 	global $cmtx_identifier; //globalise variables
 
@@ -157,24 +158,17 @@ function cmtx_validate_identifier() { //validate identifier
 
 		echo "<h3>Commentics</h3>";
 		echo "<div style='margin-bottom: 10px;'></div>";
-		?><span class="cmtx_identifier_alert"><?php echo CMTX_ALERT_MESSAGE_NO_IDENTIFIER;?></span><?php
-		die();
-
-	} else if (cmtx_strlen($cmtx_identifier) > 250) { //if invalid identifier
-
-		echo "<h3>Commentics</h3>";
-		echo "<div style='margin-bottom: 10px;'></div>";
-		?><span class="cmtx_identifier_alert"><?php echo CMTX_ALERT_MESSAGE_INVALID_IDENTIFIER;?></span><?php
+		?><span class="cmtx_page_alert"><?php echo CMTX_ALERT_MESSAGE_NO_IDENTIFIER; ?></span><?php
 		die();
 
 	}
 
-} //end of validate-identifier function
+} //end of identifier-exists function
 
 
-function cmtx_establish_identifier() { //establish identifier
+function cmtx_get_page_details() { //get page details
 
-	global $cmtx_identifier, $cmtx_reference, $cmtx_parameters; //globalise variables
+	global $cmtx_identifier, $cmtx_reference, $cmtx_url, $cmtx_parameters; //globalise variables
 
 	//get URL
 	$url = cmtx_url_decode(cmtx_current_page());
@@ -227,7 +221,7 @@ function cmtx_establish_identifier() { //establish identifier
 			curl_close($ch);
 		}
 		if (isset($file)) {
-			if (preg_match("/<title>(.+)<\/title>/i", $file, $match)) {
+			if (preg_match("/<title>(.+?)<\/title>/i", $file, $match)) {
 				$cmtx_identifier = str_ireplace("cmtx_title", $match[1], $cmtx_identifier);
 				$cmtx_reference = str_ireplace("cmtx_title", $match[1], $cmtx_reference);
 			} else {
@@ -287,8 +281,37 @@ function cmtx_establish_identifier() { //establish identifier
 		$cmtx_temp = strtolower($cmtx_temp); //convert to lowercase
 		$cmtx_identifier = str_ireplace("cmtx_url", $cmtx_temp, $cmtx_identifier);
 	}
+	
+	//get URL
+	$cmtx_url = cmtx_url_decode(cmtx_current_page());
+	
+	if (cmtx_setting('lower_pages')) {
+		$cmtx_url = strtolower($cmtx_url);
+	}
+	
+	$cmtx_url = cmtx_url_encode_spaces($cmtx_url); //encode spaces
 
-} //end of establish-identifier function
+} //end of get-page-details function
+
+
+function cmtx_validate_page_details() { //validate page details
+
+	global $cmtx_identifier, $cmtx_reference, $cmtx_url; //globalise variables
+
+	if (cmtx_strlen($cmtx_identifier) > 250 || cmtx_strlen($cmtx_reference) > 250 || cmtx_strlen($cmtx_url) > 250) { //if invalid details
+
+		echo "<h3>Commentics</h3>";
+		echo "<div style='margin-bottom: 10px;'></div>";
+	
+		if (cmtx_strlen($cmtx_identifier) > 250) { ?><span class="cmtx_page_alert"><?php echo CMTX_ALERT_MESSAGE_INVALID_IDENTIFIER; ?></span><div style='margin-bottom:5px;'></div><?php }
+		if (cmtx_strlen($cmtx_reference) > 250) { ?><span class="cmtx_page_alert"><?php echo CMTX_ALERT_MESSAGE_INVALID_REFERENCE; ?></span><div style='margin-bottom:5px;'></div><?php }
+		if (cmtx_strlen($cmtx_url) > 250) { ?><span class="cmtx_page_alert"><?php echo CMTX_ALERT_MESSAGE_INVALID_URL; ?></span><div style='margin-bottom:5px;'></div><?php }
+		
+		die();
+		
+	}
+
+} //end of validate-page-details function
 
 
 function cmtx_page_exists() { //check if the page exists
@@ -325,24 +348,14 @@ function cmtx_get_page_id() { //get the page ID
 
 function cmtx_create_page() { //create page
 
-	global $cmtx_identifier, $cmtx_reference, $cmtx_mysql_table_prefix, $cmtx_page_id; //globalise variables
-	
-	//get URL
-	$url = cmtx_url_decode(cmtx_current_page());
-	
-	if (cmtx_setting('lower_pages')) {
-		$url = strtolower($url);
-	}
+	global $cmtx_identifier, $cmtx_reference, $cmtx_url, $cmtx_mysql_table_prefix, $cmtx_page_id; //globalise variables
 	
 	//sanitize data
 	$cmtx_identifier = cmtx_sanitize($cmtx_identifier, true, true);
-	
 	$cmtx_reference = cmtx_sanitize($cmtx_reference, true, true);
-	
-	$url = cmtx_url_encode_spaces($url); //encode spaces
-	$url = cmtx_sanitize($url, true, true);
+	$cmtx_url = cmtx_sanitize($cmtx_url, true, true);
 
-	mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "pages` (`identifier`, `reference`, `url`, `is_form_enabled`, `dated`) VALUES ('$cmtx_identifier', '$cmtx_reference', '$url', 1, NOW())");
+	mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "pages` (`identifier`, `reference`, `url`, `is_form_enabled`, `dated`) VALUES ('$cmtx_identifier', '$cmtx_reference', '$cmtx_url', 1, NOW())");
 
 	$cmtx_page_id = mysql_insert_id();
 
@@ -576,12 +589,12 @@ function cmtx_get_random_key ($length) { //generates a random key
 
 function cmtx_add_viewer() { //add viewer to database
 
-	global $cmtx_mysql_table_prefix, $cmtx_reference; //globalise variables
+	global $cmtx_mysql_table_prefix, $cmtx_reference, $cmtx_url; //globalise variables
 
 	$ip_address = cmtx_get_ip_address();
 	$user_agent = cmtx_get_user_agent();
 	$page_reference = cmtx_sanitize($cmtx_reference, true, true);
-	$page_url = cmtx_sanitize(cmtx_current_page(), true, true);
+	$page_url = cmtx_sanitize($cmtx_url, true, true);
 
 	$timestamp = time();
 	$timeout = $timestamp - cmtx_setting('viewers_timeout');
