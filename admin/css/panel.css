@@ -117,6 +117,10 @@ label.layout_form_general {
 width: 120px;
 }
 
+label.layout_form_maximums {
+width: 65px;
+}
+
 label.layout_form_bb_code {
 width: 40px;
 }

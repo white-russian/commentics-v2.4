@@ -40,7 +40,7 @@ define('CMTX_DESC_LAYOUT_FORM_ENABLED', 'Estas configurações determinam quais 
 define('CMTX_DESC_LAYOUT_FORM_REQUIRED', 'Estas configurações determinam quais partes do formulário são requeridas.');
 define('CMTX_DESC_LAYOUT_FORM_DEFAULTS', 'Esta seção permite que valores padrão sejam configurados.');
 define('CMTX_DESC_LAYOUT_FORM_GENERAL', 'Esta seção contém configurações gerais dos formulários.');
-define('CMTX_DESC_LAYOUT_FORM_SIZES_MAXIMUMS', 'Estas configurações determinam o tamanho dos campos do formulário e seus tamanhos máximos.');
+define('CMTX_DESC_LAYOUT_FORM_MAXIMUMS', 'These settings determine the maximum lengths.');
 define('CMTX_DESC_LAYOUT_FORM_SORT_ORDER_FIELDS', 'Arraste e solte os elementos abaixo para determinar a ordem dos campos no formulário.');
 define('CMTX_DESC_LAYOUT_FORM_SORT_ORDER_BUTTONS', 'Arraste e solte os elementos abaixo para determinar a ordem dos botões no formulário.');
 define('CMTX_DESC_LAYOUT_FORM_BB_CODE', 'Estas configurações são para as tags de BB Code no formulário.');

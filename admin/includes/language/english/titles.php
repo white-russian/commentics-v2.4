@@ -51,7 +51,7 @@ define('CMTX_TITLE_FORM_ENABLED', 'Form: Enabled');
 define('CMTX_TITLE_FORM_REQUIRED', 'Form: Required');
 define('CMTX_TITLE_FORM_DEFAULTS', 'Form: Defaults');
 define('CMTX_TITLE_FORM_GENERAL', 'Form: General');
-define('CMTX_TITLE_FORM_SIZES_MAXIMUMS', 'Form: Sizes and Maximums');
+define('CMTX_TITLE_FORM_MAXIMUMS', 'Form: Maximums');
 define('CMTX_TITLE_FORM_SORT_ORDER', 'Form: Sort Order');
 define('CMTX_TITLE_FORM_BB_CODE', 'Form: BB Code');
 define('CMTX_TITLE_FORM_SMILIES', 'Form: Smilies');

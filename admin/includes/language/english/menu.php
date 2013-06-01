@@ -52,7 +52,7 @@ define('CMTX_MENU_LAYOUT_FORM_ENABLED', 'Enabled');
 define('CMTX_MENU_LAYOUT_FORM_REQUIRED', 'Required');
 define('CMTX_MENU_LAYOUT_FORM_DEFAULTS', 'Defaults');
 define('CMTX_MENU_LAYOUT_FORM_GENERAL', 'General');
-define('CMTX_MENU_LAYOUT_FORM_SIZES_MAXIMUMS', 'Sizes/Maximums');
+define('CMTX_MENU_LAYOUT_FORM_MAXIMUMS', 'Maximums');
 define('CMTX_MENU_LAYOUT_FORM_SORT_ORDER', 'Sort Order');
 define('CMTX_MENU_LAYOUT_FORM_SORT_ORDER_FIELDS', 'Fields');
 define('CMTX_MENU_LAYOUT_FORM_SORT_ORDER_BUTTONS', 'Buttons');

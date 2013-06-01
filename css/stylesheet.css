@@ -568,6 +568,7 @@ font-size: 0.9em;
 }
 
 .cmtx_question_field {
+width: 60px;
 }
 
 .cmtx_captcha_field {

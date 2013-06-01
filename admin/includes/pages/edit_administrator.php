@@ -188,7 +188,7 @@ echo cmtx_page_checkbox("layout", $id, "0") . "<span class='menu_checkbox'>Layou
 			echo cmtx_page_checkbox("layout_form_required", $id, "40") . "Required" . "<br />";
 			echo cmtx_page_checkbox("layout_form_defaults", $id, "40") . "Defaults" . "<br />";
 			echo cmtx_page_checkbox("layout_form_general", $id, "40") . "General" . "<br />";
-			echo cmtx_page_checkbox("layout_form_sizes_maximums", $id, "40") . "Sizes/Maximums" . "<br />";
+			echo cmtx_page_checkbox("layout_form_maximums", $id, "40") . "Maximums" . "<br />";
 			echo cmtx_page_checkbox("layout_form_sort_order", $id, "40") . "<b>Sort Order</b>" . "<br />";
 				echo cmtx_page_checkbox("layout_form_sort_order_fields", $id, "60") . "Fields" . "<br />";
 				echo cmtx_page_checkbox("layout_form_sort_order_buttons", $id, "60") . "Buttons" . "<br />";

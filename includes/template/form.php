@@ -499,7 +499,7 @@ foreach ($cmtx_elements as $cmtx_element) {
 <?php echo CMTX_LABEL_NAME ?>
 <?php if (cmtx_setting('display_required_symbol')) { ?><span class="cmtx_required_symbol"><?php echo " " . CMTX_REQUIRED_SYMBOL ?></span><?php } ?>
 </label>
-<input type="text" name="cmtx_name" class="cmtx_name_field" title="<?php echo CMTX_TITLE_NAME; ?>" size="<?php echo cmtx_setting('field_size_name'); ?>" maxlength="<?php echo cmtx_setting('field_maximum_name'); ?>" value="<?php echo $cmtx_default_name; ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
+<input type="text" name="cmtx_name" class="cmtx_name_field" title="<?php echo CMTX_TITLE_NAME; ?>" maxlength="<?php echo cmtx_setting('field_maximum_name'); ?>" value="<?php echo $cmtx_default_name; ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
 <?php } ?>
 
 <?php function cmtx_output_email () { ?>
@@ -510,7 +510,7 @@ foreach ($cmtx_elements as $cmtx_element) {
 <?php echo CMTX_LABEL_EMAIL ?>
 <?php if (cmtx_setting('required_email') && cmtx_setting('display_required_symbol')) { ?><span class="cmtx_required_symbol"><?php echo " " . CMTX_REQUIRED_SYMBOL ?></span><?php } ?>
 </label>
-<input type="text" name="cmtx_email" class="cmtx_email_field" title="<?php echo CMTX_TITLE_EMAIL; ?>" size="<?php echo cmtx_setting('field_size_email'); ?>" maxlength="<?php echo cmtx_setting('field_maximum_email'); ?>" value="<?php echo $cmtx_default_email; ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
+<input type="text" name="cmtx_email" class="cmtx_email_field" title="<?php echo CMTX_TITLE_EMAIL; ?>" maxlength="<?php echo cmtx_setting('field_maximum_email'); ?>" value="<?php echo $cmtx_default_email; ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
 <?php if (cmtx_setting('display_email_note')) { ?> <span class="cmtx_email_note"><?php echo CMTX_NOTE_EMAIL ?></span> <?php } ?>
 <?php } } ?>
 
@@ -522,7 +522,7 @@ foreach ($cmtx_elements as $cmtx_element) {
 <?php echo CMTX_LABEL_WEBSITE ?>
 <?php if (cmtx_setting('required_website') && cmtx_setting('display_required_symbol')) { ?><span class="cmtx_required_symbol"><?php echo " " . CMTX_REQUIRED_SYMBOL ?></span><?php } ?>
 </label>
-<input type="text" name="cmtx_website" class="cmtx_website_field" title="<?php echo CMTX_TITLE_WEBSITE; ?>" size="<?php echo cmtx_setting('field_size_website'); ?>" maxlength="<?php echo cmtx_setting('field_maximum_website'); ?>" value="<?php echo $cmtx_default_website; ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
+<input type="text" name="cmtx_website" class="cmtx_website_field" title="<?php echo CMTX_TITLE_WEBSITE; ?>" maxlength="<?php echo cmtx_setting('field_maximum_website'); ?>" value="<?php echo $cmtx_default_website; ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
 <?php } } ?>
 
 <?php function cmtx_output_town () { ?>
@@ -533,7 +533,7 @@ foreach ($cmtx_elements as $cmtx_element) {
 <?php echo CMTX_LABEL_TOWN ?>
 <?php if (cmtx_setting('required_town') && cmtx_setting('display_required_symbol')) { ?><span class="cmtx_required_symbol"><?php echo " " . CMTX_REQUIRED_SYMBOL ?></span><?php } ?>
 </label>
-<input type="text" name="cmtx_town" class="cmtx_town_field" title="<?php echo CMTX_TITLE_TOWN; ?>" size="<?php echo cmtx_setting('field_size_town'); ?>" maxlength="<?php echo cmtx_setting('field_maximum_town'); ?>" value="<?php echo $cmtx_default_town; ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
+<input type="text" name="cmtx_town" class="cmtx_town_field" title="<?php echo CMTX_TITLE_TOWN; ?>" maxlength="<?php echo cmtx_setting('field_maximum_town'); ?>" value="<?php echo $cmtx_default_town; ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
 <?php } } ?>
 
 <?php function cmtx_output_country () { ?>
@@ -700,7 +700,7 @@ echo $cmtx_ratings;
 <?php echo CMTX_LABEL_COMMENT ?>
 <?php if (cmtx_setting('display_required_symbol')) { ?><span class="cmtx_required_symbol"><?php echo " " . CMTX_REQUIRED_SYMBOL ?></span><?php } ?>
 </label>
-<textarea name="cmtx_comment" class="cmtx_comment_field" title="<?php echo CMTX_TITLE_COMMENT; ?>" cols="<?php echo cmtx_setting('field_size_comment_columns'); ?>" rows="<?php echo cmtx_setting('field_size_comment_rows'); ?>" onkeyup="cmtx_text_counter()" onkeydown="cmtx_text_counter()"><?php echo $cmtx_default_comment; ?></textarea>
+<textarea name="cmtx_comment" class="cmtx_comment_field" title="<?php echo CMTX_TITLE_COMMENT; ?>" maxlength="<?php echo cmtx_setting('comment_maximum_characters'); ?>" onkeyup="cmtx_text_counter()" onkeydown="cmtx_text_counter()"><?php echo $cmtx_default_comment; ?></textarea>
 
 <div style="clear: left;"></div>
 
@@ -739,7 +739,7 @@ foreach ($cmtx_elements as $cmtx_element) {
 <div style="clear: left;"></div>
 <div class="cmtx_label">&nbsp;</div>
 <span class="cmtx_question_part_answer_text"><?php echo CMTX_TEXT_QUESTION ?></span>
-<input type="text" name="cmtx_user_answer" class="cmtx_question_field" title="<?php echo CMTX_TITLE_QUESTION; ?>" size="<?php echo cmtx_setting('field_size_question'); ?>" maxlength="<?php echo cmtx_setting('field_maximum_question'); ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
+<input type="text" name="cmtx_user_answer" class="cmtx_question_field" title="<?php echo CMTX_TITLE_QUESTION; ?>" maxlength="<?php echo cmtx_setting('field_maximum_question'); ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
 <?php } } } ?>
 
 <?php function cmtx_output_captcha () { ?>

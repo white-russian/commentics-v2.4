@@ -81,7 +81,7 @@ ddlevelsmenu.setup("ddtopmenubar", "topbar");
 	<?php if (!cmtx_restrict_page("layout_form_required")) { ?> <li><a href="index.php?page=layout_form_required"><?php echo CMTX_MENU_LAYOUT_FORM_REQUIRED; ?></a></li> <?php } ?>
 	<?php if (!cmtx_restrict_page("layout_form_defaults")) { ?> <li><a href="index.php?page=layout_form_defaults"><?php echo CMTX_MENU_LAYOUT_FORM_DEFAULTS; ?></a></li> <?php } ?>
 	<?php if (!cmtx_restrict_page("layout_form_general")) { ?> <li><a href="index.php?page=layout_form_general"><?php echo CMTX_MENU_LAYOUT_FORM_GENERAL; ?></a></li> <?php } ?>
-	<?php if (!cmtx_restrict_page("layout_form_sizes_maximums")) { ?> <li><a href="index.php?page=layout_form_sizes_maximums"><?php echo CMTX_MENU_LAYOUT_FORM_SIZES_MAXIMUMS; ?></a></li> <?php } ?>
+	<?php if (!cmtx_restrict_page("layout_form_maximums")) { ?> <li><a href="index.php?page=layout_form_maximums"><?php echo CMTX_MENU_LAYOUT_FORM_MAXIMUMS; ?></a></li> <?php } ?>
 	<?php if (!cmtx_restrict_page("layout_form_sort_order")) { ?>
 	<li>
 	<a href="#"><?php echo CMTX_MENU_LAYOUT_FORM_SORT_ORDER; ?></a>

@@ -52,7 +52,7 @@ define('CMTX_MENU_LAYOUT_FORM_ENABLED', 'Ingeschakeld');
 define('CMTX_MENU_LAYOUT_FORM_REQUIRED', 'Verplicht');
 define('CMTX_MENU_LAYOUT_FORM_DEFAULTS', 'Standaard');
 define('CMTX_MENU_LAYOUT_FORM_GENERAL', 'Algemeen');
-define('CMTX_MENU_LAYOUT_FORM_SIZES_MAXIMUMS', 'Afmeting/Maximums');
+define('CMTX_MENU_LAYOUT_FORM_MAXIMUMS', 'Maximums');
 define('CMTX_MENU_LAYOUT_FORM_SORT_ORDER', 'Sortering volgorde');
 define('CMTX_MENU_LAYOUT_FORM_SORT_ORDER_FIELDS', 'Velden');
 define('CMTX_MENU_LAYOUT_FORM_SORT_ORDER_BUTTONS', 'Knoppen');

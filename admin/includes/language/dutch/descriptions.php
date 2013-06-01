@@ -40,7 +40,7 @@ define('CMTX_DESC_LAYOUT_FORM_ENABLED', 'Deze instellingen bepalen welke delen v
 define('CMTX_DESC_LAYOUT_FORM_REQUIRED', 'Deze instellingen bepalen welke delen van het formulier verplicht zijn.');
 define('CMTX_DESC_LAYOUT_FORM_DEFAULTS', 'Deze sectie staat het instellen van standaard waarden toe.');
 define('CMTX_DESC_LAYOUT_FORM_GENERAL', 'Deze sectie bevat algemene formulier instellingen.');
-define('CMTX_DESC_LAYOUT_FORM_SIZES_MAXIMUMS', 'Deze instellingen bepalen de fomrulier veld afmetingen en maximale lengtes.');
+define('CMTX_DESC_LAYOUT_FORM_MAXIMUMS', 'These settings determine the maximum lengths.');
 define('CMTX_DESC_LAYOUT_FORM_SORT_ORDER_FIELDS', 'Drag & drop de elementen hieronder om de sorteer volgorde van de formulier velden te bepalen.');
 define('CMTX_DESC_LAYOUT_FORM_SORT_ORDER_BUTTONS', 'Drag & drop de elementen hieronder om de volgorde van de formulier knoppen te bepalen.');
 define('CMTX_DESC_LAYOUT_FORM_BB_CODE', 'Deze instellingen zijn voor de formulier BB Code tags.');

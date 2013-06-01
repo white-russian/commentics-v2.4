@@ -51,7 +51,7 @@ define('CMTX_TITLE_FORM_ENABLED', 'Formulário: Habilitado');
 define('CMTX_TITLE_FORM_REQUIRED', 'Formulário: Requerido');
 define('CMTX_TITLE_FORM_DEFAULTS', 'Formulário: Padrões');
 define('CMTX_TITLE_FORM_GENERAL', 'Formulário: Geral');
-define('CMTX_TITLE_FORM_SIZES_MAXIMUMS', 'Formulário: Tamanhos e Máximos');
+define('CMTX_TITLE_FORM_MAXIMUMS', 'Form: Maximums');
 define('CMTX_TITLE_FORM_SORT_ORDER', 'Formulário: Ordenação');
 define('CMTX_TITLE_FORM_BB_CODE', 'Formulário: BB Code');
 define('CMTX_TITLE_FORM_SMILIES', 'Formulário: Emoticons');

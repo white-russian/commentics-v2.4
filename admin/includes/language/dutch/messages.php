@@ -105,7 +105,6 @@ define('CMTX_MSG_BACKUP_UNABLE', '<p>The system() function on your server appear
 define('CMTX_MSG_OPTIMIZED', 'Tables geoptimaliseerd.');
 
 define('CMTX_MSG_NOTICE_MANAGE_COMMENTS', 'Om de prestaties te verbeteren, worden alleen de laatste 50 reacties getoond. Ga naar Settings -> System om dit te veranderen.');
-define('CMTX_MSG_NOTICE_LAYOUT_FORM_SIZES_MAXIMUMS', 'De kavelgrootte worden gecontroleerd en overschreven door de CSS stylesheet.');
 define('CMTX_MSG_NOTICE_LAYOUT_FORM_QUESTIONS', 'Answers are case-insensitive. Separate multiple answers with the | character.');
 define('CMTX_MSG_NOTICE_SETTINGS_ADMIN_DETECTION', 'Posting as the admin has <a href="http://www.commentics.org/wiki/doku.php?id=admin:settings_admin_detection" target="_blank">differences</a>.');
 define('CMTX_MSG_NOTICE_SETTINGS_EMAIL_SENDER', 'The "<b>From Email</b>" should be a registered address.');

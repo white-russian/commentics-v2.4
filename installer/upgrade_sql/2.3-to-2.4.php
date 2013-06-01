@@ -60,6 +60,16 @@ mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`,
 mysql_query("ALTER TABLE `" . $cmtx_mysql_table_prefix . "comments` CHANGE `vote_up` `likes` int(10) unsigned NOT NULL default '0'");
 mysql_query("ALTER TABLE `" . $cmtx_mysql_table_prefix . "comments` CHANGE `vote_down` `dislikes` int(10) unsigned NOT NULL default '0'");
 
+mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "settings` WHERE `title` = 'field_size_name'");
+mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "settings` WHERE `title` = 'field_size_email'");
+mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "settings` WHERE `title` = 'field_size_website'");
+mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "settings` WHERE `title` = 'field_size_town'");
+mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "settings` WHERE `title` = 'field_size_comment_columns'");
+mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "settings` WHERE `title` = 'field_size_comment_rows'");
+mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "settings` WHERE `title` = 'field_size_question'");
+
+mysql_query("DELETE FROM `" . $cmtx_mysql_table_prefix . "settings` WHERE `title` = 'notice_layout_form_sizes_maximums'");
+
 if (mysql_errno()) {
 echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;
