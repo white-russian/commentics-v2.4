@@ -113,18 +113,18 @@ if (extension_loaded('ctype')) {
 echo "<span class='system_green'>Pass</span>";
 } else {
 echo "<span class='system_red'>Fail</span>";
-$notes .= "- Ctype extension is required.<br />";
+$notes .= "- Ctype extension is required for input validation.<br />";
 $proceed = false;
 }
 
 echo "<br />";
 
-echo "<label class='system_item'>filter_var() func is enabled</label>";
-if (function_exists('filter_var') && is_callable('filter_var')) {
+echo "<label class='system_item'>Filter extension is enabled</label>";
+if (extension_loaded('filter')) {
 echo "<span class='system_green'>Pass</span>";
 } else {
 echo "<span class='system_red'>Fail</span>";
-$notes .= "- filter_var() is needed for form validation.<br />";
+$notes .= "- Filter extension is required for input validation.<br />";
 $proceed = false;
 }
 
@@ -133,8 +133,7 @@ echo "<br />";
 echo "<label class='system_item'>Magic Quotes is disabled</label>";
 if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
 echo "<span class='system_amber'>Fail</span>";
-$notes .= "- Magic Quotes should be disabled or you will see extra slashes";
-$notes .= " (<a href='http://www.commentics.org/support/knowledgebase.php?article=29' target='_blank'>FAQ</a>)<br />";
+$notes .= "- Magic Quotes should be disabled to stop extra slashes.<br />";
 } else {
 echo "<span class='system_green'>Pass</span>";
 }
@@ -146,7 +145,7 @@ if (function_exists('system') && is_callable('system')) {
 echo "<span class='system_green'>Pass</span>";
 } else {
 echo "<span class='system_amber'>Fail</span>";
-$notes .= "- the system() function is used for the database backup tool.<br />";
+$notes .= "- system() is required for the database backup tool.<br />";
 }
 
 echo "<br />";
@@ -176,7 +175,27 @@ if (function_exists('fsockopen') && is_callable('fsockopen')) {
 echo "<span class='system_green'>Pass</span>";
 } else {
 echo "<span class='system_amber'>Fail</span>";
-$notes .= "- fsockopen() is used for Akismet and ReCaptcha.<br />";
+$notes .= "- fsockopen() is required for Akismet and ReCaptcha.<br />";
+}
+
+echo "<br />";
+
+echo "<label class='system_item'>GD extension is enabled</label>";
+if (extension_loaded('gd')) {
+echo "<span class='system_green'>Pass</span>";
+} else {
+echo "<span class='system_amber'>Fail</span>";
+$notes .= "- GD is required for the Securimage captcha.<br />";
+}
+
+echo "<br />";
+
+echo "<label class='system_item'>FreeType is supported</label>";
+if (function_exists('imagettftext')) {
+echo "<span class='system_green'>Pass</span>";
+} else {
+echo "<span class='system_amber'>Fail</span>";
+$notes .= "- FreeType is required for the Securimage captcha.<br />";
 }
 ?>
 

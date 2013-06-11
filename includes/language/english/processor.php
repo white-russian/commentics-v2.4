@@ -88,7 +88,7 @@ define('CMTX_ERROR_MESSAGE_REPEATS', 'The comment entered contains repeating cha
 define('CMTX_ERROR_MESSAGE_NO_ANSWER', 'The question field can not be empty. Please enter the answer.');
 define('CMTX_ERROR_MESSAGE_WRONG_ANSWER', 'The answer to the question was incorrect. Please try again.');
 define('CMTX_ERROR_MESSAGE_NO_CAPTCHA', 'The captcha field can not be empty. Please enter the characters.');
-define('CMTX_ERROR_MESSAGE_WRONG_CAPTCHA', 'The characters for the captcha image were incorrect. Please try again.');
+define('CMTX_ERROR_MESSAGE_WRONG_CAPTCHA', 'The characters for the captcha were incorrect. Please try again.');
 define('CMTX_ERROR_MESSAGE_FLOOD_CONTROL_DELAY', 'Your last comment was submitted recently. Please wait longer.');
 define('CMTX_ERROR_MESSAGE_FLOOD_CONTROL_MAXIMUM', 'You have submitted several comments recently. Please wait a while.');
 define('CMTX_ERROR_MESSAGE_NO_REFERRER', 'Please enable your web browser to send referrer information.');

@@ -195,7 +195,10 @@ echo cmtx_page_checkbox("layout", $id, "0") . "<span class='menu_checkbox'>Layou
 			echo cmtx_page_checkbox("layout_form_bb_code", $id, "40") . "BB Code" . "<br />";
 			echo cmtx_page_checkbox("layout_form_smilies", $id, "40") . "Smilies" . "<br />";
 			echo cmtx_page_checkbox("layout_form_questions", $id, "40") . "Questions" . "<br />";
-				echo cmtx_page_checkbox("edit_question", $id, "60") . "Edit" . "<p />";
+				echo cmtx_page_checkbox("edit_question", $id, "60") . "Edit" . "<br />";
+			echo cmtx_page_checkbox("layout_form_captchas", $id, "40") . "<b>Captchas</b>" . "<br />";
+				echo cmtx_page_checkbox("layout_form_captchas_securimage", $id, "60") . "Securimage" . "<br />";
+				echo cmtx_page_checkbox("layout_form_captchas_recaptcha", $id, "60") . "ReCaptcha" . "<p />";	
 		echo cmtx_page_checkbox("layout_powered", $id, "20") . "Powered" . "<p />";
 
 echo cmtx_page_checkbox("settings", $id, "0") . "<span class='menu_checkbox'>Settings</span>" . "<p />";
@@ -244,7 +247,6 @@ echo cmtx_page_checkbox("settings", $id, "0") . "<span class='menu_checkbox'>Set
 			echo cmtx_page_checkbox("list_spam_words", $id, "60") . "Spam Words" . "<br />";
 			echo cmtx_page_checkbox("list_mild_swear_words", $id, "60") . "Mild Swear Words" . "<br />";
 			echo cmtx_page_checkbox("list_strong_swear_words", $id, "60") . "Strong Swear Words" . "<br />";
-	echo cmtx_page_checkbox("settings_recaptcha", $id, "20") . "ReCaptcha" . "<br />";
 	echo cmtx_page_checkbox("settings_rich_snippets", $id, "20") . "Rich Snippets" . "<br />";
 	echo cmtx_page_checkbox("settings_rss", $id, "20") . "RSS" . "<br />";
 	echo cmtx_page_checkbox("settings_security", $id, "20") . "Security" . "<br />";

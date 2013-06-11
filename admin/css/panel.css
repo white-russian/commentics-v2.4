@@ -129,6 +129,18 @@ label.layout_form_smilies {
 width: 45px;
 }
 
+label.layout_form_captchas_securimage_1 {
+width: 85px;
+}
+
+label.layout_form_captchas_securimage_2 {
+width: 80px;
+}
+
+label.layout_form_captchas_recaptcha {
+width: 75px;
+}
+
 label.layout_powered {
 width: 60px;
 }
@@ -258,10 +270,6 @@ font-weight: bold;
 span.wildcard_not_found {
 color: #CC0000;
 font-weight: bold;
-}
-
-label.settings_recaptcha {
-width: 75px;
 }
 
 label.settings_rich_snippets {

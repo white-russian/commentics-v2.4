@@ -46,7 +46,7 @@ if (isset($_POST['submit']) && cmtx_setting('is_demo')) {
 
 cmtx_check_csrf_form_key();
 
-if (isset($_POST['enabled'])) { $enabled_captcha = 1; } else { $enabled_captcha = 0; }
+if (isset($_POST['enabled'])) { $captcha_type = 'recaptcha'; } else { $captcha_type = 'securimage'; }
 $recaptcha_public_key = $_POST['recaptcha_public_key'];
 $recaptcha_private_key = $_POST['recaptcha_private_key'];
 $recaptcha_theme = $_POST['recaptcha_themes'];
@@ -57,7 +57,7 @@ $recaptcha_private_key_san = cmtx_sanitize($recaptcha_private_key);
 $recaptcha_theme_san = cmtx_sanitize($recaptcha_theme);
 $recaptcha_language_san = cmtx_sanitize($recaptcha_language);
 
-mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$enabled_captcha' WHERE `title` = 'enabled_captcha'");
+mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$captcha_type' WHERE `title` = 'captcha_type'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$recaptcha_public_key_san' WHERE `title` = 'recaptcha_public_key'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$recaptcha_private_key_san' WHERE `title` = 'recaptcha_private_key'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$recaptcha_theme_san' WHERE `title` = 'recaptcha_theme'");
@@ -69,18 +69,18 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$r
 
 <p />
 
-<?php echo CMTX_DESC_SETTINGS_RECAPTCHA; ?>
+<?php echo CMTX_DESC_LAYOUT_FORM_RECAPTCHA; ?>
 
 <p />
 
-<form name="settings_recaptcha" id="settings_recaptcha" action="index.php?page=settings_recaptcha" method="post">
-<label class='settings_recaptcha'><?php echo CMTX_FIELD_LABEL_ENABLED; ?></label> <?php if (cmtx_setting('enabled_captcha')) { ?> <input type="checkbox" checked="checked" name="enabled"/> <?php } else { ?> <input type="checkbox" name="enabled"/> <?php } ?>
+<form name="layout_form_captchas_recaptcha" id="layout_form_captchas_recaptcha" action="index.php?page=layout_form_captchas_recaptcha" method="post">
+<label class='layout_form_captchas_recaptcha'><?php echo CMTX_FIELD_LABEL_ENABLED; ?></label> <?php if (cmtx_setting('captcha_type') == 'recaptcha') { ?> <input type="checkbox" checked="checked" name="enabled"/> <?php } else { ?> <input type="checkbox" name="enabled"/> <?php } ?>
 <p />
-<label class='settings_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_PUBLIC_KEY; ?></label> <input type="text" name="recaptcha_public_key" size="55" maxlength="250" value="<?php echo cmtx_setting('recaptcha_public_key'); ?>"/>
+<label class='layout_form_captchas_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_PUBLIC_KEY; ?></label> <input type="text" name="recaptcha_public_key" size="55" maxlength="250" value="<?php echo cmtx_setting('recaptcha_public_key'); ?>"/>
 <p />
-<label class='settings_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_PRIVATE_KEY; ?></label> <input type="text" name="recaptcha_private_key" size="55" maxlength="250" value="<?php echo cmtx_setting('recaptcha_private_key'); ?>"/>
+<label class='layout_form_captchas_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_PRIVATE_KEY; ?></label> <input type="text" name="recaptcha_private_key" size="55" maxlength="250" value="<?php echo cmtx_setting('recaptcha_private_key'); ?>"/>
 <p />
-<label class='settings_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_THEME; ?></label>
+<label class='layout_form_captchas_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_THEME; ?></label>
 <?php
 $recaptcha_themes = "<select name='recaptcha_themes'>
 <option value='red'>red</option>
@@ -92,7 +92,7 @@ $recaptcha_themes = str_ireplace("'".cmtx_setting('recaptcha_theme')."'", "'".cm
 echo $recaptcha_themes;
 ?>
 <p />
-<label class='settings_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_LANGUAGE; ?></label>
+<label class='layout_form_captchas_recaptcha'><?php echo CMTX_FIELD_LABEL_RECAPTCHA_LANGUAGE; ?></label>
 <?php
 $recaptcha_languages = "<select name='recaptcha_languages'>
 <option value='en'>english</option>

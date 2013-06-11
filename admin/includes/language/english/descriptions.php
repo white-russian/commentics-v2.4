@@ -45,6 +45,8 @@ define('CMTX_DESC_LAYOUT_FORM_SORT_ORDER_FIELDS', 'Drag & drop the elements belo
 define('CMTX_DESC_LAYOUT_FORM_SORT_ORDER_BUTTONS', 'Drag & drop the elements below to determine the sort order of the form buttons.');
 define('CMTX_DESC_LAYOUT_FORM_BB_CODE', 'These settings are for the form\'s BB Code tags.');
 define('CMTX_DESC_LAYOUT_FORM_SMILIES', 'These settings are for the form\'s smiley images.');
+define('CMTX_DESC_LAYOUT_FORM_SECURIMAGE', 'Securimage is a built-in image captcha. You can customize the look below.');
+define('CMTX_DESC_LAYOUT_FORM_RECAPTCHA', 'ReCaptcha is a free and external image captcha service to prevent spam.<p/>It\'s secure, widely used, and helps digitize books. Get your API keys <a href="http://www.google.com/recaptcha" target="_blank">here</a>.');
 define('CMTX_DESC_LAYOUT_POWERED', 'These settings relate to the \'Powered by\' statement.');
 define('CMTX_DESC_SETTINGS_ADMIN', 'These settings are for the admin panel administrator.');
 define('CMTX_DESC_SETTINGS_ADMIN_DETECTION', 'This section allows for the detection of the administrator.');
@@ -85,7 +87,6 @@ define('CMTX_DESC_WILDCARDS_II', 'The searches are case-insensitive, so for exam
 define('CMTX_DESC_WILDCARDS_III', 'Each case should be on a new line. Empty lines are ignored.');
 define('CMTX_DESC_WILDCARD_FOUND', '(Found)');
 define('CMTX_DESC_WILDCARD_NOT_FOUND', '(Not found)');
-define('CMTX_DESC_SETTINGS_RECAPTCHA', 'ReCaptcha is a free and external image captcha service to prevent spam.<p/>It\'s secure, widely used, and helps digitize books. Get your API keys <a href="http://www.google.com/recaptcha" target="_blank">here</a>.');
 define('CMTX_DESC_SETTINGS_RICH_SNIPPETS_1', '<b>Rich Snippets</b> is a way of marking-up certain types of data so that it appears in a specially displayed format in the search engine results pages, making it easier for users to decide whether to click to your site.<p />In Commentics the type of data which is marked-up is the <b>average rating</b>. It can be marked-up with any of 3 formats: Microdata, Microformats or RDFa. I recommend <b>Microformats</b> because it uses valid xHTML.<p />This is an example of how this feature looks:');
 define('CMTX_DESC_SETTINGS_RICH_SNIPPETS_2', 'To use this feature, both the <b>Average Rating</b> (Layout -> Comments -> Enabled) and the <b>Topic</b> (Layout -> Comments -> Enabled) must also be enabled.<p />After you have enabled this feature, you can test it <a href="http://www.google.com/webmasters/tools/richsnippets" target="_blank">here</a>. You must have at least one rating for the mark-up to be added.');
 define('CMTX_DESC_SETTINGS_RSS', 'These settings are for the RSS comment feed.');

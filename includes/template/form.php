@@ -742,28 +742,47 @@ foreach ($cmtx_elements as $cmtx_element) {
 <input type="text" name="cmtx_user_answer" class="cmtx_question_field" title="<?php echo CMTX_TITLE_QUESTION; ?>" maxlength="<?php echo cmtx_setting('field_maximum_question'); ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
 <?php } } } ?>
 
-<?php function cmtx_output_captcha () { ?>
-<?php global $cmtx_path; ?>
-<?php if (cmtx_setting('enabled_captcha') && function_exists('fsockopen') && is_callable('fsockopen')) { ?>
-<?php if (cmtx_session_set() && isset($_SESSION['cmtx_captcha']) && $_SESSION['cmtx_captcha'] == cmtx_setting('session_key')) {} else { ?>
-<div class="cmtx_height_between_fields"></div>
-<label class="cmtx_label">
-<?php echo CMTX_LABEL_CAPTCHA ?>
-<?php if (cmtx_setting('display_required_symbol')) { ?><span class="cmtx_required_symbol"><?php echo " " . CMTX_REQUIRED_SYMBOL ?></span><?php } ?>
-</label>
-<div class="cmtx_captcha_field">
 <?php
-if ((cmtx_setting('recaptcha_public_key') == "") || (cmtx_setting('recaptcha_private_key') == "")) {
-echo "<span class='cmtx_no_recaptcha_key'>" . CMTX_RECAPTCHA_NO_KEY . "</span>.";
-} else {
-require_once $cmtx_path . 'includes/recaptcha/recaptchalib.php';
-$cmtx_recaptcha_public_key = cmtx_setting('recaptcha_public_key');
-echo recaptcha_get_html($cmtx_recaptcha_public_key);
+function cmtx_output_captcha () {
+	global $cmtx_path;
+	if (cmtx_session_set() && isset($_SESSION['cmtx_captcha']) && $_SESSION['cmtx_captcha'] == cmtx_setting('session_key')) {} else {
+		if (cmtx_setting('enabled_captcha') && cmtx_setting('captcha_type') == 'securimage' && extension_loaded('gd') && function_exists('imagettftext')) {
+			?><div class="cmtx_height_between_fields"></div>
+			<label class="cmtx_label"><?php
+			echo CMTX_LABEL_CAPTCHA;
+			if (cmtx_setting('display_required_symbol')) { ?><span class="cmtx_required_symbol"><?php echo ' ' . CMTX_REQUIRED_SYMBOL; ?></span><?php } ?>
+			</label>
+			<img id="cmtx_securimage" class="cmtx_securimage" src="<?php echo cmtx_comments_folder(); ?>securimage/securimage_show.php" alt="Captcha" title="Captcha"/>
+			<object type="application/x-shockwave-flash" data="<?php echo cmtx_comments_folder(); ?>securimage/securimage_play.swf?audio_file=<?php echo cmtx_comments_folder(); ?>securimage/securimage_play.php&amp;icon_file=<?php echo cmtx_comments_folder(); ?>securimage/images/audio_icon.png" alt="Audio" title="<?php echo CMTX_TITLE_SECURIMAGE_AUDIO; ?>" class="cmtx_securimage_audio_icon">
+			<param name="movie" value="<?php echo cmtx_comments_folder(); ?>securimage/securimage_play.swf?audio_file=<?php echo cmtx_comments_folder(); ?>securimage/securimage_play.php&amp;icon_file=<?php echo cmtx_comments_folder(); ?>securimage/images/audio_icon.png"/>
+			</object>
+			<br/>
+			<a href="#" onclick="document.getElementById('cmtx_securimage').src = '<?php echo cmtx_comments_folder(); ?>securimage/securimage_show.php?' + Math.random(); return false"><img src="<?php echo cmtx_comments_folder(); ?>securimage/images/refresh_icon.png" alt="Refresh" title="<?php echo CMTX_TITLE_SECURIMAGE_REFRESH; ?>" class="cmtx_securimage_refresh_icon"/></a>
+			<div style="clear: left;"></div>
+			<div class="cmtx_label">&nbsp;</div>
+			<span class="securimage_text"><?php echo CMTX_TEXT_SECURIMAGE; ?></span>
+			<input type="text" name="cmtx_captcha_code" class="cmtx_securimage_field" title="<?php echo CMTX_TITLE_SECURIMAGE; ?>" maxlength="<?php echo cmtx_setting('field_maximum_captcha'); ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
+			<?php
+		} else if (cmtx_setting('enabled_captcha') && cmtx_setting('captcha_type') == 'recaptcha' && function_exists('fsockopen') && is_callable('fsockopen')) {
+			?><div class="cmtx_height_between_fields"></div>
+			<label class="cmtx_label"><?php
+			echo CMTX_LABEL_CAPTCHA;
+			if (cmtx_setting('display_required_symbol')) { ?><span class="cmtx_required_symbol"><?php echo ' ' . CMTX_REQUIRED_SYMBOL; ?></span><?php } ?>
+			</label>
+			<div class="cmtx_recaptcha"><?php
+			if ((cmtx_setting('recaptcha_public_key') == '') || (cmtx_setting('recaptcha_private_key') == '')) {
+				echo "<span class='cmtx_recaptcha_no_key'>" . CMTX_RECAPTCHA_NO_KEY . "</span>.";
+			} else {
+				require_once $cmtx_path . 'includes/recaptcha/recaptchalib.php';
+				$cmtx_recaptcha_public_key = cmtx_setting('recaptcha_public_key');
+				echo recaptcha_get_html($cmtx_recaptcha_public_key);
+			} ?>
+			</div>
+			<div style="clear: left;"></div><?php
+		}
+	}
 }
 ?>
-</div>
-<div style="clear: left;"></div>
-<?php } } } ?>
 
 <?php if ( (cmtx_setting('enabled_notify') && cmtx_setting('enabled_email')) || (cmtx_setting('enabled_remember')) || (cmtx_setting('enabled_privacy')) || (cmtx_setting('enabled_terms')) ) { ?>
 <div class='cmtx_height_above_checkboxes'></div>

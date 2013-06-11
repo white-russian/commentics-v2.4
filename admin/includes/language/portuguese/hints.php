@@ -69,6 +69,11 @@ define('CMTX_HINT_FORM_COOKIE_DAYS', 'The amount of days before the form cookie 
 define('CMTX_HINT_REPEAT_RATINGS', 'O que fazer com o campo de avaliação uma vez que o usuário já tenha avaliado.');
 define('CMTX_HINT_AGREE_TO_PREVIEW', 'Deve o usuário ter que aceitar a política de privacidade e os termos e condições antes de ser capaz de visualizar o comentário?');
 
+define('CMTX_HINT_SECURIMAGE_LENGTH', 'The number of characters to show inside the captcha image.');
+define('CMTX_HINT_SECURIMAGE_PERTURBATION', 'The character distortion. 1.0 is high distortion. The higher the number, the more distortion.');
+define('CMTX_HINT_SECURIMAGE_LINES', 'How many lines to draw over the image. The more, the harder.');
+define('CMTX_HINT_SECURIMAGE_NOISE', 'The level of noise (random dots) to place on the image, 0-10.');
+
 define('CMTX_HINT_APPROVE_COMMENTS', 'If this is selected, the admin must always approve the comment.');
 define('CMTX_HINT_APPROVE_NOTIFICATIONS', 'If this is selected, the admin must always approve the notification email which is sent to subscribers.');
 define('CMTX_HINT_TRUST_USERS', 'If this is selected, the admin does not need to approve the comment if the user has previously posted an approved comment.');

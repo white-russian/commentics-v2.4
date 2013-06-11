@@ -48,6 +48,7 @@ $field_maximum_website = $_POST['field_maximum_website'];
 $field_maximum_town = $_POST['field_maximum_town'];
 $comment_maximum_characters = $_POST['comment_maximum_characters'];
 $field_maximum_question = $_POST['field_maximum_question'];
+$field_maximum_captcha = $_POST['field_maximum_captcha'];
 
 $field_maximum_name_san = cmtx_sanitize($field_maximum_name);
 $field_maximum_email_san = cmtx_sanitize($field_maximum_email);
@@ -55,6 +56,7 @@ $field_maximum_website_san = cmtx_sanitize($field_maximum_website);
 $field_maximum_town_san = cmtx_sanitize($field_maximum_town);
 $comment_maximum_characters_san = cmtx_sanitize($comment_maximum_characters);
 $field_maximum_question_san = cmtx_sanitize($field_maximum_question);
+$field_maximum_captcha_san = cmtx_sanitize($field_maximum_captcha);
 
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$field_maximum_name_san' WHERE `title` = 'field_maximum_name'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$field_maximum_email_san' WHERE `title` = 'field_maximum_email'");
@@ -62,6 +64,7 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$f
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$field_maximum_town_san' WHERE `title` = 'field_maximum_town'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$comment_maximum_characters_san' WHERE `title` = 'comment_maximum_characters'");
 mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$field_maximum_question_san' WHERE `title` = 'field_maximum_question'");
+mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$field_maximum_captcha_san' WHERE `title` = 'field_maximum_captcha'");
 ?>
 <div class="success"><?php echo CMTX_MSG_SAVED; ?></div>
 <div style="clear: left;"></div>
@@ -85,6 +88,8 @@ mysql_query("UPDATE `" . $cmtx_mysql_table_prefix . "settings` SET `value` = '$f
 <label class='layout_form_maximums'><?php echo CMTX_FIELD_LABEL_COMMENT; ?></label> <input type="text" required name="comment_maximum_characters" size="3" maxlength="250" value="<?php echo cmtx_setting('comment_maximum_characters'); ?>"/>
 <p />
 <label class='layout_form_maximums'><?php echo CMTX_FIELD_LABEL_QUESTION; ?></label> <input type="text" required name="field_maximum_question" size="1" maxlength="250" value="<?php echo cmtx_setting('field_maximum_question'); ?>"/>
+<p />
+<label class='layout_form_maximums'><?php echo CMTX_FIELD_LABEL_CAPTCHA; ?></label> <input type="text" required name="field_maximum_captcha" size="1" maxlength="250" value="<?php echo cmtx_setting('field_maximum_captcha'); ?>"/>
 <p />
 <?php cmtx_set_csrf_form_key(); ?>
 <input type="submit" class="button" name="submit" title="<?php echo CMTX_BUTTON_UPDATE; ?>" value="<?php echo CMTX_BUTTON_UPDATE; ?>"/>

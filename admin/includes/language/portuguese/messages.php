@@ -93,6 +93,8 @@ define('CMTX_MSG_LIST_UPDATED', 'Lista atualizada.');
 
 define('CMTX_MSG_RECAPTCHA_UNABLE', '<p>The fsockopen() function on your server appears to be disabled.</p><p>This feature requires it. Please contact your host to enable it.</p>');
 
+define('CMTX_MSG_SECURIMAGE_UNABLE', '<p>Either the \'<b>GD</b>\' extension and/or \'<b>FreeType</b>\' appear to be disabled.</p><p>This feature requires it. Please contact your host to enable them.</p>');
+
 define('CMTX_MSG_BACKUP_CREATED', 'Backup criado.');
 define('CMTX_MSG_BACKUP_DELETED', 'Backup atualizado.');
 define('CMTX_MSG_BACKUP_BULK_DELETED', '1 backup deleted.');

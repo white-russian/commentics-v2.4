@@ -375,19 +375,43 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	
 	/* Captcha */
 	if (cmtx_session_set() && isset($_SESSION['cmtx_captcha']) && $_SESSION['cmtx_captcha'] == cmtx_setting('session_key')) {} else {
-		if (cmtx_setting('recaptcha_public_key') == "" || cmtx_setting('recaptcha_private_key') == "") {} else {
-			if (function_exists('fsockopen') && is_callable('fsockopen')) {
-				if ((!isset($_POST['recaptcha_challenge_field']) || !isset($_POST['recaptcha_response_field'])) && cmtx_setting('enabled_captcha')) {
+		//Securimage
+		if (cmtx_setting('enabled_captcha') && cmtx_setting('captcha_type') == 'securimage') {
+			if (extension_loaded('gd') && function_exists('imagettftext')) {
+				if (!isset($_POST['cmtx_captcha_code'])) {
 					cmtx_error(CMTX_ERROR_MESSAGE_NO_CAPTCHA); //reject user for entering no captcha value
 				} else {
-					if (cmtx_setting('enabled_captcha')) { //if captcha enabled
+					$cmtx_captcha = trim($_POST['cmtx_captcha_code']); //get and trim entered captcha value
+					if (empty($cmtx_captcha)) { //if no captcha value entered
+						cmtx_error(CMTX_ERROR_MESSAGE_NO_CAPTCHA); //reject user for entering no captcha value
+					} else { //if captcha value entered
+						require_once $cmtx_path . "securimage/securimage.php"; //load captcha script
+						$securimage = new Securimage();
+						if ($securimage->check($cmtx_captcha) == false) { //if entered captcha value invalid
+							cmtx_error(CMTX_ERROR_MESSAGE_WRONG_CAPTCHA); //reject user for entering wrong captcha value
+						} else {
+							if (cmtx_session_set()) { //if there's a session
+								$_SESSION['cmtx_captcha'] = cmtx_setting('session_key'); //add captcha completion to session
+							}
+						}
+					}
+				}
+			}
+		}
+		//ReCaptcha
+		if (cmtx_setting('enabled_captcha') && cmtx_setting('captcha_type') == 'recaptcha') {
+			if (cmtx_setting('recaptcha_public_key') == '' || cmtx_setting('recaptcha_private_key') == '') {} else {
+				if (function_exists('fsockopen') && is_callable('fsockopen')) {
+					if ((!isset($_POST['recaptcha_challenge_field']) || !isset($_POST['recaptcha_response_field']))) {
+						cmtx_error(CMTX_ERROR_MESSAGE_NO_CAPTCHA); //reject user for entering no captcha value
+					} else {
 						$cmtx_captcha = trim($_POST['recaptcha_response_field']); //get and trim entered captcha value
 						if (empty($cmtx_captcha)) { //if no captcha value entered
 							cmtx_error(CMTX_ERROR_MESSAGE_NO_CAPTCHA); //reject user for entering no captcha value
 						} else { //if captcha value entered
 							require_once $cmtx_path . 'includes/recaptcha/recaptchalib.php'; //load captcha script
 							$cmtx_recaptcha_private_key = cmtx_setting('recaptcha_private_key');
-							$cmtx_recaptcha_response = recaptcha_check_answer($cmtx_recaptcha_private_key, $cmtx_ip_address, $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
+							$cmtx_recaptcha_response = recaptcha_check_answer($cmtx_recaptcha_private_key, $cmtx_ip_address, $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field']);
 							if (!$cmtx_recaptcha_response->is_valid) { //if entered captcha value invalid
 								cmtx_error(CMTX_ERROR_MESSAGE_WRONG_CAPTCHA); //reject user for entering wrong captcha value
 							} else {

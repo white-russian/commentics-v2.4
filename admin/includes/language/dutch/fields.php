@@ -227,6 +227,16 @@ define('CMTX_FIELD_LABEL_SPLIT_SCREEN', 'Split Screen:');
 define('CMTX_FIELD_LABEL_PERMALINK', 'Permalink:');
 define('CMTX_FIELD_LABEL_VERIFY', 'Verify:');
 define('CMTX_FIELD_LABEL_SIGNATURE', 'Signature:');
+define('CMTX_FIELD_LABEL_SECURIMAGE_WIDTH', 'Width:');
+define('CMTX_FIELD_LABEL_SECURIMAGE_HEIGHT', 'Height:');
+define('CMTX_FIELD_LABEL_SECURIMAGE_LENGTH', 'Code Length:');
+define('CMTX_FIELD_LABEL_SECURIMAGE_PERTURBATION', 'Perturbation:');
+define('CMTX_FIELD_LABEL_SECURIMAGE_LINES', 'Num of Lines:');
+define('CMTX_FIELD_LABEL_SECURIMAGE_NOISE', 'Noise Level:');
+define('CMTX_FIELD_LABEL_SECURIMAGE_TEXT_COLOR', 'Text Color:');
+define('CMTX_FIELD_LABEL_SECURIMAGE_LINE_COLOR', 'Line Color:');
+define('CMTX_FIELD_LABEL_SECURIMAGE_BACK_COLOR', 'Back Color:');
+define('CMTX_FIELD_LABEL_SECURIMAGE_NOISE_COLOR', 'Noise Color:');
 
 /* Values */
 define('CMTX_FIELD_VALUE_YES', 'ja');

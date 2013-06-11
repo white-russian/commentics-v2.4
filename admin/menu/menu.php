@@ -94,6 +94,15 @@ ddlevelsmenu.setup("ddtopmenubar", "topbar");
 	<?php if (!cmtx_restrict_page("layout_form_bb_code")) { ?> <li><a href="index.php?page=layout_form_bb_code"><?php echo CMTX_MENU_LAYOUT_FORM_BB_CODE; ?></a></li> <?php } ?>
 	<?php if (!cmtx_restrict_page("layout_form_smilies")) { ?> <li><a href="index.php?page=layout_form_smilies"><?php echo CMTX_MENU_LAYOUT_FORM_SMILIES; ?></a></li> <?php } ?>
 	<?php if (!cmtx_restrict_page("layout_form_questions")) { ?> <li><a href="index.php?page=layout_form_questions"><?php echo CMTX_MENU_LAYOUT_FORM_QUESTIONS; ?></a></li> <?php } ?>
+	<?php if (!cmtx_restrict_page("layout_form_captchas")) { ?>
+	<li>
+	<a href="#"><?php echo CMTX_MENU_LAYOUT_FORM_CAPTCHAS; ?></a>
+		<ul>
+		<?php if (!cmtx_restrict_page("layout_form_captchas_securimage")) { ?> <li><a href="index.php?page=layout_form_captchas_securimage"><?php echo CMTX_MENU_LAYOUT_FORM_CAPTCHAS_SECURIMAGE; ?></a></li> <?php } ?>
+		<?php if (!cmtx_restrict_page("layout_form_captchas_recaptcha")) { ?> <li><a href="index.php?page=layout_form_captchas_recaptcha"><?php echo CMTX_MENU_LAYOUT_FORM_CAPTCHAS_RECAPTCHA; ?></a></li> <?php } ?>
+		</ul>
+	</li>
+	<?php } ?>
 	</ul>
 </li>
 <?php } ?>
@@ -162,7 +171,6 @@ ddlevelsmenu.setup("ddtopmenubar", "topbar");
 	</ul>	
 </li>
 <?php } ?>
-<?php if (!cmtx_restrict_page("settings_recaptcha")) { ?> <li><a href="index.php?page=settings_recaptcha"><?php echo CMTX_MENU_TITLE_SETTINGS_RECAPTCHA; ?></a></li> <?php } ?>
 <?php if (!cmtx_restrict_page("settings_rich_snippets")) { ?> <li><a href="index.php?page=settings_rich_snippets"><?php echo CMTX_MENU_TITLE_SETTINGS_RICH_SNIPPETS; ?></a></li> <?php } ?>
 <?php if (!cmtx_restrict_page("settings_rss")) { ?> <li><a href="index.php?page=settings_rss"><?php echo CMTX_MENU_TITLE_SETTINGS_RSS; ?></a></li> <?php } ?>
 <?php if (!cmtx_restrict_page("settings_security")) { ?> <li><a href="index.php?page=settings_security"><?php echo CMTX_MENU_TITLE_SETTINGS_SECURITY; ?></a></li> <?php } ?>

@@ -571,11 +571,34 @@ font-size: 0.9em;
 width: 60px;
 }
 
-.cmtx_captcha_field {
+.cmtx_securimage {
 float: left;
 }
 
-.cmtx_no_recaptcha_key {
+.cmtx_securimage_audio_icon {
+padding-left: 3px;
+width: 18px;
+height: 16px;
+}
+
+.cmtx_securimage_refresh_icon {
+padding-left: 3px;
+width: 16px;
+height: 16px;
+}
+
+.cmtx_securimage_text {
+}
+
+.cmtx_securimage_field {
+width: 70px;
+}
+
+.cmtx_recaptcha {
+float: left;
+}
+
+.cmtx_recaptcha_no_key {
 font-size: 0.9em;
 color: #FF0000;
 }

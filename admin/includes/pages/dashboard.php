@@ -48,7 +48,6 @@ Welcome to Commentics - here is a checklist to help get you started:
 <li>Check File Permissions (<b>Reports</b> -> <b>Permissions</b>)</li>
 <li>Set Up Email Settings (<b>Setttings</b> -> <b>Email</b> -> <b>Setup</b>)</li>
 <li>Configure Form Fields (<b>Layout</b> -> <b>Form</b> -> <b>Enabled</b>)</li>
-<li>Enter ReCaptcha Keys (<b>Settings</b> -> <b>ReCaptcha</b>)</li>
 </ul>
 
 Tip: To manually approve all comments go to <b>Settings</b> -> <b>Approval</b>.

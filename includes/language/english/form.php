@@ -101,8 +101,14 @@ define('CMTX_TEXT_COUNTER', '%s');
 /* Text displayed before question field */
 define('CMTX_TEXT_QUESTION', 'Enter answer:');
 
+/* Text displayed for Securimage captcha */
+define('CMTX_TEXT_SECURIMAGE', 'Enter code:');
+define('CMTX_TITLE_SECURIMAGE', 'Enter code from image');
+define('CMTX_TITLE_SECURIMAGE_AUDIO', 'Audio');
+define('CMTX_TITLE_SECURIMAGE_REFRESH', 'Refresh');
+
 /* Text displayed if ReCaptcha key(s) missing */
-define('CMTX_RECAPTCHA_NO_KEY', 'API key(s) missing in Settings -> ReCaptcha');
+define('CMTX_RECAPTCHA_NO_KEY', 'API key(s) missing in ReCaptcha admin page');
 
 /* Text displayed after notify checkbox */
 define('CMTX_TEXT_NOTIFY', 'Notify me of new comments via email.');
