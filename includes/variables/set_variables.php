@@ -28,6 +28,11 @@ if (!isset($cmtx_identifier)) {
 	$cmtx_identifier = '';
 }
 
+//to help transitioning to cmtx_identifier
+if (isset($cmtx_page_id)) {
+$cmtx_identifier = $cmtx_page_id;
+}
+
 $cmtx_temp = $cmtx_identifier;
 unset($cmtx_identifier);
 global $cmtx_identifier;
