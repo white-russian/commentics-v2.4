@@ -196,8 +196,8 @@ function cmtx_get_page_details() { //get page details
 		$cmtx_reference = "";
 	}
 
-	//get page title
-	if (stristr($cmtx_identifier, "cmtx_title") || stristr($cmtx_reference, "cmtx_title")) {
+	//get title/heading
+	if (stristr($cmtx_identifier, "cmtx_title") || stristr($cmtx_reference, "cmtx_title") || stristr($cmtx_identifier, "cmtx_h1") || stristr($cmtx_reference, "cmtx_h1")) {
 		if (cmtx_get_ip_address() == "127.0.0.1") { //if on localhost
 			$path = $_SERVER['SCRIPT_FILENAME'];
 		} else {
@@ -221,21 +221,34 @@ function cmtx_get_page_details() { //get page details
 			curl_close($ch);
 		}
 		if (isset($file)) {
-			if (preg_match("/<title>(.+?)<\/title>/i", $file, $match)) {
-				$cmtx_identifier = str_ireplace("cmtx_title", $match[1], $cmtx_identifier);
-				$cmtx_reference = str_ireplace("cmtx_title", $match[1], $cmtx_reference);
-			} else {
-				$cmtx_identifier = str_ireplace("cmtx_title", "Title not found", $cmtx_identifier);
-				$cmtx_reference = str_ireplace("cmtx_title", "Title not found", $cmtx_reference);
+			if (stristr($cmtx_identifier, "cmtx_title") || stristr($cmtx_reference, "cmtx_title")) {
+				if (preg_match("/<title>(.+?)<\/title>/i", $file, $match)) {
+					$cmtx_identifier = str_ireplace("cmtx_title", $match[1], $cmtx_identifier);
+					$cmtx_reference = str_ireplace("cmtx_title", $match[1], $cmtx_reference);
+				} else {
+					$cmtx_identifier = str_ireplace("cmtx_title", "Title tag not found", $cmtx_identifier);
+					$cmtx_reference = str_ireplace("cmtx_title", "Title tag not found", $cmtx_reference);
+				}
+			}
+			if (stristr($cmtx_identifier, "cmtx_h1") || stristr($cmtx_reference, "cmtx_h1")) {
+				if (preg_match("/<h1>(.+?)<\/h1>/i", $file, $match)) {
+					$cmtx_identifier = str_ireplace("cmtx_h1", $match[1], $cmtx_identifier);
+					$cmtx_reference = str_ireplace("cmtx_h1", $match[1], $cmtx_reference);
+				} else {
+					$cmtx_identifier = str_ireplace('cmtx_h1', 'H1 tag not found', $cmtx_identifier);
+					$cmtx_reference = str_ireplace('cmtx_h1', 'H1 tag not found', $cmtx_reference);
+				}
 			}
 		} else {
 			$cmtx_identifier = str_ireplace("cmtx_title", "Server incapable", $cmtx_identifier);
 			$cmtx_reference = str_ireplace("cmtx_title", "Server incapable", $cmtx_reference);
+			$cmtx_identifier = str_ireplace("cmtx_h1", "Server incapable", $cmtx_identifier);
+			$cmtx_reference = str_ireplace("cmtx_h1", "Server incapable", $cmtx_reference);
 		}
 	}
 
 	//get page filename
-	if (stristr($cmtx_identifier, "cmtx_filename") || stristr($cmtx_identifier, "cmtx_filename")) {
+	if (stristr($cmtx_identifier, "cmtx_filename") || stristr($cmtx_reference, "cmtx_filename")) {
 		if (isset($_SERVER['SCRIPT_NAME'])) {
 			$cmtx_identifier = str_ireplace("cmtx_filename", $_SERVER['SCRIPT_NAME'], $cmtx_identifier);
 			$cmtx_reference = str_ireplace("cmtx_filename", basename($_SERVER['SCRIPT_NAME']), $cmtx_reference);
