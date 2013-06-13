@@ -107,7 +107,7 @@ $date = date("jS M Y", strtotime($page_result["dated"]));
 <p />
 <label class='edit_page'><?php echo CMTX_FIELD_LABEL_REFERENCE; ?></label> <input type="text" required name="reference" size="30" maxlength="250" value="<?php echo $reference; ?>"/>
 <p />
-<label class='edit_page'><?php echo CMTX_FIELD_LABEL_URL; ?></label> <input type="text" required name="url" size="45" maxlength="250" value="<?php echo $url; ?>"/>
+<label class='edit_page'><?php echo CMTX_FIELD_LABEL_URL; ?></label> <input type="text" required name="url" size="45" maxlength="1000" value="<?php echo $url; ?>"/>
 <p />
 <label class='edit_page'><?php echo CMTX_FIELD_LABEL_FORM_ENABLED; ?></label>
 <?php if ($form_enabled) { ?>

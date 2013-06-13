@@ -85,6 +85,9 @@ mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`,
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('form', 'securimage_back_color', '#F0F0F0');");
 mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('form', 'securimage_noise_color', '#707070');");
 
+mysql_query("ALTER TABLE `" . $cmtx_mysql_table_prefix . "pages` CHANGE `url` `url` varchar(1000) NOT NULL default ''");
+mysql_query("ALTER TABLE `" . $cmtx_mysql_table_prefix . "viewers` CHANGE `page_url` `page_url` varchar(1000) NOT NULL default ''");
+
 if (mysql_errno()) {
 echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;

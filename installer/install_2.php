@@ -259,7 +259,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "pages` 
   `id` int(10) unsigned NOT NULL auto_increment,
   `identifier` varchar(250) NOT NULL default '',
   `reference` varchar(250) NOT NULL default '',
-  `url` varchar(250) NOT NULL default '',
+  `url` varchar(1000) NOT NULL default '',
   `is_form_enabled` tinyint(1) unsigned NOT NULL default '1',
   `dated` datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
@@ -734,7 +734,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `" . $cmtx_mysql_table_prefix . "viewers
   `user_agent` varchar(250) NOT NULL default '',
   `ip_address` varchar(250) NOT NULL default '',
   `page_reference` varchar(250) NOT NULL default '',
-  `page_url` varchar(250) NOT NULL default '',
+  `page_url` varchar(1000) NOT NULL default '',
   `timestamp` int(50) unsigned NOT NULL default '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
