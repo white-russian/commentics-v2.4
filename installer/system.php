@@ -55,8 +55,10 @@ define('CMTX_IN_INSTALLER', 'true');
 ?>
 
 <?php
+if (extension_loaded('mysql')) {
 require '../includes/db/connect.php'; //connect to database
 if (!$cmtx_db_ok) { die(); }
+}
 ?>
 
 A system check is being performed ..
@@ -80,12 +82,21 @@ $proceed = false;
 
 echo "<br />";
 
+echo "<label class='system_item'>MySQL extension is loaded</label>";
+if (extension_loaded('mysql')) {
+echo "<span class='system_green'>Pass</span>";
+echo "<br />";
 echo "<label class='system_item'>MySQL is 5.0.7 or higher</label>";
 if (version_compare(mysql_get_server_info(), '5.0.7', '>=')) {
 echo "<span class='system_green'>Pass</span>";
 } else {
 echo "<span class='system_red'>Fail</span>";
 $notes .= "- you must have MySQL 5.0.7 or higher.<br />";
+$proceed = false;
+}
+} else {
+echo "<span class='system_red'>Fail</span>";
+$notes .= "- MySQL extension is required for the database.<br />";
 $proceed = false;
 }
 
