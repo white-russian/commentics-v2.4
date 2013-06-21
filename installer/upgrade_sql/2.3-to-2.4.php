@@ -88,6 +88,12 @@ mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`,
 mysql_query("ALTER TABLE `" . $cmtx_mysql_table_prefix . "pages` CHANGE `url` `url` varchar(1000) NOT NULL default ''");
 mysql_query("ALTER TABLE `" . $cmtx_mysql_table_prefix . "viewers` CHANGE `page_url` `page_url` varchar(1000) NOT NULL default ''");
 
+mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('form', 'state_name', 'normal');");
+mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('form', 'state_email', 'normal');");
+mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('form', 'state_website', 'normal');");
+mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('form', 'state_town', 'normal');");
+mysql_query("INSERT INTO `" . $cmtx_mysql_table_prefix . "settings` (`category`, `title`, `value`) VALUES ('form', 'state_country', 'normal');");
+
 if (mysql_errno()) {
 echo mysql_errno() . ': ' . mysql_error() . '<br />';
 $error = true;

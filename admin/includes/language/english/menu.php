@@ -62,6 +62,7 @@ define('CMTX_MENU_LAYOUT_FORM_QUESTIONS', 'Questions');
 define('CMTX_MENU_LAYOUT_FORM_CAPTCHAS', 'Captchas');
 define('CMTX_MENU_LAYOUT_FORM_CAPTCHAS_SECURIMAGE', 'Securimage');
 define('CMTX_MENU_LAYOUT_FORM_CAPTCHAS_RECAPTCHA', 'ReCaptcha');
+define('CMTX_MENU_LAYOUT_FORM_STATES', 'States');
 define('CMTX_MENU_LAYOUT_POWERED', 'Powered');
 
 /* Settings */

@@ -113,6 +113,9 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	if (!isset($_POST['cmtx_name'])) { //if name not submitted
 		$_POST['cmtx_name'] = ""; //set it with an empty value
 	}
+	if (isset($cmtx_set_name_value) && !empty($cmtx_set_name_value) && cmtx_setting('state_name') != 'normal') { //if login name is set and name field is disabled or hidden
+		$_POST['cmtx_name'] = $cmtx_set_name_value; //set it with login name
+	}
 	$cmtx_name = trim($_POST['cmtx_name']); //remove any space at beginning and end
 	if (empty($cmtx_name)) { //if name is empty
 		cmtx_error(CMTX_ERROR_MESSAGE_NO_NAME); //reject user for entering no name
@@ -144,6 +147,9 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	if (!isset($_POST['cmtx_email'])) { //if email not submitted
 		$_POST['cmtx_email'] = ""; //set it with an empty value
 	}
+	if (isset($cmtx_set_email_value) && !empty($cmtx_set_email_value) && cmtx_setting('state_email') != 'normal') { //if login email is set and email field is disabled or hidden
+		$_POST['cmtx_email'] = $cmtx_set_email_value; //set it with login email
+	}
 	if (cmtx_setting('enabled_email')) { //if email field is enabled
 		$cmtx_email = trim($_POST['cmtx_email']); //remove any space at beginning and end
 		if (cmtx_setting('required_email') && empty($cmtx_email)) { //if field is required but value is empty
@@ -172,6 +178,9 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	/* Website */
 	if (!isset($_POST['cmtx_website'])) { //if website not submitted
 		$_POST['cmtx_website'] = ""; //set it with an empty value
+	}
+	if (isset($cmtx_set_website_value) && !empty($cmtx_set_website_value) && cmtx_setting('state_website') != 'normal') { //if login website is set and website field is disabled or hidden
+		$_POST['cmtx_website'] = $cmtx_set_website_value; //set it with login website
 	}
 	if (cmtx_setting('enabled_website')) { //if website field is enabled
 		$cmtx_website = trim($_POST['cmtx_website']); //remove any space at beginning and end
@@ -204,6 +213,9 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	/* Town */
 	if (!isset($_POST['cmtx_town'])) { //if town not submitted
 		$_POST['cmtx_town'] = ""; //set it with an empty value
+	}
+	if (isset($cmtx_set_town_value) && !empty($cmtx_set_town_value) && cmtx_setting('state_town') != 'normal') { //if login town is set and town field is disabled or hidden
+		$_POST['cmtx_town'] = $cmtx_set_town_value; //set it with login town
 	}
 	if (cmtx_setting('enabled_town')) { //if town field is enabled
 		$cmtx_town = trim($_POST['cmtx_town']); //remove any space at beginning and end
@@ -239,6 +251,9 @@ if (isset($_POST['cmtx_submit']) || isset($_POST['cmtx_sub']) || isset($_POST['c
 	/* Country */
 	if (!isset($_POST['cmtx_country'])) { //if country not submitted
 		$_POST['cmtx_country'] = ""; //set it with an empty value
+	}
+	if (isset($cmtx_set_country_value) && !empty($cmtx_set_country_value) && cmtx_setting('state_country') != 'normal') { //if login country is set and country field is disabled or hidden
+		$_POST['cmtx_country'] = $cmtx_set_country_value; //set it with login country
 	}
 	if (cmtx_setting('enabled_country')) { //if country field is enabled
 		$cmtx_country = trim($_POST['cmtx_country']); //remove any space at beginning and end

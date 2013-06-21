@@ -141,6 +141,10 @@ label.layout_form_captchas_recaptcha {
 width: 75px;
 }
 
+label.layout_form_states {
+width: 60px;
+}
+
 label.layout_powered {
 width: 60px;
 }

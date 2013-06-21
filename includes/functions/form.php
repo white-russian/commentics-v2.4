@@ -53,23 +53,70 @@ function cmtx_load_form_login() { //load login form field values
 	global $cmtx_default_name, $cmtx_default_email, $cmtx_default_website, $cmtx_default_town, $cmtx_default_country; //globalise variables
 	
 	if (isset($cmtx_set_name_value) && !empty($cmtx_set_name_value)) {
-		if (!isset($cmtx_default_name)) { $cmtx_default_name = $cmtx_set_name_value; }
+		if (!isset($cmtx_default_name)) {
+			if (!preg_match('/^[\p{L}&\-\'. ]+$/u', $cmtx_set_name_value) || !preg_match('/^[\p{L}]+/u', $cmtx_set_name_value)) {
+				$cmtx_set_name_value = '';
+			} else {
+				$cmtx_default_name = $cmtx_set_name_value;
+			}
+		}
 	}
 	
 	if (isset($cmtx_set_email_value) && !empty($cmtx_set_email_value)) {
-		if (!isset($cmtx_default_email)) { $cmtx_default_email = $cmtx_set_email_value; }
+		if (!isset($cmtx_default_email)) {
+			if (!filter_var($cmtx_set_email_value, FILTER_VALIDATE_EMAIL)) {
+				$cmtx_set_email_value = '';
+			} else {
+				$cmtx_default_email = $cmtx_set_email_value;
+			}
+		}
 	}
 	
 	if (isset($cmtx_set_website_value) && !empty($cmtx_set_website_value)) {
-		if (!isset($cmtx_default_website)) { $cmtx_default_website = $cmtx_set_website_value; }
+		if (!isset($cmtx_default_website)) {
+			if (!filter_var($cmtx_set_website_value, FILTER_VALIDATE_URL)) {
+				$cmtx_set_website_value = '';
+			} else {
+				$cmtx_default_website = $cmtx_set_website_value;
+			}
+		}
 	}
 	
 	if (isset($cmtx_set_town_value) && !empty($cmtx_set_town_value)) {
-		if (!isset($cmtx_default_town)) { $cmtx_default_town = $cmtx_set_town_value; }
+		if (!isset($cmtx_default_town)) {
+			if (!preg_match('/^[\p{L}&\-\'. ]+$/u', $cmtx_set_town_value) || !preg_match('/^[\p{L}]+/u', $cmtx_set_town_value)) {
+				$cmtx_set_town_value = '';
+			} else {
+				$cmtx_default_town = $cmtx_set_town_value;
+			}
+		}
 	}
 	
 	if (isset($cmtx_set_country_value) && !empty($cmtx_set_country_value)) {
-		if (!isset($cmtx_default_country)) { $cmtx_default_country = $cmtx_set_country_value; }
+		if (!isset($cmtx_default_country)) {
+				global $cmtx_path; //globalise variables
+				$found = false;
+				$country = str_ireplace("'", "\'", $cmtx_set_country_value); //escape ' with \
+				$file = file($cmtx_path . "includes/language/" . cmtx_setting('language_frontend') . "/countries.php"); //set file to search
+				foreach ($file as $line_number => $line) { //for each line in file
+					$line_number++; //keep count of line number
+					if ($line_number > 30) { //don't search copyright section
+						$matches = array(); //used to store matches
+						if (preg_match('/DEFINE\(\'(.*?)\',\s*\'(.*)\'\);/i', $line, $matches)) { //if the line is a valid define statement
+							$value = $matches[2]; //get the value part of the define statement
+							if ($value == $country) { //if the value is the country (country found)
+								$found = true;
+								break;
+							}
+						}
+					}
+				}
+				if ($found) {
+					$cmtx_default_country = $cmtx_set_country_value;
+				} else {
+					$cmtx_set_country_value = '';
+				}
+		}
 	}
 	
 } //end of load-form-login function

@@ -312,5 +312,6 @@ define('CMTX_FIELD_VALUE_EMAIL_SETUP_METHOD_INFO', 'Select the transport method 
 define('CMTX_FIELD_VALUE_EMAIL_SETUP_SENDER_INFO', 'Set up all of your sender details');
 define('CMTX_FIELD_VALUE_EMAIL_SETUP_SIGNATURE_INFO', 'Choose your preferred signature');
 define('CMTX_FIELD_VALUE_EMAIL_SETUP_TEST_INFO', 'Send an email to test that it works');
+define('CMTX_FIELD_VALUE_NORMAL', 'Normal');
 
 ?>

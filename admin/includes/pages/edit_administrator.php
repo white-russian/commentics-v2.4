@@ -198,7 +198,8 @@ echo cmtx_page_checkbox("layout", $id, "0") . "<span class='menu_checkbox'>Layou
 				echo cmtx_page_checkbox("edit_question", $id, "60") . "Edit" . "<br />";
 			echo cmtx_page_checkbox("layout_form_captchas", $id, "40") . "<b>Captchas</b>" . "<br />";
 				echo cmtx_page_checkbox("layout_form_captchas_securimage", $id, "60") . "Securimage" . "<br />";
-				echo cmtx_page_checkbox("layout_form_captchas_recaptcha", $id, "60") . "ReCaptcha" . "<p />";	
+				echo cmtx_page_checkbox("layout_form_captchas_recaptcha", $id, "60") . "ReCaptcha" . "<br />";	
+			echo cmtx_page_checkbox("layout_form_states", $id, "40") . "States" . "<p />";
 		echo cmtx_page_checkbox("layout_powered", $id, "20") . "Powered" . "<p />";
 
 echo cmtx_page_checkbox("settings", $id, "0") . "<span class='menu_checkbox'>Settings</span>" . "<p />";

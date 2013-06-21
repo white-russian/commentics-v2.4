@@ -47,6 +47,7 @@ define('CMTX_DESC_LAYOUT_FORM_BB_CODE', 'These settings are for the form\'s BB C
 define('CMTX_DESC_LAYOUT_FORM_SMILIES', 'These settings are for the form\'s smiley images.');
 define('CMTX_DESC_LAYOUT_FORM_SECURIMAGE', 'Securimage is a built-in image captcha. You can customize the look below.');
 define('CMTX_DESC_LAYOUT_FORM_RECAPTCHA', 'ReCaptcha is a free and external image captcha service to prevent spam.<p/>It\'s secure, widely used, and helps digitize books. Get your API keys <a href="http://www.google.com/recaptcha" target="_blank">here</a>.');
+define('CMTX_DESC_LAYOUT_FORM_STATES', 'These settings are for when supplying login details to the form.');
 define('CMTX_DESC_LAYOUT_POWERED', 'These settings relate to the \'Powered by\' statement.');
 define('CMTX_DESC_SETTINGS_ADMIN', 'These settings are for the admin panel administrator.');
 define('CMTX_DESC_SETTINGS_ADMIN_DETECTION', 'This section allows for the detection of the administrator.');

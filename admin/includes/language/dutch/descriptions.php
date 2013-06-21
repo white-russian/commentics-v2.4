@@ -47,6 +47,7 @@ define('CMTX_DESC_LAYOUT_FORM_BB_CODE', 'Deze instellingen zijn voor de formulie
 define('CMTX_DESC_LAYOUT_FORM_SMILIES', 'Deze instellingen zijn voor de formulier smiley images.');
 define('CMTX_DESC_LAYOUT_FORM_SECURIMAGE', 'Securimage is a built-in image captcha. You can customize the look below.');
 define('CMTX_DESC_LAYOUT_FORM_RECAPTCHA', 'ReCaptcha is een gratis en externe imago Captcha dienst om spam te voorkomen.<p/>Het veilig is, op grote schaal gebruikt, en helpt bij digitaliseren van boeken. <a href="http://www.google.com/recaptcha" target="_blank">Haal hier je API-keys</a>.');
+define('CMTX_DESC_LAYOUT_FORM_STATES', 'These settings are for when supplying login details to the form.');
 define('CMTX_DESC_LAYOUT_POWERED', 'Deze instellingen horen bij het \'Powered by\' statement.');
 define('CMTX_DESC_SETTINGS_ADMIN', 'Deze instellingen horen bij de admin panel administrator.');
 define('CMTX_DESC_SETTINGS_ADMIN_DETECTION', 'Deze sectie staat de detectie van de administrator toe.');

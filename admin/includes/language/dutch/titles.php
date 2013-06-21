@@ -59,6 +59,7 @@ define('CMTX_TITLE_FORM_QUESTIONS', 'Formulier: Vragen');
 define('CMTX_TITLE_EDIT_QUESTION', 'Bewerk Vragen');
 define('CMTX_TITLE_SECURIMAGE', 'Securimage');
 define('CMTX_TITLE_RECAPTCHA', 'ReCaptcha');
+define('CMTX_TITLE_FORM_STATES', 'Form: States');
 define('CMTX_TITLE_POWERED', 'Powered');
 define('CMTX_TITLE_ADMIN', 'Administrator');
 define('CMTX_TITLE_EMAIL_PREFERENCES', 'Email instellingen');

@@ -493,52 +493,57 @@ foreach ($cmtx_elements as $cmtx_element) {
 ?>
 
 <?php function cmtx_output_name () { ?>
-<?php global $cmtx_default_name; ?>
+<?php global $cmtx_default_name, $cmtx_set_name_value; ?>
+<?php if (isset($cmtx_set_name_value) && !empty($cmtx_set_name_value) && cmtx_setting('state_name') == 'hide') {} else { ?>
 <div class="cmtx_height_between_fields"></div>
 <label class="cmtx_label">
 <?php echo CMTX_LABEL_NAME ?>
 <?php if (cmtx_setting('display_required_symbol')) { ?><span class="cmtx_required_symbol"><?php echo " " . CMTX_REQUIRED_SYMBOL ?></span><?php } ?>
 </label>
-<input type="text" name="cmtx_name" class="cmtx_name_field" title="<?php echo CMTX_TITLE_NAME; ?>" maxlength="<?php echo cmtx_setting('field_maximum_name'); ?>" value="<?php echo $cmtx_default_name; ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
-<?php } ?>
+<input type="text" name="cmtx_name" class="cmtx_name_field" title="<?php echo CMTX_TITLE_NAME; ?>" maxlength="<?php echo cmtx_setting('field_maximum_name'); ?>" value="<?php echo $cmtx_default_name; ?>" <?php if (isset($cmtx_set_name_value) && !empty($cmtx_set_name_value) && cmtx_setting('state_name') == 'disable') { echo 'disabled="disabled"'; } ?> onkeypress="return cmtx_disable_enter_key(event)"/>
+<?php } } ?>
 
 <?php function cmtx_output_email () { ?>
-<?php global $cmtx_default_email; ?>
+<?php global $cmtx_default_email, $cmtx_set_email_value; ?>
 <?php if (cmtx_setting('enabled_email')) { ?>
+<?php if (isset($cmtx_set_email_value) && !empty($cmtx_set_email_value) && cmtx_setting('state_email') == 'hide') {} else { ?>
 <div class="cmtx_height_between_fields"></div>
 <label class="cmtx_label">
 <?php echo CMTX_LABEL_EMAIL ?>
 <?php if (cmtx_setting('required_email') && cmtx_setting('display_required_symbol')) { ?><span class="cmtx_required_symbol"><?php echo " " . CMTX_REQUIRED_SYMBOL ?></span><?php } ?>
 </label>
-<input type="text" name="cmtx_email" class="cmtx_email_field" title="<?php echo CMTX_TITLE_EMAIL; ?>" maxlength="<?php echo cmtx_setting('field_maximum_email'); ?>" value="<?php echo $cmtx_default_email; ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
+<input type="text" name="cmtx_email" class="cmtx_email_field" title="<?php echo CMTX_TITLE_EMAIL; ?>" maxlength="<?php echo cmtx_setting('field_maximum_email'); ?>" value="<?php echo $cmtx_default_email; ?>" <?php if (isset($cmtx_set_email_value) && !empty($cmtx_set_email_value) && cmtx_setting('state_email') == 'disable') { echo 'disabled="disabled"'; } ?> onkeypress="return cmtx_disable_enter_key(event)"/>
 <?php if (cmtx_setting('display_email_note')) { ?> <span class="cmtx_email_note"><?php echo CMTX_NOTE_EMAIL ?></span> <?php } ?>
-<?php } } ?>
+<?php } } } ?>
 
 <?php function cmtx_output_website () { ?>
-<?php global $cmtx_default_website; ?>
+<?php global $cmtx_default_website, $cmtx_set_website_value; ?>
 <?php if (cmtx_setting('enabled_website')) { ?>
+<?php if (isset($cmtx_set_website_value) && !empty($cmtx_set_website_value) && cmtx_setting('state_website') == 'hide') {} else { ?>
 <div class="cmtx_height_between_fields"></div>
 <label class="cmtx_label">
 <?php echo CMTX_LABEL_WEBSITE ?>
 <?php if (cmtx_setting('required_website') && cmtx_setting('display_required_symbol')) { ?><span class="cmtx_required_symbol"><?php echo " " . CMTX_REQUIRED_SYMBOL ?></span><?php } ?>
 </label>
-<input type="text" name="cmtx_website" class="cmtx_website_field" title="<?php echo CMTX_TITLE_WEBSITE; ?>" maxlength="<?php echo cmtx_setting('field_maximum_website'); ?>" value="<?php echo $cmtx_default_website; ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
-<?php } } ?>
+<input type="text" name="cmtx_website" class="cmtx_website_field" title="<?php echo CMTX_TITLE_WEBSITE; ?>" maxlength="<?php echo cmtx_setting('field_maximum_website'); ?>" value="<?php echo $cmtx_default_website; ?>" <?php if (isset($cmtx_set_website_value) && !empty($cmtx_set_website_value) && cmtx_setting('state_website') == 'disable') { echo 'disabled="disabled"'; } ?> onkeypress="return cmtx_disable_enter_key(event)"/>
+<?php } } } ?>
 
 <?php function cmtx_output_town () { ?>
-<?php global $cmtx_default_town; ?>
+<?php global $cmtx_default_town, $cmtx_set_town_value; ?>
 <?php if (cmtx_setting('enabled_town')) { ?>
+<?php if (isset($cmtx_set_town_value) && !empty($cmtx_set_town_value) && cmtx_setting('state_town') == 'hide') {} else { ?>
 <div class="cmtx_height_between_fields"></div>
 <label class="cmtx_label">
 <?php echo CMTX_LABEL_TOWN ?>
 <?php if (cmtx_setting('required_town') && cmtx_setting('display_required_symbol')) { ?><span class="cmtx_required_symbol"><?php echo " " . CMTX_REQUIRED_SYMBOL ?></span><?php } ?>
 </label>
-<input type="text" name="cmtx_town" class="cmtx_town_field" title="<?php echo CMTX_TITLE_TOWN; ?>" maxlength="<?php echo cmtx_setting('field_maximum_town'); ?>" value="<?php echo $cmtx_default_town; ?>" onkeypress="return cmtx_disable_enter_key(event)"/>
-<?php } } ?>
+<input type="text" name="cmtx_town" class="cmtx_town_field" title="<?php echo CMTX_TITLE_TOWN; ?>" maxlength="<?php echo cmtx_setting('field_maximum_town'); ?>" value="<?php echo $cmtx_default_town; ?>" <?php if (isset($cmtx_set_town_value) && !empty($cmtx_set_town_value) && cmtx_setting('state_town') == 'disable') { echo 'disabled="disabled"'; } ?> onkeypress="return cmtx_disable_enter_key(event)"/>
+<?php } } } ?>
 
 <?php function cmtx_output_country () { ?>
-<?php global $cmtx_default_country, $cmtx_path; ?>
+<?php global $cmtx_default_country, $cmtx_set_country_value, $cmtx_path; ?>
 <?php if (cmtx_setting('enabled_country')) { ?>
+<?php if (isset($cmtx_set_country_value) && !empty($cmtx_set_country_value) && cmtx_setting('state_country') == 'hide') {} else { ?>
 <div class="cmtx_height_between_fields"></div>
 <label class="cmtx_label">
 <?php echo CMTX_LABEL_COUNTRY ?>
@@ -549,9 +554,12 @@ require_once $cmtx_path . 'includes/template/countries.php';
 if (!empty($cmtx_default_country)) {
 	$cmtx_countries = str_ireplace('"'.$cmtx_default_country.'"', '"'.$cmtx_default_country.'" selected="selected"', $cmtx_countries);
 }
+if (isset($cmtx_set_country_value) && !empty($cmtx_set_country_value) && cmtx_setting('state_country') == 'disable') {
+	$cmtx_countries = str_ireplace('name="cmtx_country"', 'name="cmtx_country" disabled="disabled"', $cmtx_countries);
+}
 echo $cmtx_countries;
 ?>
-<?php } } ?>
+<?php } } } ?>
 
 <?php function cmtx_output_rating () { ?>
 <?php global $cmtx_default_rating, $cmtx_path; ?>

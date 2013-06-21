@@ -103,6 +103,7 @@ ddlevelsmenu.setup("ddtopmenubar", "topbar");
 		</ul>
 	</li>
 	<?php } ?>
+	<?php if (!cmtx_restrict_page("layout_form_states")) { ?> <li><a href="index.php?page=layout_form_states"><?php echo CMTX_MENU_LAYOUT_FORM_STATES; ?></a></li> <?php } ?>
 	</ul>
 </li>
 <?php } ?>
