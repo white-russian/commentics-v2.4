@@ -33,3 +33,6 @@ Lock replies for a particular comment using the Edit Comment page.
 Hide the form to save on space in Layout -> Form -> General.
 Search the language files for text in Tools -> Text Finder.
 Enable Rich Snippets for a better search engine result.
+Change the state of the form fields in Layout -> Form -> States.
+Customize the image captcha in Layout -> Form -> Captchas.
+Adjust the reply scroll speed in Layout -> Comments -> Replies.
