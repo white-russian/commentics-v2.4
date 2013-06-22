@@ -167,7 +167,7 @@ ss.addEvent(window,"load",ss.fixAllLinks);
 <script type="text/javascript">
 // <![CDATA[
 if (typeof jQuery == "undefined") {
-document.write("<scr" + "ipt type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js\"></scr" + "ipt>");
+document.write("<scr" + "ipt type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js\"></scr" + "ipt>");
 }
 // ]]>
 </script>
