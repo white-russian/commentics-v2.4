@@ -2,7 +2,7 @@
 //** Script Download/ instructions page: http://www.dynamicdrive.com/dynamicindex1/ddlevelsmenu/
 //** Usage Terms: http://www.dynamicdrive.com/notice.htm
 
-//** Current version: 3.02 See changelog.txt for details
+//** Current version: 3.03 See changelog.txt for details
 
 if (typeof dd_domreadycheck=="undefined") //global variable to detect if DOM is ready
 	var dd_domreadycheck=false
@@ -356,6 +356,7 @@ init:function(mainmenuid, dir){
 	this.topitems[mainmenuid]=[] //declare array on object
 	this.subuls[mainmenuid]=[] //declare array on object
 	this.hidetimers[mainmenuid]=[] //declare hide entire menu timer
+	this.enableshim = (this.ismobile)? false : this.enableshim //disable shim if mobile browser
 	if (this.enableshim && !this.shimadded){
 		this.shimmy={}
 		this.shimmy.topshim=this.addshimmy(document.body) //create top iframe shim obj
@@ -364,6 +365,7 @@ init:function(mainmenuid, dir){
 	}
 	var menubar=document.getElementById(mainmenuid)
 	var alllinks=menubar.getElementsByTagName("a")
+	var shelldivs=[]
 	this.getwindowsize()
 	for (var i=0; i<alllinks.length; i++){
 		if (alllinks[i].getAttribute('rel')){
@@ -377,10 +379,17 @@ init:function(mainmenuid, dir){
 			dropul.removeAttribute("class")
 			shelldiv.appendChild(dropul)
 			document.body.appendChild(shelldiv) //move main DIVs to end of document
+			shelldivs.push(shelldiv)
 			shelldiv.style.zIndex=2000 //give drop down menus a high z-index
 			shelldiv._master=mainmenuid  //Indicate which main menu this main DIV is associated with
 			shelldiv._pos=this.topitemsindex //Indicate which main menu item this main DIV is associated with
-			this.addEvent(shelldiv, function(){ddlevelsmenu.hidemenu(this)}, "click")
+			this.addEvent(shelldiv, function(e){  // 3.03 code
+				e.stopPropagation()
+				e.cancelBubble = true
+			}, "touchstart")
+			this.addEvent(shelldiv, function(e){  // 3.03 code
+				ddlevelsmenu.hidemenu(this)
+			}, "click")			
 			var arrowclass=(dir=="sidebar")? "rightarrowpointer" : "downarrowpointer"
 			var arrowpointer=(dir=="sidebar")? this.arrowpointers.rightarrow : this.arrowpointers.downarrow
 			if (this.arrowpointers.showarrow.toplevel)
@@ -413,6 +422,13 @@ init:function(mainmenuid, dir){
 		}
 	} //end for loop
 	this.addEvent(window, function(){ddlevelsmenu.getwindowsize(); ddlevelsmenu.gettopitemsdimensions()}, "resize")
+	if (this.ismobile){  // 3.03 code
+		this.addEvent(document, function(e){
+			for (var i=0; i<shelldivs.length; i++){
+				ddlevelsmenu.hidemenu(shelldivs[i])
+			}
+		}, 'touchstart')
+	}
 },
 
 setup:function(mainmenuid, dir){
