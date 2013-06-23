@@ -90,6 +90,8 @@ if (isset($cmtx_set_country_value)) {
 	$cmtx_set_country_value = $cmtx_temp;
 }
 
+global $cmtx_name;
+
 global $cmtx_url;
 
 global $cmtx_page_id;
