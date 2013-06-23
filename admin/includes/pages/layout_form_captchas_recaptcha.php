@@ -98,6 +98,7 @@ $recaptcha_languages = "<select name='recaptcha_languages'>
 <option value='en'>english</option>
 <option value='nl'>dutch</option>
 <option value='fr'>french</option>
+<option value='de'>german</option>
 <option value='pt'>portuguese</option>
 <option value='ru'>russian</option>
 <option value='es'>spanish</option>
