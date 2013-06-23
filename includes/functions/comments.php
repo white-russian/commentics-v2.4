@@ -297,7 +297,7 @@ function cmtx_generate_comment ($is_preview, $alternate, $id, $name, $email, $we
 		$comment_less = substr($comment_cut, 0, strrpos($comment_cut, " "));
 		$cmtx_box .= "<div id='cmtx_comment_less_" . $id . "'>";
 		$cmtx_box .= $comment_less;
-		$cmtx_box .= " <a href='' class='cmtx_read_more_link' title='" . CMTX_TITLE_READ_MORE . "' rel='nofollow' onclick='cmtx_read_more($id);return false;'>" . CMTX_READ_MORE . "</a>";
+		$cmtx_box .= " <a href='" . cmtx_url_encode(cmtx_current_page()) . "' class='cmtx_read_more_link' title='" . CMTX_TITLE_READ_MORE . "' rel='nofollow' onclick='cmtx_read_more($id);return false;'>" . CMTX_READ_MORE . "</a>";
 		$cmtx_box .= "</div>";
 		$cmtx_box .= "<div id='cmtx_comment_more_" . $id . "' style='display:none;'>";
 		$cmtx_box .= $comment;
