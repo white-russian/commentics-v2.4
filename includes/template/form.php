@@ -405,7 +405,7 @@ if (!cmtx_is_form_enabled(true)) { //if form is disabled
 
 <?php if (cmtx_setting('hide_form')) { ?>
 <div id="cmtx_open_form" class="cmtx_open_form">
-<a href="" onclick="cmtx_open_form();return false;"><?php echo CMTX_OPEN_FORM ?></a>
+<a href="<?php echo cmtx_url_encode(cmtx_current_page()); ?>" onclick="cmtx_open_form();return false;"><?php echo CMTX_OPEN_FORM ?></a>
 </div>
 <?php } ?>
 
@@ -765,7 +765,7 @@ function cmtx_output_captcha () {
 			<param name="movie" value="<?php echo cmtx_comments_folder(); ?>securimage/securimage_play.swf?audio_file=<?php echo cmtx_comments_folder(); ?>securimage/securimage_play.php&amp;icon_file=<?php echo cmtx_comments_folder(); ?>securimage/images/audio_icon.png"/>
 			</object>
 			<br/>
-			<a href="#" onclick="document.getElementById('cmtx_securimage').src = '<?php echo cmtx_comments_folder(); ?>securimage/securimage_show.php?' + Math.random(); return false"><img src="<?php echo cmtx_comments_folder(); ?>securimage/images/refresh_icon.png" alt="Refresh" title="<?php echo CMTX_TITLE_SECURIMAGE_REFRESH; ?>" class="cmtx_securimage_refresh_icon"/></a>
+			<a href="<?php echo cmtx_url_encode(cmtx_current_page()); ?>" onclick="document.getElementById('cmtx_securimage').src = '<?php echo cmtx_comments_folder(); ?>securimage/securimage_show.php?' + Math.random(); return false"><img src="<?php echo cmtx_comments_folder(); ?>securimage/images/refresh_icon.png" alt="Refresh" title="<?php echo CMTX_TITLE_SECURIMAGE_REFRESH; ?>" class="cmtx_securimage_refresh_icon"/></a>
 			<div style="clear: left;"></div>
 			<div class="cmtx_label">&nbsp;</div>
 			<span class="securimage_text"><?php echo CMTX_TEXT_SECURIMAGE; ?></span>
