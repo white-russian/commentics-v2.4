@@ -490,6 +490,7 @@ function cmtx_comment_minimum ($comment) { //checks whether comment is less than
 
 	$comment = str_ireplace("<br />", " ", $comment); //remove <br /> tags
 	$comment = str_ireplace("<p></p>", " ", $comment); //remove <p></p> tags
+	$comment = html_entity_decode($comment); //decode HTML entities
 	$comment = strip_tags($comment); //strip any tags from comment
 	$comment = trim($comment); //remove any space at beginning and end of comment
 
@@ -507,6 +508,8 @@ function cmtx_comment_minimum ($comment) { //checks whether comment is less than
 function cmtx_comment_maximum ($comment) { //checks whether comment exceeds maximum
 
 	$comment = trim($comment); //remove any space at beginning and end of comment
+	
+	$comment = html_entity_decode($comment); //decode HTML entities
 
 	$comment = strip_tags($comment); //strip any tags from comment
 
