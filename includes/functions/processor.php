@@ -196,10 +196,24 @@ function cmtx_notify_admin_new_comment_approve ($poster, $comment) { //notify ad
 	$comment = cmtx_prepare_comment_for_email($comment); //prepare comment for email
 
 	$admin_link = cmtx_url_encode_spaces(cmtx_setting('url_to_comments_folder') . cmtx_setting('admin_folder')) . "/"; //build admin panel link
-
+	
+	/* Instant actions via email 
+	ENTER_YOUR_RANDOM_CODE_HERE - random code, letters and digits. IMPORTANT: this code MUST BE EQUAL to the $cis in mail_actions.php
+	*/
+	$comment_id_secret = md5($comment_id . 'ENTER_YOUR_RANDOM_CODE_HERE');
+	$custom_app_approve = cmtx_url_encode_spaces(cmtx_setting('commentics_url')) . 'mailmod.php?action=ok&id=' . $comment_id . '&cis=' . $comment_id_secret; //approve
+	$custom_app_delthis = cmtx_url_encode_spaces(cmtx_setting('commentics_url')) . 'mailmod.php?action=404&id=' . $comment_id . '&cis=' . $comment_id_secret; //удалить
+	$custom_app_bandel = cmtx_url_encode_spaces(cmtx_setting('commentics_url')) . 'mailmod.php?action=000&id=' . $comment_id . '&cis=' . $comment_id_secret; //удалить и забанить
+	
+	//convert email variables with actual variables
 	//convert email variables with actual variables
 	$body = str_ireplace('[page reference]', $page_reference, $body);
 	$body = str_ireplace('[page url]', $page_url, $body);
+	$body = str_ireplace('[comment url]', $comment_url, $body);
+	$body = str_ireplace('[comment id]', $comment_id, $body);
+	$body = str_ireplace('[approve url]', $custom_app_approve, $body);
+	$body = str_ireplace('[delthis url]', $custom_app_delthis, $body);
+	$body = str_ireplace('[bandel url]', $custom_app_bandel, $body);
 	$body = str_ireplace('[poster]', $poster, $body);
 	$body = str_ireplace('[comment]', $comment, $body);
 	$body = str_ireplace('[approval reasoning]', $cmtx_approve_reason, $body);
